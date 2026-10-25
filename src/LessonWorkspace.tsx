@@ -29,8 +29,8 @@ export function LessonTimer({teacher,canEdit}:{teacher:boolean;canEdit:boolean})
   </section>;
 }
 
-export function LessonDetails({teacher,canEdit}:{teacher:boolean;canEdit:boolean}) {
-  const {get,set}=useLessonStore();const [expanded,setExpanded]=useState(true);
+export function LessonDetails({teacher,canEdit,initiallyExpanded=true}:{teacher:boolean;canEdit:boolean;initiallyExpanded?:boolean}) {
+  const {get,set}=useLessonStore();const [expanded,setExpanded]=useState(initiallyExpanded);
   const student=String(get('lesson.studentName')??'');const level=String(get('lesson.studentLevel')??'');const title=String(get('lesson.title')??'');const number=String(get('lesson.number')??'');
   const date=parseLessonDate(String(get('lesson.date')??''));const time=String(get('lesson.time')??'');
   if(!teacher) return <section className="student-lesson-details" aria-label="Your lesson details"><div className="student-welcome"><span className="student-profile-icon"><UserRound size={23}/></span><div><span className="eyebrow">YOUR LEARNING SPACE</span><h2>{student?`Welcome, ${student}`:'Welcome to your lesson'}<span>.</span></h2></div></div><div className="student-detail-items"><span><GraduationCap size={17}/>{level||'English practice'}{number&&` · Lesson ${number}`}</span><span><CalendarDays size={17}/>{date?date.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'}):'Date to be confirmed'}{time&&` · ${time} (${String(get('lesson.timeZone')??LESSON_TIME_ZONE)})`}</span></div>{title&&<p className="student-session-title">Today’s session: <strong>{title}</strong></p>}</section>;
