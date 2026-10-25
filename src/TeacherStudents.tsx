@@ -1,27 +1,62 @@
-import { ArrowRight, CalendarDays, GraduationCap, SlidersHorizontal, UserRound, Users } from 'lucide-react';
-import { useLessonStore } from './store';
-import { lesson } from './lesson';
-import { LESSON_TIME_ZONE, parseLessonDate } from './lesson-workspace';
+import { useEffect, useState } from 'react';
+import type { User } from '@supabase/supabase-js';
+import { Archive, ArrowRight, Check, ChevronLeft, ChevronRight, GraduationCap, LoaderCircle, LogOut, Plus, RefreshCw, Search, ShieldCheck, UserRound, Users } from 'lucide-react';
+import { platform } from './platform-client';
+import { listStudents, studentCounts, studentsError, STUDENTS_PAGE_SIZE } from './students-api';
+import { STUDENT_LEVELS, STUDENT_STATUSES, studentInitials } from './students-model';
+import type { Student } from './students-model';
+import { TeacherAccount } from './TeacherAccount';
+import { StudentEditor } from './StudentEditor';
+import { StudentProfile } from './StudentProfile';
+import './students.css';
 
-export function TeacherStudents({ onOpenAssignments, onEditStudent }: { onOpenAssignments: () => void; onEditStudent: () => void }) {
-  const { get } = useLessonStore();
-  const name = String(get('lesson.studentName') ?? '');
-  const level = String(get('lesson.studentLevel') ?? '');
-  const title = String(get('lesson.title') ?? lesson.title);
-  const number = String(get('lesson.number') ?? '');
-  const date = parseLessonDate(String(get('lesson.date') ?? ''));
-  const time = String(get('lesson.time') ?? '');
+function Loading({text='Загружаем учеников…'}:{text?:string}) {return <div className="students-loading" role="status"><LoaderCircle className="students-spinner" size={23}/><span>{text}</span></div>;}
 
-  return <section className="teacher-students" aria-labelledby="current-student-title">
-    <div className="service-section-heading"><span><Users size={19} /> ТЕКУЩИЙ УЧЕНИК</span><span>Индивидуальное занятие</span></div>
-    <article className="current-student-card">
-      <div className="current-student-heading"><span className="current-student-avatar"><UserRound size={30} /></span><div><span className="eyebrow">КАРТОЧКА УЧЕНИКА</span><h2 id="current-student-title">{name || 'Данные ученика пока не заполнены'}</h2><p>{name ? 'Ученик текущего занятия' : 'Укажите имя и уровень в панели управления уроком справа.'}</p></div></div>
-      <dl className="current-student-facts">
-        <div><dt><GraduationCap size={17} /> Уровень</dt><dd>{level || 'Не указан'}</dd></div>
-        <div><dt><CalendarDays size={17} /> Дата занятия</dt><dd>{date ? date.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' }) : 'Дата не выбрана'}{time && <small>{time} · {String(get('lesson.timeZone') ?? LESSON_TIME_ZONE)}</small>}</dd></div>
-      </dl>
-      <div className="current-student-lesson"><div><span className="eyebrow">МАТЕРИАЛЫ ЗАНЯТИЯ{number ? ` · № ${number}` : ''}</span><h3>{title || lesson.title}</h3><p>Unit {lesson.unit} · {lesson.title}</p></div><button className="primary" onClick={onOpenAssignments}>Открыть задания <ArrowRight size={17} /></button></div>
-      <button className="text-button student-edit-button" onClick={onEditStudent}><SlidersHorizontal size={16} /> Изменить данные в панели урока</button>
-    </article>
-  </section>;
+function StudentsWorkspace({user}:{user:User}) {
+  const [students,setStudents]=useState<Student[]>([]);const [count,setCount]=useState(0);const [counts,setCounts]=useState<number[]|null>(null);
+  const [search,setSearch]=useState('');const [query,setQuery]=useState('');const [status,setStatus]=useState('');const [level,setLevel]=useState('');const [page,setPage]=useState(0);
+  const [loading,setLoading]=useState(true);const [error,setError]=useState('');const [notice,setNotice]=useState('');const [refresh,setRefresh]=useState(0);const [signingOut,setSigningOut]=useState(false);
+  const [editor,setEditor]=useState<Student|'new'|null>(null);const [selected,setSelected]=useState<Student|null>(null);
+  useEffect(()=>{window.scrollTo({top:0,behavior:'instant'});},[]);
+  useEffect(()=>{const timer=window.setTimeout(()=>{setQuery(search);setPage(0);},250);return()=>clearTimeout(timer);},[search]);
+  useEffect(()=>{
+    const controller=new AbortController();setLoading(true);setError('');
+    void listStudents({search:query,status,level,page},controller.signal).then(result=>{if(!controller.signal.aborted){setStudents(result.students);setCount(result.count);if(page>0&&page*STUDENTS_PAGE_SIZE>=result.count)setPage(Math.max(0,Math.ceil(result.count/STUDENTS_PAGE_SIZE)-1));}}).catch(error=>{if(!controller.signal.aborted){setStudents([]);setError(studentsError(error));}}).finally(()=>{if(!controller.signal.aborted)setLoading(false);});
+    return()=>controller.abort();
+  },[query,status,level,page,refresh]);
+  useEffect(()=>{
+    const controller=new AbortController();void studentCounts(controller.signal).then(result=>{if(!controller.signal.aborted)setCounts(result);}).catch(()=>{if(!controller.signal.aborted)setCounts(null);});
+    return()=>controller.abort();
+  },[refresh]);
+  useEffect(()=>{const reload=()=>setRefresh(value=>value+1);window.addEventListener('focus',reload);return()=>window.removeEventListener('focus',reload);},[]);
+  const saved=(student:Student)=>{
+    const isNew=editor==='new';setEditor(null);setSelected(student);setRefresh(value=>value+1);setNotice(isNew?'Ученик добавлен.':'Карточка сохранена.');
+    if(isNew){setSearch('');setQuery('');setStatus('');setLevel('');setPage(0);}
+  };
+  const signOut=async()=>{setSigningOut(true);const{error}=await platform.auth.signOut({scope:'local'});if(error){setError(studentsError(error));setSigningOut(false);}};
+  const filtered=!!(search.trim()||status||level);
+  return <div className="students-workspace">
+    <div className="students-account-bar"><span><ShieldCheck size={16}/><span>{user.email}</span></span><button className="text-button" disabled={signingOut} onClick={()=>void signOut()}><LogOut size={16}/>{signingOut?'Выходим…':'Выйти'}</button></div>
+    <div className="students-stat-grid">{[{label:'Всего учеников',Icon:Users},{label:'Занимаются',Icon:GraduationCap},{label:'Пробный урок',Icon:UserRound},{label:'В архиве',Icon:Archive}].map(({label,Icon},index)=><div className="students-stat" key={label}><span><Icon size={19}/>{label}</span><strong>{counts?.[index]??'—'}</strong></div>)}</div>
+    <div className="students-section-heading"><div><h2>Ваши ученики</h2><p>Люди, цели и следующий шаг в обучении.</p></div><button className="primary" onClick={()=>{setNotice('');setEditor('new');}}><Plus size={18}/>Добавить ученика</button></div>
+    <div className="students-toolbar"><label className="students-search"><span className="sr-only">Поиск ученика по имени</span><Search size={18}/><input value={search} placeholder="Найти ученика по имени" maxLength={120} onChange={event=>setSearch(event.target.value)}/></label><label><span className="sr-only">Фильтр по статусу</span><select value={status} onChange={event=>{setStatus(event.target.value);setPage(0);}}><option value="">Все статусы</option>{Object.entries(STUDENT_STATUSES).map(([value,label])=><option key={value} value={value}>{label}</option>)}</select></label><label><span className="sr-only">Фильтр по уровню</span><select value={level} onChange={event=>{setLevel(event.target.value);setPage(0);}}><option value="">Все уровни</option>{STUDENT_LEVELS.map(value=><option key={value}>{value}</option>)}</select></label><button className="icon-button" disabled={loading} aria-label="Обновить список учеников" onClick={()=>setRefresh(value=>value+1)}><RefreshCw size={18}/></button></div>
+    {notice&&<p className="students-notice" role="status"><Check size={17}/>{notice}</p>}
+    {error?<div className="students-load-error" role="alert"><p>{error}</p><button className="secondary" onClick={()=>setRefresh(value=>value+1)}>Повторить загрузку</button></div>:loading?<Loading/>:students.length===0?<section className="students-empty"><span><Users size={33}/></span><h3>{filtered?'Ученики не найдены':'Познакомимся с первым учеником?'}</h3><p>{filtered?'Попробуйте другое имя, уровень или статус.':'Добавьте имя, укажите уровень и сохраните цели. У каждого ученика будет своя карточка.'}</p>{filtered?<button className="secondary" onClick={()=>{setSearch('');setQuery('');setStatus('');setLevel('');setPage(0);}}>Сбросить фильтры</button>:<button className="primary" onClick={()=>setEditor('new')}><Plus size={17}/>Добавить первого ученика</button>}</section>:<>
+    <div className="students-table-wrap"><table className="students-table"><thead><tr><th>Ученик</th><th>Уровень</th><th>Статус</th><th><span className="sr-only">Открыть карточку</span></th></tr></thead><tbody>{students.map(student=><tr key={student.id}><td><button className="student-name-button" onClick={()=>{setNotice('');setSelected(student);}}><span className="roster-avatar">{studentInitials(student.full_name)}</span><span><strong>{student.full_name}</strong><small>{student.email||'Почта не указана'}</small></span></button></td><td><span className="student-level">{student.level||'Не определён'}</span></td><td><span className={`student-status ${student.status}`}>{STUDENT_STATUSES[student.status]}</span></td><td><button className="icon-button" aria-label={`Открыть карточку: ${student.full_name}`} onClick={()=>{setNotice('');setSelected(student);}}><ArrowRight size={18}/></button></td></tr>)}</tbody></table></div>
+    <div className="students-pagination"><span>{page*STUDENTS_PAGE_SIZE+1}–{Math.min((page+1)*STUDENTS_PAGE_SIZE,count)} из {count}</span><div><button className="secondary" disabled={page===0} onClick={()=>setPage(value=>value-1)}><ChevronLeft size={17}/>Назад</button><button className="secondary" disabled={(page+1)*STUDENTS_PAGE_SIZE>=count} onClick={()=>setPage(value=>value+1)}>Далее<ChevronRight size={17}/></button></div></div></>}
+    {selected&&!editor&&<StudentProfile key={selected.id} student={selected} onClose={()=>setSelected(null)} onEdit={()=>setEditor(selected)} onSaved={saved}/>}
+    {editor&&<StudentEditor key={editor==='new'?'new':editor.id} student={editor==='new'?undefined:editor} onClose={()=>setEditor(null)} onSaved={saved}/>}
+  </div>;
+}
+
+export default function TeacherStudents() {
+  const [user,setUser]=useState<User|null>(null);const [ready,setReady]=useState(false);const [error,setError]=useState('');
+  useEffect(()=>{
+    let active=true;
+    const {data:{subscription}}=platform.auth.onAuthStateChange((_event,session)=>{if(active){setUser(session?.user??null);setReady(true);if(session)setError('');}});
+    void platform.auth.getSession().then(({data,error})=>{if(active){if(error)setError(studentsError(error));setUser(data.session?.user??null);setReady(true);}}).catch(error=>{if(active){setError(studentsError(error));setReady(true);}});
+    return()=>{active=false;subscription.unsubscribe();};
+  },[]);
+  if(!ready)return <Loading text="Открываем кабинет…"/>;
+  return <>{error&&<p className="students-error" role="alert">{error}</p>}{user?<StudentsWorkspace key={user.id} user={user}/>:<TeacherAccount/>}</>;
 }

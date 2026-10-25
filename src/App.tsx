@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import { ArrowLeft, ArrowRight, BookOpen, CalendarDays, Check, ChevronDown, ChevronRight, ExternalLink, FileImage, GraduationCap, Headphones, Link, Menu, MessageCircle, PenLine, RotateCcw, ShieldCheck, SlidersHorizontal, Users, X } from 'lucide-react';
 import { exercises, sections, lesson } from './lesson';
 import type { Section } from './lesson';
@@ -7,7 +7,7 @@ import { HeaderLessonTimer, LessonCalendar, LessonDetails, LessonTimer } from '.
 import { resetLesson, useLessonStore, useSessionState, sharedSession, sessionUrlError } from './store';
 import { SessionPanel } from './SessionPanel';
 import { hashForSection, sectionFromHash, sessionLink } from './session-api';
-import { TeacherStudents } from './TeacherStudents';
+const TeacherStudents = lazy(() => import('./TeacherStudents'));
 
 const sectionIcons = { Vocabulary: BookOpen, Reading: FileImage, Grammar: PenLine, Speaking: MessageCircle, Listening: Headphones };
 type TeacherPage = 'students'|'assignments';
@@ -27,6 +27,8 @@ export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [panelOpen, setPanelOpen] = useState(false);
   const [teacherPage, setTeacherPage] = useState<TeacherPage>(() => new URLSearchParams(location.search).get('view') === 'students' ? 'students' : 'assignments');
+  const rosterPage=teacher&&teacherPage==='students';
+  useEffect(()=>{document.title=rosterPage?'Ученики · Lesson Studio':`${lesson.title} · Lesson Studio`;},[rosterPage]);
   const sourceDialog = useRef<HTMLDialogElement>(null);
   const shareDialog = useRef<HTMLDialogElement>(null);
   const mainRef = useRef<HTMLElement>(null);
@@ -81,16 +83,8 @@ export default function App() {
     return()=>{cancelAnimationFrame(frame);document.removeEventListener('keydown',keyboard);previous?.focus({preventScroll:true});};
   },[menuOpen,panelOpen]);
   const navigateExercise=(id:string,name:Section)=>{goSection(name);requestAnimationFrame(()=>document.getElementById(id)?.scrollIntoView({behavior:'smooth',block:'start'}));};
-  const openStudentDetails=()=>{
-    if(window.matchMedia('(max-width:850px)').matches)setPanelOpen(true);
-    requestAnimationFrame(()=>{
-      const toggle=document.querySelector<HTMLButtonElement>('.details-card-toggle');
-      if(toggle?.getAttribute('aria-expanded')==='false')toggle.click();
-      requestAnimationFrame(()=>document.getElementById('student-name')?.focus());
-    });
-  };
 
-  return <div className={`app-shell ${teacher?'teacher-workspace':'student-workspace'}`} data-role={teacher?'teacher':'student'}>
+  return <div className={`app-shell ${teacher?'teacher-workspace':'student-workspace'} ${rosterPage?'students-page':''}`} data-role={teacher?'teacher':'student'}>
     <a href={sync?hashForSection(location.hash,section.toLowerCase()):'#lesson-main'} className="skip-link" onClick={event=>{event.preventDefault();mainRef.current?.focus();}}>Skip to lesson</a>
     {(menuOpen||panelOpen)&&<button className="nav-backdrop" aria-label="Close open panel" onClick={()=>{setMenuOpen(false);setPanelOpen(false);}}/>}
     <aside className={`sidebar ${menuOpen?'mobile-open':''}`} id="lesson-sidebar">
@@ -106,23 +100,23 @@ export default function App() {
     </aside>
 
     <div className="workspace">
-      <header className="topbar"><div className="topbar-context"><button className="icon-button mobile-nav-toggle" aria-label={teacher?'Открыть меню сервиса':'Open lesson navigation'} aria-expanded={menuOpen} aria-controls="lesson-sidebar" onClick={()=>{setMenuOpen(!menuOpen);setPanelOpen(false);}}><Menu size={20}/></button><span className="role-badge">{teacher?<ShieldCheck size={16}/>:<GraduationCap size={17}/>} {teacher?'TEACHER':'STUDENT'}</span>{teacher?<span className="teacher-page-context">{teacherPage==='students'?'Ученики':'Задания'}</span>:<span className="topbar-unit">Unit {lesson.unit}</span>}</div><HeaderLessonTimer/><div className="topbar-actions"><button className="icon-button session-panel-toggle" aria-label={teacher?'Открыть управление уроком':'Open session controls'} aria-expanded={panelOpen} aria-controls="session-controls" onClick={()=>{setPanelOpen(!panelOpen);setMenuOpen(false);}}><SlidersHorizontal size={19}/></button>{!teacher&&<><div className="segmented mode-switch" aria-label="Lesson mode"><button className="active" aria-pressed={true} disabled={!!sync||!!sessionUrlError} onClick={()=>changeMode(false)}>Student</button><button aria-pressed={false} disabled={!!sync||!!sessionUrlError} onClick={()=>changeMode(true)}>Teacher</button></div>{!sync&&<button className="primary invite-button" onClick={()=>shareDialog.current?.showModal()}><Users size={17}/>Join lesson</button>}</>}</div></header>
+      <header className="topbar"><div className="topbar-context"><button className="icon-button mobile-nav-toggle" aria-label={teacher?'Открыть меню сервиса':'Open lesson navigation'} aria-expanded={menuOpen} aria-controls="lesson-sidebar" onClick={()=>{setMenuOpen(!menuOpen);setPanelOpen(false);}}><Menu size={20}/></button><span className="role-badge">{teacher?<ShieldCheck size={16}/>:<GraduationCap size={17}/>} {teacher?'TEACHER':'STUDENT'}</span>{teacher?<span className="teacher-page-context">{teacherPage==='students'?'Ученики':'Задания'}</span>:<span className="topbar-unit">Unit {lesson.unit}</span>}</div>{!rosterPage&&<HeaderLessonTimer/>}<div className="topbar-actions">{!rosterPage&&<button className="icon-button session-panel-toggle" aria-label={teacher?'Открыть управление уроком':'Open session controls'} aria-expanded={panelOpen} aria-controls="session-controls" onClick={()=>{setPanelOpen(!panelOpen);setMenuOpen(false);}}><SlidersHorizontal size={19}/></button>}{!teacher&&<><div className="segmented mode-switch" aria-label="Lesson mode"><button className="active" aria-pressed={true} disabled={!!sync||!!sessionUrlError} onClick={()=>changeMode(false)}>Student</button><button aria-pressed={false} disabled={!!sync||!!sessionUrlError} onClick={()=>changeMode(true)}>Teacher</button></div>{!sync&&<button className="primary invite-button" onClick={()=>shareDialog.current?.showModal()}><Users size={17}/>Join lesson</button>}</>}</div></header>
 
       <div className="workspace-body"><main ref={mainRef} id="lesson-main" tabIndex={-1}>
-        <div className="lesson-page-heading"><div><div className="lesson-overline">{teacher?'КАБИНЕТ УЧИТЕЛЯ':'ENGLISH CLASSROOM'} <ChevronRight size={13}/> {teacher&&teacherPage==='students'?'УЧЕНИКИ':`UNIT ${lesson.unit}`}</div><h1>{teacher?(teacherPage==='students'?'Ученики':'Задания'):lesson.title}</h1><p>{teacher?(teacherPage==='students'?'Данные ученика и материалы вашего занятия.':`Unit ${lesson.unit} · ${lesson.title}`):'A little practice, a new perspective. Let’s begin.'}</p></div>{(!teacher||teacherPage==='assignments')&&<button className="source-button" aria-label="View textbook" onClick={()=>sourceDialog.current?.showModal()}><FileImage size={17}/><span>View textbook</span></button>}</div>
-        <div className={`save-status ${storageError||sync?.status==='error'||sync?.status==='offline'?'save-error':''}`} role="status"><span/>{saveText}{sync&&<small>Session {sharedSession?.credentials.id.slice(0,8)}</small>}</div>
+        <div className="lesson-page-heading"><div><div className="lesson-overline">{teacher?'КАБИНЕТ УЧИТЕЛЯ':'ENGLISH CLASSROOM'} <ChevronRight size={13}/> {teacher&&teacherPage==='students'?'УЧЕНИКИ':`UNIT ${lesson.unit}`}</div><h1>{teacher?(teacherPage==='students'?'Ученики':'Задания'):lesson.title}</h1><p>{teacher?(teacherPage==='students'?'Ваши ученики, их цели и история обучения.':`Unit ${lesson.unit} · ${lesson.title}`):'A little practice, a new perspective. Let’s begin.'}</p></div>{(!teacher||teacherPage==='assignments')&&<button className="source-button" aria-label="View textbook" onClick={()=>sourceDialog.current?.showModal()}><FileImage size={17}/><span>View textbook</span></button>}</div>
+        {!rosterPage&&<><div className={`save-status ${storageError||sync?.status==='error'||sync?.status==='offline'?'save-error':''}`} role="status"><span/>{saveText}{sync&&<small>Session {sharedSession?.credentials.id.slice(0,8)}</small>}</div>
         {(sessionUrlError||(sync&&(sync.status==='offline'||sync.status==='error')))&&<div className="connection-alert" role="status"><p>{sessionUrlError||sync?.notice}</p>{sync&&<button className="secondary" onClick={()=>sharedSession?.retry()}>Retry connection</button>}</div>}
-        {teacher&&teacherPage==='students'?<TeacherStudents onOpenAssignments={()=>goService('assignments')} onEditStudent={openStudentDetails}/>:<>
+        </>}{teacher&&teacherPage==='students'?<Suspense fallback={<p className="students-loading">Открываем учеников…</p>}><TeacherStudents/></Suspense>:<>
         {!teacher&&<LessonDetails teacher={false} canEdit={canEdit}/>}
         <div className="section-header"><span className="section-icon"><SectionIcon size={23}/></span><div><span className="section-kicker">PART {String(sectionIndex+1).padStart(2,'0')} / 05</span><h2>{section}<span> {current.subtitle}</span></h2></div><span className="section-count">{visible.length} {visible.length===1?'exercise':'exercises'}</span></div>
         <p className="section-description">{current.description}</p>
         <fieldset className="lesson-interaction" disabled={!canEdit}><div className="exercises" key={section}>{visible.map(exercise=><ExerciseCard key={exercise.id} exercise={exercise} teacher={teacher}/>)}</div></fieldset>
         <div className="section-footer">{sectionIndex>0?<button className="text-button" onClick={()=>goSection(sections[sectionIndex-1].name)}><ArrowLeft size={17}/>{sections[sectionIndex-1].name}</button>:<span/>}{sectionIndex<sections.length-1?<button className="secondary" onClick={()=>goSection(sections[sectionIndex+1].name)}>Next: {sections[sectionIndex+1].name}<ArrowRight size={17}/></button>:<span className="helper">{completed===exercises.length?'Lesson complete. Well done.':'You can return to any section to review your work.'}</span>}</div>
         </>}
-        <footer className="page-footer"><BookOpen size={15}/><span>Lesson Studio</span><span>One lesson. A little more confidence.</span></footer>
+        <footer className="page-footer"><BookOpen size={15}/><span>Lesson Studio</span><span>{rosterPage?'Ваше пространство для обучения.':'One lesson. A little more confidence.'}</span></footer>
       </main>
 
-      <aside className={`lesson-panel ${panelOpen?'mobile-open':''}`} id="session-controls" aria-label={teacher?'Teacher panel':'Lesson overview'}>
+      {!rosterPage&&<aside className={`lesson-panel ${panelOpen?'mobile-open':''}`} id="session-controls" aria-label={teacher?'Teacher panel':'Lesson overview'}>
         <div className="panel-mobile-close"><span>{teacher?'Управление уроком':'Your session'}</span><button className="icon-button" aria-label="Close session controls" onClick={()=>setPanelOpen(false)}><X size={20}/></button></div>
         <div className="panel-heading">{teacher?'УПРАВЛЕНИЕ УРОКОМ':'YOUR SESSION'}</div>
         {teacher&&<><div className="teacher-session-actions"><button className="primary" onClick={()=>shareDialog.current?.showModal()}><Users size={17}/>Пригласить ученика</button><a className="open-tab" href={studentLink} target="_blank" rel="noopener"><ExternalLink size={16}/>Открыть версию ученика</a></div><label className="teacher-section-picker" htmlFor="teacher-section">Раздел заданий<select id="teacher-section" value={section} onChange={event=>goSection(event.target.value as Section)}>{sections.map(s=><option key={s.name} value={s.name}>{s.name} · {s.range}</option>)}</select></label></>}
@@ -136,7 +130,7 @@ export default function App() {
           const answered=Object.entries(doc.fields).filter(([key,entry])=>key.startsWith(`${e.id}.answer.`)&&!key.endsWith('.grade')&&typeof entry.value==='string'&&entry.value.trim()).length;
           return <button key={e.id} onClick={()=>navigateExercise(e.id,e.section)}><span>{String(e.number).padStart(2,'0')}</span><div><strong>{e.title}</strong><small>{get(`${e.id}.complete`)?'Completed':`${answered} written ${answered===1?'answer':'answers'}`}</small></div><ChevronRight size={16}/></button>;
         })}</div><div className="panel-divider"/>{reset?<div className="reset-confirm"><p>Clear answers and progress for this lesson? Student details, the schedule and the lesson timer will be kept.</p><button className="danger-button" disabled={!canEdit} onClick={()=>{resetLesson();setReset(false);}}>Clear exercise answers</button><button className="text-button" onClick={()=>setReset(false)}>Cancel</button></div>:<button className="text-button reset-lesson" disabled={!canEdit} onClick={()=>setReset(true)}><RotateCcw size={15}/>Reset exercise answers</button>}</section>:<section className="student-tip"><span><MessageCircle size={19}/></span><h3>Make it a conversation.</h3><p>Take your time, ask questions and share your own ideas. Your teacher is here to help.</p></section>}
-      </aside></div>
+      </aside>}</div>
     </div>
 
     <dialog className="share-dialog" ref={shareDialog} aria-labelledby="share-title" onClick={event=>{if(event.target===shareDialog.current)shareDialog.current.close();}}><div className="dialog-heading"><div><span className="eyebrow">SHARED CLASSROOM</span><h2 id="share-title">{teacher?'Connect with your student':'Join a shared lesson'}</h2></div><button className="icon-button" aria-label="Close sharing settings" onClick={()=>shareDialog.current?.close()}><X size={21}/></button></div><SessionPanel teacher={teacher}/>{teacher&&sync&&<p className="helper"><Link size={14}/> Keep your teacher link private. Send your student the student invitation.</p>}</dialog>
