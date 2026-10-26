@@ -12,31 +12,43 @@ export default [
   makeLesson({
     n: 26,
     title: "Days, dates and appointments",
-    subtitle: "Выбираем дату и время встречи",
-    topic: "Календарь",
+    subtitle: "Arrange a date and time to meet",
+    topic: "Dates and appointments",
     skills: ["listening", "spelling", "speaking"],
     goal: "I can check a simple appointment date and time.",
     vocabulary: vocab(
-      ["Monday", "понедельник", "On Monday at six."],
-      ["Tuesday", "вторник", "The class is on Tuesday."],
-      ["Wednesday", "среда", "On Wednesday, please."],
-      ["date", "дата", "What is the date?"],
-      ["first", "первый", "The first of May."],
-      ["second", "второй", "The second of May."],
+      [
+        "Monday",
+        "the day after Sunday and before Tuesday",
+        "On Monday at six.",
+      ],
+      [
+        "Tuesday",
+        "the day after Monday and before Wednesday",
+        "The class is on Tuesday.",
+      ],
+      [
+        "Wednesday",
+        "the day after Tuesday and before Thursday",
+        "On Wednesday, please.",
+      ],
+      ["date", "the day and month when something happens", "What is the date?"],
+      ["first", "1st; number one in an order", "The first of May."],
+      ["second", "2nd; number two in an order", "The second of May."],
     ),
     language: {
       focus: "on + day/date; at + time; basic dates",
       explanation:
-        "День и дата: on Monday, on the first of May. Время: at six. Читаем 1 May как the first of May, 2 May — the second of May, 3 May — the third of May. Для этого урока достаточно дат 1–3 и знакомых дней.",
+        "Use on for a day or date: on Monday, on the first of May. Use at for a time: at six. Read 1 May as the first of May, 2 May as the second of May and 3 May as the third of May. In this lesson, practise dates 1–3 and familiar days.",
       examples: [
         "The class is on Tuesday.",
         "On the second of May at six.",
         "Is Monday good?",
       ],
       pitfall:
-        "On Monday, но at six. Wednesday пишется с буквой d, которая обычно не слышна.",
+        "Say on Monday but at six. Write the d in Wednesday, even though you usually do not hear it.",
       pronunciation:
-        "В Wednesday обычно два слога: WENZ-day. Учитель произносит first, second, third и просит сопоставить с 1, 2, 3.",
+        "Wednesday usually has two syllables: WENZ-day. Listen to first, second and third. Match them with 1, 2 and 3.",
     },
     input: model(
       "Two lesson times",
@@ -47,7 +59,7 @@ export default [
           "Which day does Anna choose?",
           ["Monday", "Tuesday", "Wednesday"],
           1,
-          "Anna выбирает Tuesday.",
+          "Anna chooses Tuesday.",
         ],
         [
           "What is the date?",
@@ -64,23 +76,23 @@ export default [
       ],
     ),
     retrieval: recall(
-      ["Прочитайте время 9:30.", "Nine thirty. / Half past nine.", 24],
-      ["Спросите о занятии в понедельник.", "Do you study on Monday?", 12],
-      ["Назовите общее увлечение.", "We like walking.", 25],
+      ["Read the time 9:30 aloud.", "Nine thirty. / Half past nine.", 24],
+      ["Ask about a lesson on Monday.", "Do you study on Monday?", 12],
+      ["Name a hobby two people share.", "We like walking.", 25],
     ),
     practice: [
       gaps("appointment-prepositions", "Complete the appointment", [
-        ["The class is ___ Monday.", "on", "Перед днём: on."],
-        ["The lesson is ___ six.", "at", "Перед временем: at."],
-        ["1 May: the ___ of May", "first", "Первое число: first."],
-        ["2 May: the ___ of May", "second", "Второе число: second."],
+        ["The class is ___ Monday.", "on", "Use on before a day."],
+        ["The lesson is ___ six.", "at", "Use at before a time."],
+        ["1 May: the ___ of May", "first", "Use first for date 1."],
+        ["2 May: the ___ of May", "second", "Use second for date 2."],
       ]),
       choice("calendar-reading", "Read the calendar", [
         [
           "Wednesday in this timetable is…",
           ["1 May", "2 May", "3 May"],
           2,
-          "В таблице Wednesday, 3 May.",
+          "The table says Wednesday, 3 May.",
         ],
         [
           "17:30 is…",
@@ -96,18 +108,18 @@ export default [
           "Choose the correct spelling.",
           ["Wensday", "Wednesday", "Wednsday"],
           1,
-          "Правильное написание: Wednesday.",
+          "The correct spelling is Wednesday.",
         ],
       ]),
     ],
     speaking: {
       situation:
-        "У учителя и ученика разные свободные окна для следующего занятия.",
+        "You and your teacher have different free times for your next lesson.",
       steps: [
-        "Учитель называет два варианта из расписания.",
-        "Уточните день, дату и время каждого.",
-        "Выберите подходящий вариант.",
-        "Повторите все три детали в одной фразе.",
+        "Your teacher gives two options from the timetable.",
+        "Check the day, date and time of each option.",
+        "Choose a suitable option.",
+        "Repeat all three details in one phrase.",
       ],
       support: [
         "Is Tuesday good?",
@@ -116,71 +128,91 @@ export default [
         "On Tuesday at…",
       ],
       success: [
-        "День не перепутан с датой.",
-        "Время проверено повтором.",
-        "Получилась однозначная договорённость.",
+        "I give the correct day and date.",
+        "I repeat the time to check it.",
+        "We both understand the same lesson time.",
       ],
       model: "Tuesday is good. The second of May at half past five. Thank you.",
       teacherNote:
-        "Таблица — вымышленное расписание без привязки к текущему году. Не переносите его автоматически в настоящий календарь ученика.",
+        "The timetable is fictional and has no current year attached. Keep it as a language task rather than adding it to a real calendar.",
     },
     writing: {
-      instruction: "Запишите короткое подтверждение выбранного занятия.",
+      instruction: "Write a short message to confirm the lesson you choose.",
       model:
         "English lesson: Tuesday, 2 May, 17:30. The lesson is on Tuesday at half past five.",
       checklist: [
-        "День и дата совпадают с таблицей.",
-        "On перед днём.",
-        "At перед временем.",
+        "My day and date match the table.",
+        "I use on before a day.",
+        "I use at before a time.",
       ],
     },
     exit: [
-      "Я могу уточнить день занятия.",
-      "Я могу понять даты 1–3.",
-      "Я могу подтвердить дату и время.",
+      "I can check the day of a lesson.",
+      "I can understand dates 1–3.",
+      "I can confirm a date and time.",
     ],
     homework: {
-      instruction: "Создайте три вымышленные записи календаря.",
+      instruction: "Make three made-up calendar notes.",
       steps: [
-        "Используйте Monday–Wednesday и даты 1–3.",
-        "Запишите цифровое и словесное время.",
-        "Завтра продиктуйте одну запись учителю без показа текста.",
+        "Use Monday, Tuesday and Wednesday with dates 1–3.",
+        "Write each time in digits and words.",
+        "Tomorrow, read one note to your teacher without showing the text.",
       ],
       model: "Wednesday, 3 May, 19:00 — on Wednesday at seven.",
     },
     teacherNotes: [
-      "При необходимости добавляйте месяцы по личной потребности, не требуя выучить все сразу.",
-      "Реальное время уроков зависит от часового пояса; здесь отрабатывается только язык.",
+      "Add month names as the learner needs them. Do not require all twelve at once.",
+      "Real lesson arrangements also need an agreed time zone. This fictional task practises the language only.",
     ],
   }),
   makeLesson({
     n: 27,
     title: "A short message",
-    subtitle: "Пишем понятное сообщение о встрече",
-    topic: "Сообщения",
+    subtitle: "Write a clear message about a meeting",
+    topic: "Messages",
     skills: ["writing", "spelling", "reading"],
     goal: "I can write a short message with a greeting, a simple plan and a question.",
     vocabulary: vocab(
-      ["Hi…", "Привет… в сообщении", "Hi, Anna!"],
-      ["Are you free?", "Ты свободен/свободна?", "Are you free on Friday?"],
-      ["Let’s…", "Давай…", "Let’s meet at six."],
-      ["meet", "встретиться", "Let’s meet at the café."],
-      ["See you", "До встречи", "See you on Friday."],
-      ["Sorry", "Извини / простите", "Sorry, I work on Friday."],
+      ["Hi…", "a friendly greeting at the start of a message", "Hi, Anna!"],
+      [
+        "Are you free?",
+        "ask if someone has time to do something",
+        "Are you free on Friday?",
+      ],
+      [
+        "Let’s…",
+        "use this to suggest doing something together",
+        "Let’s meet at six.",
+      ],
+      [
+        "meet",
+        "come together at an agreed place and time",
+        "Let’s meet at the café.",
+      ],
+      [
+        "See you",
+        "a friendly way to finish before meeting again",
+        "See you on Friday.",
+      ],
+      [
+        "Sorry",
+        "a polite word when you cannot do something or make a mistake",
+        "Sorry, I work on Friday.",
+      ],
     ),
     language: {
       focus: "short message structure; capitals and punctuation",
       explanation:
-        "Короткое сообщение может состоять из приветствия, причины/предложения, вопроса и завершения. I, имена и дни пишем с большой буквы. Let’s meet… вводим как готовую фразу-предложение.",
+        "A short message can have a greeting, a reason or suggestion, a question and an ending. Start I, names and days with capital letters. Use Let’s meet… as a phrase to suggest a meeting.",
       examples: [
         "Hi, Eva!",
         "Are you free on Friday?",
         "Let’s meet at six. See you!",
       ],
       pitfall:
-        "В конце вопроса нужен ?. I всегда с большой буквы; Friday тоже. Не требуется сложный официальный стиль.",
+        "End a question with ?. Always write I with a capital letter. Start Friday with a capital too. Keep the message short and friendly.",
       pronunciation:
-        "При чтении сообщения делайте паузу между законченными предложениями. See you часто звучит слитно; учитель даёт модель.",
+        "Pause between sentences when you read a message aloud. Listen to how See you joins together. Copy your teacher’s model.",
     },
     input: model(
       "A message to a classmate",
@@ -191,7 +223,7 @@ export default [
           "Who writes the first message?",
           ["Anna", "Eva", "Ben"],
           0,
-          "Первое сообщение подписано Anna.",
+          "Anna signs the first message.",
         ],
         [
           "Where do they meet?",
@@ -208,9 +240,9 @@ export default [
       ],
     ),
     retrieval: recall(
-      ["Подтвердите время занятия.", "On Tuesday at six.", 26],
-      ["Скажите, где кафе.", "It is near the park.", 16],
-      ["Спросите об увлечении.", "Do you like reading?", 25],
+      ["Confirm a lesson time.", "On Tuesday at six.", 26],
+      ["Say where the café is.", "It is near the park.", 16],
+      ["Ask about a hobby.", "Do you like reading?", 25],
     ),
     practice: [
       choice("message-punctuation", "Choose a clear message", [
@@ -218,7 +250,7 @@ export default [
           "Correct capital letters:",
           ["i study on friday.", "I study on Friday.", "I Study on friday."],
           1,
-          "I и Friday с большой буквы.",
+          "Start I and Friday with capital letters.",
         ],
         [
           "A question:",
@@ -228,113 +260,125 @@ export default [
             "Are you free on Friday,",
           ],
           0,
-          "Вопрос заканчивается ?.",
+          "End a question with a question mark.",
         ],
         [
           "A friendly ending:",
           ["See you!", "What price?", "Turn left!"],
           0,
-          "See you — естественное завершение сообщения.",
+          "See you is a natural ending for a friendly message.",
         ],
         [
           "A proposal:",
           ["Let’s meet at six.", "I’m six.", "I have Friday."],
           0,
-          "Let’s meet — предложение встретиться.",
+          "Let’s meet suggests a meeting.",
         ],
       ]),
       order("message-order", "Build the key sentences", [
         ["Are you free on Friday?", "Are + you + free + day."],
-        ["Let’s meet at the café.", "Let’s + глагол meet."],
-        ["See you on Friday.", "See you + on + день."],
+        ["Let’s meet at the café.", "Put the verb meet after Let’s."],
+        ["See you on Friday.", "Use See you + on + a day."],
       ]),
     ],
     speaking: {
       situation:
-        "Учитель присылает короткое устное приглашение, а вы отвечаете голосом и затем письменно.",
+        "Your teacher gives you a short spoken invitation. Reply aloud, then in writing.",
       steps: [
-        "Уточните место и время.",
-        "Согласитесь или предложите другой знакомый день.",
-        "Продиктуйте короткий ответ.",
-        "Учитель читает запись; исправьте один неточный факт.",
+        "Check the place and time.",
+        "Say yes, or suggest another familiar day.",
+        "Say a short reply for your teacher to write.",
+        "Your teacher reads the reply. Correct one wrong detail.",
       ],
       support: ["Yes, … is good.", "Sorry, I work on…", "At six?", "See you!"],
       success: [
-        "Понятно, согласились ли вы.",
-        "Место и время совпадают.",
-        "Ответ содержит приветствие и завершение.",
+        "My reply makes it clear if I agree.",
+        "The place and time are correct.",
+        "My reply has a greeting and ending.",
       ],
       model:
         "Hi, Anna. Yes, Friday at six is good. At the café near the park? See you!",
       teacherNote:
-        "Открытый ответ проверяйте по смыслу и полноте информации. Не требуйте точного совпадения с образцом.",
+        "Review the meaning and completeness of the open reply. Other answers can be correct without matching the model exactly.",
     },
     writing: {
       instruction:
-        "Напишите сообщение знакомому: приветствие, встреча, место, время, вопрос и завершение. Достаточно 3–5 коротких предложений.",
+        "Write to a friend about a meeting. Include a greeting, place, time, question and ending. Three to five short sentences are enough.",
       model:
         "Hi, Ben! Are you free on Monday? Let’s meet at the park at five. Is five good? See you!",
       checklist: [
-        "Есть конкретные место и время.",
-        "I/имена/дни с большой буквы.",
-        "Вопросы отмечены знаком ?.",
+        "I give a clear place and time.",
+        "I start I, names and days with capital letters.",
+        "I put ? at the end of questions.",
       ],
     },
     exit: [
-      "Я могу написать короткое понятное сообщение.",
-      "Я могу согласиться или вежливо отказаться.",
-      "Я проверяю основные заглавные буквы.",
+      "I can write a short, clear message.",
+      "I can agree or say no politely.",
+      "I can check important capital letters.",
     ],
     homework: {
-      instruction: "Создайте приглашение и ответ с изменением одного условия.",
+      instruction: "Write an invitation and a reply that changes one detail.",
       steps: [
-        "Напишите приглашение на знакомое занятие.",
-        "Ответьте от имени друга с другим временем.",
-        "На следующий день прочитайте оба сообщения вслух.",
+        "Invite someone to a familiar activity.",
+        "Reply as a friend. Suggest a different time.",
+        "The next day, read both messages aloud.",
       ],
       model: "Hi! Let’s meet at six. — Hi! Sorry, seven is good for me.",
     },
     teacherNotes: [
-      "Не отправляйте сообщения реальным людям: это учебные черновики.",
-      "Если Let’s трудно, достаточно формулы Café on Friday at six?",
+      "Keep the messages as practice drafts; no real messages need to be sent.",
+      "If Let’s is difficult, a short suggestion such as Café on Friday at six? is sufficient.",
     ],
   }),
   makeLesson({
     n: 28,
     title: "Sorry, again, please!",
-    subtitle: "Переспрашиваем и проверяем важные детали",
-    topic: "Стратегии общения",
+    subtitle: "Ask for repetition and check important details",
+    topic: "Communication strategies",
     skills: ["listening", "speaking", "pronunciation"],
     goal: "I can ask someone to repeat, speak slowly or spell a word.",
     vocabulary: vocab(
-      ["Again, please", "Ещё раз, пожалуйста", "Again, please."],
-      ["Slowly, please", "Медленно, пожалуйста", "Slowly, please."],
-      ["I don’t understand", "Я не понимаю", "Sorry, I don’t understand."],
+      [
+        "Again, please",
+        "ask someone to say something one more time",
+        "Again, please.",
+      ],
+      ["Slowly, please", "ask someone not to speak so fast", "Slowly, please."],
+      [
+        "I don’t understand",
+        "say that the meaning is not clear to you",
+        "Sorry, I don’t understand.",
+      ],
       [
         "Can you repeat that?",
-        "Можете повторить?",
+        "ask to hear the same words again",
         "Can you repeat that, please?",
       ],
-      ["Is that right?", "Это верно?", "Platform two. Is that right?"],
+      [
+        "Is that right?",
+        "ask if the information is correct",
+        "Platform two. Is that right?",
+      ],
       [
         "How do you spell it?",
-        "Как это пишется по буквам?",
+        "ask for the letters of a word",
         "How do you spell it?",
       ],
     ),
     language: {
       focus: "repair phrases; checking by repetition",
       explanation:
-        "Необязательно понимать всё с первого раза. Остановите разговор короткой вежливой фразой, уточните одну деталь и повторите её для проверки. Can you…? используем как готовую форму просьбы.",
+        "You do not need to understand everything the first time. Use a short, polite phrase to stop and ask. Check one detail, then repeat it to make sure it is right. Use Can you…? as a request phrase.",
       examples: [
         "Sorry, can you repeat that?",
         "Slowly, please.",
         "Fifteen pounds. Is that right?",
       ],
       pitfall:
-        "Не отвечайте yes, если важная информация осталась непонятной. Уточните конкретное слово, число или время.",
+        "If an important detail is not clear, ask again before saying yes. Check the word, number or time you need.",
       pronunciation:
-        "Просьбы произносите спокойно и отчётливо; в Slowly, please выделите SLOW. Уточнение Fifteen? может иметь восходящую интонацию.",
+        "Speak calmly and clearly. Make SLOW stronger in Slowly, please. Your voice can go up when you check Fifteen? Listen to your teacher’s model.",
     },
     input: model(
       "Checking a ticket",
@@ -345,64 +389,68 @@ export default [
           "Which detail does the visitor check first?",
           ["The platform", "The city name", "The weather"],
           0,
-          "После повтора он проверяет Platform three.",
+          "After the repetition, the traveller checks Platform three.",
         ],
         [
           "How much is the ticket?",
           ["Fifty pounds", "Fifteen pounds", "Five pounds"],
           1,
-          "Кассир подтверждает fifteen.",
+          "The ticket seller confirms fifteen.",
         ],
         [
           "Which phrase asks for repetition?",
           ["Can you repeat that?", "See you!", "I like trains."],
           0,
-          "Repeat that — просьба повторить.",
+          "Repeat that asks someone to say the words again.",
         ],
       ],
     ),
     retrieval: recall(
-      ["Спросите время поезда.", "What time is the train?", 24],
-      ["Попросите произнести имя по буквам.", "How do you spell your name?", 2],
-      ["Прочитайте число 15 и 50.", "Fifteen. Fifty.", 15],
+      ["Ask the time of a train.", "What time is the train?", 24],
+      ["Ask someone to spell a name.", "How do you spell your name?", 2],
+      ["Say the numbers 15 and 50.", "Fifteen. Fifty.", 15],
     ),
     practice: [
       match("repair-functions", "Choose the useful phrase", [
         [
           "You need the letters.",
           "How do you spell it?",
-          "Чтобы записать слово, попросите произнести буквы.",
+          "Ask for the letters when you need to write a word.",
         ],
         [
           "The person speaks too fast.",
           "Slowly, please.",
-          "Просьба говорить медленнее.",
+          "This asks the speaker not to speak so fast.",
         ],
         [
           "You want to check the number.",
           "Is that right?",
-          "После повтора проверьте правильность.",
+          "After hearing the detail again, check that it is correct.",
         ],
       ]),
       gaps("repair-phrases", "Complete the polite request", [
-        ["Can you ___ that?", "repeat", "Repeat = повторить."],
-        ["___, please. (медленно)", "Slowly", "Slowly = медленно."],
+        ["Can you ___ that?", "repeat", "Repeat means say something again."],
+        ["___, please. (not so fast)", "Slowly", "Slowly means not fast."],
         [
-          "I don’t ___. (понимаю)",
+          "I don’t ___. (the meaning is not clear to me)",
           "understand",
-          "I don’t understand — я не понимаю.",
+          "I don’t understand tells the speaker that the message is not clear to you.",
         ],
-        ["Is that ___? (верно)", "right", "Is that right? — это верно?"],
+        [
+          "Is that ___? (correct)",
+          "right",
+          "Is that right? asks if the information is correct.",
+        ],
       ]),
     ],
     speaking: {
       situation:
-        "Учитель диктует вымышленное бронирование: имя, время, цена и номер.",
+        "Your teacher dictates a made-up booking with a name, time, price and number.",
       steps: [
-        "Запишите четыре детали; попросите повтор, когда нужно.",
-        "Попросите произнести имя по буквам.",
-        "Проверьте число повтором.",
-        "Поменяйтесь ролями и намеренно исправьте одну услышанную неточность.",
+        "Write the four details. Ask to hear them again when needed.",
+        "Ask your teacher to spell the name.",
+        "Repeat a number to check it.",
+        "Change roles. Correct one wrong detail you hear.",
       ],
       support: [
         "Sorry, again, please.",
@@ -411,72 +459,89 @@ export default [
         "Is that right?",
       ],
       success: [
-        "Использовал хотя бы две стратегии уточнения.",
-        "Получил верные имя и цифры.",
-        "Не сделал вид, что понял непонятную деталь.",
+        "I use at least two ways to check information.",
+        "I get the name and numbers right.",
+        "I ask when a detail is not clear.",
       ],
       model:
         "A: Mia, six thirty, fifteen pounds, room two.\nB: Mia. How do you spell it? Six thirty? Fifteen pounds. Is that right?",
       teacherNote:
-        "Начните в понятном темпе. Увеличивайте трудность только после успешной попытки; цель не в том, чтобы запутать ученика.",
+        "Begin at an understandable pace. Increase difficulty only after success. The aim is to help the learner repair communication, not to confuse them.",
     },
     writing: {
-      instruction: "Составьте памятку из четырёх фраз для сложного разговора.",
+      instruction:
+        "Make a help card with four phrases for a difficult conversation.",
       model:
         "Sorry, I don’t understand.\nCan you repeat that?\nSlowly, please.\nIs that right?",
       checklist: [
-        "Фразы вежливые.",
-        "Каждая решает отдельную задачу.",
-        "В вопросах есть ?.",
+        "My phrases are polite.",
+        "Each phrase helps me check a different thing.",
+        "I end questions with ?.",
       ],
     },
     exit: [
-      "Я могу попросить повтор.",
-      "Я могу попросить говорить медленнее.",
-      "Я могу проверить число или написание.",
+      "I can ask someone to repeat.",
+      "I can ask someone to speak more slowly.",
+      "I can check a number or spelling.",
     ],
     homework: {
-      instruction: "Потренируйте уточнение трёх вымышленных деталей.",
+      instruction: "Practise checking three made-up details.",
       steps: [
-        "Выберите имя, время и цену.",
-        "Составьте к каждой просьбу или проверочный вопрос.",
-        "На следующем уроке попросите учителя продиктовать новые детали.",
+        "Choose a name, time and price.",
+        "Write a request or checking question for each detail.",
+        "In the next lesson, ask your teacher to dictate new details.",
       ],
       model: "Eva? E–V–A? At five? Twenty pounds? Is that right?",
     },
     teacherNotes: [
-      "Стратегии исправления непонимания — самостоятельная часть цели A1, а не признак неуспеха.",
-      "Все важные детали должны стать понятны после уточнений.",
+      "Repairing a misunderstanding is an A1 communication skill, not a sign of failure.",
+      "Check that all important details are understood after the clarification questions.",
     ],
   }),
   makeLesson({
     n: 29,
     title: "At a guesthouse",
-    subtitle: "Регистрируемся и задаём простые вопросы",
-    topic: "Проживание в поездке",
+    subtitle: "Check in and ask about your stay",
+    topic: "Places to stay",
     skills: ["speaking", "writing", "listening"],
     goal: "I can give simple registration details and ask about a room and breakfast.",
     vocabulary: vocab(
-      ["room", "комната / номер", "Room twelve."],
-      ["key", "ключ", "Here is your key."],
-      ["breakfast", "завтрак", "What time is breakfast?"],
-      ["Wi-Fi", "беспроводной интернет", "Is there Wi-Fi?"],
-      ["reception", "стойка регистрации", "The key is at reception."],
-      ["one night", "одна ночь", "A room for one night, please."],
+      [
+        "room",
+        "a space in a building where you can stay or sleep",
+        "Room twelve.",
+      ],
+      ["key", "something you use to open a lock", "Here is your key."],
+      ["breakfast", "the first meal of the day", "What time is breakfast?"],
+      [
+        "Wi-Fi",
+        "a way to connect to the internet without a cable",
+        "Is there Wi-Fi?",
+      ],
+      [
+        "reception",
+        "the desk where guests arrive and ask for help",
+        "The key is at reception.",
+      ],
+      [
+        "one night",
+        "a stay for one night, not two or more",
+        "A room for one night, please.",
+      ],
     ),
     language: {
       focus: "registration questions; What time / Where / Is there",
       explanation:
-        "Используйте уже знакомые вопросы для новой ситуации: What’s your surname? What time is breakfast? Where is my room? Is there Wi-Fi? Для просьбы о комнате: A room for one night, please.",
+        "Use familiar questions in a new place: What’s your surname? What time is breakfast? Where is my room? Is there Wi-Fi? Ask A room for one night, please.",
       examples: [
         "My surname is Green.",
         "What time is breakfast?",
         "Is there Wi-Fi?",
       ],
       pitfall:
-        "Выбирайте вопрос по смыслу: Where — место, What time — время, Is there — наличие.",
+        "Choose the question for the information you need: Where for a place, What time for a time and Is there for something available.",
       pronunciation:
-        "Room содержит долгий /uː/. В breakfast обычно два слога; повторите вопрос What time is breakfast? как целую фразу.",
+        "Room has a long /uː/ sound. Breakfast usually has two syllables. Repeat What time is breakfast? as one phrase.",
     },
     input: model(
       "Welcome to the guesthouse",
@@ -487,21 +552,21 @@ export default [
           "What is the guest’s surname?",
           ["Green", "Brown", "White"],
           0,
-          "Гость называет Green.",
+          "The guest gives the surname Green.",
         ],
         ["Which room?", ["Two", "Twelve", "Twenty"], 1, "Room twelve."],
         [
           "When is breakfast?",
           ["At seven", "At nine", "At eight"],
           2,
-          "Ресепшен отвечает At eight.",
+          "The receptionist answers At eight.",
         ],
       ],
     ),
     retrieval: recall(
-      ["Назовите фамилию по буквам.", "Green: G–R–E–E–N.", 4],
-      ["Попросите повторить число.", "Can you repeat that, please?", 28],
-      ["Скажите «ключ в сумке».", "The key is in the bag.", 9],
+      ["Spell a surname aloud.", "Green: G–R–E–E–N.", 4],
+      ["Ask someone to repeat a number.", "Can you repeat that, please?", 28],
+      ["Say that the key is inside the bag.", "The key is in the bag.", 9],
     ),
     practice: [
       choice("guesthouse-questions", "Ask the right question", [
@@ -513,7 +578,7 @@ export default [
             "How much is your name?",
           ],
           1,
-          "What time — вопрос о времени.",
+          "Use What time to ask about time.",
         ],
         [
           "You need the room location.",
@@ -523,35 +588,47 @@ export default [
             "What colour is my name?",
           ],
           0,
-          "Where — место.",
+          "Use Where to ask about a place.",
         ],
         [
           "You want to know about Wi-Fi.",
           ["Is there Wi-Fi?", "Are Wi-Fi?", "I Wi-Fi?"],
           0,
-          "Is there…? — вопрос о наличии.",
+          "Use Is there…? to ask if something is available.",
         ],
         [
           "You did not hear the room number.",
           ["See you!", "Again, please.", "I like blue."],
           1,
-          "Просьба повторить подходит к непонятной детали.",
+          "Ask for repetition when a detail is not clear.",
         ],
       ]),
       gaps("registration", "Complete the registration", [
-        ["A room for one ___, please.", "night", "One night — одна ночь."],
-        ["My ___ is Green. (фамилия)", "surname", "Surname — фамилия."],
-        ["What ___ is breakfast?", "time", "What time — во сколько."],
+        [
+          "A room for one ___, please.",
+          "night",
+          "One night is a stay for one night only.",
+        ],
+        [
+          "My ___ is Green. (family name)",
+          "surname",
+          "Surname means family name.",
+        ],
+        [
+          "What ___ is breakfast?",
+          "time",
+          "What time asks when something happens.",
+        ],
       ]),
     ],
     speaking: {
       situation:
-        "Учитель — сотрудник гостевого дома, ученик регистрируется с вымышленными данными.",
+        "Your teacher works at a guesthouse. Check in using made-up details.",
       steps: [
-        "Попросите комнату на одну ночь.",
-        "Сообщите фамилию и при необходимости буквы.",
-        "Уточните номер и время завтрака.",
-        "Задайте один вопрос о расположении или Wi-Fi.",
+        "Ask for a room for one night.",
+        "Give your surname. Spell it if needed.",
+        "Check the room number and breakfast time.",
+        "Ask one question about a place or Wi-Fi.",
       ],
       support: [
         "A room for one night, please.",
@@ -560,73 +637,85 @@ export default [
         "Where is…?",
       ],
       success: [
-        "Регистрационные данные понятны.",
-        "Номер и время проверены.",
-        "Есть хотя бы один самостоятельный вопрос.",
+        "My registration details are clear.",
+        "I check the room number and time.",
+        "I can ask at least one question of my own.",
       ],
       model:
         "A room for one night, please. My surname is Green. Room twelve? What time is breakfast? Is there Wi-Fi?",
       teacherNote:
-        "Не используйте реальные документы, бронирования или платёжные данные. Это итоговая функциональная практика знакомых форм.",
+        "Use fictional details without real documents, bookings or payment information. This task brings familiar forms together in a practical situation.",
     },
     writing: {
       instruction:
-        "Заполните карточку гостя и запишите два вопроса сотруднику.",
+        "Complete a guest card. Write two questions for the receptionist.",
       model:
         "Name: Eva Green\nCountry: Poland\nRoom: 12\nWhat time is breakfast?\nIs there Wi-Fi?",
       checklist: [
-        "Имя и страна с большой буквы.",
-        "Номер записан верно.",
-        "Вопросы соответствуют нужной информации.",
+        "I start names and countries with capital letters.",
+        "I write the correct room number.",
+        "My questions ask for the information I need.",
       ],
     },
     exit: [
-      "Я могу дать простые данные для регистрации.",
-      "Я могу уточнить время завтрака.",
-      "Я могу задать вопрос о комнате.",
+      "I can give simple check-in details.",
+      "I can check the breakfast time.",
+      "I can ask a question about a room.",
     ],
     homework: {
-      instruction: "Подготовьте другой вариант регистрации с новым персонажем.",
+      instruction: "Prepare another check-in with a new character.",
       steps: [
-        "Измените имя, страну и номер комнаты.",
-        "Запишите три вопроса.",
-        "Завтра проиграйте ситуацию без чтения диалога.",
+        "Change the name, country and room number.",
+        "Write three questions.",
+        "Tomorrow, role-play the check-in without reading the dialogue.",
       ],
       model: "My name is Tom White. Room twenty? Where is the room?",
     },
     teacherNotes: [
-      "Опирайтесь на накопленный язык, не добавляя много новых правил.",
-      "Повторная попытка с другим номером показывает перенос навыка.",
+      "Use the language already learned rather than adding many new rules.",
+      "A second attempt with a different room number checks transfer to a new situation.",
     ],
   }),
   makeLesson({
     n: 30,
     title: "My first day in a new town",
-    subtitle: "Объединяем навыки в одном учебном дне",
-    topic: "Итоговая практика",
+    subtitle: "Use everyday English in a new town",
+    topic: "Putting it together",
     skills: ["speaking", "writing", "reading", "listening"],
     goal: "I can handle several very short everyday exchanges with a helpful partner.",
     vocabulary: vocab(
-      ["introduce myself", "представиться", "I can introduce myself."],
-      ["check", "проверить", "Check the time."],
-      ["ask", "спросить", "Ask about the price."],
-      ["choose", "выбрать", "Choose a café."],
-      ["repeat", "повторить", "Repeat the important number."],
-      ["next step", "следующий шаг", "My next step is speaking practice."],
+      [
+        "introduce myself",
+        "tell someone your name or tell them about a person",
+        "I can introduce myself.",
+      ],
+      [
+        "check",
+        "look or ask again to make sure something is right",
+        "Check the time.",
+      ],
+      ["ask", "say a question to someone", "Ask about the price."],
+      ["choose", "decide which one you want", "Choose a café."],
+      ["repeat", "say or do something again", "Repeat the important number."],
+      [
+        "next step",
+        "the next thing you plan to do or learn",
+        "My next step is speaking practice.",
+      ],
     ),
     language: {
       focus: "review: be, present simple, can, there is, polite questions",
       explanation:
-        "Выберите форму по смыслу: I am… — кто я; I study… — привычка; I can… — умение; There is… — что есть; Can I have…? — просьба. Если не поняли, уточняйте. Это повторение, а не экзамен на весь уровень.",
+        "Choose a form for your message: I am… for who you are; I study… for a habit; I can… for an ability; There is… for something in a place; Can I have…? for a request. Ask again if you do not understand. This is review, not a test of the whole A1 level.",
       examples: [
         "I’m Eva. I’m from Poland.",
         "I study English on Monday.",
         "Can I have a tea, please?",
       ],
       pitfall:
-        "Не соединяйте все формы подряд: I am can study → I can study. Сначала решите, какую мысль хотите передать.",
+        "Choose the meaning first. Do not join all the forms: I am can study → I can study.",
       pronunciation:
-        "Выделяйте важные детали: имя, время, цену, направление. После просьбы повторите ключевое число для проверки.",
+        "Make important details clear: names, times, prices and directions. Repeat a key number to check it after a request.",
     },
     input: model(
       "A new student’s day",
@@ -637,7 +726,7 @@ export default [
           "How much is the tea?",
           ["£10", "£2", "£20"],
           1,
-          "It is two pounds относится к чаю.",
+          "It is two pounds gives the price of the tea.",
         ],
         [
           "When does the class start?",
@@ -655,34 +744,38 @@ export default [
     ),
     retrieval: recall(
       [
-        "Представьтесь, назовите страну и одно увлечение.",
+        "Introduce yourself. Give your country and one hobby.",
         "I’m Anna. I’m from Ukraine. I like reading.",
         25,
       ],
       [
-        "Спросите цену и повторите её для проверки.",
+        "Ask a price. Repeat it to check it.",
         "How much is it? Fifteen pounds?",
         15,
       ],
-      ["Попросите говорить медленнее.", "Slowly, please.", 28],
+      ["Ask someone to speak more slowly.", "Slowly, please.", 28],
     ),
     practice: [
       gaps("review-forms", "Choose the useful form", [
-        ["I ___ from Poland.", "am", "Происхождение: be."],
+        ["I ___ from Poland.", "am", "Use be to say where a person is from."],
         [
           "She ___ English every day. (study)",
           "studies",
-          "Study → studies после she.",
+          "After she, study becomes studies.",
         ],
-        ["I can ___ a computer.", "use", "Can + начальная форма."],
-        ["There ___ a café near the station.", "is", "Одно кафе: there is."],
+        ["I can ___ a computer.", "use", "Use the basic verb after can."],
+        [
+          "There ___ a café near the station.",
+          "is",
+          "For one café, use there is.",
+        ],
       ]),
       choice("review-functions", "Choose the phrase for the situation", [
         [
           "You need a tea.",
           ["Can I have a tea, please?", "I am tea.", "Do tea you?"],
           0,
-          "Вежливая просьба.",
+          "This is a polite request.",
         ],
         [
           "You need the station location.",
@@ -692,25 +785,25 @@ export default [
             "What name is the station?",
           ],
           1,
-          "Where спрашивает место.",
+          "Where asks about a place.",
         ],
         [
           "You did not understand the price.",
           ["I like prices.", "See you!", "Can you repeat that, please?"],
           2,
-          "Попросите повторить непонятную информацию.",
+          "Ask the speaker to repeat information you do not understand.",
         ],
       ]),
     ],
     speaking: {
       situation:
-        "Четыре мини-сцены с одним учителем: знакомство, кафе, маршрут, время занятия.",
+        "Try four short scenes with your teacher: meeting someone, ordering in a café, asking for directions and checking a lesson time.",
       steps: [
-        "Представьтесь новому учителю и назовите одно увлечение.",
-        "Закажите напиток и узнайте цену.",
-        "Спросите путь к школе по вымышленной карте.",
-        "Подтвердите день и время занятия.",
-        "Выберите одну трудную сцену и повторите её после обратной связи.",
+        "Introduce yourself to a new teacher and name one hobby.",
+        "Order a drink and ask the price.",
+        "Ask for directions to a school on a made-up map.",
+        "Confirm the day and time of a lesson.",
+        "Choose one difficult scene. Listen to feedback and try it again.",
       ],
       support: [
         "I’m… / I’m from…",
@@ -720,44 +813,45 @@ export default [
         "Again, please.",
       ],
       success: [
-        "Передал нужную информацию в четырёх сценах.",
-        "Пользовался уточнением при необходимости.",
-        "После обратной связи улучшил одну сцену.",
+        "I can communicate the important details in four scenes.",
+        "I can ask for help or repetition when needed.",
+        "I can improve one scene after feedback.",
       ],
       model:
         "Hello. I’m Eva. I like reading. Can I have a tea, please? How much is it? Where is the school? Monday at ten? Thank you.",
       teacherNote:
-        "Учитель меняет роль, а не требует второго ученика. Помощь, повтор и медленный темп допустимы; успех не равен безошибочности.",
+        "Play the different roles yourself; a second learner is not required. Allow help, repetition and slow speech. Success does not mean error-free language.",
     },
     writing: {
       instruction:
-        "Создайте мини-портфолио: короткий профиль, заказ и сообщение о времени занятия.",
+        "Make a small portfolio: a short profile, a café order and a message about a lesson time.",
       model:
         "I’m Eva. I’m from Poland. I like walking.\nA tea and a sandwich, please.\nHi, Ben. Monday at ten is good. See you!",
       checklist: [
-        "Каждая запись выполняет конкретную задачу.",
-        "Имена, I и дни с большой буквы.",
-        "Вопросы и просьбы понятны читателю.",
+        "Each piece has a clear purpose.",
+        "I start names, I and days with capital letters.",
+        "A reader can understand my questions and requests.",
       ],
     },
     exit: [
-      "Я могу назвать свои сильные стороны в простых разговорах.",
-      "Я могу выбрать одну тему для повторения.",
-      "Я могу использовать уточнение вместо молчания.",
+      "I can say what I do well in simple conversations.",
+      "I can choose one topic to review.",
+      "I can ask for help when I do not understand.",
     ],
     homework: {
-      instruction: "Соберите три лучшие работы и выберите следующий шаг.",
+      instruction:
+        "Choose three pieces of work you like best. Decide on a next step.",
       steps: [
-        "Выберите профиль, сообщение и одну запись диалога в виде текста.",
-        "Подчеркните две фразы, которые теперь можете сказать без подсказки.",
-        "Запишите одну следующую цель и обсудите её с учителем.",
+        "Choose a profile, a message and a written dialogue.",
+        "Underline two phrases you can now say without help.",
+        "Write one next learning goal. Discuss it with your teacher.",
       ],
       model:
         "I can order a drink. I can give my name. My next step: ask questions about a daily routine.",
     },
     teacherNotes: [
-      "Не выдавайте результат этого урока за официальное подтверждение CEFR A1.",
-      "Для следующего цикла используйте реальные трудности ученика, а не автоматическое повышение уровня.",
+      "Do not present this lesson result as official CEFR A1 certification.",
+      "Plan the next learning cycle around observed needs rather than automatically raising the learner’s level.",
     ],
   }),
 ];

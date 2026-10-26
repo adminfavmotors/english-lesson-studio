@@ -1,25 +1,29 @@
-# Методические основания коллекции A1
+# Teaching approach for the A1 collection
 
-## Цели и аудитория
+## Goals and audience
 
-Коллекция предназначена прежде всего для индивидуальной работы подростка или взрослого с учителем. Урок 1 допускает абсолютного новичка и помощь в первых репликах. Поздние уроки опираются на уже введённые слова и конструкции; пропущенные темы учитель предварительно повторяет. Полная последовательность находится в [программе](A1-CURRICULUM.md).
+These lessons are designed mainly for one teenager or adult working with a teacher. Lesson 1 supports a complete beginner with models and prompts. Later lessons reuse earlier language; review missed topics before moving on. See the full [curriculum](A1-CURRICULUM.md).
 
-Ориентир — конкретные повседневные действия уровня A1: назвать себя, передать простые данные, описать знакомое окружение, понять короткие сообщения, попросить нужную вещь и уточнить непонятное. CEFR описывает коммуникативные умения, а не обязательный список грамматических тем. Это авторское распределение учебного материала по этим целям. [Council of Europe: CEFR descriptors](https://www.coe.int/en/web/common-european-framework-reference-languages/cefr-descriptors), [официальная сетка самооценки](https://rm.coe.int/168069ce6e).
+The goals describe everyday A1 actions: introducing yourself, sharing simple information, describing familiar places, understanding short messages, requesting something and asking for clarification. CEFR describes communication skills rather than one compulsory grammar sequence. This collection is an original teaching sequence built around those goals. [Council of Europe: CEFR descriptors](https://www.coe.int/en/web/common-european-framework-reference-languages/cefr-descriptors), [official self-assessment grid](https://rm.coe.int/168069ce6e).
 
-## Как принципы отражены в заданиях
+## How the principles appear in the tasks
 
-- **Понятный образец и постепенное снятие опор.** Сначала короткий текст/диалог и полезные фразы, затем контролируемая практика, после неё — собственное сообщение или разговор с новой деталью. На A1 допускаются медленная речь, повтор и помощь партнёра.
-- **Коммуникативный результат.** В разговорной задаче нужно получить верную анкету, выбрать общий завтрак, найти место на плане или согласовать время. Учитель играет собеседника; второй ученик не требуется. Информационный пробел создаётся разными карточками/сведениями у учителя и ученика. Эта коллекция сочетает языковые опоры с элементами task-supported teaching; она не заявляется как чистая реализация TBL. [TeachingEnglish: A task-based approach](https://www.teachingenglish.org.uk/professional-development/teachers/knowing-subject/task-based-approach).
-- **Воспроизведение из памяти с проверкой.** В начале урока ученик пробует восстановить знакомые фразы до раскрытия образца. После ошибки есть объяснение и новая попытка. Номер исходного урока указан у повторяемой темы.
-- **Распределённое повторение.** Домашние задания предлагают вернуться к материалу завтра, затем примерно через 3 и 7 дней. Это удобный стартовый план, а не научно установленный оптимум для каждого ученика. При неуспешном воспроизведении интервал сокращают, при уверенном — увеличивают. Исследования поддерживают использование успешного извлечения и обратной связи, при этом результат зависит от условий и сложности. [Koval, Applied Psycholinguistics](https://www.cambridge.org/core/journals/applied-psycholinguistics/article/abs/testing-the-reminding-account-of-the-lag-effect-in-l2-vocabulary-learning/4D03D1F5169B719D90F14BBE474015F5), [Karatas et al.: сочетание retrieval, spacing и feedback](https://journals.sagepub.com/doi/10.1177/13621688211053525).
-- **Короткая формирующая оценка.** Три can-do утверждения в конце помогают выбрать следующий шаг. Свободные ответы сверяются с критериями смысла и понятности; пример не считается единственно правильным ответом.
+- **Models and gradual independence.** A short text or dialogue and useful phrases come before controlled practice. Learners then make their own message or take part in a conversation with a new detail. Slow speech, repetition and help are appropriate at A1.
+- **A meaningful communication outcome.** Speaking tasks ask the learner to complete a form accurately, choose a shared breakfast, find a place on a plan or agree on a time. The teacher plays the other person; a second learner is not required. Different cards or hidden details create an information gap. The collection combines language support with task-supported teaching rather than claiming to be a pure TBL course. [TeachingEnglish: A task-based approach](https://www.teachingenglish.org.uk/professional-development/teachers/knowing-subject/task-based-approach).
+- **Recall with feedback.** At the start of a lesson, learners try to remember familiar phrases before opening an example. Checked exercises explain an answer and allow another attempt. Review prompts identify the earlier lesson they revisit.
+- **Spaced review.** Home practice suggests returning tomorrow, then about 3 and 7 days later. This is an adaptable starting plan, not a universally optimal schedule. Shorten the interval after difficult recall and extend it after successful recall. Research supports attention to successful retrieval and feedback while showing that results depend on the task and conditions. [Koval, Applied Psycholinguistics](https://www.cambridge.org/core/journals/applied-psycholinguistics/article/abs/testing-the-reminding-account-of-the-lag-effect-in-l2-vocabulary-learning/4D03D1F5169B719D90F14BBE474015F5), [Karatas et al.: retrieval, spacing and feedback](https://journals.sagepub.com/doi/10.1177/13621688211053525).
+- **A short goal check.** Three can-do statements help identify the next step. Review open answers for meaning and clarity using the task criteria. A model is one example, not the only correct response.
 
-## Практические границы
+## English throughout
 
-Единственной «лучшей методики» для всех нет. Учитель адаптирует объём, темп, лексику и опоры; чувствительные темы заменяются вымышленными персонажами. Поездки, цены, анкеты и расписания в материалах вымышлены. Задания не требуют настоящих адресов, документов, медицинских подробностей или внешних покупок.
+All learner instructions, explanations, feedback, vocabulary meanings, criteria, home practice and teacher notes are in English. Vocabulary entries use short English meanings and examples rather than Russian translations. Meaning-matching tasks use definitions, replies or paraphrases so that the exercise still asks learners to make a meaningful choice. Teachers can model a phrase, point to an object, draw a simple plan or read a short instruction aloud when a beginner needs support.
 
-Тексты, упражнения, варианты, ключи и модели написаны для этой платформы. Сторонние уроки и иллюстрации не копировались. Аудирование проводится по предоставленному тексту: его читает учитель либо доступный английский голос устройства. Готовых аудиозаписей, анализа произношения и автоматической оценки свободной речи нет.
+## Practical limits
 
-Автоматическая проверка применяется к закрытым вопросам, пропускам, соответствиям и порядку слов. Выбор вариантов сравнивается точно: это сохраняет смысл упражнений на регистр и пунктуацию. Для короткого ввода допустимы регистр, лишние пробелы, вариант апострофа и конечная точка, если они не являются предметом данного задания.
+No single method is best for every learner. The teacher adjusts workload, pace, vocabulary and support. Fictional people can replace sensitive personal topics. Journeys, prices, forms and timetables are made up; the tasks do not require real addresses, documents, medical details or purchases.
 
-Коллекция не заменяет диагностику учителем и не является официальным тестом или гарантией получения CEFR A1 за 30 занятий. Домашние задания присутствуют как материалы и черновики; их назначение конкретному ученику и общий журнал результатов будут отдельной доработкой платформы.
+The texts, exercises, options, keys and models were written for this platform. Third-party lessons or illustrations were not copied. For listening, the teacher reads the provided script or the learner uses an available English device voice. Recorded audio, pronunciation analysis and automatic speaking assessment are not provided.
+
+Automatic checking covers closed questions, gaps, matching and word order. Selected options are compared exactly to preserve exercises on capital letters and punctuation. Short typed answers allow harmless case, spacing, apostrophe and terminal punctuation differences when these are not the focus of the task.
+
+The collection is not an official CEFR test or a guarantee of reaching A1 in 30 lessons. Home practice is available as lesson content and local drafts. Assigning it to a named student and sharing a results record are separate platform features still to be added.

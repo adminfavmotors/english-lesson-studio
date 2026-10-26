@@ -5,6 +5,8 @@ import type {
   MaterialContent,
   MaterialSummary,
 } from "./material-model";
+import packagedVersions from "./data/a1-versions.json";
+const builtinVersions: Record<string, number> = packagedVersions;
 const columns =
   "id,owner_id,title,subtitle,level,topic,skills,duration,sequence,version,created_at,updated_at";
 export async function loadMaterials(
@@ -39,7 +41,7 @@ export async function loadMaterials(
         skills: l.skills as MaterialSummary["skills"],
         duration: l.duration,
         sequence: l.sequence,
-        version: 1,
+        version: builtinVersions[materialId(l.sequence!)] ?? 1,
         created_at: "",
         updated_at: "",
       })),
@@ -75,7 +77,7 @@ export async function loadMaterial(
         owner_id: null,
         ...content,
         content,
-        version: 1,
+        version: builtinVersions[id] ?? 1,
         created_at: "",
         updated_at: "",
       };

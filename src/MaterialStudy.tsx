@@ -21,18 +21,22 @@ import {
   isCorrectAnswer,
 } from "./material-model";
 import type { Material, PracticeTask, PracticeItem } from "./material-model";
-import { materialPresentation } from "./material-presentation";
 import {
   blankMaterialDraft as blankDraft,
   materialPracticeKey,
-  parseMaterialDraft,
+  restoreMaterialDraft,
 } from "./material-practice";
 import type { MaterialDraft as Draft } from "./material-practice";
 import "./materials.css";
 
-function loadDraft(key: string): Draft {
+function loadDraft(material: Material, teacher: boolean): Draft {
   try {
-    return parseMaterialDraft(localStorage.getItem(key));
+    return restoreMaterialDraft(
+      (key) => localStorage.getItem(key),
+      material.id,
+      material.version,
+      teacher,
+    );
   } catch {
     return blankDraft();
   }
@@ -382,7 +386,7 @@ export default function MaterialStudy({
   const [confirmReset, setConfirmReset] = useState(false);
   const [storageError, setStorageError] = useState(false);
   const key = materialPracticeKey(material.id, material.version, teacher);
-  const [draft, setDraft] = useState<Draft>(() => loadDraft(key));
+  const [draft, setDraft] = useState<Draft>(() => loadDraft(material, teacher));
   useEffect(() => {
     try {
       localStorage.setItem(key, JSON.stringify(draft));
@@ -432,7 +436,7 @@ export default function MaterialStudy({
           </span>
         </div>
         <h1>{l.title}</h1>
-        <p>{materialPresentation(material).subtitle}</p>
+        <p>{l.subtitle}</p>
         <div className="material-skill-tags">
           {l.skills.map((skill) => (
             <span key={skill}>{MATERIAL_SKILLS[skill]}</span>

@@ -10,6 +10,12 @@ test("the public database serves the same thirty complete A1 lessons as the pack
       "utf8",
     ),
   );
+  const versions = JSON.parse(
+    fs.readFileSync(
+      new URL("../src/data/a1-versions.json", import.meta.url),
+      "utf8",
+    ),
+  );
   const response = await fetch(
     `${backend.url}/rest/v1/lesson_materials?select=id,owner_id,content,version&owner_id=is.null&order=sequence.asc`,
     {
@@ -23,7 +29,11 @@ test("the public database serves the same thirty complete A1 lessons as the pack
   for (const [index, row] of rows.entries()) {
     assert.equal(row.id, `a1-${String(index + 1).padStart(2, "0")}`);
     assert.equal(row.owner_id, null);
-    assert.ok(row.version >= 1);
+    assert.equal(
+      row.version,
+      versions[row.id],
+      `Packaged version differs for ${row.id}`,
+    );
     assert.deepEqual(
       row.content,
       lessons[index],

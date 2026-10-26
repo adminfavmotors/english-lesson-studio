@@ -17,5 +17,5 @@ const rows = lessons
 process.stdout.write(
   "insert into public.lesson_materials(id,owner_id,content) values\n" +
     rows.join(",\n") +
-    "\non conflict(id) do update set content=excluded.content where public.lesson_materials.owner_id is null;\n",
+    "\non conflict(id) do update set content=excluded.content where public.lesson_materials.owner_id is null and public.lesson_materials.content is distinct from excluded.content;\n",
 );

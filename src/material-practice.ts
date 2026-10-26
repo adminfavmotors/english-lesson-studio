@@ -62,3 +62,39 @@ export function parseMaterialDraft(raw: string | null): MaterialDraft {
   }
   return draft;
 }
+
+// Only this verified translation edition can reuse older drafts. Future edits
+// may change the questions and must not copy a previous version automatically.
+export function restoreMaterialDraft(
+  read: (key: string) => string | null,
+  id: string,
+  version: number,
+  teacher: boolean,
+): MaterialDraft {
+  const current = read(materialPracticeKey(id, version, teacher));
+  if (current !== null) return parseMaterialDraft(current);
+  if (!/^a1-(0[1-9]|[12][0-9]|30)$/.test(id)) return blankMaterialDraft();
+  const englishVersion = id === "a1-11" || id === "a1-22" ? 3 : 2;
+  if (version !== englishVersion) return blankMaterialDraft();
+  for (let previous = version - 1; previous >= 1; previous--) {
+    const raw = read(materialPracticeKey(id, previous, teacher));
+    if (raw === null) continue;
+    const draft = parseMaterialDraft(raw);
+    if (id === "a1-19") {
+      // These are legacy selectable labels, never learner-written paragraphs.
+      const labels: Record<string, string> = {
+        "Он высокий.": "He is a tall person.",
+        "У неё есть очки.": "She has a pair of glasses.",
+        "У него короткие волосы.": "His hair is short.",
+      };
+      for (const key of Object.keys(draft.answers))
+        if (
+          key.startsWith("description-meaning.") &&
+          Object.hasOwn(labels, draft.answers[key])
+        )
+          draft.answers[key] = labels[draft.answers[key]];
+    }
+    return draft;
+  }
+  return blankMaterialDraft();
+}

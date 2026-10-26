@@ -40,11 +40,11 @@ console.log(
 const docs = fileURLToPath(new URL("../docs/", import.meta.url));
 fs.mkdirSync(docs, { recursive: true });
 const overview =
-  "# A1: первые уверенные разговоры\n\n30 оригинальных уроков для индивидуального занятия учителя с учеником, преимущественно в подростковых и взрослых повседневных контекстах. Ориентир — 45 минут на урок; это 22,5 контактных часа, а не гарантия освоения уровня. Темп и необходимое число повторений определяет учитель.\n\nВ каждом уроке: повторение из памяти (4 мин), язык и 6 речевых единиц (8), исходный текст и понимание (7), практика (10), разговорная задача (8), письмо (4), самооценка (2), объяснение домашней практики (2). Домашняя работа выполняется отдельно, примерно 10–15 минут.\n\nКоллекция: " +
+  "# A1: first conversations\n\n30 original lessons for one learner and a teacher, with everyday contexts suitable mainly for teenagers and adults. Each lesson suggests 45 minutes: 22.5 contact hours in total. This is a learning collection, not a guarantee of reaching A1. The teacher adjusts pace and review to the learner.\n\nEach lesson includes recall (4 min), language and 6 useful words or phrases (8), a source text and comprehension (7), practice (10), speaking (8), writing (4), a goal check (2) and a home practice briefing (2). Home practice takes about 10–15 minutes outside the lesson.\n\nThe collection contains " +
   tasks +
-  " проверяемых блоков, " +
+  " checked practice blocks, " +
   items +
-  " закрытых вопросов, 180 слов и фраз с переводом и примером, 30 разговорных задач, 30 письменных задач и 30 домашних работ.\n\n| № | Урок | Тема | Основной фокус | Коммуникативная цель |\n|---|---|---|---|---|\n";
+  " closed questions, 180 vocabulary entries with English meanings and examples, 30 speaking tasks, 30 writing tasks and 30 home practice tasks. All lesson instructions, explanations, feedback and teacher notes are in English.\n\n| No. | Lesson | Topic | Main skills | Communication goal |\n|---|---|---|---|---|\n";
 const table = lessons
   .map(
     (l) =>
@@ -55,5 +55,5 @@ fs.writeFileSync(
   docs + "A1-CURRICULUM.md",
   overview +
     table +
-    "\n\nМетодические основания и ограничения: [A1-METHODOLOGY.md](A1-METHODOLOGY.md).\n",
+    "\n\nTeaching approach and limitations: [A1-METHODOLOGY.md](A1-METHODOLOGY.md).\n",
 );

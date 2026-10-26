@@ -16,7 +16,6 @@ import {
   X,
 } from "lucide-react";
 import { MATERIAL_SKILLS, validateMaterial } from "./material-model";
-import { materialPresentation } from "./material-presentation";
 import type {
   Material,
   MaterialContent,
@@ -322,11 +321,8 @@ export default function AssignmentsLibrary({
   const allowedRows = rows.filter(
     (row) => !row.owner_id || row.owner_id === user?.id,
   );
-  const topicLabels = new Map(
-    allowedRows.map((row) => [row.topic, materialPresentation(row).topic]),
-  );
-  const topics = [...topicLabels.keys()].sort((a, b) =>
-    topicLabels.get(a)!.localeCompare(topicLabels.get(b)!, "en-GB"),
+  const topics = [...new Set(allowedRows.map((row) => row.topic))].sort(
+    (a, b) => a.localeCompare(b, "en-GB"),
   );
   const normalized = search.toLocaleLowerCase().trim();
   const filtered = allowedRows.filter(
@@ -335,7 +331,7 @@ export default function AssignmentsLibrary({
       (!skill || row.skills.includes(skill as keyof typeof MATERIAL_SKILLS)) &&
       (!topic || row.topic === topic) &&
       (!normalized ||
-        `${row.title} ${row.subtitle} ${row.topic} ${materialPresentation(row).subtitle} ${materialPresentation(row).topic}`
+        `${row.title} ${row.subtitle} ${row.topic}`
           .toLocaleLowerCase()
           .includes(normalized)) &&
       (source !== "studio" || !row.owner_id) &&
@@ -504,7 +500,7 @@ export default function AssignmentsLibrary({
                 <option value="">All topics</option>
                 {topics.map((value) => (
                   <option key={value} value={value}>
-                    {topicLabels.get(value)}
+                    {value}
                   </option>
                 ))}
               </select>
@@ -568,13 +564,11 @@ export default function AssignmentsLibrary({
                       />
                     </button>
                   </div>
-                  <span className="material-topic">
-                    {materialPresentation(row).topic}
-                  </span>
+                  <span className="material-topic">{row.topic}</span>
                   <h2>
                     <button onClick={() => open(row.id)}>{row.title}</button>
                   </h2>
-                  <p>{materialPresentation(row).subtitle}</p>
+                  <p>{row.subtitle}</p>
                   <div className="material-skill-tags">
                     {row.skills.slice(0, 3).map((value) => (
                       <span key={value}>{MATERIAL_SKILLS[value]}</span>

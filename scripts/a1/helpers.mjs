@@ -89,7 +89,7 @@ export function makeLesson(u) {
       ...u.homework,
       review:
         u.homework.review ||
-        "Вернитесь к фразам завтра, затем примерно через 3 и 7 дней. Сначала вспомните без подсказки, потом проверьте; интервал можно менять по трудности.",
+        "Review these phrases tomorrow, then about 3 and 7 days later. Try without help first, then check. Review sooner if it is difficult.",
     },
     teacherNotes: u.teacherNotes,
   };
