@@ -7,10 +7,13 @@
     "node": "24.x"
   },
   "scripts": {
+    "content:build": "node --experimental-strip-types scripts/build-a1-course.mjs",
+    "content:seed:sql": "node scripts/seed-library.mjs 0 30",
     "dev": "vite --host 127.0.0.1",
     "build": "tsc -b && vite build",
     "preview": "vite preview --host 127.0.0.1",
     "test": "node --experimental-strip-types --test tests/*.test.ts",
+    "test:library": "node --experimental-strip-types --test tests/materials.integration.ts",
     "test:cloud": "node --experimental-strip-types --test tests/cloud.integration.ts"
   },
   "dependencies": {
