@@ -30,13 +30,13 @@ export default function StandaloneMaterial({ id }: { id: string }) {
       <header>
         <BookOpen size={24} />
         <span>Lesson Studio</span>
-        <small>ПРАКТИКА УЧЕНИКА</small>
+        <small>STUDENT PRACTICE</small>
       </header>
       <main>
         {error ? (
           <div className="library-error" role="alert">
             <p>{error}</p>
-            <a href="/?mode=student">В учебную комнату</a>
+            <a href="/?mode=student">Back to classroom</a>
           </div>
         ) : material &&
           (!material.owner_id || material.owner_id === user?.id) ? (
@@ -49,7 +49,7 @@ export default function StandaloneMaterial({ id }: { id: string }) {
         ) : (
           <div className="library-loading" role="status">
             <LoaderCircle className="students-spinner" />
-            Открываем урок…
+            Opening lesson…
           </div>
         )}
       </main>

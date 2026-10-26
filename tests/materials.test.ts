@@ -116,7 +116,7 @@ test("JSON import rejects incomplete lessons and invalid question keys", () => {
   const invalid = structuredClone(lessons[0]);
   invalid.input.questions.items[0].answers = ["Not an option"];
   assert.ok(
-    validateMaterial(invalid).some((e) => e.includes("среди вариантов")),
+    validateMaterial(invalid).some((e) => e.includes("one of the options")),
   );
   const broken = structuredClone(lessons[4]);
   broken.practice[1].items[0].tokens = ["wrong", "sentence"];

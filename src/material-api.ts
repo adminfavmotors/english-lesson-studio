@@ -60,7 +60,7 @@ export async function loadMaterial(
   if (!error && data) {
     const errors = validateMaterial(data.content);
     if (errors.length)
-      throw new Error("Урок не прошёл проверку структуры: " + errors[0]);
+      throw new Error("The lesson failed validation: " + errors[0]);
     return data as Material;
   }
   if (signal.aborted) throw error;
@@ -81,7 +81,7 @@ export async function loadMaterial(
       };
   }
   throw new Error(
-    "Урок недоступен. Войдите в аккаунт владельца или вернитесь в библиотеку.",
+    "This lesson is unavailable. Sign in to the account that owns it or return to the library.",
   );
 }
 export async function importMaterial(content: MaterialContent) {
@@ -95,7 +95,7 @@ export async function importMaterial(content: MaterialContent) {
     .single();
   if (error)
     throw new Error(
-      "Не удалось сохранить урок. Проверьте вход в кабинет и соединение.",
+      "Could not save the lesson. Check your sign-in and internet connection.",
     );
   return data as Material;
 }
@@ -112,5 +112,5 @@ export async function saveFavourite(id: string, active: boolean) {
     ? await platform.from("material_favourites").insert({ material_id: id })
     : await platform.from("material_favourites").delete().eq("material_id", id);
   if (result.error && result.error.code !== "23505")
-    throw new Error("Не удалось сохранить избранное. Попробуйте ещё раз.");
+    throw new Error("Could not save favourites. Please try again.");
 }

@@ -16,6 +16,7 @@ import {
   X,
 } from "lucide-react";
 import { MATERIAL_SKILLS, validateMaterial } from "./material-model";
+import { materialPresentation } from "./material-presentation";
 import type {
   Material,
   MaterialContent,
@@ -50,10 +51,10 @@ function AccountDialog({ onClose }: { onClose: () => void }) {
       }}
     >
       <div className="dialog-heading">
-        <h2 id="library-account-title">Вход в кабинет учителя</h2>
+        <h2 id="library-account-title">Sign in to your workspace</h2>
         <button
           className="icon-button"
-          aria-label="Закрыть вход"
+          aria-label="Close sign in"
           onClick={onClose}
         >
           <X size={20} />
@@ -83,7 +84,7 @@ function ImportDialog({
     try {
       content = JSON.parse(text);
     } catch {
-      setErrors(["Не удалось прочитать JSON. Проверьте запятые и кавычки."]);
+      setErrors(["Could not read the JSON. Check commas and quotation marks."]);
       return;
     }
     const problems = validateMaterial(content);
@@ -112,12 +113,12 @@ function ImportDialog({
     >
       <div className="dialog-heading">
         <div>
-          <span className="eyebrow">НАПОЛНЕНИЕ БИБЛИОТЕКИ</span>
-          <h2 id="import-title">Импортировать урок</h2>
+          <span className="eyebrow">BUILD YOUR LIBRARY</span>
+          <h2 id="import-title">Import a lesson</h2>
         </div>
         <button
           className="icon-button"
-          aria-label="Закрыть импорт"
+          aria-label="Close import"
           disabled={busy}
           onClick={onClose}
         >
@@ -125,13 +126,13 @@ function ImportDialog({
         </button>
       </div>
       <p>
-        Подготовьте урок с ИИ или самостоятельно. Экспорт любого урока коллекции
-        подходит как образец структуры. Импорт создаёт ваш личный материал;
-        исходная коллекция сохраняется.
+        Prepare a lesson with AI or write your own. Export a lesson from the
+        collection to use as a template. Importing creates a private material in
+        your workspace.
       </p>
       <label className="json-file-label">
         <Upload size={18} />
-        Выбрать JSON-файл
+        Choose a JSON file
         <input
           type="file"
           accept=".json,application/json"
@@ -140,7 +141,7 @@ function ImportDialog({
             const file = event.target.files?.[0];
             if (!file) return;
             if (file.size > 150000) {
-              setErrors(["Файл должен быть не больше 150 КБ."]);
+              setErrors(["The file must be no larger than 150 KB."]);
               return;
             }
             setText(await file.text());
@@ -149,7 +150,7 @@ function ImportDialog({
         />
       </label>
       <label className="material-json-label">
-        JSON урока
+        Lesson JSON
         <textarea
           rows={12}
           value={text}
@@ -166,7 +167,7 @@ function ImportDialog({
       </label>
       {errors.length > 0 && (
         <div className="library-error" role="alert">
-          <strong>Проверьте структуру</strong>
+          <strong>Check the structure</strong>
           <ul>
             {errors.slice(0, 10).map((error) => (
               <li key={error}>{error}</li>
@@ -176,7 +177,7 @@ function ImportDialog({
       )}
       <div className="student-dialog-actions">
         <button className="secondary" disabled={busy} onClick={onClose}>
-          Отмена
+          Cancel
         </button>
         <button
           className="primary"
@@ -188,7 +189,7 @@ function ImportDialog({
           ) : (
             <Upload size={17} />
           )}{" "}
-          {busy ? "Сохраняем…" : "Добавить в мои материалы"}
+          {busy ? "Saving…" : "Add to my materials"}
         </button>
       </div>
     </dialog>
@@ -243,7 +244,7 @@ export default function AssignmentsLibrary({
       })
       .catch(() => {
         if (!controller.signal.aborted)
-          setError("Библиотека недоступна. Попробуйте обновить страницу.");
+          setError("The library is unavailable. Try refreshing the page.");
       })
       .finally(() => {
         if (!controller.signal.aborted) setLoading(false);
@@ -256,7 +257,7 @@ export default function AssignmentsLibrary({
         .catch(() => {
           if (!controller.signal.aborted)
             setError(
-              "Не удалось загрузить избранное. Коллекция доступна; повторите обновление для личных данных.",
+              "Could not load favourites. The collection is available; refresh to try loading your personal materials again.",
             );
         });
     else setFavourites(new Set());
@@ -321,8 +322,11 @@ export default function AssignmentsLibrary({
   const allowedRows = rows.filter(
     (row) => !row.owner_id || row.owner_id === user?.id,
   );
-  const topics = [...new Set(allowedRows.map((row) => row.topic))].sort(
-    (a, b) => a.localeCompare(b, "ru"),
+  const topicLabels = new Map(
+    allowedRows.map((row) => [row.topic, materialPresentation(row).topic]),
+  );
+  const topics = [...topicLabels.keys()].sort((a, b) =>
+    topicLabels.get(a)!.localeCompare(topicLabels.get(b)!, "en-GB"),
   );
   const normalized = search.toLocaleLowerCase().trim();
   const filtered = allowedRows.filter(
@@ -331,7 +335,7 @@ export default function AssignmentsLibrary({
       (!skill || row.skills.includes(skill as keyof typeof MATERIAL_SKILLS)) &&
       (!topic || row.topic === topic) &&
       (!normalized ||
-        `${row.title} ${row.subtitle} ${row.topic}`
+        `${row.title} ${row.subtitle} ${row.topic} ${materialPresentation(row).subtitle} ${materialPresentation(row).topic}`
           .toLocaleLowerCase()
           .includes(normalized)) &&
       (source !== "studio" || !row.owner_id) &&
@@ -356,7 +360,7 @@ export default function AssignmentsLibrary({
           {detailLoading ? (
             <div className="library-loading" role="status">
               <LoaderCircle className="students-spinner" />
-              Открываем урок…
+              Opening lesson…
             </div>
           ) : material &&
             (!material.owner_id || material.owner_id === user?.id) ? (
@@ -370,17 +374,17 @@ export default function AssignmentsLibrary({
             <div className="library-error" role="alert">
               <p>
                 {detailError ||
-                  "Для личного материала войдите в кабинет владельца."}
+                  "Sign in to the account that owns this private material."}
               </p>
               <button className="secondary" onClick={() => open("")}>
-                Вернуться в библиотеку
+                Back to library
               </button>
               {!user && (
                 <button
                   className="text-button"
                   onClick={() => setAccountOpen(true)}
                 >
-                  Войти в кабинет
+                  Sign in
                 </button>
               )}
             </div>
@@ -390,17 +394,17 @@ export default function AssignmentsLibrary({
         <>
           <div className="library-top-actions">
             <div>
-              <span className="eyebrow">БИБЛИОТЕКА УЧИТЕЛЯ</span>
-              <h1>Задания и уроки</h1>
+              <span className="eyebrow">TEACHER LIBRARY</span>
+              <h1>Assignments and lessons</h1>
               <p>
-                Выбирайте материал под цель ученика. Дополняйте библиотеку
-                своими уроками.
+                Choose materials for each learning goal. Grow your library with
+                your own lessons.
               </p>
             </div>
             <div>
               <button className="secondary" onClick={() => void template()}>
                 <Download size={17} />
-                Пример JSON
+                Sample JSON
               </button>
               <button
                 className="primary"
@@ -409,31 +413,31 @@ export default function AssignmentsLibrary({
                 }
               >
                 <Upload size={17} />
-                Добавить урок
+                Add lesson
               </button>
             </div>
           </div>
           <div className="a1-collection-banner">
             <span className="a1-collection-mark">A1</span>
             <div>
-              <span className="eyebrow">КОЛЛЕКЦИЯ LESSON STUDIO</span>
-              <h2>Первые уверенные разговоры</h2>
+              <span className="eyebrow">LESSON STUDIO COLLECTION</span>
+              <h2>First conversations</h2>
               <p>
-                30 уроков · 300 вопросов с проверкой · речь, письмо и домашняя
-                практика
+                30 lessons · 300 questions with feedback · speaking, writing and
+                home practice
               </p>
             </div>
             <GraduationCap size={39} />
           </div>
           <div
             className="library-source-tabs"
-            aria-label="Коллекции материалов"
+            aria-label="Material collections"
           >
             {[
-              { id: "all", label: "Все материалы" },
-              { id: "studio", label: "Коллекция Studio" },
-              { id: "mine", label: "Мои материалы" },
-              { id: "favourites", label: "Избранное" },
+              { id: "all", label: "All materials" },
+              { id: "studio", label: "Studio collection" },
+              { id: "mine", label: "My materials" },
+              { id: "favourites", label: "Favourites" },
             ].map((tab) => (
               <button
                 key={tab.id}
@@ -454,34 +458,36 @@ export default function AssignmentsLibrary({
           <div className="library-filters">
             <label className="library-search">
               <Search size={18} />
-              <span className="sr-only">Поиск урока</span>
+              <span className="sr-only">Search lessons</span>
               <input
                 type="search"
-                placeholder="Тема, название или ключевое слово"
+                placeholder="Topic, title or keyword"
                 value={search}
                 maxLength={120}
                 onChange={(event) => setFilter(setSearch, event.target.value)}
               />
             </label>
             <label>
-              <span className="sr-only">Уровень урока</span>
+              <span className="sr-only">Lesson level</span>
               <select
                 value={level}
                 onChange={(event) => setFilter(setLevel, event.target.value)}
               >
-                <option value="">Все уровни</option>
+                <option value="">All levels</option>
                 {["A1", "A2", "B1", "B2", "C1", "C2"].map((value) => (
-                  <option key={value}>{value}</option>
+                  <option key={value} value={value}>
+                    {value}
+                  </option>
                 ))}
               </select>
             </label>
             <label>
-              <span className="sr-only">Навык урока</span>
+              <span className="sr-only">Lesson skill</span>
               <select
                 value={skill}
                 onChange={(event) => setFilter(setSkill, event.target.value)}
               >
-                <option value="">Любой навык</option>
+                <option value="">All skills</option>
                 {Object.entries(MATERIAL_SKILLS).map(([value, label]) => (
                   <option key={value} value={value}>
                     {label}
@@ -490,22 +496,24 @@ export default function AssignmentsLibrary({
               </select>
             </label>
             <label>
-              <span className="sr-only">Тема урока</span>
+              <span className="sr-only">Lesson topic</span>
               <select
                 value={topic}
                 onChange={(event) => setFilter(setTopic, event.target.value)}
               >
-                <option value="">Все темы</option>
+                <option value="">All topics</option>
                 {topics.map((value) => (
-                  <option key={value}>{value}</option>
+                  <option key={value} value={value}>
+                    {topicLabels.get(value)}
+                  </option>
                 ))}
               </select>
             </label>
           </div>
           {offline && (
             <p className="library-notice" role="status">
-              Облако недоступно. Открыта встроенная коллекция A1; личные
-              материалы и избранное могут быть недоступны.
+              The cloud is unavailable. You are viewing the built-in A1
+              collection; private materials and favourites may be unavailable.
             </p>
           )}
           {error && (
@@ -515,7 +523,7 @@ export default function AssignmentsLibrary({
                 className="secondary"
                 onClick={() => setReload((value) => value + 1)}
               >
-                Повторить загрузку
+                Try again
               </button>
             </div>
           )}
@@ -527,14 +535,14 @@ export default function AssignmentsLibrary({
           <div className="library-result-line">
             <span>
               <Filter size={15} />
-              {loading ? "Загружаем материалы…" : `Найдено: ${filtered.length}`}
+              {loading ? "Loading materials…" : `Results: ${filtered.length}`}
             </span>
-            <small>Навыки — основной фокус урока</small>
+            <small>Skills show the main focus of each lesson</small>
           </div>
           {loading ? (
             <div className="library-loading" role="status">
               <LoaderCircle className="students-spinner" />
-              Загружаем библиотеку…
+              Loading library…
             </div>
           ) : visible.length ? (
             <div className="material-grid">
@@ -544,12 +552,12 @@ export default function AssignmentsLibrary({
                     <span className="material-level">{row.level}</span>
                     <span>
                       {row.owner_id
-                        ? "Мой материал"
-                        : `Урок ${String(row.sequence).padStart(2, "0")}`}
+                        ? "My material"
+                        : `Lesson ${String(row.sequence).padStart(2, "0")}`}
                     </span>
                     <button
                       className={`icon-button favourite-button ${favourites.has(row.id) ? "selected" : ""}`}
-                      aria-label={`${favourites.has(row.id) ? "Убрать из избранного" : "В избранное"}: ${row.title}`}
+                      aria-label={`${favourites.has(row.id) ? "Remove from favourites" : "Add to favourites"}: ${row.title}`}
                       aria-pressed={favourites.has(row.id)}
                       disabled={pendingFavourite === row.id}
                       onClick={() => void toggleFavourite(row.id)}
@@ -560,11 +568,13 @@ export default function AssignmentsLibrary({
                       />
                     </button>
                   </div>
-                  <span className="material-topic">{row.topic}</span>
+                  <span className="material-topic">
+                    {materialPresentation(row).topic}
+                  </span>
                   <h2>
                     <button onClick={() => open(row.id)}>{row.title}</button>
                   </h2>
-                  <p>{row.subtitle}</p>
+                  <p>{materialPresentation(row).subtitle}</p>
                   <div className="material-skill-tags">
                     {row.skills.slice(0, 3).map((value) => (
                       <span key={value}>{MATERIAL_SKILLS[value]}</span>
@@ -573,13 +583,13 @@ export default function AssignmentsLibrary({
                   <div className="material-card-bottom">
                     <span>
                       <Clock3 size={15} />
-                      {row.duration} мин
+                      {row.duration} min
                     </span>
                     <button
                       className="text-button"
                       onClick={() => open(row.id)}
                     >
-                      Открыть урок
+                      Open lesson
                       <ChevronRight size={17} />
                     </button>
                   </div>
@@ -589,10 +599,10 @@ export default function AssignmentsLibrary({
           ) : (
             <div className="library-empty">
               <BookOpen size={34} />
-              <h2>Материалы не найдены</h2>
+              <h2>No materials found</h2>
               <p>
-                Попробуйте другую тему или навык. Для A2–C2 можно добавить
-                собственный урок через JSON-импорт.
+                Try another topic or skill. You can import your own lessons for
+                levels A2–C2 using JSON.
               </p>
               <button
                 className="secondary"
@@ -605,14 +615,14 @@ export default function AssignmentsLibrary({
                   setPage(0);
                 }}
               >
-                Сбросить фильтры
+                Clear filters
               </button>
             </div>
           )}
           {pages > 1 && !loading && (
             <div className="library-pagination">
               <span>
-                Страница {currentPage + 1} из {pages}
+                Page {currentPage + 1} of {pages}
               </span>
               <div>
                 <button
@@ -624,7 +634,7 @@ export default function AssignmentsLibrary({
                   }}
                 >
                   <ChevronLeft size={16} />
-                  Назад
+                  Back
                 </button>
                 <button
                   className="secondary"
@@ -634,7 +644,7 @@ export default function AssignmentsLibrary({
                     window.scrollTo({ top: 0, behavior: "instant" });
                   }}
                 >
-                  Далее
+                  Next
                   <ChevronRight size={16} />
                 </button>
               </div>
@@ -643,28 +653,28 @@ export default function AssignmentsLibrary({
           <section className="legacy-material-link">
             <BookOpen size={22} />
             <div>
-              <h2>A Better Life · материал из учебника</h2>
+              <h2>A Better Life · textbook material</h2>
               <p>
-                Прежняя учебная комната с общей сессией, таймером и исходной
-                страницей сохранена отдельно.
+                Open the textbook classroom with a shared session, lesson timer
+                and original page.
               </p>
             </div>
             <button className="secondary" onClick={onOpenLegacy}>
-              Открыть комнату
+              Open classroom
               <ExternalLink size={15} />
             </button>
           </section>
           <details className="library-methods">
             <summary>
               <FileJson size={17} />
-              Как устроены уроки и дальнейшее наполнение
+              About the lessons and adding your own materials
             </summary>
             <p>
-              Уроки опираются на повседневные коммуникативные цели CEFR A1,
-              короткие образцы, повторение из памяти и практику с обратной
-              связью. Темп и объём адаптирует учитель. Для импорта подготовьте
-              один JSON-объект по экспорту любого урока. Созданные материалы
-              видны только владельцу кабинета.
+              Lessons use everyday CEFR A1 communication goals, short models,
+              recall practice and feedback. The teacher adjusts the pace and
+              workload. To import a lesson, prepare one JSON object using an
+              exported lesson as a template. Your imported materials are private
+              to your account.
             </p>
             <p>
               <a
@@ -672,7 +682,7 @@ export default function AssignmentsLibrary({
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                CEFR: цели и дескрипторы
+                CEFR: goals and descriptors
               </a>{" "}
               ·{" "}
               <a
@@ -680,13 +690,13 @@ export default function AssignmentsLibrary({
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                TeachingEnglish: коммуникативные задачи
+                TeachingEnglish: communicative tasks
               </a>
             </p>
             <p>
-              30 уроков — учебная коллекция, а не гарантия достижения уровня или
-              официальная сертификация. Назначение ученикам и общий журнал
-              результатов будут отдельным этапом платформы.
+              This 30-lesson collection supports learning; it does not guarantee
+              a CEFR level or provide certification. Student assignments and a
+              shared results record will be added in a future update.
             </p>
           </details>
         </>
@@ -697,7 +707,7 @@ export default function AssignmentsLibrary({
           onClose={() => setImportOpen(false)}
           onSaved={(value) => {
             setImportOpen(false);
-            setNotice("Урок добавлен в ваши материалы.");
+            setNotice("Lesson added to your materials.");
             setReload((previous) => previous + 1);
             open(value.id);
           }}

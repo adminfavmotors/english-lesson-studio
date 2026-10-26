@@ -21,6 +21,7 @@ import {
   isCorrectAnswer,
 } from "./material-model";
 import type { Material, PracticeTask, PracticeItem } from "./material-model";
+import { materialPresentation } from "./material-presentation";
 import {
   blankMaterialDraft as blankDraft,
   materialPracticeKey,
@@ -62,13 +63,13 @@ function OrderedAnswer({
   const shuffled = [...pool.slice(shift), ...pool.slice(0, shift)];
   return (
     <div className="word-order">
-      <div className="word-order-answer" aria-label="Ваше предложение">
+      <div className="word-order-answer" aria-label="Your sentence">
         {value.length ? (
           value.map((index, position) => (
             <button
               type="button"
               key={index}
-              aria-label={`Убрать слово ${tokens[index]}`}
+              aria-label={`Remove word ${tokens[index]}`}
               onClick={() => {
                 const next = value.filter((_, i) => i !== position);
                 onChange(next, next.map((i) => tokens[i]).join(" "));
@@ -79,7 +80,7 @@ function OrderedAnswer({
             </button>
           ))
         ) : (
-          <span>Нажимайте слова в нужном порядке</span>
+          <span>Choose the words in the correct order</span>
         )}
       </div>
       <div className="word-order-pool">
@@ -104,7 +105,7 @@ function OrderedAnswer({
         onClick={() => onChange([], "")}
       >
         <RotateCcw size={13} />
-        Очистить предложение
+        Clear sentence
       </button>
     </div>
   );
@@ -149,7 +150,8 @@ function Practice({
           <p>{task.instruction}</p>
         </div>
         <span>
-          {task.items.length} {task.items.length === 1 ? "вопрос" : "вопроса"}
+          {task.items.length}{" "}
+          {task.items.length === 1 ? "question" : "questions"}
         </span>
       </div>
       {task.items.map((item, index) => {
@@ -181,11 +183,11 @@ function Practice({
               </div>
             ) : task.type === "match" ? (
               <select
-                aria-label={`Ответ: ${item.prompt}`}
+                aria-label={`Answer: ${item.prompt}`}
                 value={value}
                 onChange={(event) => set(key, event.target.value)}
               >
-                <option value="">Выберите соответствие</option>
+                <option value="">Choose a match</option>
                 {item.options?.map((option) => (
                   <option key={option}>{option}</option>
                 ))}
@@ -198,7 +200,7 @@ function Practice({
               />
             ) : (
               <input
-                aria-label={`Ответ: ${item.prompt}`}
+                aria-label={`Answer: ${item.prompt}`}
                 value={value}
                 maxLength={300}
                 autoComplete="off"
@@ -211,8 +213,8 @@ function Practice({
               <div className="practice-feedback">
                 <strong>
                   {correctItem
-                    ? "Верно"
-                    : `Один верный ответ: ${item.answers[0]}`}
+                    ? "Correct"
+                    : `One correct answer: ${item.answers[0]}`}
                 </strong>
                 <p>{item.explanation}</p>
               </div>
@@ -232,12 +234,12 @@ function Practice({
           }
         >
           <Check size={17} />
-          Проверить
+          Check answers
         </button>
         <span role="status">
           {checked
-            ? `${correct} из ${task.items.length} верно`
-            : `Заполнено ${answered} из ${task.items.length}`}
+            ? `${correct} of ${task.items.length} correct`
+            : `${answered} of ${task.items.length} answered`}
         </span>
       </div>
     </section>
@@ -273,7 +275,7 @@ function InputBlock({
   const speak = () => {
     if (!voice) {
       setNotice(
-        "На устройстве нет английского голоса. Учитель может прочитать текст вслух.",
+        "No English voice is available on this device. Your teacher can read the text aloud.",
       );
       return;
     }
@@ -297,11 +299,11 @@ function InputBlock({
       <div className="model-actions">
         <button className="secondary" onClick={() => setVisible(!visible)}>
           {visible ? <EyeOff size={16} /> : <Eye size={16} />}{" "}
-          {visible ? "Скрыть текст для аудирования" : "Показать текст"}
+          {visible ? "Hide text to listen" : "Show text"}
         </button>
         <button className="secondary" onClick={speak}>
           <Volume2 size={16} />
-          Голос устройства
+          Read aloud
         </button>
       </div>
       {notice && (
@@ -317,14 +319,14 @@ function InputBlock({
         <div className="hidden-input">
           <BookOpen size={24} />
           <p>
-            Сначала послушайте учителя или голос устройства. Текст можно открыть
-            для проверки.
+            First, listen to your teacher or the device voice. Then show the
+            text to check.
           </p>
         </div>
       )}
       <p className="material-helper">
-        Аудиозаписи нет: текст читает учитель или доступный английский голос
-        устройства. Повторное прослушивание разрешено.
+        There is no recorded audio. Your teacher or an available English device
+        voice reads the text. You can listen again.
       </p>
       <Practice task={input.questions} draft={draft} update={update} />
     </>
@@ -336,10 +338,10 @@ function TeacherKeys({ material }: { material: Material }) {
     <details className="material-teacher-keys">
       <summary>
         <Eye size={17} />
-        Ключи и рекомендации учителю
+        Answer keys and teacher notes
       </summary>
       <div>
-        <h3>Как провести урок</h3>
+        <h3>Teaching notes</h3>
         <ul>
           {l.teacherNotes.map((note) => (
             <li key={note}>{note}</li>
@@ -359,8 +361,8 @@ function TeacherKeys({ material }: { material: Material }) {
           </section>
         ))}
         <p>
-          Письмо и речь проверяйте по критериям задачи. Образцы открытых ответов
-          — примеры, допустимы другие корректные варианты.
+          Use the task criteria to review writing and speaking. Model answers
+          are examples; other correct answers are welcome.
         </p>
       </div>
     </details>
@@ -414,23 +416,23 @@ export default function MaterialStudy({
       <div className="material-study-toolbar">
         <button className="text-button" onClick={onBack}>
           <ArrowLeft size={17} />
-          {teacher ? "В библиотеку" : "В учебную комнату"}
+          {teacher ? "Back to library" : "Back to classroom"}
         </button>
-        <span>{teacher ? "ПРЕДПРОСМОТР УРОКА" : "ЛИЧНАЯ ПРАКТИКА"}</span>
+        <span>{teacher ? "LESSON PREVIEW" : "PERSONAL PRACTICE"}</span>
       </div>
       <header className="material-study-heading">
         <div className="material-tags">
           <span className="material-level">{l.level}</span>
           {l.sequence && (
-            <span>Урок {String(l.sequence).padStart(2, "0")}</span>
+            <span>Lesson {String(l.sequence).padStart(2, "0")}</span>
           )}
           <span>
             <Clock3 size={14} />
-            {l.duration} мин · ориентир
+            {l.duration} min · suggested
           </span>
         </div>
         <h1>{l.title}</h1>
-        <p>{l.subtitle}</p>
+        <p>{materialPresentation(material).subtitle}</p>
         <div className="material-skill-tags">
           {l.skills.map((skill) => (
             <span key={skill}>{MATERIAL_SKILLS[skill]}</span>
@@ -439,7 +441,7 @@ export default function MaterialStudy({
         <div className="material-can-do">
           <TargetMark />
           <div>
-            <small>ЦЕЛЬ УРОКА</small>
+            <small>LESSON GOAL</small>
             <p lang="en">{l.goal}</p>
           </div>
         </div>
@@ -452,14 +454,14 @@ export default function MaterialStudy({
               rel="noopener"
             >
               <ExternalLink size={16} />
-              Открыть практику ученика
+              Open student practice
             </a>
             <button
               className="secondary"
               onClick={() => downloadMaterial(material)}
             >
               <Download size={16} />
-              Экспорт JSON
+              Export JSON
             </button>
           </div>
         )}
@@ -469,14 +471,14 @@ export default function MaterialStudy({
         role="status"
       >
         {storageError
-          ? "Не удалось сохранить ответы в браузере. Не закрывайте страницу до завершения практики."
-          : "Ответы сохраняются только в этом браузере. Эта практика пока не назначена ученику и не отправляет результаты учителю."}
+          ? "Could not save answers in this browser. Keep the page open until you finish."
+          : "Answers are saved only in this browser. This practice is not yet assigned to a student and does not send results to the teacher."}
       </p>
       {teacher && <TeacherKeys material={material} />}
       <div className="material-study-layout">
-        <aside className="material-plan" aria-label="План урока">
-          <h2>План урока</h2>
-          <p>{l.duration} минут · с учителем</p>
+        <aside className="material-plan" aria-label="Lesson plan">
+          <h2>Lesson plan</h2>
+          <p>{l.duration} minutes · with your teacher</p>
           <nav>
             {MATERIAL_STAGES.map((item, index) => (
               <button
@@ -487,18 +489,18 @@ export default function MaterialStudy({
               >
                 <span>{String(index + 1).padStart(2, "0")}</span>
                 <strong>{item.title}</strong>
-                <small>{item.minutes} мин</small>
+                <small>{item.minutes} min</small>
               </button>
             ))}
           </nav>
           <p className="material-helper">
-            Время — ориентир. Меняйте темп и объём повторения по готовности
-            ученика.
+            Times are a guide. Adjust the pace and review practice to suit the
+            learner.
           </p>
           {confirmReset ? (
             <div className="material-reset-confirm">
               <p>
-                Очистить ответы и черновики только этого урока в этом браузере?
+                Clear the answers and drafts for this lesson in this browser?
               </p>
               <button
                 className="danger-button"
@@ -507,13 +509,13 @@ export default function MaterialStudy({
                   setConfirmReset(false);
                 }}
               >
-                Очистить
+                Clear
               </button>
               <button
                 className="text-button"
                 onClick={() => setConfirmReset(false)}
               >
-                Отмена
+                Cancel
               </button>
             </div>
           ) : (
@@ -522,15 +524,15 @@ export default function MaterialStudy({
               onClick={() => setConfirmReset(true)}
             >
               <RotateCcw size={14} />
-              Начать практику заново
+              Start practice again
             </button>
           )}
         </aside>
         <div className="material-stage-content">
           <div className="material-stage-overline">
-            ЭТАП {stage + 1} ИЗ {MATERIAL_STAGES.length}{" "}
+            STEP {stage + 1} OF {MATERIAL_STAGES.length}{" "}
             <ChevronRight size={13} />
-            {current.minutes} мин
+            {current.minutes} min
           </div>
           <h2 id="material-stage-title" tabIndex={-1}>
             {current.title}
@@ -538,8 +540,8 @@ export default function MaterialStudy({
           {current.id === "retrieval" && (
             <>
               <p className="material-section-description">
-                Сначала попробуйте вспомнить без подсказки. Потом откройте
-                пример. Личный ответ может отличаться.
+                Try to remember without help. Then open the example. Your own
+                answer can be different.
               </p>
               <div className="retrieval-cards">
                 {l.retrieval.map((item, index) => (
@@ -547,12 +549,12 @@ export default function MaterialStudy({
                     <span>
                       {String(index + 1).padStart(2, "0")}
                       {item.fromLesson
-                        ? ` · повтор урока ${item.fromLesson}`
-                        : " · пробуем с помощью учителя"}
+                        ? `  · review lesson ${item.fromLesson}`
+                        : "  · try with your teacher"}
                     </span>
                     <h3>{item.prompt}</h3>
                     <details>
-                      <summary>Открыть пример ответа</summary>
+                      <summary>Show an example answer</summary>
                       <p lang="en">{item.answer}</p>
                     </details>
                   </div>
@@ -572,7 +574,7 @@ export default function MaterialStudy({
                 ))}
               </div>
               <div className="material-rule">
-                <span>ЯЗЫКОВОЙ ФОКУС</span>
+                <span>LANGUAGE FOCUS</span>
                 <h3>{l.language.focus}</h3>
                 <p>{l.language.explanation}</p>
                 <ul lang="en">
@@ -581,14 +583,14 @@ export default function MaterialStudy({
                   ))}
                 </ul>
                 <div className="material-pitfall">
-                  <strong>На что обратить внимание</strong>
+                  <strong>Watch out</strong>
                   <p>{l.language.pitfall}</p>
                 </div>
               </div>
               <section className="material-pronunciation">
                 <h3>
                   <Volume2 size={18} />
-                  Произношение
+                  Pronunciation
                 </h3>
                 <p>{l.language.pronunciation}</p>
               </section>
@@ -600,8 +602,8 @@ export default function MaterialStudy({
           {current.id === "practice" && (
             <>
               <p className="material-section-description">
-                Завершите блок, проверьте ответы и прочитайте объяснения. После
-                изменения ответа блок можно проверить снова.
+                Complete the block, check your answers and read the feedback.
+                You can change an answer and check again.
               </p>
               {l.practice.map((task) => (
                 <Practice
@@ -622,7 +624,7 @@ export default function MaterialStudy({
                 ))}
               </ol>
               <div className="speaking-support">
-                <h3>Фразы-подсказки</h3>
+                <h3>Useful phrases</h3>
                 {l.speaking.support.map((phrase) => (
                   <span key={phrase} lang="en">
                     {phrase}
@@ -630,7 +632,7 @@ export default function MaterialStudy({
                 ))}
               </div>
               <div className="material-success">
-                <h3>Как понять, что задача выполнена</h3>
+                <h3>Success criteria</h3>
                 <ul>
                   {l.speaking.success.map((item) => (
                     <li key={item}>
@@ -641,18 +643,18 @@ export default function MaterialStudy({
                 </ul>
               </div>
               <details className="sample-answer">
-                <summary>Один возможный диалог</summary>
+                <summary>One possible dialogue</summary>
                 <p lang="en">{l.speaking.model}</p>
               </details>
               {teacher && (
                 <p className="teacher-task-note">
-                  Учителю: {l.speaking.teacherNote}
+                  Teacher note: {l.speaking.teacherNote}
                 </p>
               )}
               <p className="material-helper">
-                Один ученик работает с учителем, который меняет роли. Для
-                самостоятельной практики можно произнести обе роли.
-                Автоматического оценивания речи нет.
+                Work with your teacher, who plays the other roles. For solo
+                practice, you can say both parts. Speaking is not graded
+                automatically.
               </p>
             </>
           )}
@@ -660,7 +662,7 @@ export default function MaterialStudy({
             <>
               <p className="material-task-situation">{l.writing.instruction}</p>
               <label className="material-writing-label">
-                Ваш текст
+                Your writing
                 <textarea
                   rows={7}
                   value={draft.writing}
@@ -675,7 +677,7 @@ export default function MaterialStudy({
                 />
               </label>
               <div className="material-success">
-                <h3>Проверьте свой текст</h3>
+                <h3>Check your writing</h3>
                 <ul>
                   {l.writing.checklist.map((item) => (
                     <li key={item}>
@@ -686,20 +688,20 @@ export default function MaterialStudy({
                 </ul>
               </div>
               <details className="sample-answer">
-                <summary>Посмотреть пример после своей попытки</summary>
+                <summary>See an example after your own attempt</summary>
                 <p lang="en">{l.writing.model}</p>
               </details>
               <p className="material-helper">
-                Свободный текст оценивает учитель по критериям. Совпадение с
-                образцом не требуется.
+                Your teacher reviews your writing using the task criteria. Your
+                answer does not need to match the example.
               </p>
             </>
           )}
           {current.id === "exit" && (
             <>
               <p className="material-section-description">
-                Попробуйте выполнить цель ещё раз без текста. Отметьте то, что
-                уже получается; это самооценка, а не итоговый балл CEFR.
+                Try the lesson goal again without the text. Tick what you can
+                do. This is a self-check, not a CEFR test score.
               </p>
               <div className="material-exit">
                 {l.exit.map((item, index) => (
@@ -720,8 +722,8 @@ export default function MaterialStudy({
                 ))}
               </div>
               <p className="material-task-situation">
-                Выберите один трудный момент и повторите его после короткой
-                обратной связи учителя.
+                Choose one difficult point to practise again after feedback from
+                your teacher.
               </p>
             </>
           )}
@@ -740,7 +742,7 @@ export default function MaterialStudy({
                 <p>{l.homework.review}</p>
               </div>
               <label className="material-writing-label">
-                Черновик домашней практики
+                Home practice draft
                 <textarea
                   rows={7}
                   value={draft.homework}
@@ -755,12 +757,12 @@ export default function MaterialStudy({
                 />
               </label>
               <details className="sample-answer">
-                <summary>Пример результата</summary>
+                <summary>Example result</summary>
                 <p lang="en">{l.homework.model}</p>
               </details>
               <p className="material-helper">
-                На уроке отведите 2 минуты на объяснение. Сама домашняя работа
-                рассчитана примерно на 10–15 минут и выполняется отдельно.
+                Use the final lesson stage to explain the task. Allow about
+                10–15 minutes for home practice after the lesson.
               </p>
             </>
           )}
@@ -771,17 +773,17 @@ export default function MaterialStudy({
               onClick={() => go(stage - 1)}
             >
               <ArrowLeft size={16} />
-              Назад
+              Back
             </button>
             {stage < MATERIAL_STAGES.length - 1 ? (
               <button className="primary" onClick={() => go(stage + 1)}>
-                Далее: {MATERIAL_STAGES[stage + 1].title}
+                Next: {MATERIAL_STAGES[stage + 1].title}
                 <ArrowRight size={16} />
               </button>
             ) : (
               <button className="secondary" onClick={() => go(0)}>
                 <RotateCcw size={16} />
-                Вернуться к повторению
+                Back to recall
               </button>
             )}
           </div>

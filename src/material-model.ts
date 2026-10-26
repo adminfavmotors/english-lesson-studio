@@ -1,12 +1,12 @@
 export const MATERIAL_SKILLS = {
-  grammar: "Грамматика",
-  vocabulary: "Лексика",
-  reading: "Чтение",
-  listening: "Аудирование",
-  speaking: "Разговорная речь",
-  writing: "Письмо",
-  spelling: "Орфография",
-  pronunciation: "Произношение",
+  grammar: "Grammar",
+  vocabulary: "Vocabulary",
+  reading: "Reading",
+  listening: "Listening",
+  speaking: "Speaking",
+  writing: "Writing",
+  spelling: "Spelling",
+  pronunciation: "Pronunciation",
 } as const;
 export type MaterialSkill = keyof typeof MATERIAL_SKILLS;
 export type PracticeItem = {
@@ -86,14 +86,14 @@ export type Material = {
 };
 export type MaterialSummary = Omit<Material, "content">;
 export const MATERIAL_STAGES = [
-  { id: "retrieval", title: "Вспоминаем", minutes: 4 },
-  { id: "language", title: "Язык урока", minutes: 8 },
-  { id: "input", title: "Читаем и слушаем", minutes: 7 },
-  { id: "practice", title: "Практикуемся", minutes: 10 },
-  { id: "speaking", title: "Говорим", minutes: 8 },
-  { id: "writing", title: "Пишем", minutes: 4 },
-  { id: "exit", title: "Проверяем цель", minutes: 2 },
-  { id: "homework", title: "Домашняя практика", minutes: 2 },
+  { id: "retrieval", title: "Recall", minutes: 4 },
+  { id: "language", title: "Language focus", minutes: 8 },
+  { id: "input", title: "Read and listen", minutes: 7 },
+  { id: "practice", title: "Practise", minutes: 10 },
+  { id: "speaking", title: "Speak", minutes: 8 },
+  { id: "writing", title: "Write", minutes: 4 },
+  { id: "exit", title: "Check your goal", minutes: 2 },
+  { id: "homework", title: "Home practice", minutes: 2 },
 ] as const;
 export function materialStages(duration: number) {
   const stages = MATERIAL_STAGES.map((stage) => ({
@@ -141,7 +141,7 @@ export function materialId(sequence: number) {
 export function validateMaterial(value: unknown): string[] {
   const errors: string[] = [];
   if (!value || typeof value !== "object" || Array.isArray(value))
-    return ["Нужен JSON-объект урока."];
+    return ["Provide a lesson as a JSON object."];
   const m = value as Record<string, unknown>;
   const text = (v: unknown, max = 6000) =>
     typeof v === "string" && !!v.trim() && v.length <= max;
@@ -150,17 +150,17 @@ export function validateMaterial(value: unknown): string[] {
     v.length >= min &&
     v.length <= max &&
     v.every((x) => text(x));
-  if (m.schemaVersion !== 1) errors.push("schemaVersion должен быть 1.");
+  if (m.schemaVersion !== 1) errors.push("schemaVersion must be 1.");
   for (const key of ["title", "subtitle", "topic", "goal"])
-    if (!text(m[key], 300)) errors.push(`Проверьте ${key}.`);
+    if (!text(m[key], 300)) errors.push(`Check ${key}.`);
   if (!["A1", "A2", "B1", "B2", "C1", "C2"].includes(String(m.level)))
-    errors.push("Уровень: A1–C2.");
+    errors.push("Choose a level from A1 to C2.");
   if (
     !Number.isInteger(m.duration) ||
     Number(m.duration) < 15 ||
     Number(m.duration) > 180
   )
-    errors.push("Длительность: 15–180 минут.");
+    errors.push("Duration must be between 15 and 180 minutes.");
   if (
     !(
       m.sequence === null ||
@@ -169,14 +169,14 @@ export function validateMaterial(value: unknown): string[] {
         Number(m.sequence) <= 999)
     )
   )
-    errors.push("sequence: номер урока или null.");
+    errors.push("sequence must be a lesson number or null.");
   if (
     !Array.isArray(m.skills) ||
     !m.skills.length ||
     m.skills.length > 8 ||
     m.skills.some((s) => !Object.hasOwn(MATERIAL_SKILLS, String(s)))
   )
-    errors.push("Укажите навыки из схемы.");
+    errors.push("Choose skills supported by the schema.");
   if (
     !Array.isArray(m.vocabulary) ||
     m.vocabulary.length < 3 ||
@@ -190,7 +190,7 @@ export function validateMaterial(value: unknown): string[] {
         !text(v.example, 500),
     )
   )
-    errors.push("Нужны 3–20 слов/фраз с переводом и примером.");
+    errors.push("Include 3–20 words or phrases with a meaning and example.");
   const language = m.language as MaterialContent["language"];
   if (
     !language ||
@@ -201,7 +201,7 @@ export function validateMaterial(value: unknown): string[] {
     !text(language.pronunciation)
   )
     errors.push(
-      "Заполните language: фокус, объяснение, примеры, типичную ошибку и произношение.",
+      "Complete language: focus, explanation, examples, a common mistake and pronunciation.",
     );
   const ids = new Set<string>();
   const task = (t: PracticeTask | undefined) => {
@@ -215,10 +215,10 @@ export function validateMaterial(value: unknown): string[] {
       !t.items.length ||
       t.items.length > 20
     ) {
-      errors.push("Некорректный блок упражнений.");
+      errors.push("Invalid practice block.");
       return;
     }
-    if (ids.has(t.id)) errors.push("ID блоков должны быть уникальны.");
+    if (ids.has(t.id)) errors.push("Practice block IDs must be unique.");
     ids.add(t.id);
     const itemIds = new Set<string>();
     for (const item of t.items) {
@@ -230,7 +230,7 @@ export function validateMaterial(value: unknown): string[] {
         !list(item.answers, 1, 8) ||
         !text(item.explanation, 1200)
       ) {
-        errors.push(`Проверьте вопросы в ${t.id}.`);
+        errors.push(`Check the questions in ${t.id}.`);
         continue;
       }
       itemIds.add(item.id);
@@ -239,13 +239,13 @@ export function validateMaterial(value: unknown): string[] {
         (!list(item.options, 2, 12) ||
           !item.answers.every((a) => item.options?.includes(a)))
       )
-        errors.push(`Ответ должен быть среди вариантов в ${t.id}.`);
+        errors.push(`The answer must be one of the options in ${t.id}.`);
       if (
         t.type === "order" &&
         (!list(item.tokens, 2, 30) ||
           !isCorrectAnswer((item.tokens ?? []).join(" "), item))
       )
-        errors.push(`tokens должны образовывать правильный ответ в ${t.id}.`);
+        errors.push(`tokens must form a correct answer in ${t.id}.`);
     }
   };
   const input = m.input as MaterialContent["input"];
@@ -258,10 +258,10 @@ export function validateMaterial(value: unknown): string[] {
       input.format,
     )
   )
-    errors.push("Нужен исходный текст input.");
+    errors.push("Provide the source text in input.");
   else task(input.questions);
   if (!Array.isArray(m.practice) || !m.practice.length || m.practice.length > 6)
-    errors.push("Нужны 1–6 практических блоков.");
+    errors.push("Include 1–6 practice blocks.");
   else m.practice.forEach((t) => task(t));
   if (
     !Array.isArray(m.retrieval) ||
@@ -280,7 +280,7 @@ export function validateMaterial(value: unknown): string[] {
         ),
     )
   )
-    errors.push("Заполните повторение retrieval.");
+    errors.push("Complete the retrieval section.");
   const speaking = m.speaking as MaterialContent["speaking"];
   if (
     !speaking ||
@@ -291,7 +291,7 @@ export function validateMaterial(value: unknown): string[] {
     !text(speaking.model) ||
     !text(speaking.teacherNote)
   )
-    errors.push("Заполните разговорную задачу speaking.");
+    errors.push("Complete the speaking task.");
   const writing = m.writing as MaterialContent["writing"];
   if (
     !writing ||
@@ -299,7 +299,7 @@ export function validateMaterial(value: unknown): string[] {
     !text(writing.model) ||
     !list(writing.checklist)
   )
-    errors.push("Заполните письменную задачу writing.");
+    errors.push("Complete the writing task.");
   const homework = m.homework as MaterialContent["homework"];
   if (
     !homework ||
@@ -308,10 +308,10 @@ export function validateMaterial(value: unknown): string[] {
     !text(homework.model) ||
     !text(homework.review)
   )
-    errors.push("Заполните homework.");
+    errors.push("Complete the homework section.");
   if (!list(m.exit, 2, 6) || !list(m.teacherNotes, 1, 8))
-    errors.push("Нужны критерии цели и заметки учителю.");
+    errors.push("Include goal criteria and teacher notes.");
   if (new TextEncoder().encode(JSON.stringify(value)).length > 100000)
-    errors.push("Один урок — не более 100 КБ JSON без форматирования.");
+    errors.push("A lesson must be no larger than 100 KB of compact JSON.");
   return [...new Set(errors)];
 }
