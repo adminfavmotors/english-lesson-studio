@@ -9,6 +9,7 @@
 | `/teacher/students` | Teacher-owned roster |
 | `/teacher/classroom` | Teacher textbook classroom and lesson controls |
 | `/student/classroom` | Student learning home, or invited shared classroom |
+| `/student/connect` | Accept a personal invitation linking an account to a student profile |
 | `/student/lessons/:id` | Student material view; currently available as a teacher preview |
 
 `/teacher` and `/student` resolve to their respective start pages. A canonical
@@ -41,6 +42,13 @@ within that workspace. Cross-workspace sharing uses the explicit shared lesson.
 Material practice already uses role-specific draft keys, which remain unchanged.
 
 ## Account access
+
+Personal account invitations use `/student/connect#invite=<secret>`, separately
+from shared classroom `session`/`access` credentials. They require a confirmed
+student account with the invited email and explicit acceptance. Cross-page
+navigation reloads when the personal secret is present. An account switch on
+this page preserves the invitation; email confirmation keeps the existing
+provider return URL and asks the student to reopen the personal invitation.
 
 Every workspace route requires a confirmed account and a server-managed role.
 Students opening teacher URLs are sent to their own learning home. The teacher

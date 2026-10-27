@@ -14,7 +14,7 @@ export function canNavigateInApp(currentAddress: string, nextAddress: string) {
   // Crossing that boundary must initialise a fresh store, including on Back.
   if (navigationArea(current) !== navigationArea(next)) return false;
   for (const url of [current, next]) {
-    if (['session', 'code', 'access_token', 'refresh_token'].some(key => url.searchParams.has(key)) || /(?:access|access_token|refresh_token|code)=/.test(url.hash)) return false;
+    if (['session', 'code', 'access_token', 'refresh_token'].some(key => url.searchParams.has(key)) || /(?:access|invite|access_token|refresh_token|code)=/.test(url.hash)) return false;
   }
   return !next.hash;
 }

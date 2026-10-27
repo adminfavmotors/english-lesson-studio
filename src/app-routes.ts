@@ -4,7 +4,7 @@ export type AppRoute =
   | { area: "entry" }
   | { area: "login" }
   | { area: "teacher"; page: TeacherPage; materialId?: string }
-  | { area: "student"; page: "classroom" | "lesson"; materialId?: string }
+  | { area: "student"; page: "classroom" | "lesson" | "connect"; materialId?: string }
   | { area: "not-found"; workspace?: Workspace };
 
 const materialIdPattern = /^[a-z0-9-]{3,100}$/;
@@ -55,6 +55,7 @@ export function resolveAppRoute(address: string): AppRoute {
   if (teacherMaterial && materialIdPattern.test(teacherMaterial[1]))
     return { area: "teacher", page: "materials", materialId: teacherMaterial[1] };
   if (path === studentClassroomPath) return { area: "student", page: "classroom" };
+  if (path === '/student/connect') return { area: 'student', page: 'connect' };
   const studentMaterial = path.match(/^\/student\/lessons\/([^/]+)$/);
   if (studentMaterial && materialIdPattern.test(studentMaterial[1]))
     return { area: "student", page: "lesson", materialId: studentMaterial[1] };

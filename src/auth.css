@@ -260,7 +260,7 @@
   color: var(--color-text-muted);
 }
 
-.student-home-card a {
+.student-home-card a:not(.primary):not(.secondary) {
   color: var(--color-text);
   min-height: 44px;
   display: inline-flex;

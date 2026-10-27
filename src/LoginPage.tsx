@@ -8,7 +8,7 @@ import { validateAccountForm } from './account-form';
 import type { AccountFormErrors } from './account-form';
 import { studentsError } from './students-api';
 
-export function AccountForm() {
+export function AccountForm({ connectionInvitation = false }: { connectionInvitation?: boolean }) {
   const [mode, setMode] = useState<'signin' | 'signup'>('signin');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -31,7 +31,7 @@ export function AccountForm() {
         const { data, error } = await platform.auth.signUp({ email: email.trim(), password, options: { emailRedirectTo: teacherAccountReturnUrl(location.href) } });
         if (error) throw error;
         if (!data.session) {
-          setNotice('Check your inbox to confirm your email address, then sign in. If you already have an account, use your existing password.');
+          setNotice(connectionInvitation ? 'Confirm your email using the link in your inbox, then reopen your teacher’s personal invitation and sign in to accept it.' : 'Check your inbox to confirm your email address, then sign in. If you already have an account, use your existing password.');
           setMode('signin'); setPassword('');
         }
       }
@@ -58,11 +58,11 @@ export function AccountForm() {
     <p className="login-role-note"><LockKeyhole size={15} aria-hidden="true"/>Your account opens the right workspace automatically.</p>
   </form>;
 }
-export default function LoginPage({ invitation = false }: { invitation?: boolean }) {
+export default function LoginPage({ invitation = false, connectionInvitation = false }: { invitation?: boolean; connectionInvitation?: boolean }) {
   useEffect(() => { document.title = 'Sign in · Lesson Studio'; }, []);
   return <div className="login-page">
     <header><AppLink className="landing-brand" href="/" aria-label="Lesson Studio home"><span><BookOpen size={23}/></span>lesson<strong>studio</strong></AppLink><AppLink className="login-home" href="/"><ArrowLeft size={16}/>Back to home</AppLink></header>
-    <main className="login-layout"><div className="login-intro"><span className="landing-eyebrow">A SPACE FOR YOUR ENGLISH</span><h2>Let’s pick up<br/>the conversation.</h2><p>Your lessons, your practice and your next step. All in one shared space.</p><span className="login-intro-note"><BookOpen size={20}/>Small steps. Real conversations.</span></div><section className="login-card" aria-label="Account access">{invitation && <p className="login-invitation">Sign in to open your teacher’s lesson invitation.</p>}<AccountForm/></section></main>
+    <main className="login-layout"><div className="login-intro"><span className="landing-eyebrow">A SPACE FOR YOUR ENGLISH</span><h2>Let’s pick up<br/>the conversation.</h2><p>Your lessons, your practice and your next step. All in one shared space.</p><span className="login-intro-note"><BookOpen size={20}/>Small steps. Real conversations.</span></div><section className="login-card" aria-label="Account access">{invitation && <p className="login-invitation">Sign in to open your teacher’s lesson invitation.</p>}{connectionInvitation && <p className="login-invitation">Sign in with the email address your teacher invited. After creating an account and confirming your email, reopen this personal invitation to accept it.</p>}<AccountForm connectionInvitation={connectionInvitation}/></section></main>
     <footer>Lesson Studio · English lessons and practice</footer>
   </div>;
 }

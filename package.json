@@ -13,6 +13,8 @@
     "build": "tsc -b && vite build",
     "preview": "vite preview --host 127.0.0.1",
     "test": "node --experimental-strip-types --test tests/*.test.ts",
+    "test:database": "node --experimental-strip-types --test tests/database.integration.ts",
+    "test:invitations:browser": "node --experimental-strip-types --test tests/student-invitations.browser.ts",
     "test:library": "node --experimental-strip-types --test tests/materials.integration.ts",
     "test:cloud": "node --experimental-strip-types --test tests/cloud.integration.ts"
   },
@@ -24,9 +26,11 @@
     "react-dom": "^19.2.0"
   },
   "devDependencies": {
+    "@electric-sql/pglite": "0.5.12",
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
     "@vitejs/plugin-react": "^5.1.0",
+    "playwright": "1.64.1",
     "typescript": "~5.9.3",
     "vite": "^7.2.0"
   }
