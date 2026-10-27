@@ -2,13 +2,14 @@
 
 | Address | Screen |
 |---|---|
-| `/` | Separate teacher and student entry links |
+| `/` | Public service homepage |
+| `/login` | Shared account sign-in and registration |
 | `/teacher/materials` | Teacher lesson library |
 | `/teacher/materials/:id` | Teacher lesson preview and answer keys |
-| `/teacher/students` | Teacher-owned roster and account entry |
+| `/teacher/students` | Teacher-owned roster |
 | `/teacher/classroom` | Teacher textbook classroom and lesson controls |
-| `/student/classroom` | Student textbook classroom |
-| `/student/lessons/:id` | Student practice for one material |
+| `/student/classroom` | Student learning home, or invited shared classroom |
+| `/student/lessons/:id` | Student material view; currently available as a teacher preview |
 
 `/teacher` and `/student` resolve to their respective start pages. A canonical
 path determines the interface; `mode` or `view` query parameters cannot switch
@@ -39,12 +40,13 @@ Existing role drafts and resets take priority. Subsequent local edits remain
 within that workspace. Cross-workspace sharing uses the explicit shared lesson.
 Material practice already uses role-specific draft keys, which remain unchanged.
 
-## Account access is a separate step
+## Account access
 
-These routes separate screens and browser state. They do not establish teacher
-account entitlements or student memberships. Existing Supabase account access,
-RLS and invitation validation remain in place. Google sign-in, trusted account
-roles and student invitations are subsequent authentication work.
+Every workspace route requires a confirmed account and a server-managed role.
+Students opening teacher URLs are sent to their own learning home. The teacher
+library is protected by RLS and has no packaged offline fallback. Shared lessons
+also require a valid invitation. See [ACCOUNT-ACCESS.md](ACCOUNT-ACCESS.md) for the
+owner bootstrap, access rules, checks and remaining work.
 
 The existing email confirmation return URL remains compatible with the current
 provider allow-list. It redirects to `/teacher/students` before the Auth client

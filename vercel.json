@@ -5,6 +5,7 @@
   "installCommand": "npm ci",
   "outputDirectory": "dist",
   "rewrites": [
+    { "source": "/login", "destination": "/index.html" },
     { "source": "/teacher/:path*", "destination": "/index.html" },
     { "source": "/student/:path*", "destination": "/index.html" }
   ]

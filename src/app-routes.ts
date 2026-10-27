@@ -2,6 +2,7 @@ export type Workspace = "teacher" | "student";
 export type TeacherPage = "students" | "materials" | "classroom";
 export type AppRoute =
   | { area: "entry" }
+  | { area: "login" }
   | { area: "teacher"; page: TeacherPage; materialId?: string }
   | { area: "student"; page: "classroom" | "lesson"; materialId?: string }
   | { area: "not-found"; workspace?: Workspace };
@@ -17,7 +18,7 @@ export const classroomPath = (workspace: Workspace) => `/${workspace}/classroom`
 export function canonicalAppUrl(address: string): URL {
   const url = new URL(address);
   const path = url.pathname.replace(/\/+$/, "") || "/";
-  const legacy = path === "/" && (url.searchParams.has("mode") || url.searchParams.has("view") || url.searchParams.has("session") || !!url.hash);
+  const legacy = path === "/" && (url.searchParams.has("mode") || url.searchParams.has("view") || url.searchParams.has("session") || /^#(vocabulary|reading|grammar|speaking|listening)$/.test(url.hash));
   if (legacy) {
     const teacher = url.searchParams.get("mode") === "teacher";
     const view = url.searchParams.get("view");
@@ -46,6 +47,7 @@ export function resolveAppRoute(address: string): AppRoute {
   const url = canonicalAppUrl(address);
   const path = url.pathname;
   if (path === "/") return { area: "entry" };
+  if (path === "/login") return { area: "login" };
   if (path === teacherPath("students")) return { area: "teacher", page: "students" };
   if (path === teacherPath("classroom")) return { area: "teacher", page: "classroom" };
   if (path === teacherPath("materials")) return { area: "teacher", page: "materials" };

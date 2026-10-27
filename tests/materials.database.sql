@@ -3,8 +3,9 @@ insert into auth.users(id,aud,role,email) values
 ('f81ef0ec-745e-4c38-a407-f78ba485d7b1','authenticated','authenticated','material-test-a@example.invalid'),
 ('f81ef0ec-745e-4c38-a407-f78ba485d7b2','authenticated','authenticated','material-test-b@example.invalid');
 set local role anon;
-do $$ begin if (select count(*) from public.lesson_materials where level='A1')<>30 then raise exception 'Public A1 collection is incomplete';end if;end $$;
+do $$ begin begin perform * from public.lesson_materials;raise exception 'Anonymous library leaked';exception when insufficient_privilege then null;end;end $$;
 reset role;
+insert into public.workspace_members(user_id,role) values ('f81ef0ec-745e-4c38-a407-f78ba485d7b1','teacher'),('f81ef0ec-745e-4c38-a407-f78ba485d7b2','teacher');
 set local role authenticated;
 select set_config('request.jwt.claims','{"sub":"f81ef0ec-745e-4c38-a407-f78ba485d7b1","role":"authenticated"}',true);
 insert into public.lesson_materials(id,content) select 'custom-library-qa',jsonb_set(content,'{title}','"Private QA lesson"') from public.lesson_materials where id='a1-01';
@@ -30,4 +31,4 @@ do $$ begin if (select count(*) from public.material_favourites)<>2 then raise e
 delete from public.material_favourites where material_id='a1-01';
 do $$ begin if (select count(*) from public.material_favourites)<>1 then raise exception 'Own favourite deletion failed';end if;end $$;
 rollback;
-select 'PASS: 30 public lessons, protected shared content, private import and revision, private favourites and account isolation; fixtures rolled back' as result;
+select 'PASS: 30 protected lessons, protected shared content, private import and revision, private favourites and account isolation; fixtures rolled back' as result;

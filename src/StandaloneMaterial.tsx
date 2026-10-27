@@ -5,6 +5,7 @@ import { loadMaterial } from "./material-api";
 import MaterialStudy from "./MaterialStudy";
 import { useTeacherAccount } from "./use-teacher-account";
 import { studentClassroomPath } from "./app-routes";
+import AccountControls from "./AccountControls";
 export default function StandaloneMaterial({ id }: { id: string }) {
   const { user, ready } = useTeacherAccount();
   const [material, setMaterial] = useState<Material | null>(null);
@@ -32,6 +33,7 @@ export default function StandaloneMaterial({ id }: { id: string }) {
         <BookOpen size={24} />
         <span>Lesson Studio</span>
         <small>STUDENT PRACTICE</small>
+        <AccountControls/>
       </header>
       <main>
         {error ? (

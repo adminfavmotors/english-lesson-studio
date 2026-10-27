@@ -4,6 +4,7 @@ begin;
 insert into auth.users(id,aud,role,email) values
 ('f81ef0ec-745e-4c38-a407-f78ba485d7a1','authenticated','authenticated','roster-test-a@example.invalid'),
 ('f81ef0ec-745e-4c38-a407-f78ba485d7a2','authenticated','authenticated','roster-test-b@example.invalid');
+insert into public.workspace_members(user_id,role) values ('f81ef0ec-745e-4c38-a407-f78ba485d7a1','teacher'),('f81ef0ec-745e-4c38-a407-f78ba485d7a2','teacher');
 set local role authenticated;
 select set_config('request.jwt.claims','{"sub":"f81ef0ec-745e-4c38-a407-f78ba485d7a1","role":"authenticated"}',true);
 insert into public.teacher_students(id,full_name,level,notes) values ('f81ef0ec-745e-4c38-a407-f78ba485d7a3','Roster QA','B1','private teacher note');

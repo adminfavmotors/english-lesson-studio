@@ -34,6 +34,13 @@ synchronise through their existing invitation credentials. Existing email
 confirmation return URLs remain a compatibility bridge until provider URL
 configuration is updated in the authentication work.
 
+All workspace routes now require a confirmed Supabase account. Trust only the
+server-managed `workspace_members` role. Never derive privileges from an email
+typed in a form, user metadata, a query parameter or browser storage. Students
+receive invitations to individual shared lessons; the library is teacher-only.
+Keep the A1 authoring snapshot out of browser imports and public build chunks.
+See `docs/ACCOUNT-ACCESS.md` for the current rules and remaining work.
+
 # Lesson changes
 
 The editable A1 sources are `scripts/a1/content-*.mjs`. Run `npm run content:build`

@@ -207,7 +207,6 @@ export default function AssignmentsLibrary({
   const [rows, setRows] = useState<MaterialSummary[]>([]);
   const [favourites, setFavourites] = useState(new Set<string>());
   const [loading, setLoading] = useState(true);
-  const [offline, setOffline] = useState(false);
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
   const [reload, setReload] = useState(0);
@@ -233,7 +232,6 @@ export default function AssignmentsLibrary({
       .then((result) => {
         if (!controller.signal.aborted) {
           setRows(result.materials);
-          setOffline(result.offline);
         }
       })
       .catch(() => {
@@ -516,13 +514,6 @@ export default function AssignmentsLibrary({
               </select>
             </label>
           </div>
-          {offline && (
-            <p className="library-notice" role="status">
-              Could not connect to your library. You can still use the A1
-              collection. Your own lessons and favourites may be unavailable
-              until the connection is restored.
-            </p>
-          )}
           {error && (
             <div className="library-error" role="alert">
               <p>{error}</p>

@@ -1,11 +1,14 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { createSession, readSession, writeSession, SessionError } from '../src/session-api.ts';
+import { appendFileSync } from 'node:fs';
+import { createSession, readSession, writeSession, SessionError, setSessionAuthToken } from '../src/session-api.ts';
 import type { Operation } from '../src/session-api.ts';
 import { backend } from '../src/backend.config.ts';
 
-test('real Supabase: independent clients, durable writes, roles, resets and isolation',async t=>{
+test('real Supabase: independent clients, durable writes, roles, resets and isolation', {skip: !process.env.LESSON_TEST_ACCESS_TOKEN && 'Set LESSON_TEST_ACCESS_TOKEN to a teacher JWT for authenticated cloud checks'}, async t=>{
+  setSessionAuthToken(process.env.LESSON_TEST_ACCESS_TOKEN!);
   const session=await createSession();
+  if(process.env.LESSON_TEST_SESSION_FILE)appendFileSync(process.env.LESSON_TEST_SESSION_FILE,session.id+'\n');
   const teacher={id:session.id,token:session.teacher_token};
   const student={id:session.id,token:session.student_token};
   const operation=(values:Operation['values'],epochs:Operation['epochs']={}):Operation=>({id:crypto.randomUUID(),action:'patch',values,epochs,exercise:null});

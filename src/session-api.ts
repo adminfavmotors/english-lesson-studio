@@ -18,9 +18,11 @@ export class SessionError extends Error {
   status: number;
   constructor(message: string, status: number) { super(message); this.status = status; }
 }
+let accountToken: string | null = null;
+export const setSessionAuthToken = (token: string | null) => { accountToken = token; };
 async function rpc<T>(name: string, params: object, token?: string): Promise<T> {
   const response = await fetch(`${backend.url}/rest/v1/rpc/${name}`, {
-    method: 'POST', headers: { apikey: backend.publishableKey, 'Content-Type': 'application/json', ...(token ? { 'x-lesson-token': token } : {}) },
+    method: 'POST', headers: { apikey: backend.publishableKey, 'Content-Type': 'application/json', ...(accountToken ? { Authorization: `Bearer ${accountToken}` } : {}), ...(token ? { 'x-lesson-token': token } : {}) },
     body: JSON.stringify(params), signal: AbortSignal.timeout(12000), cache: 'no-store', referrerPolicy: 'no-referrer',
   });
   if (!response.ok) {

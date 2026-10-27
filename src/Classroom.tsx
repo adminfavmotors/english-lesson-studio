@@ -10,6 +10,7 @@ import { classroomPath, studentClassroomPath } from './app-routes';
 import { SessionPanel } from './SessionPanel';
 import TeacherSidebar from './TeacherSidebar';
 import WorkspaceNotice from './WorkspaceNotice';
+import AccountControls from './AccountControls';
 
 const sectionIcons = { Vocabulary: BookOpen, Reading: FileImage, Grammar: PenLine, Speaking: MessageCircle, Listening: Headphones };
 function ClassroomContent({teacher}:{teacher:boolean}) {
@@ -78,7 +79,7 @@ function ClassroomContent({teacher}:{teacher:boolean}) {
     </aside>}
 
     <div className="workspace">
-      <header className="topbar"><div className="topbar-context"><button className="icon-button mobile-nav-toggle" aria-label={teacher?'Open workspace menu':'Open lesson navigation'} aria-expanded={menuOpen} aria-controls="lesson-sidebar" onClick={()=>{setMenuOpen(!menuOpen);setPanelOpen(false);}}><Menu size={20}/></button><span className="role-badge">{teacher?<ShieldCheck size={16}/>:<GraduationCap size={17}/>} {teacher?'TEACHER':'STUDENT'}</span>{teacher?<span className="teacher-page-context">Classroom</span>:<span className="topbar-unit">Unit {lesson.unit}</span>}</div><HeaderLessonTimer/><div className="topbar-actions"><button className="icon-button session-panel-toggle" aria-label={teacher?'Open lesson controls':'Open lesson overview'} aria-expanded={panelOpen} aria-controls="session-controls" onClick={()=>{setPanelOpen(!panelOpen);setMenuOpen(false);}}><SlidersHorizontal size={19}/></button>{!teacher&&!sync&&<button className="primary invite-button" onClick={()=>shareDialog.current?.showModal()}><Users size={17}/>Join lesson</button>}</div></header>
+      <header className="topbar"><div className="topbar-context"><button className="icon-button mobile-nav-toggle" aria-label={teacher?'Open workspace menu':'Open lesson navigation'} aria-expanded={menuOpen} aria-controls="lesson-sidebar" onClick={()=>{setMenuOpen(!menuOpen);setPanelOpen(false);}}><Menu size={20}/></button><span className="role-badge">{teacher?<ShieldCheck size={16}/>:<GraduationCap size={17}/>} {teacher?'TEACHER':'STUDENT'}</span>{teacher?<span className="teacher-page-context">Classroom</span>:<span className="topbar-unit">Unit {lesson.unit}</span>}</div><HeaderLessonTimer/><div className="topbar-actions"><button className="icon-button session-panel-toggle" aria-label={teacher?'Open lesson controls':'Open lesson overview'} aria-expanded={panelOpen} aria-controls="session-controls" onClick={()=>{setPanelOpen(!panelOpen);setMenuOpen(false);}}><SlidersHorizontal size={19}/></button>{!teacher&&!sync&&<button className="primary invite-button" onClick={()=>shareDialog.current?.showModal()}><Users size={17}/>Join lesson</button>}<AccountControls/></div></header>
 
       <div className="workspace-body"><main ref={mainRef} id="lesson-main" tabIndex={-1}>
         <div className="lesson-page-heading"><div><div className="lesson-overline">{teacher?'TEACHER WORKSPACE':'ENGLISH CLASSROOM'} <ChevronRight size={13}/> UNIT {lesson.unit}</div><h1>{teacher?'Classroom':lesson.title}</h1><p>{teacher?'Unit '+lesson.unit+' · '+lesson.title:'A little practice, a new perspective. Let’s begin.'}</p></div><button className="source-button" aria-label="View textbook" onClick={()=>sourceDialog.current?.showModal()}><FileImage size={17}/><span>View textbook</span></button></div>
