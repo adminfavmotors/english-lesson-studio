@@ -33,8 +33,6 @@ import {
 import { useTeacherAccount } from "./use-teacher-account";
 import { TeacherAccount } from "./TeacherAccount";
 import MaterialStudy, { downloadMaterial } from "./MaterialStudy";
-import "./students.css";
-import "./materials.css";
 
 function AccountDialog({ onClose }: { onClose: () => void }) {
   const dialog = useRef<HTMLDialogElement>(null);

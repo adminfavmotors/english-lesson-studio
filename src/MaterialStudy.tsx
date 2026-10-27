@@ -29,7 +29,6 @@ import {
 import type { MaterialDraft as Draft } from "./material-practice";
 import { APP_LOCALE, APP_LANGUAGE } from "./app-language";
 import { studentLessonPath } from "./app-routes";
-import "./materials.css";
 
 function loadDraft(material: Material, teacher: boolean): Draft {
   try {

@@ -1,3 +1,4 @@
+import AppLink from './AppLink';
 import { useEffect, useState } from 'react';
 import type { FormEvent } from 'react';
 import { ArrowLeft, ArrowRight, BookOpen, Check, LoaderCircle, LockKeyhole } from 'lucide-react';
@@ -51,7 +52,7 @@ export function AccountForm() {
       {mode === 'signup' && <small id="account-password-hint">Use at least 10 characters.</small>}
       {error && <p className="login-error" role="alert">{error}</p>}
       {notice && <p className="login-notice" role="status"><Check size={18}/>{notice}</p>}
-      <button className="landing-primary" type="submit">{busy ? <LoaderCircle className="students-spinner" size={18}/> : <ArrowRight size={18}/>} {busy ? (mode === 'signin' ? 'Signing in…' : 'Creating account…') : mode === 'signin' ? 'Sign in' : 'Create account'}</button>
+      <button className="primary" type="submit">{busy ? <LoaderCircle className="students-spinner" size={18}/> : <ArrowRight size={18}/>} {busy ? (mode === 'signin' ? 'Signing in…' : 'Creating account…') : mode === 'signin' ? 'Sign in' : 'Create account'}</button>
       <button className="login-mode" type="button" onClick={() => { setMode(mode === 'signin' ? 'signup' : 'signin'); setError(''); setNotice(''); setErrors({}); setPassword(''); }}>{mode === 'signin' ? 'New here? Create an account' : 'Already have an account? Sign in'}</button>
     </fieldset>
     <p className="login-role-note"><LockKeyhole size={15} aria-hidden="true"/>Your account opens the right workspace automatically.</p>
@@ -60,7 +61,7 @@ export function AccountForm() {
 export default function LoginPage({ invitation = false }: { invitation?: boolean }) {
   useEffect(() => { document.title = 'Sign in · Lesson Studio'; }, []);
   return <div className="login-page">
-    <header><a className="landing-brand" href="/" aria-label="Lesson Studio home"><span><BookOpen size={23}/></span>lesson<strong>studio</strong></a><a className="login-home" href="/"><ArrowLeft size={16}/>Back to home</a></header>
+    <header><AppLink className="landing-brand" href="/" aria-label="Lesson Studio home"><span><BookOpen size={23}/></span>lesson<strong>studio</strong></AppLink><AppLink className="login-home" href="/"><ArrowLeft size={16}/>Back to home</AppLink></header>
     <main className="login-layout"><div className="login-intro"><span className="landing-eyebrow">A SPACE FOR YOUR ENGLISH</span><h2>Let’s pick up<br/>the conversation.</h2><p>Your lessons, your practice and your next step. All in one shared space.</p><span className="login-intro-note"><BookOpen size={20}/>Small steps. Real conversations.</span></div><section className="login-card" aria-label="Account access">{invitation && <p className="login-invitation">Sign in to open your teacher’s lesson invitation.</p>}<AccountForm/></section></main>
     <footer>Lesson Studio · English lessons and practice</footer>
   </div>;

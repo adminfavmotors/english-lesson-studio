@@ -1,22 +1,22 @@
+import AppLink from './AppLink';
 import { useEffect } from "react";
 import { ArrowDown, ArrowRight, BookOpen, Check, MessageCircle, NotebookPen, Sparkles } from "lucide-react";
-import "./landing.css";
 
 export default function LandingPage() {
   useEffect(()=>{document.title="Lesson Studio · English lessons, practice and conversation";},[]);
   return <div className="landing-page">
-    <a className="skip-link" href="#landing-main">Skip to main content</a>
+    <AppLink className="skip-link" href="#landing-main">Skip to main content</AppLink>
     <header className="landing-header">
-      <a className="landing-brand" href="/" aria-label="Lesson Studio home"><span><BookOpen size={23} aria-hidden="true"/></span>lesson<strong>studio</strong></a>
-      <nav aria-label="Main navigation"><a href="#experience">The experience</a><a href="#how-it-works">How it works</a></nav>
-      <a className="landing-signin" href="/login">Sign in <ArrowRight size={17} aria-hidden="true"/></a>
+      <AppLink className="landing-brand" href="/" aria-label="Lesson Studio home"><span><BookOpen size={23} aria-hidden="true"/></span>lesson<strong>studio</strong></AppLink>
+      <nav aria-label="Main navigation"><AppLink href="#experience">The experience</AppLink><AppLink href="#how-it-works">How it works</AppLink></nav>
+      <AppLink className="secondary landing-signin" href="/login">Sign in <ArrowRight size={17} aria-hidden="true"/></AppLink>
     </header>
     <main id="landing-main">
       <section className="landing-hero" aria-labelledby="landing-title">
         <div className="landing-hero-copy"><span className="landing-eyebrow"><span/>ENGLISH, TOGETHER</span>
           <h1 id="landing-title">Learn English.<br/>Keep the<br/><span>conversation going.</span></h1>
           <p>A shared space for guided lessons, useful practice and feedback. Learn with your teacher, then make the language your own.</p>
-          <div className="landing-hero-actions"><a className="landing-primary" href="/login">Sign in to Lesson Studio <ArrowRight size={19} aria-hidden="true"/></a><a className="landing-text-link" href="#how-it-works">See how it works <ArrowDown size={16} aria-hidden="true"/></a></div>
+          <div className="landing-hero-actions"><AppLink className="primary" href="/login">Sign in to Lesson Studio <ArrowRight size={19} aria-hidden="true"/></AppLink><AppLink className="landing-text-link" href="#how-it-works">See how it works <ArrowDown size={16} aria-hidden="true"/></AppLink></div>
           <div className="landing-hero-note"><span><Check size={15} aria-hidden="true"/></span>For focused lessons and the practice in between.</div>
         </div>
         <div className="landing-preview" role="img" aria-label="Illustration of a Lesson Studio lesson: First conversations, with reading, practice and speaking stages.">
@@ -41,8 +41,8 @@ export default function LandingPage() {
         </div>
       </section>
       <section className="landing-process" id="how-it-works" aria-labelledby="process-title"><div><span className="landing-eyebrow">HOW IT WORKS</span><h2 id="process-title">A simple rhythm<br/>for learning.</h2><p>Your account opens your own workspace, ready for the next step.</p></div><ol><li><span>01</span><div><h3>Sign in to your space</h3><p>One entrance. The right workspace for your account.</p></div></li><li><span>02</span><div><h3>Explore the lesson together</h3><p>Read, practise and speak with guidance from your teacher.</p></div></li><li><span>03</span><div><h3>Take the language with you</h3><p>Revisit what you have learnt and bring your questions to the next lesson.</p></div></li></ol></section>
-      <section className="landing-closing"><div><span className="landing-eyebrow">YOUR NEXT CONVERSATION STARTS HERE</span><h2>A little practice.<br/>A little more confidence.</h2></div><a className="landing-primary" href="/login">Sign in <ArrowRight size={19} aria-hidden="true"/></a></section>
+      <section className="landing-closing"><div><span className="landing-eyebrow">YOUR NEXT CONVERSATION STARTS HERE</span><h2>A little practice.<br/>A little more confidence.</h2></div><AppLink className="primary" href="/login">Sign in <ArrowRight size={19} aria-hidden="true"/></AppLink></section>
     </main>
-    <footer className="landing-footer"><a className="landing-brand" href="/"><span><BookOpen size={21} aria-hidden="true"/></span>lesson<strong>studio</strong></a><p>A space for English lessons and practice.</p><a href="/login">Sign in</a></footer>
+    <footer className="landing-footer"><AppLink className="landing-brand" href="/"><span><BookOpen size={21} aria-hidden="true"/></span>lesson<strong>studio</strong></AppLink><p>A space for English lessons and practice.</p><AppLink href="/login">Sign in</AppLink></footer>
   </div>;
 }

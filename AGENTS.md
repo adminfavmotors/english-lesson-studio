@@ -41,6 +41,16 @@ receive invitations to individual shared lessons; the library is teacher-only.
 Keep the A1 authoring snapshot out of browser imports and public build chunks.
 See `docs/ACCOUNT-ACCESS.md` for the current rules and remaining work.
 
+# Shared interface styles
+
+`src/main.tsx` imports only `src/app.css` for product styles. Keep every page's
+CSS in that static entry so navigation cannot change stylesheet order. Define
+colours and the interface font only in `src/theme.css`; use semantic tokens in
+component styles. Shared buttons and form controls belong in `foundation.css`.
+Do not add route-level CSS imports, page-specific palettes or override tails.
+Use `AppLink` for internal links. Invitation, account callback and cross-workspace
+navigation intentionally reload to initialise isolated stores and credentials.
+
 # Lesson changes
 
 The editable A1 sources are `scripts/a1/content-*.mjs`. Run `npm run content:build`

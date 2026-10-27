@@ -8,7 +8,6 @@ import type { Student } from './students-model';
 import { TeacherAccount } from './TeacherAccount';
 import { StudentEditor } from './StudentEditor';
 import { StudentProfile } from './StudentProfile';
-import './students.css';
 
 function Loading({text='Loading students…'}:{text?:string}) {return <div className="students-loading" role="status"><LoaderCircle className="students-spinner" size={23}/><span>{text}</span></div>;}
 

@@ -1,0 +1,12 @@
+@import '@fontsource/source-sans-3/400.css';
+@import '@fontsource/source-sans-3/500.css';
+@import '@fontsource/source-sans-3/600.css';
+@import '@fontsource/source-sans-3/700.css';
+@import './theme.css';
+@import './foundation.css';
+@import './workspace.css';
+@import './students.css';
+@import './materials.css';
+@import './workspace-routes.css';
+@import './landing.css';
+@import './auth.css';

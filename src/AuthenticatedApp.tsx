@@ -5,7 +5,6 @@ import { mayOpenWorkspace, workspaceHome } from './workspace-access';
 import LoginPage from './LoginPage';
 import AccountControls from './AccountControls';
 import WorkspaceNotice from './WorkspaceNotice';
-import './auth.css';
 
 const TeacherWorkspace = lazy(() => import('./TeacherWorkspace'));
 const StudentWorkspace = lazy(() => import('./StudentWorkspace'));

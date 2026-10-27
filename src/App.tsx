@@ -2,7 +2,6 @@ import { lazy, Suspense, useEffect, useState } from "react";
 import { canonicalAppUrl, resolveAppRoute } from "./app-routes";
 import LandingPage from "./LandingPage";
 import WorkspaceNotice from "./WorkspaceNotice";
-import "./workspace-routes.css";
 
 const AuthenticatedApp=lazy(()=>import("./AuthenticatedApp"));
 

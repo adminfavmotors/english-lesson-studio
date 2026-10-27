@@ -159,7 +159,7 @@ src/LessonWorkspace.tsx Карточка ученика, календарь и �
 src/lesson-workspace.ts Чистая логика таймера и календарной сетки
 src/backend.config.ts Публичный адрес Supabase и publishable key
 supabase/migrations/ Воспроизводимая схема базы и её ограничения
-src/styles.css     Визуальная система, адаптивная вёрстка и состояния элементов
+src/app.css     Визуальная система, адаптивная вёрстка и состояния элементов
 src/main.tsx       Запуск React и локальные файлы шрифтов
 public/unit14.jpg  Предоставленное изображение учебника
 public/audio/      Оригинальные записи, добавляемые позднее
