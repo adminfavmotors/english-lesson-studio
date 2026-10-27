@@ -1,7 +1,10 @@
 // Lesson invitations and account confirmation links use different credentials.
 export function isTeacherAuthCallback(url: URL, params: Record<string,string>) {
-  return !url.searchParams.has('session') && url.searchParams.get('mode')==='teacher' && url.searchParams.get('view')==='students' && !!(params.access_token||params.error_description);
+  const teacherAccountPage=url.pathname==='/teacher/students'||(url.pathname==='/'&&url.searchParams.get('mode')==='teacher'&&url.searchParams.get('view')==='students');
+  return !url.searchParams.has('session') && teacherAccountPage && !!(params.access_token||params.error_description);
 }
 export function teacherAccountReturnUrl(address: string) {
+  // Keep the existing provider allow-list contract; the router canonicalises it
+  // to /teacher/students before account callback processing.
   const url=new URL(address);url.search='?mode=teacher&view=students';url.hash='';url.pathname='/';return url.toString();
 }

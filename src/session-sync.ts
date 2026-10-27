@@ -63,7 +63,8 @@ export class SessionSync {
           this.serverDocument = parseDocument(JSON.stringify(saved.document));
           this.epochs = saved.epochs ?? {};
           this.operations = Array.isArray(saved.operations) ? saved.operations.filter((op: Operation) => op && typeof op.id === 'string' && ['patch','reset_exercise','reset_all'].includes(op.action) && op.epochs && op.values) : [];
-          this.snapshot = {...this.snapshot,role:saved.role === 'teacher' || saved.role === 'student' ? saved.role : null,revision:Number.isSafeInteger(saved.revision) ? saved.revision : -1,studentToken:saved.studentToken ?? null};
+          // Cached work survives reload; access is established by the next server response.
+          this.snapshot = {...this.snapshot,revision:Number.isSafeInteger(saved.revision) ? saved.revision : -1};
         }
       }
     } catch { this.snapshot = {...this.snapshot,storageError:true}; }

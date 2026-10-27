@@ -3,5 +3,9 @@
   "framework": "vite",
   "buildCommand": "npm run build",
   "installCommand": "npm ci",
-  "outputDirectory": "dist"
+  "outputDirectory": "dist",
+  "rewrites": [
+    { "source": "/teacher/:path*", "destination": "/index.html" },
+    { "source": "/student/:path*", "destination": "/index.html" }
+  ]
 }

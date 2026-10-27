@@ -1,6 +1,7 @@
 import { backend } from './backend.config.ts';
 import type { Document, Value } from './store-model.ts';
 import { sharedLessonErrorMessage } from './session-messages.ts';
+import { classroomPath } from './app-routes.ts';
 
 export type SessionRole = 'teacher' | 'student';
 export type SessionCredentials = { id: string; token: string };
@@ -46,7 +47,7 @@ export function parseSessionUrl(address: string): SessionCredentials | null {
   return { id, token };
 }
 export function sessionLink(address: string, credentials: SessionCredentials, role: SessionRole, section = 'vocabulary') {
-  const url = new URL(address); url.search = ''; url.searchParams.set('session', credentials.id); url.searchParams.set('mode', role);
+  const url = new URL(address); url.pathname=classroomPath(role); url.search = ''; url.searchParams.set('session', credentials.id);
   url.hash = new URLSearchParams({ access: credentials.token, section }).toString();
   return url.toString();
 }

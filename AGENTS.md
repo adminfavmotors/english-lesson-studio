@@ -20,6 +20,20 @@ switcher. When other languages are requested, add explicit localisations based
 on the English source. User-written names, notes and answers retain their
 original text; never translate or rewrite them automatically.
 
+# Workspace boundaries
+
+Teacher pages live under `/teacher/`; student pages live under `/student/`.
+Keep their navigation and entry components separate. New internal links use
+canonical paths; old root URLs redirect for compatibility. Query parameters
+never change the workspace of a canonical path. A shared lesson's server
+response, not cached state or a URL role, determines its invitation access.
+
+Routing does not replace account authorisation or RLS. Browser-only classroom
+drafts and broadcast channels are isolated by workspace; shared sessions
+synchronise through their existing invitation credentials. Existing email
+confirmation return URLs remain a compatibility bridge until provider URL
+configuration is updated in the authentication work.
+
 # Lesson changes
 
 The editable A1 sources are `scripts/a1/content-*.mjs`. Run `npm run content:build`

@@ -174,3 +174,18 @@
 - Temporary local fixtures rendered the real student editor, profile and import components with fictional data and blocked backend requests. Checked required name and invalid email, profile dates and empty history, malformed JSON and the offline A1 fallback. Fixtures were removed after review.
 - Tested the account page, library, student practice and classroom in a 375 px iframe viewport. The content area and scroll width were both 360 px after the native scrollbar; opening the mobile controls and calendar did not introduce horizontal overflow. Calendar labels and screen-reader date names are English.
 - Final checks: npm test passes 42/42, including account validation and shared-request error status preservation. TypeScript and the Vite production build pass. Static product sources contain no Cyrillic strings, stale homework wording or developer audio paths.
+
+
+## 2026-10-27 — Separate teacher and student workspaces
+
+- Added independent teacher/student entry components and canonical paths under /teacher/ and /student/. The root page offers separate entry links. Student navigation contains no teacher service menu or workspace role switch.
+- Teacher roster, library, previews and classroom now have their own paths. Student classroom and material practice use student-only paths. Canonical paths ignore mode/view role overrides; previous root URLs redirect while preserving lesson IDs, invitation fragments and account confirmation tokens.
+- Moved the textbook classroom into a shared fixed-role component. Service navigation never carries lesson capabilities to roster/library pages. A shared classroom waits for the server to verify its invitation role; wrong-workspace invitation URLs redirect to the verified workspace before rendering controls.
+- Cached work no longer restores an authoritative invitation role. The first request verifies the invitation before replaying queued changes.
+- Split local textbook draft keys and BroadcastChannel names by workspace. The previous shared browser draft is retained as independent snapshots; existing role drafts and resets take precedence. Material-practice draft keys remain unchanged.
+- Kept the existing email-provider redirect allow-list contract through a legacy return URL that is canonicalised before Auth callback processing. Both callback formats reject lesson invitation credentials. No Google provider, account entitlement, database schema or RLS changes were introduced.
+- npm test: 51/51; TypeScript and Vite production build pass. content:build still produces the same 30 lessons, 90 blocks, 300 questions and 180 vocabulary entries; only curriculum links changed.
+- Browser: teacher library and lesson deep-link refresh; legacy material bookmark redirects; student practice deep-link refresh; student URL with forged teacher query parameters stays student; no teacher menu, teacher controls, teacher keys or teacher links in the tested student views.
+- One isolated real shared lesson verified both invitation mismatches: teacher capability at the student path returned to /teacher/classroom, student capability at the teacher path returned to /student/classroom. A student answer synchronised to the teacher. Test answers were cleared and the temporary credential file removed.
+- At a 375 px iframe viewport, the entry page, teacher library and student classroom each had a 360 px content area and matching scroll width. Temporary review files and tabs were removed.
+- Account-based teacher entitlements, student memberships and Google sign-in remain the separate authentication step described in the platform plan.

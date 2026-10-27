@@ -28,6 +28,7 @@ import {
 } from "./material-practice";
 import type { MaterialDraft as Draft } from "./material-practice";
 import { APP_LOCALE, APP_LANGUAGE } from "./app-language";
+import { studentLessonPath } from "./app-routes";
 import "./materials.css";
 
 function loadDraft(material: Material, teacher: boolean): Draft {
@@ -406,10 +407,7 @@ export default function MaterialStudy({
     });
   };
   const openPractice = () => {
-    const url = new URL(location.origin);
-    url.searchParams.set("mode", "student");
-    url.searchParams.set("view", "material");
-    url.searchParams.set("material", material.id);
+    const url = new URL(studentLessonPath(material.id), location.origin);
     return url.toString();
   };
   return (

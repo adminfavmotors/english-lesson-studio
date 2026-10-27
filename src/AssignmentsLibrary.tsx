@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import { MATERIAL_SKILLS, validateMaterial } from "./material-model";
 import { APP_LOCALE, normaliseSearchText } from "./app-language";
+import { navigateToMaterial } from "./app-routes";
 import type {
   Material,
   MaterialContent,
@@ -197,8 +198,10 @@ function ImportDialog({
 
 export default function AssignmentsLibrary({
   onOpenLegacy,
+  materialId,
 }: {
   onOpenLegacy: () => void;
+  materialId: string;
 }) {
   const { user, ready } = useTeacherAccount();
   const [rows, setRows] = useState<MaterialSummary[]>([]);
@@ -215,21 +218,12 @@ export default function AssignmentsLibrary({
   const [source, setSource] = useState("all");
   const [page, setPage] = useState(0);
   const [pendingFavourite, setPendingFavourite] = useState<string | null>(null);
-  const [materialId, setMaterialId] = useState(
-    () => new URLSearchParams(location.search).get("material") ?? "",
-  );
   const [material, setMaterial] = useState<Material | null>(null);
   const [detailLoading, setDetailLoading] = useState(false);
   const [detailError, setDetailError] = useState("");
   const [accountOpen, setAccountOpen] = useState(false);
   const [importOpen, setImportOpen] = useState(false);
   const [templateBusy, setTemplateBusy] = useState(false);
-  useEffect(() => {
-    const pop = () =>
-      setMaterialId(new URLSearchParams(location.search).get("material") ?? "");
-    window.addEventListener("popstate", pop);
-    return () => window.removeEventListener("popstate", pop);
-  }, []);
   useEffect(() => {
     if (!ready) return;
     const controller = new AbortController();
@@ -290,12 +284,7 @@ export default function AssignmentsLibrary({
     return () => controller.abort();
   }, [materialId, user?.id]);
   const open = (id: string) => {
-    setMaterialId(id);
-    const url = new URL(location.href);
-    if (id) url.searchParams.set("material", id);
-    else url.searchParams.delete("material");
-    history.pushState(null, "", url);
-    window.scrollTo({ top: 0, behavior: "instant" });
+    navigateToMaterial(id);
   };
   const toggleFavourite = async (id: string) => {
     if (!user) {

@@ -36,4 +36,6 @@ test('account callbacks cannot consume or forward lesson invitation secrets',()=
   assert.equal(teacherAccountReturnUrl(invitation),'https://example.com/?mode=teacher&view=students');
   assert.equal(isTeacherAuthCallback(new URL('https://example.com/?mode=teacher&view=students'),{access_token:'account-token'}),true);
   assert.equal(isTeacherAuthCallback(new URL('https://example.com/?mode=student'),{access_token:'account-token'}),false);
+  assert.equal(isTeacherAuthCallback(new URL('https://example.com/teacher/students'),{access_token:'account-token'}),true);
+  assert.equal(isTeacherAuthCallback(new URL('https://example.com/student/classroom?mode=teacher&view=students'),{access_token:'account-token'}),false);
 });

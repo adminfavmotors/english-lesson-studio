@@ -18,6 +18,8 @@ test('invitation capability stays in fragment while navigation preserves it',()=
   const link=sessionLink('https://lesson.example/?irrelevant=1#reading',credentials,'student');
   assert.deepEqual(parseSessionUrl(link),credentials);
   const url=new URL(link); assert.ok(!url.search.includes(credentials.token));
+  assert.equal(url.pathname,'/student/classroom');assert.equal(url.searchParams.has('mode'),false);
+  assert.equal(new URL(sessionLink('https://lesson.example/student/lessons/a1-01',credentials,'teacher')).pathname,'/teacher/classroom');
   url.hash=hashForSection(url.hash,'grammar');
   assert.equal(sectionFromHash(url.hash),'grammar');
   assert.deepEqual(parseSessionUrl(url.toString()),credentials);
@@ -51,6 +53,9 @@ test('network failure retains outbox across reload and retries idempotent operat
   const reloaded=new SessionSync(credentials,{transport,cache,clientId:'stable-tab'});
   try{
     assert.equal(reloaded.getSnapshot().document.fields['ex3.answer.1'].value,'survives reload');
+    assert.equal(reloaded.getSnapshot().role,null,'Cached work does not grant a workspace role');
+    await reloaded.syncOnce(); assert.equal(reloaded.getSnapshot().role,'student');
+    assert.equal(reloaded.getSnapshot().pendingCount,1,'The first request verifies the link before sending cached changes');
     await reloaded.syncOnce(); assert.equal(reloaded.getSnapshot().pendingCount,0);
     assert.equal(reloaded.getSnapshot().status,'online'); assert.equal(sent[0],sent[1]);
   }finally{reloaded.stop();}

@@ -62,7 +62,7 @@ export async function loadMaterial(
   if (!error && data) {
     const errors = validateMaterial(data.content);
     if (errors.length)
-      throw new Error("This lesson could not be opened because some content is missing or invalid. Return to the library and choose another lesson.");
+      throw new Error("This lesson could not be opened because some content is missing or invalid. Please try again later.");
     return data as Material;
   }
   if (signal.aborted) throw error;
@@ -83,7 +83,7 @@ export async function loadMaterial(
       };
   }
   throw new Error(
-    "This lesson is unavailable. Sign in to the account that owns it or return to the library.",
+    "This lesson is unavailable. Check that you are using the right account and lesson link.",
   );
 }
 export async function importMaterial(content: MaterialContent) {

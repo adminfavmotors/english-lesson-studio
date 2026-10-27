@@ -3,10 +3,13 @@ import { emptyDocument, parseDocument, mergeDocuments } from './store-model.ts';
 import type { Document, Value } from './store-model.ts';
 import { SessionSync } from './session-sync.ts';
 import { parseSessionUrl } from './session-api.ts';
+import { resolveAppRoute } from './app-routes.ts';
+import { classroomStorageKey, loadClassroomDraft } from './classroom-storage.ts';
 export { parseDocument, mergeDocuments } from './store-model.ts';
 export type { Document, Entry, Value } from './store-model.ts';
 
-export const STORAGE_KEY = 'lesson-studio.unit14.v1';
+const workspace=typeof location!=='undefined'&&resolveAppRoute(location.href).area==='teacher'?'teacher':'student';
+export const STORAGE_KEY = classroomStorageKey(workspace);
 let memory = emptyDocument();
 let storageError = false;
 const writer = globalThis.crypto?.randomUUID?.() ?? Math.random().toString(36);
@@ -16,7 +19,7 @@ export let sharedSession: SessionSync | null = null;
 export let sessionUrlError = '';
 
 function read(): Document {
-  try { return parseDocument(localStorage.getItem(STORAGE_KEY)); }
+  try { const result=loadClassroomDraft(localStorage,workspace);storageError=result.storageError;return result.document; }
   catch { storageError = true; return emptyDocument(); }
 }
 function persist() {

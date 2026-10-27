@@ -48,7 +48,7 @@ const overview =
 const table = lessons
   .map(
     (l) =>
-      `| ${l.sequence} | [${l.title}](https://english-lesson-studio.vercel.app/?mode=teacher&view=assignments&material=a1-${String(l.sequence).padStart(2, "0")}) | ${l.topic} | ${l.skills.map((s) => MATERIAL_SKILLS[s]).join(", ")} | ${l.goal} |`,
+      `| ${l.sequence} | [${l.title}](https://english-lesson-studio.vercel.app/teacher/materials/a1-${String(l.sequence).padStart(2, "0")}) | ${l.topic} | ${l.skills.map((s) => MATERIAL_SKILLS[s]).join(", ")} | ${l.goal} |`,
   )
   .join("\n");
 fs.writeFileSync(

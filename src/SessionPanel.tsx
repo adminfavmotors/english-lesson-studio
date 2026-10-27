@@ -3,6 +3,7 @@ import { Check, Copy, Link, Radio, RefreshCw, Unplug, Users } from 'lucide-react
 import { createSession, sessionLink, writeSession, SessionError } from './session-api';
 import type { CreatedSession } from './session-api';
 import { sessionUrlError, sharedSession, useLessonStore, useSessionState } from './store';
+import { classroomPath } from './app-routes';
 
 export function SessionPanel({ teacher }: {teacher:boolean}) {
   const sync=useSessionState();
@@ -27,7 +28,7 @@ export function SessionPanel({ teacher }: {teacher:boolean}) {
     try {await navigator.clipboard.writeText(value);setCopied(label);}
     catch {setError('Select the lesson link and copy it manually.');}
   };
-  if(sessionUrlError) return <section className="session-banner session-problem"><Unplug size={21}/><div><h2>Invitation could not be opened</h2><p role="alert">{sessionUrlError}</p><a href={`${location.pathname}?mode=${teacher?'teacher':'student'}&view=classroom`}>Open classroom</a></div></section>;
+  if(sessionUrlError) return <section className="session-banner session-problem"><Unplug size={21}/><div><h2>Invitation could not be opened</h2><p role="alert">{sessionUrlError}</p><a href={classroomPath(teacher?'teacher':'student')}>Open classroom</a></div></section>;
   if(!sync) return <section className="session-banner"><Users size={22}/><div><h2>{teacher?'Invite your student':'Join your teacher’s lesson'}</h2><p>{teacher?'Your student details, schedule and timer settings are copied to the shared lesson. Exercise answers start blank.':'Open the student link your teacher sent you to join their lesson.'}</p>{error&&<p role="alert" className="session-error">{error}</p>}</div>{teacher&&<button className="primary" disabled={creating} onClick={()=>void start()}><Link size={15}/>{creating?'Creating lesson…':'Create shared lesson'}</button>}</section>;
   const credentials=sharedSession!.credentials;
   const studentLink=sync.studentToken?sessionLink(location.href,{id:credentials.id,token:sync.studentToken},'student'):'';
