@@ -7,7 +7,7 @@ export const emptyStudent = (): StudentDraft => ({ full_name: '', email: '', lev
 export type StudentErrors = Partial<Record<keyof StudentDraft, string>>;
 export function validateStudent(draft: StudentDraft): StudentErrors {
   const errors: StudentErrors = {};
-  if (!draft.full_name.trim()) errors.full_name = 'Enter the student name.';
+  if (!draft.full_name.trim()) errors.full_name = 'Enter the student’s full name.';
   else if (draft.full_name.trim().length > 120) errors.full_name = 'Use no more than 120 characters.';
   const email = draft.email.trim();
   if (email && (email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))) errors.email = 'Enter a valid email address.';

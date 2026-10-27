@@ -107,7 +107,7 @@ export class SessionSync {
     }
     const offset=data.server_time-(started+Date.now())/2;
     if(this.clockOffset===0 || Math.abs(this.clockOffset-offset)>2000) this.clockOffset=offset;
-    if(data.discarded?.length) this.snapshot={...this.snapshot,notice:'Some queued changes were discarded because this exercise was reset. The reset version is shown.'};
+    if(data.discarded?.length) this.snapshot={...this.snapshot,notice:'This exercise was reset. Older unsaved changes were not applied.'};
   }
   async syncOnce() {
     if(this.busy || this.stopped) return;
@@ -126,7 +126,7 @@ export class SessionSync {
       this.failures++;
       const permanent=error instanceof SessionError && [400,401,403,404,413,429].includes(error.status);
       this.blockedOperation=permanent?operation?.id??null:null;
-      this.refreshView({status:permanent?'error':'offline',notice:permanent ? (error as Error).message : 'Connection interrupted. Changes are queued on this device and will retry automatically.'}); this.save();
+      this.refreshView({status:permanent?'error':'offline',notice:permanent ? (error as Error).message : 'Connection lost. Your changes are kept in this browser and will be saved when you reconnect.'}); this.save();
     } finally {this.busy=false;this.inFlightId=null;}
   }
   private schedule(delay: number) {

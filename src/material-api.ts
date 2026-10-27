@@ -62,7 +62,7 @@ export async function loadMaterial(
   if (!error && data) {
     const errors = validateMaterial(data.content);
     if (errors.length)
-      throw new Error("The lesson failed validation: " + errors[0]);
+      throw new Error("This lesson could not be opened because some content is missing or invalid. Return to the library and choose another lesson.");
     return data as Material;
   }
   if (signal.aborted) throw error;
@@ -97,7 +97,7 @@ export async function importMaterial(content: MaterialContent) {
     .single();
   if (error)
     throw new Error(
-      "Could not save the lesson. Check your sign-in and internet connection.",
+      "Could not save the lesson. Check that you are signed in and connected to the internet, then try again.",
     );
   return data as Material;
 }

@@ -54,7 +54,7 @@ function AccountDialog({ onClose }: { onClose: () => void }) {
         <h2 id="library-account-title">Sign in to your workspace</h2>
         <button
           className="icon-button"
-          aria-label="Close sign in"
+          aria-label="Close sign-in dialog"
           onClick={onClose}
         >
           <X size={20} />
@@ -118,7 +118,7 @@ function ImportDialog({
         </div>
         <button
           className="icon-button"
-          aria-label="Close import"
+          aria-label="Close lesson import"
           disabled={busy}
           onClick={onClose}
         >
@@ -126,9 +126,8 @@ function ImportDialog({
         </button>
       </div>
       <p>
-        Prepare a lesson with AI or write your own. Export a lesson from the
-        collection to use as a template. Importing adds a private lesson to
-        your library.
+        Prepare a lesson with AI or write your own using the library’s JSON
+        template. Imported lessons are private to your account.
       </p>
       <label className="json-file-label">
         <Upload size={18} />
@@ -167,7 +166,7 @@ function ImportDialog({
       </label>
       {errors.length > 0 && (
         <div className="library-error" role="alert">
-          <strong>Check the structure</strong>
+          <strong>Check the lesson content</strong>
           <ul>
             {errors.slice(0, 10).map((error) => (
               <li key={error}>{error}</li>
@@ -189,7 +188,7 @@ function ImportDialog({
           ) : (
             <Upload size={17} />
           )}{" "}
-          {busy ? "Saving…" : "Add to my materials"}
+          {busy ? "Saving…" : "Import lesson"}
         </button>
       </div>
     </dialog>
@@ -224,6 +223,7 @@ export default function AssignmentsLibrary({
   const [detailError, setDetailError] = useState("");
   const [accountOpen, setAccountOpen] = useState(false);
   const [importOpen, setImportOpen] = useState(false);
+  const [templateBusy, setTemplateBusy] = useState(false);
   useEffect(() => {
     const pop = () =>
       setMaterialId(new URLSearchParams(location.search).get("material") ?? "");
@@ -257,7 +257,7 @@ export default function AssignmentsLibrary({
         .catch(() => {
           if (!controller.signal.aborted)
             setError(
-              "Could not load favourites. The collection is available; refresh to try loading your personal materials again.",
+              "Could not load your favourites. Other lessons are still available. Try again to reload your favourites.",
             );
         });
     else setFavourites(new Set());
@@ -341,13 +341,34 @@ export default function AssignmentsLibrary({
   const pages = Math.max(1, Math.ceil(filtered.length / 9));
   const currentPage = Math.min(page, pages - 1);
   const visible = filtered.slice(currentPage * 9, currentPage * 9 + 9);
+  const hasFilters = !!(search || level || skill || topic);
+  const needsSignIn = !user && (source === "mine" || source === "favourites");
+  const emptyTitle = needsSignIn
+    ? "Sign in to your library"
+    : hasFilters ? "No matching lessons"
+      : source === "favourites" ? "No favourites yet"
+        : source === "mine" ? "Your own lessons will appear here" : "No lessons found";
+  const emptyDescription = needsSignIn
+    ? "Sign in to access your own lessons and favourites on any device."
+    : hasFilters ? "Try a different search or clear the filters to see all lessons."
+      : source === "favourites" ? "Select the star on a lesson to save it here."
+        : source === "mine" ? "Import a lesson to add it to your private collection."
+          : "Browse the Studio collection or import a lesson of your own.";
   const setFilter = (setter: (value: string) => void, value: string) => {
     setter(value);
     setPage(0);
   };
   const template = async () => {
-    const data = await loadMaterial("a1-01", new AbortController().signal);
-    downloadMaterial(data);
+    setTemplateBusy(true);
+    setError("");
+    try {
+      const data = await loadMaterial("a1-01", new AbortController().signal);
+      downloadMaterial(data);
+    } catch {
+      setError("Could not download the template. Please try again.");
+    } finally {
+      setTemplateBusy(false);
+    }
   };
   return (
     <section className="assignments-library">
@@ -356,7 +377,7 @@ export default function AssignmentsLibrary({
           {detailLoading ? (
             <div className="library-loading" role="status">
               <LoaderCircle className="students-spinner" />
-              Opening lesson…
+              Loading lesson…
             </div>
           ) : material &&
             (!material.owner_id || material.owner_id === user?.id) ? (
@@ -370,10 +391,10 @@ export default function AssignmentsLibrary({
             <div className="library-error" role="alert">
               <p>
                 {detailError ||
-                  "Sign in to the account that owns this private material."}
+                  "Sign in to the account that owns this private lesson."}
               </p>
               <button className="secondary" onClick={() => open("")}>
-                Back to library
+                Back to lesson library
               </button>
               {!user && (
                 <button
@@ -398,9 +419,9 @@ export default function AssignmentsLibrary({
               </p>
             </div>
             <div>
-              <button className="secondary" onClick={() => void template()}>
+              <button className="secondary" disabled={templateBusy} onClick={() => void template()}>
                 <Download size={17} />
-                Sample JSON
+                {templateBusy ? "Preparing template…" : "Download template"}
               </button>
               <button
                 className="primary"
@@ -409,7 +430,7 @@ export default function AssignmentsLibrary({
                 }
               >
                 <Upload size={17} />
-                Add lesson
+                Import lesson
               </button>
             </div>
           </div>
@@ -457,14 +478,14 @@ export default function AssignmentsLibrary({
               <span className="sr-only">Search lessons</span>
               <input
                 type="search"
-                placeholder="Topic, title or keyword"
+                placeholder="Search by title or topic"
                 value={search}
                 maxLength={120}
                 onChange={(event) => setFilter(setSearch, event.target.value)}
               />
             </label>
             <label>
-              <span className="sr-only">Lesson level</span>
+              <span className="sr-only">Filter by level</span>
               <select
                 value={level}
                 onChange={(event) => setFilter(setLevel, event.target.value)}
@@ -478,7 +499,7 @@ export default function AssignmentsLibrary({
               </select>
             </label>
             <label>
-              <span className="sr-only">Lesson skill</span>
+              <span className="sr-only">Filter by skill</span>
               <select
                 value={skill}
                 onChange={(event) => setFilter(setSkill, event.target.value)}
@@ -492,7 +513,7 @@ export default function AssignmentsLibrary({
               </select>
             </label>
             <label>
-              <span className="sr-only">Lesson topic</span>
+              <span className="sr-only">Filter by topic</span>
               <select
                 value={topic}
                 onChange={(event) => setFilter(setTopic, event.target.value)}
@@ -508,8 +529,9 @@ export default function AssignmentsLibrary({
           </div>
           {offline && (
             <p className="library-notice" role="status">
-              The cloud is unavailable. You are viewing the built-in A1
-              collection; private materials and favourites may be unavailable.
+              Could not connect to your library. You can still use the A1
+              collection. Your own lessons and favourites may be unavailable
+              until the connection is restored.
             </p>
           )}
           {error && (
@@ -593,14 +615,12 @@ export default function AssignmentsLibrary({
           ) : (
             <div className="library-empty">
               <BookOpen size={34} />
-              <h2>No materials found</h2>
-              <p>
-                Try another topic or skill. You can import your own lessons for
-                levels A2–C2 using JSON.
-              </p>
+              <h2>{emptyTitle}</h2>
+              <p>{emptyDescription}</p>
               <button
                 className="secondary"
                 onClick={() => {
+                  if (needsSignIn) { setAccountOpen(true); return; }
                   setSearch("");
                   setLevel("");
                   setSkill("");
@@ -609,7 +629,7 @@ export default function AssignmentsLibrary({
                   setPage(0);
                 }}
               >
-                Clear filters
+                {needsSignIn ? "Sign in" : hasFilters ? "Clear filters" : "Browse all lessons"}
               </button>
             </div>
           )}
@@ -647,10 +667,9 @@ export default function AssignmentsLibrary({
           <section className="legacy-material-link">
             <BookOpen size={22} />
             <div>
-              <h2>A Better Life · textbook material</h2>
+              <h2>A Better Life · textbook lesson</h2>
               <p>
-                Open the textbook classroom with a shared session, lesson timer
-                and original page.
+                Teach from the textbook pages, invite your student and use the lesson timer.
               </p>
             </div>
             <button className="secondary" onClick={onOpenLegacy}>
@@ -666,8 +685,8 @@ export default function AssignmentsLibrary({
             <p>
               Lessons use everyday CEFR A1 communication goals, short models,
               recall practice and feedback. The teacher adjusts the pace and
-              workload. To import a lesson, prepare one JSON object using an
-              exported lesson as a template. Your imported materials are private
+              workload. To import a lesson, prepare one JSON object using a
+              downloaded lesson as a template. Your imported materials are private
               to your account.
             </p>
             <p>
@@ -689,8 +708,8 @@ export default function AssignmentsLibrary({
             </p>
             <p>
               This 30-lesson collection supports learning; it does not guarantee
-              a CEFR level or provide certification. Student assignments and a
-              shared results record will be added in a future update.
+              a CEFR level or provide certification. Assigning lessons and
+              sharing student results are coming in a future update.
             </p>
           </details>
         </>
@@ -701,7 +720,7 @@ export default function AssignmentsLibrary({
           onClose={() => setImportOpen(false)}
           onSaved={(value) => {
             setImportOpen(false);
-            setNotice("Lesson added to your materials.");
+            setNotice("Lesson imported into your library.");
             setReload((previous) => previous + 1);
             open(value.id);
           }}

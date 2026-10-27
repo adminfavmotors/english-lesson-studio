@@ -13,7 +13,7 @@ export function lessonTimerState(document: Document, now: number): LessonTimerSt
 }
 export function timerChanges(action: 'start'|'pause'|'reset'|'duration', state: LessonTimerState, now: number, minutes?: number): Record<string,Value> {
   if(action==='duration') {
-    if(minutes===undefined||!Number.isInteger(minutes)||minutes<1||minutes>240) throw new Error('Choose a lesson length between 1 and 240 minutes.');
+    if(minutes===undefined||!Number.isInteger(minutes)||minutes<1||minutes>240) throw new Error('Choose a lesson duration between 1 and 240 minutes.');
     return {'lesson.timer.duration':minutes*60,'lesson.timer.remaining':minutes*60,'lesson.timer.deadline':null,'lesson.timer.state':'idle'};
   }
   if(action==='reset') return {'lesson.timer.remaining':state.duration,'lesson.timer.deadline':null,'lesson.timer.state':'idle'};

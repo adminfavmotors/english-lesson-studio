@@ -280,7 +280,7 @@ function InputBlock({
   const speak = () => {
     if (!voice) {
       setNotice(
-        "No English voice is available on this device. Your teacher can read the text aloud.",
+        "An English voice is not available on this device. You can read the text or ask your teacher to read it aloud.",
       );
       return;
     }
@@ -304,7 +304,7 @@ function InputBlock({
       <div className="model-actions">
         <button className="secondary" onClick={() => setVisible(!visible)}>
           {visible ? <EyeOff size={16} /> : <Eye size={16} />}{" "}
-          {visible ? "Hide text to listen" : "Show text"}
+          {visible ? "Hide text" : "Show text"}
         </button>
         <button className="secondary" onClick={speak}>
           <Volume2 size={16} />
@@ -324,14 +324,12 @@ function InputBlock({
         <div className="hidden-input">
           <BookOpen size={24} />
           <p>
-            First, listen to your teacher or the device voice. Then show the
-            text to check.
+            Listen to your teacher or select Read aloud. Then select Show text to check what you heard.
           </p>
         </div>
       )}
       <p className="material-helper">
-        There is no recorded audio. Your teacher or an available English device
-        voice reads the text. You can listen again.
+        Select Read aloud to hear an English device voice, or ask your teacher to read the text. A recorded audio track is not included.
       </p>
       <Practice task={input.questions} draft={draft} update={update} />
     </>
@@ -366,7 +364,7 @@ function TeacherKeys({ material }: { material: Material }) {
           </section>
         ))}
         <p>
-          Use the task criteria to review writing and speaking. Model answers
+          Use the checklists to review speaking and writing. Model answers
           are examples; other correct answers are welcome.
         </p>
       </div>
@@ -421,9 +419,9 @@ export default function MaterialStudy({
       <div className="material-study-toolbar">
         <button className="text-button" onClick={onBack}>
           <ArrowLeft size={17} />
-          {teacher ? "Back to library" : "Back to classroom"}
+          {teacher ? "Back to lesson library" : "Back to classroom"}
         </button>
-        <span>{teacher ? "LESSON PREVIEW" : "PERSONAL PRACTICE"}</span>
+        <span>{teacher ? "LESSON PREVIEW" : "STUDENT PRACTICE"}</span>
       </div>
       <header className="material-study-heading">
         <div className="material-tags">
@@ -466,7 +464,7 @@ export default function MaterialStudy({
               onClick={() => downloadMaterial(material)}
             >
               <Download size={16} />
-              Export JSON
+              Download lesson JSON
             </button>
           </div>
         )}
@@ -477,13 +475,15 @@ export default function MaterialStudy({
       >
         {storageError
           ? "Could not save answers in this browser. Keep the page open until you finish."
-          : "Answers are saved only in this browser. This practice is not yet assigned to a student and does not send results to the teacher."}
+          : teacher
+            ? "Preview answers are saved only in this browser. They do not affect student practice."
+            : "Your answers are saved only in this browser. Results are not shared with your teacher yet."}
       </p>
       {teacher && <TeacherKeys material={material} />}
       <div className="material-study-layout">
         <aside className="material-plan" aria-label="Lesson plan">
           <h2>Lesson plan</h2>
-          <p>{l.duration} minutes · with your teacher</p>
+          <p>{l.duration} minutes · with your {teacher ? "student" : "teacher"}</p>
           <nav>
             {MATERIAL_STAGES.map((item, index) => (
               <button
@@ -499,13 +499,14 @@ export default function MaterialStudy({
             ))}
           </nav>
           <p className="material-helper">
-            Times are a guide. Adjust the pace and review practice to suit the
-            learner.
+            {teacher
+              ? "Times are a guide. Adjust the pace and review to suit your student."
+              : "Times are a guide. Work at your own pace and ask your teacher for help."}
           </p>
           {confirmReset ? (
             <div className="material-reset-confirm">
               <p>
-                Clear the answers and drafts for this lesson in this browser?
+                Clear all answers, writing and homework drafts for this lesson in this browser?
               </p>
               <button
                 className="danger-button"
@@ -514,7 +515,7 @@ export default function MaterialStudy({
                   setConfirmReset(false);
                 }}
               >
-                Clear
+                Clear practice
               </button>
               <button
                 className="text-button"
@@ -607,7 +608,7 @@ export default function MaterialStudy({
           {current.id === "practice" && (
             <>
               <p className="material-section-description">
-                Complete the block, check your answers and read the feedback.
+                Answer each question, check your answers and read the feedback.
                 You can change an answer and check again.
               </p>
               {l.practice.map((task) => (
@@ -637,7 +638,7 @@ export default function MaterialStudy({
                 ))}
               </div>
               <div className="material-success">
-                <h3>Success criteria</h3>
+                <h3>Speaking checklist</h3>
                 <ul>
                   {l.speaking.success.map((item) => (
                     <li key={item}>
@@ -648,7 +649,7 @@ export default function MaterialStudy({
                 </ul>
               </div>
               <details className="sample-answer">
-                <summary>One possible dialogue</summary>
+                <summary>Example dialogue</summary>
                 <p lang="en">{l.speaking.model}</p>
               </details>
               {teacher && (
@@ -693,7 +694,7 @@ export default function MaterialStudy({
                 </ul>
               </div>
               <details className="sample-answer">
-                <summary>See an example after your own attempt</summary>
+                <summary>Show an example answer</summary>
                 <p lang="en">{l.writing.model}</p>
               </details>
               <p className="material-helper">
@@ -705,8 +706,8 @@ export default function MaterialStudy({
           {current.id === "exit" && (
             <>
               <p className="material-section-description">
-                Try the lesson goal again without the text. Tick what you can
-                do. This is a self-check, not a CEFR test score.
+                Try the main task again without looking at the text. Tick what
+                you can do. Use this checklist to reflect on your progress.
               </p>
               <div className="material-exit">
                 {l.exit.map((item, index) => (
@@ -762,12 +763,13 @@ export default function MaterialStudy({
                 />
               </label>
               <details className="sample-answer">
-                <summary>Example result</summary>
+                <summary>Example answer</summary>
                 <p lang="en">{l.homework.model}</p>
               </details>
               <p className="material-helper">
-                Use the final lesson stage to explain the task. Allow about
-                Allow 10–15 minutes for homework after the lesson.
+                {teacher
+                  ? "Use this stage to explain the homework. Allow 10–15 minutes after the lesson for the student to complete it."
+                  : "Allow 10–15 minutes after the lesson to complete your homework."}
               </p>
             </>
           )}
@@ -788,7 +790,7 @@ export default function MaterialStudy({
             ) : (
               <button className="secondary" onClick={() => go(0)}>
                 <RotateCcw size={16} />
-                Back to recall
+                Back to warm-up
               </button>
             )}
           </div>

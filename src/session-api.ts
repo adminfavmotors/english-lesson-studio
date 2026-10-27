@@ -1,5 +1,6 @@
 import { backend } from './backend.config.ts';
 import type { Document, Value } from './store-model.ts';
+import { sharedLessonErrorMessage } from './session-messages.ts';
 
 export type SessionRole = 'teacher' | 'student';
 export type SessionCredentials = { id: string; token: string };
@@ -22,8 +23,9 @@ async function rpc<T>(name: string, params: object, token?: string): Promise<T> 
     body: JSON.stringify(params), signal: AbortSignal.timeout(12000), cache: 'no-store', referrerPolicy: 'no-referrer',
   });
   if (!response.ok) {
-    let message = 'Could not reach the shared lesson. Your changes stay on this device.';
-    try { const error = await response.json(); if (typeof error.message === 'string') message = error.message; } catch { /* retain the useful fallback */ }
+    let detail: unknown;
+    try { detail = (await response.json()).message; } catch { /* use the connection message */ }
+    const message = sharedLessonErrorMessage(response.status,detail);
     throw new SessionError(message, response.status);
   }
   return response.json() as Promise<T>;

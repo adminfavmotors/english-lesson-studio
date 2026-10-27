@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { hashForSection, sectionFromHash, sessionLink, parseSessionUrl } from '../src/session-api.ts';
+import { hashForSection, sectionFromHash, sessionLink, parseSessionUrl, readSession, SessionError } from '../src/session-api.ts';
 import { SessionSync, overlayOperations } from '../src/session-sync.ts';
 import type { SessionData, Operation } from '../src/session-api.ts';
 import { emptyDocument } from '../src/store-model.ts';
@@ -8,6 +8,11 @@ import { emptyDocument } from '../src/store-model.ts';
 const credentials={id:'00000000-0000-4000-8000-000000000001',token:'a'.repeat(64)};
 const op=(values: Operation['values'],epochs: Operation['epochs']={}):Operation=>({id:crypto.randomUUID(),action:'patch',exercise:null,epochs,values});
 const response=(changes:Partial<SessionData>={}):SessionData=>({id:credentials.id,role:'student',revision:0,document:emptyDocument(),epochs:{},server_time:Date.now(),...changes});
+
+test('shared request failures preserve their status and present a useful message',async(context)=>{
+  context.mock.method(globalThis,'fetch',async()=>new Response(JSON.stringify({message:'Unexpected database detail'}),{status:403,headers:{'Content-Type':'application/json'}}));
+  await assert.rejects(()=>readSession(credentials),(error:unknown)=>error instanceof SessionError && error.status===403 && error.message.includes('full link') && !error.message.includes('database detail'));
+});
 
 test('invitation capability stays in fragment while navigation preserves it',()=>{
   const link=sessionLink('https://lesson.example/?irrelevant=1#reading',credentials,'student');

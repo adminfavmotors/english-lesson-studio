@@ -48,5 +48,5 @@ export function studentsError(error: unknown) {
   if (/rate limit|too many requests|over_email_send_rate_limit/i.test(message)) return 'Too many attempts. Please wait a moment and try again.';
   if (/Failed to fetch|NetworkError|fetch failed/i.test(message)) return 'Could not reach the server. Check your internet connection and try again.';
   if (/JWT|session.*missing|refresh_token/i.test(message)) return 'Your session has expired. Please sign in again.';
-  return error instanceof StudentActionError ? message : 'Could not complete the action. Please try again; your entries are still in the form.';
+  return error instanceof StudentActionError ? message : 'Something went wrong. Please try again.';
 }

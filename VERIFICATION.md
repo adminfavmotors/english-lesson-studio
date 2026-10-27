@@ -160,3 +160,17 @@
 - Updated changed shared lessons and packaged revision metadata. The public API integration test confirms exact JSON content and versions for all 30 lessons.
 - npm test: 39/39; npm run test:library: 1/1; TypeScript and Vite production build pass. The 30 lessons retain 90 checked blocks, 300 questions and 180 vocabulary entries.
 - Browser checks: Materials / Lesson library; uppercase I LIKE search finds Food I like; student Warm-up / Self-check / Homework labels; lesson 19 feedback at 2/3, correction to 3/3, then cleared only the three test selections. The rendered student page has lang=en, no Cyrillic text and no horizontal overflow at 1280 px. Teacher calendar displays October 2026 and Europe/Warsaw. No student records or account settings were changed.
+
+
+## 2026-10-27 — Complete interface language review
+
+- Reviewed every existing teacher and student screen, including navigation, library filters and empty states, lesson stages, profile and import dialogs, account forms, timers, calendars, audio notices, saved-work messages and connection failures.
+- Standardised Materials / Lesson library, Import lesson / Download template / Download lesson JSON, previous-page controls, completion actions and teacher/student guidance. Corrected the duplicated homework wording and Back to warm-up navigation.
+- Replaced developer setup directions in learner-facing notices with usable guidance. Textbook notices now explain missing pages and recordings without asking the learner to edit lesson data or server folders. Reading tabs identify Text A / Text B.
+- Account and student forms show inline English validation independently of native browser validation bubbles, focus the first invalid field, and keep labels separate from error descriptions. Lesson duration errors also use the application's English message.
+- Shared request errors retain their HTTP status for reconnection handling but display known, actionable English messages instead of raw server details. Local practice and teacher previews explicitly describe browser-only saving.
+- Fixed View textbook availability in the teacher classroom; the same source dialog is now accessible to both roles. Updated teacher-link controls to Show/Hide and added the expanded state.
+- Browser checks used localhost: library, sign-in dialog and required-field messages, empty search results, student homework, teacher duration validation, the source dialog and student audio notices. No actual sign-in, account creation, password change or student save was submitted.
+- Temporary local fixtures rendered the real student editor, profile and import components with fictional data and blocked backend requests. Checked required name and invalid email, profile dates and empty history, malformed JSON and the offline A1 fallback. Fixtures were removed after review.
+- Tested the account page, library, student practice and classroom in a 375 px iframe viewport. The content area and scroll width were both 360 px after the native scrollbar; opening the mobile controls and calendar did not introduce horizontal overflow. Calendar labels and screen-reader date names are English.
+- Final checks: npm test passes 42/42, including account validation and shared-request error status preservation. TypeScript and the Vite production build pass. Static product sources contain no Cyrillic strings, stale homework wording or developer audio paths.

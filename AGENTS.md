@@ -9,6 +9,12 @@ Use `src/app-language.ts` for the application's language and display locale.
 The browser's preferred language must not change the product language. Keep
 lesson time zones separate from the interface locale.
 
+Use Materials for the service menu and Lesson library for the collection page.
+Distinguish teacher previews, student practice saved in a browser, and shared
+lessons. Labels must describe the action a control actually performs. Write
+role-specific guidance, actionable empty states and inline English validation
+messages. Keep developer setup instructions out of learner-facing screens.
+
 Do not introduce a Russian source layer, runtime translation or a language
 switcher. When other languages are requested, add explicit localisations based
 on the English source. User-written names, notes and answers retain their

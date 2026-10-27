@@ -49,7 +49,7 @@ export default function StandaloneMaterial({ id }: { id: string }) {
         ) : (
           <div className="library-loading" role="status">
             <LoaderCircle className="students-spinner" />
-            Opening lesson…
+            Loading lesson…
           </div>
         )}
       </main>
