@@ -27,6 +27,7 @@ import {
   restoreMaterialDraft,
 } from "./material-practice";
 import type { MaterialDraft as Draft } from "./material-practice";
+import { APP_LOCALE, APP_LANGUAGE } from "./app-language";
 import "./materials.css";
 
 function loadDraft(material: Material, teacher: boolean): Draft {
@@ -218,7 +219,7 @@ function Practice({
                 <strong>
                   {correctItem
                     ? "Correct"
-                    : `One correct answer: ${item.answers[0]}`}
+                    : `Correct answer: ${item.answers[0]}`}
                 </strong>
                 <p>{item.explanation}</p>
               </div>
@@ -285,11 +286,11 @@ function InputBlock({
     }
     speechSynthesis.cancel();
     const utterance = new SpeechSynthesisUtterance(material.content.input.text);
-    utterance.lang = "en-GB";
+    utterance.lang = APP_LOCALE;
     utterance.rate = 0.85;
     utterance.voice =
-      speechSynthesis.getVoices().find((v) => v.lang === "en-GB") ??
-      speechSynthesis.getVoices().find((v) => v.lang.startsWith("en")) ??
+      speechSynthesis.getVoices().find((v) => v.lang === APP_LOCALE) ??
+      speechSynthesis.getVoices().find((v) => v.lang.startsWith(APP_LANGUAGE)) ??
       null;
     speechSynthesis.speak(utterance);
   };
@@ -528,7 +529,7 @@ export default function MaterialStudy({
               onClick={() => setConfirmReset(true)}
             >
               <RotateCcw size={14} />
-              Start practice again
+              Reset practice
             </button>
           )}
         </aside>
@@ -746,7 +747,7 @@ export default function MaterialStudy({
                 <p>{l.homework.review}</p>
               </div>
               <label className="material-writing-label">
-                Home practice draft
+                Homework draft
                 <textarea
                   rows={7}
                   value={draft.homework}
@@ -766,7 +767,7 @@ export default function MaterialStudy({
               </details>
               <p className="material-helper">
                 Use the final lesson stage to explain the task. Allow about
-                10–15 minutes for home practice after the lesson.
+                Allow 10–15 minutes for homework after the lesson.
               </p>
             </>
           )}

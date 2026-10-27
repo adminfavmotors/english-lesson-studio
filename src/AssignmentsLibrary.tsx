@@ -16,6 +16,7 @@ import {
   X,
 } from "lucide-react";
 import { MATERIAL_SKILLS, validateMaterial } from "./material-model";
+import { APP_LOCALE, normaliseSearchText } from "./app-language";
 import type {
   Material,
   MaterialContent,
@@ -126,8 +127,8 @@ function ImportDialog({
       </div>
       <p>
         Prepare a lesson with AI or write your own. Export a lesson from the
-        collection to use as a template. Importing creates a private material in
-        your workspace.
+        collection to use as a template. Importing adds a private lesson to
+        your library.
       </p>
       <label className="json-file-label">
         <Upload size={18} />
@@ -322,17 +323,16 @@ export default function AssignmentsLibrary({
     (row) => !row.owner_id || row.owner_id === user?.id,
   );
   const topics = [...new Set(allowedRows.map((row) => row.topic))].sort(
-    (a, b) => a.localeCompare(b, "en-GB"),
+    (a, b) => a.localeCompare(b, APP_LOCALE),
   );
-  const normalized = search.toLocaleLowerCase().trim();
+  const normalized = normaliseSearchText(search).trim();
   const filtered = allowedRows.filter(
     (row) =>
       (!level || row.level === level) &&
       (!skill || row.skills.includes(skill as keyof typeof MATERIAL_SKILLS)) &&
       (!topic || row.topic === topic) &&
       (!normalized ||
-        `${row.title} ${row.subtitle} ${row.topic}`
-          .toLocaleLowerCase()
+        normaliseSearchText(`${row.title} ${row.subtitle} ${row.topic}`)
           .includes(normalized)) &&
       (source !== "studio" || !row.owner_id) &&
       (source !== "mine" || row.owner_id === user?.id) &&
@@ -391,7 +391,7 @@ export default function AssignmentsLibrary({
           <div className="library-top-actions">
             <div>
               <span className="eyebrow">TEACHER LIBRARY</span>
-              <h1>Assignments and lessons</h1>
+              <h1>Lesson library</h1>
               <p>
                 Choose materials for each learning goal. Grow your library with
                 your own lessons.
@@ -420,7 +420,7 @@ export default function AssignmentsLibrary({
               <h2>First conversations</h2>
               <p>
                 30 lessons · 300 questions with feedback · speaking, writing and
-                home practice
+                homework
               </p>
             </div>
             <GraduationCap size={39} />
@@ -548,7 +548,7 @@ export default function AssignmentsLibrary({
                     <span className="material-level">{row.level}</span>
                     <span>
                       {row.owner_id
-                        ? "My material"
+                        ? "My lesson"
                         : `Lesson ${String(row.sequence).padStart(2, "0")}`}
                     </span>
                     <button

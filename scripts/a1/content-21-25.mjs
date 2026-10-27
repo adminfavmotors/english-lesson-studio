@@ -493,7 +493,7 @@ export default [
     language: {
       focus: "a ticket to…; What time…?; short travel questions",
       explanation:
-        "Use to for your destination: to York. Ask A single ticket to York, please. Use separate short questions to check the time, price and platform.",
+        "Use to for your destination: to York. Say A single ticket to York, please. Use separate short questions to check the time, price and platform.",
       examples: [
         "A ticket to York, please.",
         "What time is the train?",
@@ -651,7 +651,7 @@ export default [
       ],
       [
         "watching films",
-        "looking at movies on a screen",
+        "watching stories on a cinema, television or computer screen",
         "I like watching films.",
       ],
       [

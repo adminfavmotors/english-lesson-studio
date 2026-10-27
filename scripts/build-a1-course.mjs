@@ -40,11 +40,11 @@ console.log(
 const docs = fileURLToPath(new URL("../docs/", import.meta.url));
 fs.mkdirSync(docs, { recursive: true });
 const overview =
-  "# A1: first conversations\n\n30 original lessons for one learner and a teacher, with everyday contexts suitable mainly for teenagers and adults. Each lesson suggests 45 minutes: 22.5 contact hours in total. This is a learning collection, not a guarantee of reaching A1. The teacher adjusts pace and review to the learner.\n\nEach lesson includes recall (4 min), language and 6 useful words or phrases (8), a source text and comprehension (7), practice (10), speaking (8), writing (4), a goal check (2) and a home practice briefing (2). Home practice takes about 10–15 minutes outside the lesson.\n\nThe collection contains " +
+  "# A1: first conversations\n\n30 original lessons for one learner and a teacher, with everyday contexts suitable mainly for teenagers and adults. Each lesson suggests 45 minutes: 22.5 contact hours in total. This is a learning collection, not a guarantee of reaching A1. The teacher adjusts pace and review to the learner.\n\nEach lesson includes a warm-up (4 min), language and 6 useful words or phrases (8), a source text and comprehension (7), practice (10), speaking (8), writing (4), a self-check (2) and a homework briefing (2). Homework takes about 10–15 minutes outside the lesson.\n\nThe collection contains " +
   tasks +
   " checked practice blocks, " +
   items +
-  " closed questions, 180 vocabulary entries with English meanings and examples, 30 speaking tasks, 30 writing tasks and 30 home practice tasks. All lesson instructions, explanations, feedback and teacher notes are in English.\n\n| No. | Lesson | Topic | Main skills | Communication goal |\n|---|---|---|---|---|\n";
+  " closed questions, 180 vocabulary entries with English meanings and examples, 30 speaking tasks, 30 writing tasks and 30 homework tasks. All lesson instructions, explanations, feedback and teacher notes are in English.\n\n| No. | Lesson | Topic | Main skills | Communication goal |\n|---|---|---|---|---|\n";
 const table = lessons
   .map(
     (l) =>

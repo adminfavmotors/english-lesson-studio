@@ -1,1 +1,1 @@
-Добавьте оригинальные записи 102.mp3 и 103.mp3 в эту папку. После добавления обновите страницу; для production-сборки повторите npm run build. Аудиозаписи в прототип не включены и не сгенерированы.
+Add the original recordings 102.mp3 and 103.mp3 to this folder. Refresh the page after adding them; run npm run build again for a production build. The prototype does not include or generate these recordings.

@@ -45,11 +45,16 @@ export const order = (id, title, rows) => ({
     explanation,
   })),
 });
-export const match = (id, title, rows) => ({
+export const match = (
+  id,
+  title,
+  rows,
+  instruction = "Match each phrase with its meaning or reply.",
+) => ({
   id,
   type: "match",
   title,
-  instruction: "Match each phrase with its meaning or reply.",
+  instruction,
   items: rows.map(([prompt, answer, explanation], i) => ({
     id: String(i + 1),
     prompt,

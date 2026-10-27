@@ -2,9 +2,9 @@
 
 30 original lessons for one learner and a teacher, with everyday contexts suitable mainly for teenagers and adults. Each lesson suggests 45 minutes: 22.5 contact hours in total. This is a learning collection, not a guarantee of reaching A1. The teacher adjusts pace and review to the learner.
 
-Each lesson includes recall (4 min), language and 6 useful words or phrases (8), a source text and comprehension (7), practice (10), speaking (8), writing (4), a goal check (2) and a home practice briefing (2). Home practice takes about 10–15 minutes outside the lesson.
+Each lesson includes a warm-up (4 min), language and 6 useful words or phrases (8), a source text and comprehension (7), practice (10), speaking (8), writing (4), a self-check (2) and a homework briefing (2). Homework takes about 10–15 minutes outside the lesson.
 
-The collection contains 90 checked practice blocks, 300 closed questions, 180 vocabulary entries with English meanings and examples, 30 speaking tasks, 30 writing tasks and 30 home practice tasks. All lesson instructions, explanations, feedback and teacher notes are in English.
+The collection contains 90 checked practice blocks, 300 closed questions, 180 vocabulary entries with English meanings and examples, 30 speaking tasks, 30 writing tasks and 30 homework tasks. All lesson instructions, explanations, feedback and teacher notes are in English.
 
 | No. | Lesson | Topic | Main skills | Communication goal |
 |---|---|---|---|---|
@@ -22,12 +22,12 @@ The collection contains 90 checked practice blocks, 300 closed questions, 180 vo
 | 12 | [Do you study every day?](https://english-lesson-studio.vercel.app/?mode=teacher&view=assignments&material=a1-12) | Habits | Grammar, Speaking, Listening | I can ask simple questions about routines and give short answers. |
 | 13 | [Food I like](https://english-lesson-studio.vercel.app/?mode=teacher&view=assignments&material=a1-13) | Food | Vocabulary, Grammar, Speaking | I can say which foods I like and ask about someone’s preferences. |
 | 14 | [At the café](https://english-lesson-studio.vercel.app/?mode=teacher&view=assignments&material=a1-14) | At a café | Speaking, Listening, Vocabulary | I can order a drink and a simple snack politely. |
-| 15 | [How much is it?](https://english-lesson-studio.vercel.app/?mode=teacher&view=assignments&material=a1-15) | Shopping | Listening, Spelling, Speaking | I can ask a price and understand simple whole-number prices up to one hundred. |
+| 15 | [How much is it?](https://english-lesson-studio.vercel.app/?mode=teacher&view=assignments&material=a1-15) | Shopping | Listening, Spelling, Speaking | I can ask about prices and understand simple whole-number prices up to one hundred. |
 | 16 | [Places in my town](https://english-lesson-studio.vercel.app/?mode=teacher&view=assignments&material=a1-16) | Town | Vocabulary, Reading, Grammar | I can name common places and say what there is near my home. |
 | 17 | [Turn left at the café](https://english-lesson-studio.vercel.app/?mode=teacher&view=assignments&material=a1-17) | Directions | Listening, Speaking, Vocabulary | I can ask where a place is and follow a few simple directions with help. |
 | 18 | [What can you do?](https://english-lesson-studio.vercel.app/?mode=teacher&view=assignments&material=a1-18) | Abilities | Grammar, Speaking, Pronunciation | I can say what I can do and ask for simple help. |
 | 19 | [People and their things](https://english-lesson-studio.vercel.app/?mode=teacher&view=assignments&material=a1-19) | People and appearance | Grammar, Vocabulary, Reading | I can describe a person with a few simple details and say what they have. |
-| 20 | [What are you doing now?](https://english-lesson-studio.vercel.app/?mode=teacher&view=assignments&material=a1-20) | Right now | Grammar, Speaking, Listening | I can say what I or another person am/is doing now. |
+| 20 | [What are you doing now?](https://english-lesson-studio.vercel.app/?mode=teacher&view=assignments&material=a1-20) | Right now | Grammar, Speaking, Listening | I can describe what people are doing now. |
 | 21 | [Weather and seasons](https://english-lesson-studio.vercel.app/?mode=teacher&view=assignments&material=a1-21) | Weather | Vocabulary, Speaking, Listening | I can describe familiar weather and choose a suitable everyday activity. |
 | 22 | [How do you feel?](https://english-lesson-studio.vercel.app/?mode=teacher&view=assignments&material=a1-22) | How you feel | Vocabulary, Speaking, Listening | I can say how I feel and ask for a simple thing I need. |
 | 23 | [Clothes that fit](https://english-lesson-studio.vercel.app/?mode=teacher&view=assignments&material=a1-23) | Clothes and shopping | Vocabulary, Speaking, Grammar | I can ask for a familiar item of clothing in a colour and size. |

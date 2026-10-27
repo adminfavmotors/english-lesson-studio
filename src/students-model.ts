@@ -21,5 +21,5 @@ export function studentValues(draft: StudentDraft): StudentDraft {
   return { full_name: draft.full_name.trim(), email: draft.email.trim().toLowerCase(), level: draft.level, status: draft.status, goals: draft.goals.trim(), notes: draft.notes.trim() };
 }
 export function studentInitials(name: string) {
-  return name.trim().split(/\s+/).slice(0, 2).map(word => Array.from(word)[0] ?? '').join('').toLocaleUpperCase();
+  return name.trim().split(/\s+/).slice(0, 2).map(word => Array.from(word)[0] ?? '').join('').toUpperCase();
 }

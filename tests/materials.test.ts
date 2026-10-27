@@ -72,7 +72,7 @@ test("each lesson has retrieval, vocabulary, comprehension, practice, output and
   assert.equal(skills.size, 8);
 });
 
-test("all built-in learner and teacher lesson text is in English", () => {
+test("built-in course text has no Cyrillic language regressions", () => {
   const versions = JSON.parse(
     fs.readFileSync(
       new URL("../src/data/a1-versions.json", import.meta.url),
@@ -195,62 +195,53 @@ test("damaged practice storage cannot inject non-string answers or invalid word 
   assert.equal(draft.writing, "Hello");
 });
 
-test("English edition preserves old work and maps selected meanings without changing learner writing", () => {
+test("reviewed content revisions preserve work and clear only a replaced activity", () => {
+  const versions = JSON.parse(fs.readFileSync(new URL("../src/data/a1-versions.json", import.meta.url), "utf8"));
   const previous = {
-    answers: {
-      "description-meaning.1": "У неё есть очки.",
-      "description-meaning.2": "У неё есть очки.",
-      "description-meaning.3": "У него короткие волосы.",
-      "have-got.1": "have",
-    },
-    checked: { "description-meaning": true },
-    orders: { sentence: [1, 0] },
-    writing: "My original writing",
+    answers: { "description-meaning.1": "Old selected option", "have-got.1": "have" },
+    checked: { "description-meaning": true, "have-got": true },
+    orders: { "description-meaning.1": [1, 0], sentence: [1, 0] },
+    writing: "My original writing — Олена",
     homework: "My original homework",
     exit: [true, false],
   };
-  const storage = new Map([
-    [materialPracticeKey("a1-19", 1, false), JSON.stringify(previous)],
-  ]);
-  const read = (key: string) => storage.get(key) ?? null;
-  const draft = restoreMaterialDraft(read, "a1-19", 2, false);
-  assert.equal(draft.writing, previous.writing);
-  assert.equal(draft.homework, previous.homework);
-  assert.deepEqual(draft.orders, previous.orders);
-  assert.deepEqual(draft.exit, previous.exit);
-  assert.equal(draft.answers["have-got.1"], "have");
-  assert.equal(draft.checked["description-meaning"], true);
-  const task = lessons[18].practice[1];
-  assert.equal(
-    isCorrectAnswer(
-      draft.answers["description-meaning.1"],
-      task.items[0],
-      task.type,
-    ),
-    false,
-  );
-  assert.equal(
-    isCorrectAnswer(
-      draft.answers["description-meaning.2"],
-      task.items[1],
-      task.type,
-    ),
-    true,
-  );
-  assert.equal(
-    isCorrectAnswer(
-      draft.answers["description-meaning.3"],
-      task.items[2],
-      task.type,
-    ),
-    true,
-  );
-  assert.deepEqual(restoreMaterialDraft(read, "a1-19", 3, false).answers, {});
-  assert.deepEqual(restoreMaterialDraft(read, "a1-19", 2, true).answers, {});
-  storage.set(materialPracticeKey("a1-19", 2, false), "{}");
-  assert.deepEqual(
-    restoreMaterialDraft(read, "a1-19", 2, false).answers,
-    {},
-    "An existing current draft, including a reset, takes priority",
-  );
+  for (const previousVersion of [1, 2]) {
+    const storage = new Map([
+      [materialPracticeKey("a1-19", previousVersion, false), JSON.stringify(previous)],
+    ]);
+    const read = (key: string) => storage.get(key) ?? null;
+    const version = versions["a1-19"];
+    const draft = restoreMaterialDraft(read, "a1-19", version, false);
+    assert.equal(draft.writing, previous.writing);
+    assert.equal(draft.homework, previous.homework);
+    assert.deepEqual(draft.orders, { sentence: [1, 0] });
+    assert.deepEqual(draft.exit, previous.exit);
+    assert.deepEqual(draft.answers, { "have-got.1": "have" });
+    assert.deepEqual(draft.checked, { "have-got": true });
+    assert.deepEqual(restoreMaterialDraft(read, "a1-19", version + 1, false).answers, {});
+    assert.deepEqual(restoreMaterialDraft(read, "a1-19", version, true).answers, {});
+    storage.set(materialPracticeKey("a1-19", version, false), "{}");
+    assert.deepEqual(
+      restoreMaterialDraft(read, "a1-19", version, false).answers,
+      {},
+      "An existing current draft, including a reset, takes priority",
+    );
+  }
+});
+test("every compatibility entry matches the published revision and lists older revisions explicitly", () => {
+  const compatibility = JSON.parse(fs.readFileSync(new URL("../src/data/a1-draft-compatibility.json", import.meta.url), "utf8"));
+  const versions = JSON.parse(fs.readFileSync(new URL("../src/data/a1-versions.json", import.meta.url), "utf8"));
+  assert.deepEqual(Object.keys(compatibility).sort(), Object.keys(versions).sort());
+  for (const [id, entry] of Object.entries(compatibility) as [string, {version: number; fromVersions: number[]}][]) {
+    assert.equal(entry.version, versions[id]);
+    assert.equal(new Set(entry.fromVersions).size, entry.fromVersions.length);
+    assert.deepEqual(entry.fromVersions, [...entry.fromVersions].sort((a, b) => b - a));
+    assert.ok(entry.fromVersions.every(v => Number.isInteger(v) && v >= 1 && v < entry.version));
+    const old = JSON.stringify({ answers: { "unrelated.1": "original" }, writing: "Keep this writing" });
+    const latest = entry.fromVersions[0];
+    const restored = restoreMaterialDraft(key => key === materialPracticeKey(id, latest, false) ? old : null, id, entry.version, false);
+    assert.equal(restored.answers["unrelated.1"], "original");
+    assert.equal(restored.writing, "Keep this writing");
+  }
+  assert.deepEqual(restoreMaterialDraft(() => null, "private-lesson", 1, false).answers, {});
 });

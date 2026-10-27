@@ -219,7 +219,7 @@
       "situation": "You meet someone in an online lesson. Your teacher is the other person.",
       "steps": [
         "Say hello and give your name.",
-        "Ask for the other name.",
+        "Ask the other person’s name.",
         "Say the name again. Use a friendly phrase to finish.",
         "Change roles. Try again without reading the model."
       ],
@@ -230,7 +230,7 @@
       ],
       "success": [
         "I can say my name.",
-        "I can ask for the other name.",
+        "I can ask the other person’s name.",
         "I can reply to a greeting."
       ],
       "model": "A: Hi. I’m Anna. What’s your name?\nB: I’m Sam.\nA: Nice to meet you, Sam.\nB: Nice to meet you too.",
@@ -1025,7 +1025,7 @@
         "Make up a first name, surname, age from 0 to 20, town and email address ending in example.com.",
         "Answer your teacher’s questions. Spell words if you need to.",
         "Listen as your teacher reads the completed form.",
-        "Find and correct one different detail."
+        "Correct any details that are wrong."
       ],
       "support": [
         "My first name is…",
@@ -1096,12 +1096,12 @@
       },
       {
         "term": "sister",
-        "meaning": "another daughter of your parents",
+        "meaning": "a girl or woman who has the same parent or parents as you",
         "example": "Her sister is Eva."
       },
       {
         "term": "brother",
-        "meaning": "another son of your parents",
+        "meaning": "a boy or man who has the same parent or parents as you",
         "example": "His brother is Ben."
       },
       {
@@ -1209,7 +1209,7 @@
             "answers": [
               "my"
             ],
-            "explanation": "Use my to say something belongs with I."
+            "explanation": "Use my before a noun when you talk about yourself: my sister."
           },
           {
             "id": "2",
@@ -1292,7 +1292,7 @@
       "situation": "Show your teacher a simple diagram of four people close to you or four made-up people.",
       "steps": [
         "Choose family, friends or made-up people. You do not need to share private details.",
-        "Give each name. Say who each person is.",
+        "Say each person’s name. Say who each person is.",
         "Your teacher asks you to check one name.",
         "Ask your teacher to introduce two made-up people."
       ],
@@ -1717,7 +1717,7 @@
     },
     "retrieval": [
       {
-        "prompt": "Say a or an with umbrella.",
+        "prompt": "Put a or an before umbrella and say the phrase.",
         "answer": "An umbrella.",
         "fromLesson": 6
       },
@@ -1914,7 +1914,7 @@
       },
       {
         "term": "table",
-        "meaning": "furniture for eating, writing or putting things on",
+        "meaning": "a piece of furniture with a flat top, used for meals or work",
         "example": "There is a table."
       },
       {
@@ -1999,7 +1999,7 @@
         "fromLesson": 7
       },
       {
-        "prompt": "Say the word chair for more than one: two ___. You can look at the word list.",
+        "prompt": "Complete the phrase: two ___ (chair). You can look at the word list.",
         "answer": "Two chairs.",
         "fromLesson": 6
       }
@@ -2663,7 +2663,7 @@
     "homework": {
       "instruction": "Prepare a short My morning talk using four clock times.",
       "steps": [
-        "Draw four clock times and write an action for each.",
+        "Draw four clocks showing different times and write an action for each.",
         "Say the sentences without reading.",
         "Tomorrow, review three place words from lesson 9."
       ],
@@ -3436,7 +3436,7 @@
         "Ask about three foods from the list.",
         "Say two foods you like or do not like.",
         "Choose two foods you both like.",
-        "Say what you do not want in the breakfast."
+        "Say what you do not want for breakfast."
       ],
       "support": [
         "Do you like…?",
@@ -3786,7 +3786,7 @@
     ],
     "duration": 45,
     "sequence": 15,
-    "goal": "I can ask a price and understand simple whole-number prices up to one hundred.",
+    "goal": "I can ask about prices and understand simple whole-number prices up to one hundred.",
     "vocabulary": [
       {
         "term": "price",
@@ -4022,7 +4022,7 @@
       ]
     },
     "exit": [
-      "I can ask a price.",
+      "I can ask about prices.",
       "I can understand familiar tens up to 100.",
       "I can repeat a price to check it."
     ],
@@ -4275,7 +4275,7 @@
       "success": [
         "I can name three places.",
         "I can answer an Is there…? question.",
-        "I can give a clear place to help someone find it."
+        "I can say where a place is."
       ],
       "model": "There is a park near my home. There is a café next to the park. There isn’t a station.",
       "teacherNote": "Let the learner choose a fictional neighbourhood without sharing an exact home address."
@@ -4414,7 +4414,7 @@
             "answers": [
               "The park"
             ],
-            "explanation": "Station is opposite the park."
+            "explanation": "The station is opposite the park."
           }
         ]
       }
@@ -5013,49 +5013,49 @@
         ]
       },
       {
-        "id": "description-meaning",
+        "id": "identify-people",
         "type": "match",
-        "title": "Match the description",
-        "instruction": "Match each phrase with its meaning or reply.",
+        "title": "Who is it?",
+        "instruction": "Read about Ben, Eva and Mia again. Match each description to a name.",
         "items": [
           {
             "id": "1",
-            "prompt": "He is tall.",
+            "prompt": "This person is tall and has got glasses.",
             "answers": [
-              "He is a tall person."
+              "Ben"
             ],
             "options": [
-              "He is a tall person.",
-              "She has a pair of glasses.",
-              "His hair is short."
+              "Ben",
+              "Eva",
+              "Mia"
             ],
-            "explanation": "Use be before a word that describes someone."
+            "explanation": "Ben is tall. He has got short brown hair and glasses."
           },
           {
             "id": "2",
-            "prompt": "She has got glasses.",
+            "prompt": "This person has got long brown hair and a blue bag.",
             "answers": [
-              "She has a pair of glasses."
+              "Eva"
             ],
             "options": [
-              "He is a tall person.",
-              "She has a pair of glasses.",
-              "His hair is short."
+              "Ben",
+              "Eva",
+              "Mia"
             ],
-            "explanation": "Has got tells us that a person has something."
+            "explanation": "Eva has got long brown hair. Her bag is blue."
           },
           {
             "id": "3",
-            "prompt": "He has got short hair.",
+            "prompt": "This person has got short hair and a red bag, but no glasses.",
             "answers": [
-              "His hair is short."
+              "Mia"
             ],
             "options": [
-              "He is a tall person.",
-              "She has a pair of glasses.",
-              "His hair is short."
+              "Ben",
+              "Eva",
+              "Mia"
             ],
-            "explanation": "Use hair without -s to talk about all the hair on a head."
+            "explanation": "Mia has got short hair and a red bag. She hasn’t got glasses."
           }
         ]
       }
@@ -5123,7 +5123,7 @@
     ],
     "duration": 45,
     "sequence": 20,
-    "goal": "I can say what I or another person am/is doing now.",
+    "goal": "I can describe what people are doing now.",
     "vocabulary": [
       {
         "term": "reading",
@@ -6231,7 +6231,7 @@
     ],
     "language": {
       "focus": "a ticket to…; What time…?; short travel questions",
-      "explanation": "Use to for your destination: to York. Ask A single ticket to York, please. Use separate short questions to check the time, price and platform.",
+      "explanation": "Use to for your destination: to York. Say A single ticket to York, please. Use separate short questions to check the time, price and platform.",
       "examples": [
         "A ticket to York, please.",
         "What time is the train?",
@@ -6487,7 +6487,7 @@
       },
       {
         "term": "watching films",
-        "meaning": "looking at movies on a screen",
+        "meaning": "watching stories on a cinema, television or computer screen",
         "example": "I like watching films."
       },
       {
@@ -7591,7 +7591,7 @@
     ],
     "language": {
       "focus": "registration questions; What time / Where / Is there",
-      "explanation": "Use familiar questions in a new place: What’s your surname? What time is breakfast? Where is my room? Is there Wi-Fi? Ask A room for one night, please.",
+      "explanation": "Use familiar questions in a new place: What’s your surname? What time is breakfast? Where is my room? Is there Wi-Fi? Say A room for one night, please.",
       "examples": [
         "My surname is Green.",
         "What time is breakfast?",
@@ -7833,7 +7833,7 @@
     "vocabulary": [
       {
         "term": "introduce myself",
-        "meaning": "tell someone your name or tell them about a person",
+        "meaning": "say your name and a little about yourself",
         "example": "I can introduce myself."
       },
       {
@@ -7843,7 +7843,7 @@
       },
       {
         "term": "ask",
-        "meaning": "say a question to someone",
+        "meaning": "use words to get information from someone",
         "example": "Ask about the price."
       },
       {
@@ -7933,7 +7933,7 @@
         "fromLesson": 25
       },
       {
-        "prompt": "Ask a price. Repeat it to check it.",
+        "prompt": "Ask the price. Repeat it to check it.",
         "answer": "How much is it? Fifteen pounds?",
         "fromLesson": 15
       },

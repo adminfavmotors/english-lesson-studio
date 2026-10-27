@@ -122,7 +122,7 @@ export default [
       success: [
         "I can name three places.",
         "I can answer an Is there…? question.",
-        "I can give a clear place to help someone find it.",
+        "I can say where a place is.",
       ],
       model:
         "There is a park near my home. There is a café next to the park. There isn’t a station.",
@@ -222,7 +222,7 @@ export default [
           "What is opposite the station?",
           ["The supermarket", "The park", "The school"],
           1,
-          "Station is opposite the park.",
+          "The station is opposite the park.",
         ],
       ],
     ),
@@ -529,23 +529,23 @@ export default [
           "Do not add -s to hair in this meaning.",
         ],
       ]),
-      match("description-meaning", "Match the description", [
+      match("identify-people", "Who is it?", [
         [
-          "He is tall.",
-          "He is a tall person.",
-          "Use be before a word that describes someone.",
+          "This person is tall and has got glasses.",
+          "Ben",
+          "Ben is tall. He has got short brown hair and glasses.",
         ],
         [
-          "She has got glasses.",
-          "She has a pair of glasses.",
-          "Has got tells us that a person has something.",
+          "This person has got long brown hair and a blue bag.",
+          "Eva",
+          "Eva has got long brown hair. Her bag is blue.",
         ],
         [
-          "He has got short hair.",
-          "His hair is short.",
-          "Use hair without -s to talk about all the hair on a head.",
+          "This person has got short hair and a red bag, but no glasses.",
+          "Mia",
+          "Mia has got short hair and a red bag. She hasn’t got glasses.",
         ],
-      ]),
+      ], "Read about Ben, Eva and Mia again. Match each description to a name."),
     ],
     speaking: {
       situation:
@@ -602,7 +602,7 @@ export default [
     subtitle: "Say what is happening now",
     topic: "Right now",
     skills: ["grammar", "speaking", "listening"],
-    goal: "I can say what I or another person am/is doing now.",
+    goal: "I can describe what people are doing now.",
     vocabulary: vocab(
       [
         "reading",

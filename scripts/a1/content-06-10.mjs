@@ -213,7 +213,7 @@ export default [
       ],
     ),
     retrieval: recall(
-      ["Say a or an with umbrella.", "An umbrella.", 6],
+      ["Put a or an before umbrella and say the phrase.", "An umbrella.", 6],
       ["Say that these keys belong to you.", "These are my keys.", 6],
       ["Introduce your brother.", "This is my brother.", 5],
     ),
@@ -310,7 +310,7 @@ export default [
       ],
       [
         "table",
-        "furniture for eating, writing or putting things on",
+        "a piece of furniture with a flat top, used for meals or work",
         "There is a table.",
       ],
       ["chair", "a seat for one person", "There are four chairs."],
@@ -358,7 +358,7 @@ export default [
       ["Say your favourite colour.", "My favourite colour is blue.", 7],
       ["Describe one blue thing.", "It is a blue bag.", 7],
       [
-        "Say the word chair for more than one: two ___. You can look at the word list.",
+        "Complete the phrase: two ___ (chair). You can look at the word list.",
         "Two chairs.",
         6,
       ],
@@ -735,7 +735,7 @@ export default [
     homework: {
       instruction: "Prepare a short My morning talk using four clock times.",
       steps: [
-        "Draw four clock times and write an action for each.",
+        "Draw four clocks showing different times and write an action for each.",
         "Say the sentences without reading.",
         "Tomorrow, review three place words from lesson 9.",
       ],

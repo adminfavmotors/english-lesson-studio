@@ -148,3 +148,15 @@
 - В браузере проверено английское содержимое урока 19, неверный выбор с английским объяснением и результатом 2/3, исправление и повторная проверка 3/3. На отдельной временной странице обращения только к REST API базы отклонялись: показана встроенная коллекция из 30 уроков, открыта та же английская практика, восстановлены ответы и 3/3 из локального черновика. В видимом тексте урока кириллицы и горизонтального переполнения нет. Собственные проверочные ответы очищены; временная страница удалена.
 
 Свободные пользовательские ответы, имена и заметки не переводятся автоматически. Задания остаются индивидуальной практикой; облачный журнал результатов и назначение конкретному ученику не добавлялись.
+
+
+## 2026-10-27 — English as the source language
+
+- Added a single explicit product language and display locale: English / en-GB. Library search, topic sorting, dates and speech synthesis use the product locale. Lesson time zones remain independent.
+- Added AGENTS.md with the English authoring policy: British English source, short learner instructions, explicit future localisations and no automatic rewriting of learner text.
+- Audited the application source, public text and all 30 built-in lessons. No Cyrillic product strings remain. A script check is only a regression guard; wording and task meaning were reviewed separately.
+- Edited unnatural instructions, definitions and goals in the course. Replaced lesson 19's description-paraphrase activity with identifying Ben, Eva and Mia from contextual descriptions.
+- Removed the language-specific answer conversion from draft restoration. A reviewed revision manifest preserves compatible work and learner writing, and resets only the retired lesson 19 activity. Current drafts and explicit resets take priority; roles and unknown future revisions remain isolated.
+- Updated changed shared lessons and packaged revision metadata. The public API integration test confirms exact JSON content and versions for all 30 lessons.
+- npm test: 39/39; npm run test:library: 1/1; TypeScript and Vite production build pass. The 30 lessons retain 90 checked blocks, 300 questions and 180 vocabulary entries.
+- Browser checks: Materials / Lesson library; uppercase I LIKE search finds Food I like; student Warm-up / Self-check / Homework labels; lesson 19 feedback at 2/3, correction to 3/3, then cleared only the three test selections. The rendered student page has lang=en, no Cyrillic text and no horizontal overflow at 1280 px. Teacher calendar displays October 2026 and Europe/Warsaw. No student records or account settings were changed.

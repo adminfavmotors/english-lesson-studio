@@ -400,7 +400,7 @@ export default [
         "Ask about three foods from the list.",
         "Say two foods you like or do not like.",
         "Choose two foods you both like.",
-        "Say what you do not want in the breakfast.",
+        "Say what you do not want for breakfast.",
       ],
       support: [
         "Do you like…?",
@@ -608,7 +608,7 @@ export default [
     subtitle: "Ask about prices and choose what to buy",
     topic: "Shopping",
     skills: ["listening", "spelling", "speaking"],
-    goal: "I can ask a price and understand simple whole-number prices up to one hundred.",
+    goal: "I can ask about prices and understand simple whole-number prices up to one hundred.",
     vocabulary: vocab(
       [
         "price",
@@ -741,7 +741,7 @@ export default [
       ],
     },
     exit: [
-      "I can ask a price.",
+      "I can ask about prices.",
       "I can understand familiar tens up to 100.",
       "I can repeat a price to check it.",
     ],

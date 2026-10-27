@@ -86,14 +86,14 @@ export type Material = {
 };
 export type MaterialSummary = Omit<Material, "content">;
 export const MATERIAL_STAGES = [
-  { id: "retrieval", title: "Recall", minutes: 4 },
+  { id: "retrieval", title: "Warm-up", minutes: 4 },
   { id: "language", title: "Language focus", minutes: 8 },
   { id: "input", title: "Read and listen", minutes: 7 },
   { id: "practice", title: "Practise", minutes: 10 },
   { id: "speaking", title: "Speak", minutes: 8 },
   { id: "writing", title: "Write", minutes: 4 },
-  { id: "exit", title: "Check your goal", minutes: 2 },
-  { id: "homework", title: "Home practice", minutes: 2 },
+  { id: "exit", title: "Self-check", minutes: 2 },
+  { id: "homework", title: "Homework", minutes: 2 },
 ] as const;
 export function materialStages(duration: number) {
   const stages = MATERIAL_STAGES.map((stage) => ({

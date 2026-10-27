@@ -532,7 +532,7 @@ export default [
     language: {
       focus: "registration questions; What time / Where / Is there",
       explanation:
-        "Use familiar questions in a new place: What’s your surname? What time is breakfast? Where is my room? Is there Wi-Fi? Ask A room for one night, please.",
+        "Use familiar questions in a new place: What’s your surname? What time is breakfast? Where is my room? Is there Wi-Fi? Say A room for one night, please.",
       examples: [
         "My surname is Green.",
         "What time is breakfast?",
@@ -686,7 +686,7 @@ export default [
     vocabulary: vocab(
       [
         "introduce myself",
-        "tell someone your name or tell them about a person",
+        "say your name and a little about yourself",
         "I can introduce myself.",
       ],
       [
@@ -694,7 +694,7 @@ export default [
         "look or ask again to make sure something is right",
         "Check the time.",
       ],
-      ["ask", "say a question to someone", "Ask about the price."],
+      ["ask", "use words to get information from someone", "Ask about the price."],
       ["choose", "decide which one you want", "Choose a café."],
       ["repeat", "say or do something again", "Repeat the important number."],
       [
@@ -749,7 +749,7 @@ export default [
         25,
       ],
       [
-        "Ask a price. Repeat it to check it.",
+        "Ask the price. Repeat it to check it.",
         "How much is it? Fifteen pounds?",
         15,
       ],

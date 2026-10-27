@@ -104,14 +104,14 @@ export default [
         "You meet someone in an online lesson. Your teacher is the other person.",
       steps: [
         "Say hello and give your name.",
-        "Ask for the other name.",
+        "Ask the other person’s name.",
         "Say the name again. Use a friendly phrase to finish.",
         "Change roles. Try again without reading the model.",
       ],
       support: ["Hello. I’m…", "What’s your name?", "Nice to meet you."],
       success: [
         "I can say my name.",
-        "I can ask for the other name.",
+        "I can ask the other person’s name.",
         "I can reply to a greeting.",
       ],
       model:
@@ -549,7 +549,7 @@ export default [
         "Make up a first name, surname, age from 0 to 20, town and email address ending in example.com.",
         "Answer your teacher’s questions. Spell words if you need to.",
         "Listen as your teacher reads the completed form.",
-        "Find and correct one different detail.",
+        "Correct any details that are wrong.",
       ],
       support: ["My first name is…", "I’m…", "It’s … at example dot com."],
       success: [
@@ -604,8 +604,8 @@ export default [
     vocabulary: vocab(
       ["mother", "a woman who has a child", "This is my mother."],
       ["father", "a man who has a child", "My father is Tom."],
-      ["sister", "another daughter of your parents", "Her sister is Eva."],
-      ["brother", "another son of your parents", "His brother is Ben."],
+      ["sister", "a girl or woman who has the same parent or parents as you", "Her sister is Eva."],
+      ["brother", "a boy or man who has the same parent or parents as you", "His brother is Ben."],
       [
         "partner",
         "a person you share your life with as a couple",
@@ -662,7 +662,7 @@ export default [
         [
           "I am Anna. This is ___ brother.",
           "my",
-          "Use my to say something belongs with I.",
+          "Use my before a noun when you talk about yourself: my sister.",
         ],
         [
           "He is Leo. ___ friend is Ben.",
@@ -686,7 +686,7 @@ export default [
         "Show your teacher a simple diagram of four people close to you or four made-up people.",
       steps: [
         "Choose family, friends or made-up people. You do not need to share private details.",
-        "Give each name. Say who each person is.",
+        "Say each person’s name. Say who each person is.",
         "Your teacher asks you to check one name.",
         "Ask your teacher to introduce two made-up people.",
       ],

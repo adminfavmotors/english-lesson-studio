@@ -5,5 +5,7 @@ import '@fontsource/source-sans-3/500.css';
 import '@fontsource/source-sans-3/600.css';
 import '@fontsource/source-sans-3/700.css';
 import App from './App';
+import { APP_LANGUAGE } from './app-language';
 import './styles.css';
+document.documentElement.lang = APP_LANGUAGE;
 createRoot(document.getElementById('root')!).render(<React.StrictMode><App /></React.StrictMode>);
