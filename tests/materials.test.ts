@@ -7,20 +7,22 @@ import {
   materialStages,
   materialId,
   normalizeAnswer,
-  validateMaterial,
+  validateMaterialDocument,
 } from "../src/material-model.ts";
-import type { MaterialContent } from "../src/material-model.ts";
+import type { MaterialDocument } from "../src/material-model.ts";
 import {
   materialPracticeKey,
   parseMaterialDraft,
   restoreMaterialDraft,
 } from "../src/material-practice.ts";
-const lessons = JSON.parse(
+const documents = JSON.parse(
   fs.readFileSync(
     new URL("../src/data/a1-lessons.json", import.meta.url),
     "utf8",
   ),
-) as MaterialContent[];
+) as MaterialDocument[];
+// A test-only projection keeps the existing course/marking assertions readable.
+const lessons = documents.map(({ catalogue, content }) => ({ ...catalogue, ...content }));
 test("the A1 collection contains thirty complete, ordered and distinct original lessons", () => {
   assert.equal(lessons.length, 30);
   assert.equal(new Set(lessons.map((l) => l.title)).size, 30);
@@ -29,7 +31,7 @@ test("the A1 collection contains thirty complete, ordered and distinct original 
   for (const [index, l] of lessons.entries()) {
     assert.equal(l.sequence, index + 1);
     assert.equal(l.level, "A1");
-    assert.deepEqual(validateMaterial(l), [], `Lesson ${index + 1}`);
+    assert.deepEqual(validateMaterialDocument(documents[index]), [], `Lesson ${index + 1}`);
     assert.equal(
       materialId(index + 1),
       `a1-${String(index + 1).padStart(2, "0")}`,
@@ -61,7 +63,7 @@ test("each lesson has retrieval, vocabulary, comprehension, practice, output and
       for (const item of t.items)
         assert.ok(isCorrectAnswer(item.answers[0], item, t.type));
     }
-    for (const skill of l.skills) skills.add(skill);
+    for (const skill of l.skills!) skills.add(skill);
     assert.ok(l.speaking.steps.length >= 3);
     assert.ok(l.writing.checklist.length >= 3);
     assert.ok(l.homework.steps.length >= 3);
@@ -69,7 +71,7 @@ test("each lesson has retrieval, vocabulary, comprehension, practice, output and
   assert.equal(items, 300);
   assert.equal(words, 180);
   assert.deepEqual([...types].sort(), ["choice", "gap", "match", "order"]);
-  assert.equal(skills.size, 8);
+  assert.deepEqual([...skills].sort(), ['listening', 'reading', 'speaking', 'writing']);
 });
 
 test("built-in course text has no Cyrillic language regressions", () => {
@@ -141,17 +143,17 @@ test("short answers allow harmless whitespace, terminal punctuation and apostrop
   assert.equal(isCorrectAnswer("", negative), false);
 });
 test("JSON import rejects incomplete lessons and invalid question keys", () => {
-  assert.ok(validateMaterial(null).length);
-  assert.ok(validateMaterial([]).length);
-  assert.ok(validateMaterial({ title: "Empty lesson" }).length);
-  const invalid = structuredClone(lessons[0]);
-  invalid.input.questions.items[0].answers = ["Not an option"];
+  assert.ok(validateMaterialDocument(null).length);
+  assert.ok(validateMaterialDocument([]).length);
+  assert.ok(validateMaterialDocument({ title: "Empty lesson" }).length);
+  const invalid = structuredClone(documents[0]);
+  invalid.content.input.questions.items[0].answers = ["Not an option"];
   assert.ok(
-    validateMaterial(invalid).some((e) => e.includes("one of the options")),
+    validateMaterialDocument(invalid).some((e) => e.includes("one of the options")),
   );
-  const broken = structuredClone(lessons[4]);
-  broken.practice[1].items[0].tokens = ["wrong", "sentence"];
-  assert.ok(validateMaterial(broken).some((e) => e.includes("tokens")));
+  const broken = structuredClone(documents[4]);
+  broken.content.practice[1].items[0].tokens = ["wrong", "sentence"];
+  assert.ok(validateMaterialDocument(broken).some((e) => e.includes("tokens")));
 });
 test("all incorrect choice options in the course are actually graded incorrect", () => {
   for (const l of lessons)

@@ -16,11 +16,12 @@ import {
   X,
 } from "lucide-react";
 import {
-  MATERIAL_SKILLS,
   materialStages,
   isCorrectAnswer,
+  materialDocument,
 } from "./material-model";
 import type { Material, PracticeTask, PracticeItem } from "./material-model";
+import MaterialClassification from "./MaterialClassification";
 import {
   blankMaterialDraft as blankDraft,
   materialPracticeKey,
@@ -43,7 +44,7 @@ function loadDraft(material: Material, teacher: boolean): Draft {
   }
 }
 export function downloadMaterial(material: Material) {
-  const blob = new Blob([JSON.stringify(material.content, null, 2)], {
+  const blob = new Blob([JSON.stringify(materialDocument(material), null, 2)], {
     type: "application/json",
   });
   const url = URL.createObjectURL(blob);
@@ -395,7 +396,7 @@ export default function MaterialStudy({
     }
   }, [key, draft]);
   const l = material.content;
-  const MATERIAL_STAGES = materialStages(l.duration);
+  const MATERIAL_STAGES = materialStages(material.duration);
   const current = MATERIAL_STAGES[stage];
   const go = (index: number) => {
     setStage(index);
@@ -422,22 +423,18 @@ export default function MaterialStudy({
       </div>
       <header className="material-study-heading">
         <div className="material-tags">
-          <span className="material-level">{l.level}</span>
-          {l.sequence && (
-            <span>Lesson {String(l.sequence).padStart(2, "0")}</span>
+          <span className="material-level">{material.level}</span>
+          {material.sequence && (
+            <span>Lesson {String(material.sequence).padStart(2, "0")}</span>
           )}
           <span>
             <Clock3 size={14} />
-            {l.duration} min · suggested
+            {material.duration} min · suggested
           </span>
         </div>
-        <h1>{l.title}</h1>
-        <p>{l.subtitle}</p>
-        <div className="material-skill-tags">
-          {l.skills.map((skill) => (
-            <span key={skill}>{MATERIAL_SKILLS[skill]}</span>
-          ))}
-        </div>
+        <h1>{material.title}</h1>
+        <p>{material.subtitle}</p>
+        <MaterialClassification classification={material} showLegacy={teacher} />
         <div className="material-can-do">
           <TargetMark />
           <div>
@@ -480,7 +477,7 @@ export default function MaterialStudy({
       <div className="material-study-layout">
         <aside className="material-plan" aria-label="Lesson plan">
           <h2>Lesson plan</h2>
-          <p>{l.duration} minutes · with your {teacher ? "student" : "teacher"}</p>
+          <p>{material.duration} minutes · with your {teacher ? "student" : "teacher"}</p>
           <nav>
             {MATERIAL_STAGES.map((item, index) => (
               <button

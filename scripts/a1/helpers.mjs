@@ -73,29 +73,36 @@ export const model = (title, format, text, questions) => ({
 });
 export function makeLesson(u) {
   return {
-    schemaVersion: 1,
-    title: u.title,
-    subtitle: u.subtitle,
-    level: "A1",
-    topic: u.topic,
-    skills: u.skills,
-    duration: 45,
-    sequence: u.n,
-    goal: u.goal,
-    vocabulary: u.vocabulary,
-    language: u.language,
-    input: u.input,
-    retrieval: u.retrieval,
-    practice: u.practice,
-    speaking: u.speaking,
-    writing: u.writing,
-    exit: u.exit,
-    homework: {
-      ...u.homework,
-      review:
-        u.homework.review ||
-        "Review these phrases tomorrow, then about 3 and 7 days later. Try without help first, then check. Review sooner if it is difficult.",
+    catalogue: {
+      title: u.title,
+      subtitle: u.subtitle,
+      level: "A1",
+      topic: u.topic,
+      skills: u.skills,
+      language_focus: u.languageFocus,
+      classification_status: "reviewed",
+      legacy_skills: null,
+      duration: 45,
+      sequence: u.n,
     },
-    teacherNotes: u.teacherNotes,
+    content: {
+      schemaVersion: 2,
+      goal: u.goal,
+      vocabulary: u.vocabulary,
+      language: u.language,
+      input: u.input,
+      retrieval: u.retrieval,
+      practice: u.practice,
+      speaking: u.speaking,
+      writing: u.writing,
+      exit: u.exit,
+      homework: {
+        ...u.homework,
+        review:
+          u.homework.review ||
+          "Review these phrases tomorrow, then about 3 and 7 days later. Try without help first, then check. Review sooner if it is difficult.",
+      },
+      teacherNotes: u.teacherNotes,
+    },
   };
 }

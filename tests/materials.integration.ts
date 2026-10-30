@@ -17,7 +17,7 @@ test("the authenticated teacher library matches all thirty source lessons", {ski
     ),
   );
   const response = await fetch(
-    `${backend.url}/rest/v1/lesson_materials?select=id,owner_id,content,version&owner_id=is.null&order=sequence.asc`,
+    `${backend.url}/rest/v1/lesson_materials?select=id,owner_id,title,subtitle,level,topic,skills,language_focus,classification_status,legacy_skills,duration,sequence,content,version,catalogue_version&owner_id=is.null&order=sequence.asc`,
     {
       headers: { apikey: backend.publishableKey, Authorization: `Bearer ${process.env.LESSON_TEST_ACCESS_TOKEN}` },
       signal: AbortSignal.timeout(20000),
@@ -36,9 +36,12 @@ test("the authenticated teacher library matches all thirty source lessons", {ski
     );
     assert.deepEqual(
       row.content,
-      lessons[index],
+      lessons[index].content,
       `Database content differs for ${row.id}`,
     );
+    for (const [key, value] of Object.entries(lessons[index].catalogue))
+      assert.deepEqual(row[key], value, `Database catalogue differs for ${row.id}: ${key}`);
+    assert.ok(row.catalogue_version >= 1);
   }
 });
 

@@ -1,3 +1,20 @@
+# Change discipline
+
+Work one step at a time: each step delivers one precise, agreed change. Keep
+the scope focused; do not bundle unrelated fixes or start the next change
+without the owner's next instruction.
+
+Understand the root cause and the affected architecture before editing. Make
+one coherent solution in the implementation that owns the behaviour. Do not
+mask symptoms with workarounds, duplicate logic, extra override layers or
+patches layered over a flawed design.
+
+When replacing a flawed implementation, remove the superseded code and its
+obsolete branches or styles as part of that change. Do not leave competing
+implementations in place. Preserve user data and required compatibility through
+an explicit migration where needed. Verify the intended behaviour and relevant
+regression risks before calling the step complete.
+
 # Product language
 
 English is the source language of Lesson Studio. Author the interface, errors,
@@ -62,3 +79,25 @@ Give a changed activity a new ID. Only restore old drafts through the explicitly
 reviewed revisions in `src/data/a1-draft-compatibility.json`; preserve unrelated
 answers and learner writing. Keep the shared database content, built-in snapshot
 and revision manifests in sync when publishing a content revision.
+
+# Catalogue development direction
+
+Lesson Studio is intended to become an open service for independent teachers
+with trial and paid access and an author catalogue. The first teacher workspace
+is a pilot, not a permanent single-teacher product boundary. Current account
+authorisation remains in force until a separately agreed onboarding change.
+
+When changing the library model, distinguish reusable activities, lessons,
+courses/methodologies and personal collections. Use CEFR-aligned facets and a
+controlled vocabulary. Keep material identity, revisions, authorship, private
+ownership, access entitlements and actual teaching use distinct. Previewing or
+opening a page must not implicitly become a payable use. Do not implement
+unagreed billing, payout or ranking rules as part of library work.
+
+The agreed future stage, repeat-use payout principle and unresolved rules are
+recorded in the local `internal-docs/10-platform-and-author-catalogue.md`.
+
+Definitions, assignment rules and the runtime contract for Skills and Language
+focus are in `docs/MATERIAL-CLASSIFICATION.md`. Use the reviewed A1 mapping;
+never infer a reviewed classification from old mixed tags or section headings.
+Preserve unreviewed legacy tags explicitly, independently of account permissions.

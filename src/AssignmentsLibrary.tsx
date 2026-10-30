@@ -15,12 +15,12 @@ import {
   Upload,
   X,
 } from "lucide-react";
-import { MATERIAL_SKILLS, validateMaterial } from "./material-model";
+import { MATERIAL_SKILLS, MATERIAL_LANGUAGE_FOCUS, readMaterialDocument } from "./material-model";
+import MaterialClassification from "./MaterialClassification";
 import { APP_LOCALE, normaliseSearchText } from "./app-language";
 import { navigateToMaterial } from "./app-routes";
 import type {
   Material,
-  MaterialContent,
   MaterialSummary,
 } from "./material-model";
 import {
@@ -86,14 +86,14 @@ function ImportDialog({
       setErrors(["Could not read the JSON. Check commas and quotation marks."]);
       return;
     }
-    const problems = validateMaterial(content);
-    if (problems.length) {
-      setErrors(problems);
+    const result = readMaterialDocument(content);
+    if (!result.document) {
+      setErrors(result.errors);
       return;
     }
     setBusy(true);
     try {
-      onSaved(await importMaterial(content as MaterialContent));
+      onSaved(await importMaterial(result.document));
     } catch (error) {
       setErrors([(error as Error).message]);
     } finally {
@@ -155,7 +155,7 @@ function ImportDialog({
           disabled={busy}
           spellCheck={false}
           placeholder={
-            '{\n  "schemaVersion": 1,\n  "title": "My new lesson",\n  …\n}'
+            '{\n  "catalogue": { "title": "My new lesson", … },\n  "content": { "schemaVersion": 2, … }\n}'
           }
           onChange={(event) => {
             setText(event.target.value);
@@ -211,6 +211,7 @@ export default function AssignmentsLibrary({
   const [search, setSearch] = useState("");
   const [level, setLevel] = useState("");
   const [skill, setSkill] = useState("");
+  const [languageFocus, setLanguageFocus] = useState("");
   const [topic, setTopic] = useState("");
   const [source, setSource] = useState("all");
   const [page, setPage] = useState(0);
@@ -314,7 +315,8 @@ export default function AssignmentsLibrary({
   const filtered = allowedRows.filter(
     (row) =>
       (!level || row.level === level) &&
-      (!skill || row.skills.includes(skill as keyof typeof MATERIAL_SKILLS)) &&
+      (!skill || (row.classification_status === "reviewed" && row.skills.includes(skill as keyof typeof MATERIAL_SKILLS))) &&
+      (!languageFocus || (row.classification_status === "reviewed" && row.language_focus.includes(languageFocus as keyof typeof MATERIAL_LANGUAGE_FOCUS))) &&
       (!topic || row.topic === topic) &&
       (!normalized ||
         normaliseSearchText(`${row.title} ${row.subtitle} ${row.topic}`)
@@ -326,7 +328,7 @@ export default function AssignmentsLibrary({
   const pages = Math.max(1, Math.ceil(filtered.length / 9));
   const currentPage = Math.min(page, pages - 1);
   const visible = filtered.slice(currentPage * 9, currentPage * 9 + 9);
-  const hasFilters = !!(search || level || skill || topic);
+  const hasFilters = !!(search || level || skill || languageFocus || topic);
   const needsSignIn = !user && (source === "mine" || source === "favourites");
   const emptyTitle = needsSignIn
     ? "Sign in to your library"
@@ -470,7 +472,7 @@ export default function AssignmentsLibrary({
               />
             </label>
             <label>
-              <span className="sr-only">Filter by level</span>
+              <span className="library-filter-label">Level</span>
               <select
                 value={level}
                 onChange={(event) => setFilter(setLevel, event.target.value)}
@@ -484,7 +486,7 @@ export default function AssignmentsLibrary({
               </select>
             </label>
             <label>
-              <span className="sr-only">Filter by skill</span>
+              <span className="library-filter-label">Skills</span>
               <select
                 value={skill}
                 onChange={(event) => setFilter(setSkill, event.target.value)}
@@ -497,8 +499,20 @@ export default function AssignmentsLibrary({
                 ))}
               </select>
             </label>
+            <label className="library-language-focus">
+              <span className="library-filter-label">Language focus</span>
+              <select
+                value={languageFocus}
+                onChange={(event) => setFilter(setLanguageFocus, event.target.value)}
+              >
+                <option value="">Any language focus</option>
+                {Object.entries(MATERIAL_LANGUAGE_FOCUS).map(([value, label]) => (
+                  <option key={value} value={value}>{label}</option>
+                ))}
+              </select>
+            </label>
             <label>
-              <span className="sr-only">Filter by topic</span>
+              <span className="library-filter-label">Topic</span>
               <select
                 value={topic}
                 onChange={(event) => setFilter(setTopic, event.target.value)}
@@ -533,7 +547,7 @@ export default function AssignmentsLibrary({
               <Filter size={15} />
               {loading ? "Loading materials…" : `Results: ${filtered.length}`}
             </span>
-            <small>Skills show the main focus of each lesson</small>
+            <small>Skills describe communication practice; language focus describes the language features taught.</small>
           </div>
           {loading ? (
             <div className="library-loading" role="status">
@@ -569,11 +583,7 @@ export default function AssignmentsLibrary({
                     <button onClick={() => open(row.id)}>{row.title}</button>
                   </h2>
                   <p>{row.subtitle}</p>
-                  <div className="material-skill-tags">
-                    {row.skills.slice(0, 3).map((value) => (
-                      <span key={value}>{MATERIAL_SKILLS[value]}</span>
-                    ))}
-                  </div>
+                  <MaterialClassification classification={row} />
                   <div className="material-card-bottom">
                     <span>
                       <Clock3 size={15} />
@@ -602,6 +612,7 @@ export default function AssignmentsLibrary({
                   setSearch("");
                   setLevel("");
                   setSkill("");
+                  setLanguageFocus("");
                   setTopic("");
                   setSource("all");
                   setPage(0);
@@ -698,7 +709,9 @@ export default function AssignmentsLibrary({
           onClose={() => setImportOpen(false)}
           onSaved={(value) => {
             setImportOpen(false);
-            setNotice("Lesson imported into your library.");
+            setNotice(value.classification_status === "needs_review"
+              ? "Lesson imported. Its previous tags are saved for classification review."
+              : "Lesson imported into your library.");
             setReload((previous) => previous + 1);
             open(value.id);
           }}

@@ -14,7 +14,8 @@ export default [
     title: "Days, dates and appointments",
     subtitle: "Arrange a date and time to meet",
     topic: "Dates and appointments",
-    skills: ["listening", "spelling", "speaking"],
+    skills: ["reading", "listening", "speaking", "writing"],
+    languageFocus: ["grammar", "vocabulary"],
     goal: "I can check a simple appointment date and time.",
     vocabulary: vocab(
       [
@@ -170,7 +171,8 @@ export default [
     title: "A short message",
     subtitle: "Write a clear message about a meeting",
     topic: "Messages",
-    skills: ["writing", "spelling", "reading"],
+    skills: ["listening", "speaking", "writing"],
+    languageFocus: ["vocabulary", "spelling_punctuation"],
     goal: "I can write a short message with a greeting, a simple plan and a question.",
     vocabulary: vocab(
       ["Hi…", "a friendly greeting at the start of a message", "Hi, Anna!"],
@@ -336,7 +338,8 @@ export default [
     title: "Sorry, again, please!",
     subtitle: "Ask for repetition and check important details",
     topic: "Communication strategies",
-    skills: ["listening", "speaking", "pronunciation"],
+    skills: ["listening", "speaking"],
+    languageFocus: ["vocabulary"],
     goal: "I can ask someone to repeat, speak slowly or spell a word.",
     vocabulary: vocab(
       [
@@ -503,7 +506,8 @@ export default [
     title: "At a guesthouse",
     subtitle: "Check in and ask about your stay",
     topic: "Places to stay",
-    skills: ["speaking", "writing", "listening"],
+    skills: ["listening", "speaking", "writing"],
+    languageFocus: ["vocabulary"],
     goal: "I can give simple registration details and ask about a room and breakfast.",
     vocabulary: vocab(
       [
@@ -681,7 +685,8 @@ export default [
     title: "My first day in a new town",
     subtitle: "Use everyday English in a new town",
     topic: "Putting it together",
-    skills: ["speaking", "writing", "reading", "listening"],
+    skills: ["listening", "speaking", "writing"],
+    languageFocus: ["grammar", "vocabulary"],
     goal: "I can handle several very short everyday exchanges with a helpful partner.",
     vocabulary: vocab(
       [

@@ -1,25 +1,28 @@
 import fs from "node:fs";
 import { fileURLToPath } from "node:url";
-import { validateMaterial, MATERIAL_SKILLS } from "../src/material-model.ts";
+import { validateMaterialDocument, MATERIAL_SKILLS, MATERIAL_LANGUAGE_FOCUS } from "../src/material-model.ts";
+import { assertReviewedA1 } from "./a1/classification-review.mjs";
 import first from "./a1/content-01-05.mjs";
 import second from "./a1/content-06-10.mjs";
 import third from "./a1/content-11-15.mjs";
 import fourth from "./a1/content-16-20.mjs";
 import fifth from "./a1/content-21-25.mjs";
 import sixth from "./a1/content-26-30.mjs";
-const lessons = [...first, ...second, ...third, ...fourth, ...fifth, ...sixth];
+const documents = [...first, ...second, ...third, ...fourth, ...fifth, ...sixth];
+const lessons = documents.map(document => document.content);
+assertReviewedA1(documents);
 if (lessons.length !== 30) throw new Error("Expected 30 lessons");
-for (const [index, lesson] of lessons.entries()) {
-  const errors = validateMaterial(lesson);
+for (const [index, document] of documents.entries()) {
+  const errors = validateMaterialDocument(document);
   if (errors.length)
     throw new Error(`Lesson ${index + 1}: ${errors.join("; ")}`);
-  if (lesson.sequence !== index + 1) throw new Error("Invalid sequence");
+  if (document.catalogue.sequence !== index + 1) throw new Error("Invalid sequence");
 }
 const directory = fileURLToPath(new URL("../src/data/", import.meta.url));
 fs.mkdirSync(directory, { recursive: true });
 fs.writeFileSync(
   directory + "a1-lessons.json",
-  JSON.stringify(lessons, null, 2) + "\n",
+  JSON.stringify(documents, null, 2) + "\n",
 );
 const tasks = lessons.reduce((sum, l) => sum + l.practice.length + 1, 0);
 const items = lessons.reduce(
@@ -44,11 +47,13 @@ const overview =
   tasks +
   " checked practice blocks, " +
   items +
-  " closed questions, 180 vocabulary entries with English meanings and examples, 30 speaking tasks, 30 writing tasks and 30 homework tasks. All lesson instructions, explanations, feedback and teacher notes are in English.\n\n| No. | Lesson | Topic | Main skills | Communication goal |\n|---|---|---|---|---|\n";
-const table = lessons
+  " closed questions, 180 vocabulary entries with English meanings and examples, 30 speaking tasks, 30 writing tasks and 30 homework tasks. All lesson instructions, explanations, feedback and teacher notes are in English.\n\n| No. | Lesson | Topic | Skills | Language focus | Communication goal |\n|---|---|---|---|---|\n";
+const table = documents
   .map(
-    (l) =>
-      `| ${l.sequence} | [${l.title}](https://english-lesson-studio.vercel.app/teacher/materials/a1-${String(l.sequence).padStart(2, "0")}) | ${l.topic} | ${l.skills.map((s) => MATERIAL_SKILLS[s]).join(", ")} | ${l.goal} |`,
+    ({ catalogue, content }) => {
+      const l = { ...catalogue, goal: content.goal };
+      return `| ${l.sequence} | [${l.title}](https://english-lesson-studio.vercel.app/teacher/materials/a1-${String(l.sequence).padStart(2, "0")}) | ${l.topic} | ${l.skills.map((s) => MATERIAL_SKILLS[s]).join(", ") || "None"} | ${l.language_focus.map(s => MATERIAL_LANGUAGE_FOCUS[s]).join(", ") || "None"} | ${l.goal} |`;
+    },
   )
   .join("\n");
 fs.writeFileSync(

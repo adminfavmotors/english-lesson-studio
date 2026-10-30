@@ -14,7 +14,8 @@ export default [
     title: "Weather and seasons",
     subtitle: "Talk about the weather and choose an activity",
     topic: "Weather",
-    skills: ["vocabulary", "speaking", "listening"],
+    skills: ["listening", "speaking", "writing"],
+    languageFocus: ["grammar", "vocabulary"],
     goal: "I can describe familiar weather and choose a suitable everyday activity.",
     vocabulary: vocab(
       ["sunny", "with a lot of sun", "It is sunny."],
@@ -154,7 +155,8 @@ export default [
     title: "How do you feel?",
     subtitle: "Describe how you feel and ask for help",
     topic: "How you feel",
-    skills: ["vocabulary", "speaking", "listening"],
+    skills: ["speaking", "writing"],
+    languageFocus: ["grammar", "vocabulary"],
     goal: "I can say how I feel and ask for a simple thing I need.",
     vocabulary: vocab(
       ["tired", "feeling that you need to rest or sleep", "I am tired."],
@@ -296,7 +298,8 @@ export default [
     title: "Clothes that fit",
     subtitle: "Choose clothes in the right colour and size",
     topic: "Clothes and shopping",
-    skills: ["vocabulary", "speaking", "grammar"],
+    skills: ["listening", "speaking", "writing"],
+    languageFocus: ["grammar", "vocabulary"],
     goal: "I can ask for a familiar item of clothing in a colour and size.",
     vocabulary: vocab(
       ["T-shirt", "a light top with short sleeves", "A blue T-shirt, please."],
@@ -456,7 +459,8 @@ export default [
     title: "A ticket, please",
     subtitle: "Buy a ticket and check travel details",
     topic: "Travel",
-    skills: ["listening", "reading", "speaking"],
+    skills: ["reading", "listening", "speaking", "writing"],
+    languageFocus: ["vocabulary"],
     goal: "I can ask for a simple ticket and check a departure time and price.",
     vocabulary: vocab(
       [
@@ -634,7 +638,8 @@ export default [
     title: "Free time and hobbies",
     subtitle: "Find a hobby you have in common",
     topic: "Free time",
-    skills: ["speaking", "vocabulary", "grammar"],
+    skills: ["listening", "speaking", "writing"],
+    languageFocus: ["grammar", "vocabulary"],
     goal: "I can talk about a few hobbies and find a shared interest.",
     vocabulary: vocab(
       ["reading", "spending time with a book or text", "I like reading."],

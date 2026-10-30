@@ -14,7 +14,8 @@ export default [
     title: "What is this?",
     subtitle: "Name everyday objects and ask for what you need",
     topic: "Everyday objects",
-    skills: ["grammar", "spelling", "vocabulary"],
+    skills: ["speaking", "writing"],
+    languageFocus: ["grammar", "vocabulary"],
     goal: "I can name everyday objects and ask for a classroom item.",
     vocabulary: vocab(
       [
@@ -163,7 +164,8 @@ export default [
     title: "Colours and favourite things",
     subtitle: "Describe colours and choose a gift",
     topic: "Colours and preferences",
-    skills: ["vocabulary", "grammar", "speaking"],
+    skills: ["reading", "listening", "speaking", "writing"],
+    languageFocus: ["grammar", "vocabulary", "spelling_punctuation"],
     goal: "I can describe familiar objects by colour and choose a simple gift.",
     vocabulary: vocab(
       ["red", "the colour of a tomato", "a red bag"],
@@ -297,7 +299,8 @@ export default [
     title: "My home",
     subtitle: "Talk about rooms and furniture",
     topic: "Home",
-    skills: ["grammar", "vocabulary", "reading"],
+    skills: ["listening", "speaking", "writing"],
+    languageFocus: ["grammar", "vocabulary"],
     goal: "I can say what rooms and basic furniture there are in a home.",
     vocabulary: vocab(
       ["kitchen", "a room where people cook", "There is a kitchen."],
@@ -450,7 +453,8 @@ export default [
     title: "Where is my key?",
     subtitle: "Find things using simple descriptions",
     topic: "Where things are",
-    skills: ["grammar", "listening", "speaking"],
+    skills: ["listening", "speaking", "writing"],
+    languageFocus: ["grammar", "vocabulary"],
     goal: "I can ask where a familiar object is and understand a simple location.",
     vocabulary: vocab(
       ["in", "inside something", "The key is in the bag."],
@@ -595,7 +599,8 @@ export default [
     title: "My morning",
     subtitle: "Talk about your morning and tell the time",
     topic: "Daily routines",
-    skills: ["vocabulary", "grammar", "speaking"],
+    skills: ["listening", "speaking", "writing"],
+    languageFocus: ["grammar", "vocabulary"],
     goal: "I can describe a simple morning routine and say basic times.",
     vocabulary: vocab(
       ["get up", "leave your bed and start the day", "I get up at seven."],

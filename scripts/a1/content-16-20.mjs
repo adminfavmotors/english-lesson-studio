@@ -14,7 +14,8 @@ export default [
     title: "Places in my town",
     subtitle: "Talk about places nearby",
     topic: "Town",
-    skills: ["vocabulary", "reading", "grammar"],
+    skills: ["speaking", "writing"],
+    languageFocus: ["grammar", "vocabulary"],
     goal: "I can name common places and say what there is near my home.",
     vocabulary: vocab(
       [
@@ -165,7 +166,8 @@ export default [
     title: "Turn left at the café",
     subtitle: "Ask for and follow simple directions",
     topic: "Directions",
-    skills: ["listening", "speaking", "vocabulary"],
+    skills: ["listening", "speaking", "writing"],
+    languageFocus: ["grammar", "vocabulary"],
     goal: "I can ask where a place is and follow a few simple directions with help.",
     vocabulary: vocab(
       ["turn left", "change direction to the left", "Turn left at the café."],
@@ -314,7 +316,8 @@ export default [
     title: "What can you do?",
     subtitle: "Talk about skills and ask for help",
     topic: "Abilities",
-    skills: ["grammar", "speaking", "pronunciation"],
+    skills: ["listening", "speaking", "writing"],
+    languageFocus: ["grammar", "vocabulary"],
     goal: "I can say what I can do and ask for simple help.",
     vocabulary: vocab(
       ["swim", "move your body through water", "I can swim."],
@@ -452,7 +455,8 @@ export default [
     title: "People and their things",
     subtitle: "Describe people and their belongings",
     topic: "People and appearance",
-    skills: ["grammar", "vocabulary", "reading"],
+    skills: ["reading", "listening", "speaking", "writing"],
+    languageFocus: ["grammar", "vocabulary"],
     goal: "I can describe a person with a few simple details and say what they have.",
     vocabulary: vocab(
       ["tall", "having more height than most people", "Ben is tall."],
@@ -601,7 +605,8 @@ export default [
     title: "What are you doing now?",
     subtitle: "Say what is happening now",
     topic: "Right now",
-    skills: ["grammar", "speaking", "listening"],
+    skills: ["speaking", "writing"],
+    languageFocus: ["grammar", "vocabulary"],
     goal: "I can describe what people are doing now.",
     vocabulary: vocab(
       [

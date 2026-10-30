@@ -14,7 +14,8 @@ export default [
     title: "A day in her life",
     subtitle: "Describe a daily routine",
     topic: "Daily routines",
-    skills: ["grammar", "reading", "writing"],
+    skills: ["speaking", "writing"],
+    languageFocus: ["grammar"],
     goal: "I can describe another person’s routine with simple sentences.",
     vocabulary: vocab(
       ["works", "does a job regularly", "She works in a café."],
@@ -148,7 +149,8 @@ export default [
     title: "Do you study every day?",
     subtitle: "Ask and answer questions about habits",
     topic: "Habits",
-    skills: ["grammar", "speaking", "listening"],
+    skills: ["listening", "speaking"],
+    languageFocus: ["grammar"],
     goal: "I can ask simple questions about routines and give short answers.",
     vocabulary: vocab(
       ["every day", "on all days", "I study every day."],
@@ -300,7 +302,8 @@ export default [
     title: "Food I like",
     subtitle: "Talk about food and preferences",
     topic: "Food",
-    skills: ["vocabulary", "grammar", "speaking"],
+    skills: ["listening", "speaking", "writing"],
+    languageFocus: ["grammar", "vocabulary"],
     goal: "I can say which foods I like and ask about someone’s preferences.",
     vocabulary: vocab(
       [
@@ -454,7 +457,8 @@ export default [
     title: "At the café",
     subtitle: "Order food and drinks",
     topic: "At a café",
-    skills: ["speaking", "listening", "vocabulary"],
+    skills: ["reading", "listening", "speaking", "writing"],
+    languageFocus: ["vocabulary"],
     goal: "I can order a drink and a simple snack politely.",
     vocabulary: vocab(
       ["tea", "a drink made with hot water and leaves", "A tea, please."],
@@ -607,7 +611,8 @@ export default [
     title: "How much is it?",
     subtitle: "Ask about prices and choose what to buy",
     topic: "Shopping",
-    skills: ["listening", "spelling", "speaking"],
+    skills: ["listening", "speaking"],
+    languageFocus: ["grammar", "vocabulary", "pronunciation", "spelling_punctuation"],
     goal: "I can ask about prices and understand simple whole-number prices up to one hundred.",
     vocabulary: vocab(
       [

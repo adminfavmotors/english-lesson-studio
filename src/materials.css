@@ -112,9 +112,17 @@
 
 .library-filters {
   display: grid;
-  grid-template-columns: minmax(220px, 1fr) 125px 180px 185px;
+  grid-template-columns: minmax(200px, 1fr) 100px 140px minmax(220px, 240px) minmax(140px, 170px);
   gap: 11px;
   margin-bottom: 18px;
+  align-items: end;
+}
+
+.library-filter-label {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--color-text-muted);
+  font-size: 13px;
 }
 
 .library-filters input, .library-filters select {
@@ -258,6 +266,30 @@
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
+}
+
+.material-classification {
+  display: grid;
+  gap: 9px;
+  margin: 0;
+}
+
+.material-classification dt {
+  color: var(--color-text-muted);
+  font-size: 12px;
+  margin-bottom: 4px;
+}
+
+.material-classification dd {
+  margin: 0;
+}
+
+.material-classification-pending,
+.material-classification-legacy {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 13px;
+  line-height: 1.5;
 }
 
 .material-skill-tags > span {
@@ -552,7 +584,7 @@
   margin: 0 0 18px;
 }
 
-.material-study-heading .material-skill-tags {
+.material-study-heading .material-classification {
   margin-bottom: 22px;
 }
 
@@ -1401,9 +1433,9 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
   .library-filters {
-    grid-template-columns: minmax(180px, 1fr) 105px 165px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-  .library-filters > label:last-child {
+  .library-filters .library-search {
     grid-column: 1/-1;
   }
   .library-top-actions {
@@ -1535,12 +1567,10 @@
     padding: 10px 12px;
   }
   .library-filters {
-    grid-template-columns: 1fr 1fr;
     gap: 10px;
   }
-  .library-filters .library-search {
-    grid-column: 1/-1;
-  }
+  .library-filters .library-search,
+  .library-filters .library-language-focus,
   .library-filters > label:last-child {
     grid-column: 1/-1;
   }
@@ -1765,12 +1795,6 @@
   .library-top-actions {
     flex-direction: row;
     align-items: center;
-  }
-  .library-filters {
-    grid-template-columns: minmax(180px, 1fr) 110px 165px 175px;
-  }
-  .library-filters > label:last-child {
-    grid-column: auto;
   }
   .a1-collection-banner {
     padding: 22px 25px;

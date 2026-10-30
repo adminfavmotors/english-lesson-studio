@@ -69,6 +69,11 @@ available for authoring and seeding, but is no longer imported by application
 code or emitted as a public content chunk. A connection failure shows a retry
 message; it never falls back to an unrestricted copy of the collection.
 
+Catalogue fields and teaching content have independent server-managed revisions.
+The same teacher/owner RLS protects both; owners cannot write revision counters
+or transfer ownership. See [MATERIAL-CATALOGUE](MATERIAL-CATALOGUE.md) for the
+separated contract, JSON compatibility and coordinated migration/frontend release.
+
 Students see an invitation-based learning home. They cannot browse the library
 or open arbitrary material IDs. Teachers can still preview a student material.
 Named material assignments, homework delivery and binding a shared textbook

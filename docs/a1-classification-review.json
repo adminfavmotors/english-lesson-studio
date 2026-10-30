@@ -1,0 +1,3482 @@
+{
+  "kind": "lesson-studio-editorial-classification-review",
+  "review_version": 1,
+  "review_date": "2026-10-30",
+  "time_zone": "Europe/Warsaw",
+  "status": "reviewed_proposal_not_applied",
+  "scope": "The 30 built-in studio A1 lessons only; no private imports or working-database records were changed.",
+  "rules": "docs/MATERIAL-CLASSIFICATION.md",
+  "reviews": [
+    {
+      "material_id": "a1-01",
+      "proposal": {
+        "skills": [
+          "speaking",
+          "writing"
+        ],
+        "language_focus": [
+          "grammar",
+          "vocabulary"
+        ]
+      },
+      "evidence": {
+        "speaking": {
+          "paths": [
+            "/goal",
+            "/speaking/steps",
+            "/speaking/success"
+          ],
+          "reason": "Introduce yourself, ask a name and respond to a greeting in a second round without the model."
+        },
+        "writing": {
+          "paths": [
+            "/writing/instruction",
+            "/writing/checklist"
+          ],
+          "reason": "Compose a new-person message with a greeting, your name and a question; this is not gap completion."
+        },
+        "grammar": {
+          "paths": [
+            "/language/explanation",
+            "/practice/0/items/0",
+            "/practice/0/items/1",
+            "/writing/checklist/1"
+          ],
+          "reason": "I am / I'm is explicitly explained, practised and checked in the learner's own message."
+        },
+        "vocabulary": {
+          "paths": [
+            "/vocabulary",
+            "/practice/1",
+            "/speaking/support"
+          ],
+          "reason": "Greeting and introduction chunks are taught, matched to replies and used to meet another person."
+        }
+      },
+      "removed_legacy": {
+        "pronunciation": {
+          "paths": [
+            "/language/pronunciation",
+            "/speaking/success"
+          ],
+          "reason": "Greeting stress and the contraction are short modelling support. There is no separate required sound task or phonological success outcome at lesson level."
+        }
+      },
+      "notes": [
+        "The opening model and its three questions support the introduction; they do not independently establish Reading or Listening as lesson focuses."
+      ],
+      "title": "Hello! Nice to meet you",
+      "source": {
+        "teaching_revision": 4,
+        "sequence": 1,
+        "legacy_skills": [
+          "speaking",
+          "vocabulary",
+          "pronunciation"
+        ],
+        "content_sha256": "72a3f378157be2812a34f36f5e95b0b2e8909804d100a8784945c4cdf86b56c4",
+        "catalogue_sha256": "a3d3322997a15025aa0a15c79e2b2ae4f1ee85583426a21f858227c0e2a0e7bf",
+        "authoring_file": "scripts/a1/content-01-05.mjs"
+      },
+      "status": "reviewed_proposal_not_applied",
+      "legacy_mapping": [
+        {
+          "old_value": "speaking",
+          "decision": "retained",
+          "target": {
+            "facet": "skills",
+            "concept": "speaking"
+          },
+          "reason": "Introduce yourself, ask a name and respond to a greeting in a second round without the model."
+        },
+        {
+          "old_value": "vocabulary",
+          "decision": "reclassified",
+          "target": {
+            "facet": "language_focus",
+            "concept": "vocabulary"
+          },
+          "reason": "Greeting and introduction chunks are taught, matched to replies and used to meet another person."
+        },
+        {
+          "old_value": "pronunciation",
+          "decision": "removed",
+          "target": null,
+          "reason": "Greeting stress and the contraction are short modelling support. There is no separate required sound task or phonological success outcome at lesson level."
+        }
+      ],
+      "additions": [
+        {
+          "facet": "skills",
+          "concept": "writing"
+        },
+        {
+          "facet": "language_focus",
+          "concept": "grammar"
+        }
+      ]
+    },
+    {
+      "material_id": "a1-02",
+      "proposal": {
+        "skills": [
+          "listening",
+          "speaking"
+        ],
+        "language_focus": [
+          "vocabulary",
+          "pronunciation",
+          "spelling_punctuation"
+        ]
+      },
+      "evidence": {
+        "listening": {
+          "paths": [
+            "/goal",
+            "/speaking/teacherNote",
+            "/exit/1"
+          ],
+          "reason": "Understand dictated names and numbers with the text hidden, write them and check against the key."
+        },
+        "speaking": {
+          "paths": [
+            "/speaking/steps",
+            "/speaking/success"
+          ],
+          "reason": "Give a name and class number to another person, then correct a deliberately mistaken detail."
+        },
+        "vocabulary": {
+          "paths": [
+            "/language/explanation",
+            "/practice/0",
+            "/speaking/steps/2"
+          ],
+          "reason": "Number words zero to twenty are explicitly taught, retrieved and used to communicate a class number."
+        },
+        "pronunciation": {
+          "paths": [
+            "/language/pronunciation",
+            "/practice/1/items/1",
+            "/teacherNotes/0",
+            "/homework/steps/2"
+          ],
+          "reason": "Contrasting letter names has explicit sound models, a sound-to-letter question and planned teacher feedback on difficult names."
+        },
+        "spelling_punctuation": {
+          "paths": [
+            "/goal",
+            "/practice/0",
+            "/practice/1/items/0",
+            "/writing/checklist"
+          ],
+          "reason": "Letter order and number-word spelling are central targets in the exercises and the name-spelling form."
+        }
+      },
+      "removed_legacy": {},
+      "notes": [
+        "The small form reinforces letter order and number spelling; its prescribed number words do not establish a separate communicative Writing focus.",
+        "Letter-name perception supports Pronunciation; Listening is justified separately by the hidden-text name-and-number dictation."
+      ],
+      "title": "Names, letters and numbers",
+      "source": {
+        "teaching_revision": 2,
+        "sequence": 2,
+        "legacy_skills": [
+          "spelling",
+          "listening",
+          "pronunciation"
+        ],
+        "content_sha256": "b58486180f55d286d5c28f28b691b376732c4e36d0031380956bb527c29061b9",
+        "catalogue_sha256": "dbabd38165fbf36cbd6a38e09274e29d0bcd2359c9a338fe801a7ed49c92ab63",
+        "authoring_file": "scripts/a1/content-01-05.mjs"
+      },
+      "status": "reviewed_proposal_not_applied",
+      "legacy_mapping": [
+        {
+          "old_value": "spelling",
+          "decision": "reclassified",
+          "target": {
+            "facet": "language_focus",
+            "concept": "spelling_punctuation"
+          },
+          "reason": "Letter order and number-word spelling are central targets in the exercises and the name-spelling form."
+        },
+        {
+          "old_value": "listening",
+          "decision": "retained",
+          "target": {
+            "facet": "skills",
+            "concept": "listening"
+          },
+          "reason": "Understand dictated names and numbers with the text hidden, write them and check against the key."
+        },
+        {
+          "old_value": "pronunciation",
+          "decision": "reclassified",
+          "target": {
+            "facet": "language_focus",
+            "concept": "pronunciation"
+          },
+          "reason": "Contrasting letter names has explicit sound models, a sound-to-letter question and planned teacher feedback on difficult names."
+        }
+      ],
+      "additions": [
+        {
+          "facet": "skills",
+          "concept": "speaking"
+        },
+        {
+          "facet": "language_focus",
+          "concept": "vocabulary"
+        }
+      ]
+    },
+    {
+      "material_id": "a1-03",
+      "proposal": {
+        "skills": [
+          "listening",
+          "speaking",
+          "writing"
+        ],
+        "language_focus": [
+          "grammar",
+          "vocabulary"
+        ]
+      },
+      "evidence": {
+        "listening": {
+          "paths": [
+            "/speaking/steps/1",
+            "/speaking/steps/3",
+            "/speaking/model"
+          ],
+          "reason": "Find out the teacher's country and use that newly heard information to introduce the teacher to another person."
+        },
+        "speaking": {
+          "paths": [
+            "/goal",
+            "/speaking/steps",
+            "/speaking/success"
+          ],
+          "reason": "Ask and give country information, then introduce a third person using the information gathered."
+        },
+        "writing": {
+          "paths": [
+            "/writing/instruction",
+            "/writing/checklist"
+          ],
+          "reason": "Compose profiles of yourself and a made-up person with names, countries and a language."
+        },
+        "grammar": {
+          "paths": [
+            "/language/explanation",
+            "/practice/0",
+            "/speaking/success/1"
+          ],
+          "reason": "Choose am, are and is for different people and apply from + country in personal descriptions."
+        },
+        "vocabulary": {
+          "paths": [
+            "/vocabulary",
+            "/practice/1",
+            "/speaking/success/2"
+          ],
+          "reason": "Country and language names are distinguished through matching and used to communicate origin and language."
+        }
+      },
+      "removed_legacy": {},
+      "notes": [
+        "Capital-letter guidance in the profile is a supporting convention, not an independent spelling/punctuation teaching sequence.",
+        "Listening is based on the oral information relay, not on the generic read-or-listen input instruction."
+      ],
+      "title": "Where are you from?",
+      "source": {
+        "teaching_revision": 2,
+        "sequence": 3,
+        "legacy_skills": [
+          "grammar",
+          "speaking",
+          "vocabulary"
+        ],
+        "content_sha256": "7a526a74297673ee0ffb2d29688dccb96f1775cdf3bced4325497cdc3acf813a",
+        "catalogue_sha256": "f524e2a39a43e016b6cca5a6c232845e9e25957b7ec3f974bebf03330cf83222",
+        "authoring_file": "scripts/a1/content-01-05.mjs"
+      },
+      "status": "reviewed_proposal_not_applied",
+      "legacy_mapping": [
+        {
+          "old_value": "grammar",
+          "decision": "reclassified",
+          "target": {
+            "facet": "language_focus",
+            "concept": "grammar"
+          },
+          "reason": "Choose am, are and is for different people and apply from + country in personal descriptions."
+        },
+        {
+          "old_value": "speaking",
+          "decision": "retained",
+          "target": {
+            "facet": "skills",
+            "concept": "speaking"
+          },
+          "reason": "Ask and give country information, then introduce a third person using the information gathered."
+        },
+        {
+          "old_value": "vocabulary",
+          "decision": "reclassified",
+          "target": {
+            "facet": "language_focus",
+            "concept": "vocabulary"
+          },
+          "reason": "Country and language names are distinguished through matching and used to communicate origin and language."
+        }
+      ],
+      "additions": [
+        {
+          "facet": "skills",
+          "concept": "listening"
+        },
+        {
+          "facet": "skills",
+          "concept": "writing"
+        }
+      ]
+    },
+    {
+      "material_id": "a1-04",
+      "proposal": {
+        "skills": [
+          "listening",
+          "speaking",
+          "writing"
+        ],
+        "language_focus": [
+          "grammar",
+          "vocabulary",
+          "spelling_punctuation"
+        ]
+      },
+      "evidence": {
+        "listening": {
+          "paths": [
+            "/speaking/steps/2",
+            "/speaking/steps/3",
+            "/teacherNotes/1"
+          ],
+          "reason": "Listen to the completed form, identify inaccurate information and correct the recorded details; dictation allows repetitions."
+        },
+        "speaking": {
+          "paths": [
+            "/speaking/situation",
+            "/speaking/steps",
+            "/speaking/success"
+          ],
+          "reason": "Supply information from a hidden card so the teacher can complete an accurate contact form."
+        },
+        "writing": {
+          "paths": [
+            "/goal",
+            "/writing/instruction",
+            "/writing/checklist"
+          ],
+          "reason": "Enter chosen fictional contact information into the appropriate form fields and add an age statement."
+        },
+        "grammar": {
+          "paths": [
+            "/language/explanation",
+            "/practice/0/items/3",
+            "/writing/checklist/2"
+          ],
+          "reason": "Be for age is explicitly contrasted with have, practised in sentence selection and checked in the completed form."
+        },
+        "vocabulary": {
+          "paths": [
+            "/vocabulary",
+            "/practice/0",
+            "/speaking/steps/0"
+          ],
+          "reason": "Contact-field meanings and the spoken email-address chunks at/dot are taught and used in the information exchange."
+        },
+        "spelling_punctuation": {
+          "paths": [
+            "/practice/1/items/1",
+            "/speaking/steps/1",
+            "/writing/checklist/0",
+            "/writing/checklist/1"
+          ],
+          "reason": "Accurate names, address spelling and the @/dot conventions are checked as part of producing a usable contact record."
+        }
+      },
+      "removed_legacy": {},
+      "notes": [
+        "Unlike lesson 2's spelling worksheet, completing a usable five-field contact record is the explicit whole-lesson goal.",
+        "The supplied form is the model; no separate Reading focus is inferred merely from its field labels."
+      ],
+      "title": "My contact card",
+      "source": {
+        "teaching_revision": 3,
+        "sequence": 4,
+        "legacy_skills": [
+          "writing",
+          "spelling",
+          "listening"
+        ],
+        "content_sha256": "318a70011e8ac5aed45c0e649851b8b3b3f7bf4931b2754cef364ec83e9b5667",
+        "catalogue_sha256": "0b0323296c2600d2f796ac63b61da1d2733492cb2e4b1b190914569f525429bb",
+        "authoring_file": "scripts/a1/content-01-05.mjs"
+      },
+      "status": "reviewed_proposal_not_applied",
+      "legacy_mapping": [
+        {
+          "old_value": "writing",
+          "decision": "retained",
+          "target": {
+            "facet": "skills",
+            "concept": "writing"
+          },
+          "reason": "Enter chosen fictional contact information into the appropriate form fields and add an age statement."
+        },
+        {
+          "old_value": "spelling",
+          "decision": "reclassified",
+          "target": {
+            "facet": "language_focus",
+            "concept": "spelling_punctuation"
+          },
+          "reason": "Accurate names, address spelling and the @/dot conventions are checked as part of producing a usable contact record."
+        },
+        {
+          "old_value": "listening",
+          "decision": "retained",
+          "target": {
+            "facet": "skills",
+            "concept": "listening"
+          },
+          "reason": "Listen to the completed form, identify inaccurate information and correct the recorded details; dictation allows repetitions."
+        }
+      ],
+      "additions": [
+        {
+          "facet": "skills",
+          "concept": "speaking"
+        },
+        {
+          "facet": "language_focus",
+          "concept": "grammar"
+        },
+        {
+          "facet": "language_focus",
+          "concept": "vocabulary"
+        }
+      ]
+    },
+    {
+      "material_id": "a1-05",
+      "proposal": {
+        "skills": [
+          "speaking",
+          "writing"
+        ],
+        "language_focus": [
+          "grammar",
+          "vocabulary"
+        ]
+      },
+      "evidence": {
+        "speaking": {
+          "paths": [
+            "/goal",
+            "/speaking/steps",
+            "/speaking/success"
+          ],
+          "reason": "Introduce at least three chosen people and answer a name-checking question so the listener understands who they are."
+        },
+        "writing": {
+          "paths": [
+            "/writing/instruction",
+            "/writing/checklist"
+          ],
+          "reason": "Create a diagram description with original names and relationships, rather than copying a model."
+        },
+        "grammar": {
+          "paths": [
+            "/language/explanation",
+            "/practice/0",
+            "/practice/1",
+            "/writing/checklist/1"
+          ],
+          "reason": "Possessive determiners, This is and person/reference forms are taught, manipulated and checked in descriptions."
+        },
+        "vocabulary": {
+          "paths": [
+            "/vocabulary",
+            "/speaking/steps/0",
+            "/speaking/success/0"
+          ],
+          "reason": "Relationship words are deliberately selected and used to explain who the people on a diagram are."
+        }
+      },
+      "removed_legacy": {},
+      "notes": [
+        "Hearing another introduction is not followed by a separate comprehension outcome; Listening is not added for conversation alone."
+      ],
+      "title": "People in my family",
+      "source": {
+        "teaching_revision": 3,
+        "sequence": 5,
+        "legacy_skills": [
+          "vocabulary",
+          "speaking",
+          "grammar"
+        ],
+        "content_sha256": "74fa4f99b7cd41318b270cf7240a20f724e1c6901a78b6903a94e5eed8e23821",
+        "catalogue_sha256": "fd8f4fef10b77a7842109fe9b20f1fe66a058b74b37417d9d9fc7dbfd19c82fa",
+        "authoring_file": "scripts/a1/content-01-05.mjs"
+      },
+      "status": "reviewed_proposal_not_applied",
+      "legacy_mapping": [
+        {
+          "old_value": "vocabulary",
+          "decision": "reclassified",
+          "target": {
+            "facet": "language_focus",
+            "concept": "vocabulary"
+          },
+          "reason": "Relationship words are deliberately selected and used to explain who the people on a diagram are."
+        },
+        {
+          "old_value": "speaking",
+          "decision": "retained",
+          "target": {
+            "facet": "skills",
+            "concept": "speaking"
+          },
+          "reason": "Introduce at least three chosen people and answer a name-checking question so the listener understands who they are."
+        },
+        {
+          "old_value": "grammar",
+          "decision": "reclassified",
+          "target": {
+            "facet": "language_focus",
+            "concept": "grammar"
+          },
+          "reason": "Possessive determiners, This is and person/reference forms are taught, manipulated and checked in descriptions."
+        }
+      ],
+      "additions": [
+        {
+          "facet": "skills",
+          "concept": "writing"
+        }
+      ]
+    },
+    {
+      "material_id": "a1-06",
+      "proposal": {
+        "skills": [
+          "speaking",
+          "writing"
+        ],
+        "language_focus": [
+          "grammar",
+          "vocabulary"
+        ]
+      },
+      "evidence": {
+        "speaking": {
+          "paths": [
+            "/goal",
+            "/speaking/steps",
+            "/speaking/success"
+          ],
+          "reason": "Request classroom items and correct a wrong physical choice so the teacher packs the intended bag."
+        },
+        "writing": {
+          "paths": [
+            "/writing/instruction",
+            "/writing/checklist"
+          ],
+          "reason": "Produce a personal lesson-item list and two descriptions identifying the chosen objects and quantities."
+        },
+        "grammar": {
+          "paths": [
+            "/language/explanation",
+            "/practice/0",
+            "/practice/1/items/0",
+            "/writing/checklist"
+          ],
+          "reason": "Articles, singular/plural agreement and this/these are explicitly practised and checked in original descriptions."
+        },
+        "vocabulary": {
+          "paths": [
+            "/vocabulary",
+            "/speaking/steps/0",
+            "/speaking/steps/3"
+          ],
+          "reason": "Classroom-object words are taught and must be selected to request the intended items."
+        }
+      },
+      "removed_legacy": {
+        "spelling": {
+          "paths": [
+            "/practice/1/items/2",
+            "/homework/steps/1"
+          ],
+          "reason": "One umbrella-spelling choice and a homework checking reminder are supporting accuracy work, not a separate lesson-level orthographic focus."
+        }
+      },
+      "notes": [
+        "Plural -s is treated as grammatical number here. A grammar ending does not automatically add Spelling and punctuation."
+      ],
+      "title": "What is this?",
+      "source": {
+        "teaching_revision": 2,
+        "sequence": 6,
+        "legacy_skills": [
+          "grammar",
+          "spelling",
+          "vocabulary"
+        ],
+        "content_sha256": "171ec9693c68f5fdf97385e97a20f663fe79d89bbe2ff365a977af2ddf7f73df",
+        "catalogue_sha256": "4153618fcd1475d3d2f5dd8bfb9b5c0fa4ad6c61dbe4a37451fc41a0992e9399",
+        "authoring_file": "scripts/a1/content-06-10.mjs"
+      },
+      "status": "reviewed_proposal_not_applied",
+      "legacy_mapping": [
+        {
+          "old_value": "grammar",
+          "decision": "reclassified",
+          "target": {
+            "facet": "language_focus",
+            "concept": "grammar"
+          },
+          "reason": "Articles, singular/plural agreement and this/these are explicitly practised and checked in original descriptions."
+        },
+        {
+          "old_value": "spelling",
+          "decision": "removed",
+          "target": null,
+          "reason": "One umbrella-spelling choice and a homework checking reminder are supporting accuracy work, not a separate lesson-level orthographic focus."
+        },
+        {
+          "old_value": "vocabulary",
+          "decision": "reclassified",
+          "target": {
+            "facet": "language_focus",
+            "concept": "vocabulary"
+          },
+          "reason": "Classroom-object words are taught and must be selected to request the intended items."
+        }
+      ],
+      "additions": [
+        {
+          "facet": "skills",
+          "concept": "speaking"
+        },
+        {
+          "facet": "skills",
+          "concept": "writing"
+        }
+      ]
+    },
+    {
+      "material_id": "a1-07",
+      "proposal": {
+        "skills": [
+          "reading",
+          "listening",
+          "speaking",
+          "writing"
+        ],
+        "language_focus": [
+          "grammar",
+          "vocabulary",
+          "spelling_punctuation"
+        ]
+      },
+      "evidence": {
+        "reading": {
+          "paths": [
+            "/input/text",
+            "/speaking/steps/1"
+          ],
+          "reason": "Use the gifts and their colours in the supplied text to choose an appropriate item; the text remains a decision resource."
+        },
+        "listening": {
+          "paths": [
+            "/speaking/steps/0",
+            "/speaking/steps/3",
+            "/speaking/teacherNote"
+          ],
+          "reason": "Discover a hidden colour preference, choose a gift and revise the choice after the teacher changes that information."
+        },
+        "speaking": {
+          "paths": [
+            "/speaking/steps",
+            "/speaking/success"
+          ],
+          "reason": "Ask about a preference and propose a suitable gift with a short reason."
+        },
+        "writing": {
+          "paths": [
+            "/writing/instruction",
+            "/writing/checklist"
+          ],
+          "reason": "Describe three selected gifts and state who each gift is for."
+        },
+        "grammar": {
+          "paths": [
+            "/language/explanation",
+            "/practice/0",
+            "/writing/checklist"
+          ],
+          "reason": "Adjective order and it is / they are are taught, reconstructed and applied to new gifts."
+        },
+        "vocabulary": {
+          "paths": [
+            "/vocabulary",
+            "/speaking/success/0",
+            "/speaking/steps/1"
+          ],
+          "reason": "Colour and preference meanings determine the learner's gift choice."
+        },
+        "spelling_punctuation": {
+          "paths": [
+            "/practice/1/title",
+            "/practice/1/items/0",
+            "/practice/1/items/1",
+            "/practice/1/items/2"
+          ],
+          "reason": "A required multi-item block explicitly retrieves missing letters in blue, green and white with spelling feedback."
+        }
+      },
+      "removed_legacy": {},
+      "notes": [
+        "All four Skills have separate task evidence here; the four labels are not inferred from the lesson's section headings.",
+        "The spelling block is more substantial than the isolated umbrella item in lesson 6."
+      ],
+      "title": "Colours and favourite things",
+      "source": {
+        "teaching_revision": 3,
+        "sequence": 7,
+        "legacy_skills": [
+          "vocabulary",
+          "grammar",
+          "speaking"
+        ],
+        "content_sha256": "d06ddc66d39d2aacf5c1bde174ccb4768b234ec8b89c0b326c553e670789d2dd",
+        "catalogue_sha256": "13827091befd3261edefa7c2c0c45e9cbaeba03bfe80be843730d5569f48dc68",
+        "authoring_file": "scripts/a1/content-06-10.mjs"
+      },
+      "status": "reviewed_proposal_not_applied",
+      "legacy_mapping": [
+        {
+          "old_value": "vocabulary",
+          "decision": "reclassified",
+          "target": {
+            "facet": "language_focus",
+            "concept": "vocabulary"
+          },
+          "reason": "Colour and preference meanings determine the learner's gift choice."
+        },
+        {
+          "old_value": "grammar",
+          "decision": "reclassified",
+          "target": {
+            "facet": "language_focus",
+            "concept": "grammar"
+          },
+          "reason": "Adjective order and it is / they are are taught, reconstructed and applied to new gifts."
+        },
+        {
+          "old_value": "speaking",
+          "decision": "retained",
+          "target": {
+            "facet": "skills",
+            "concept": "speaking"
+          },
+          "reason": "Ask about a preference and propose a suitable gift with a short reason."
+        }
+      ],
+      "additions": [
+        {
+          "facet": "skills",
+          "concept": "reading"
+        },
+        {
+          "facet": "skills",
+          "concept": "listening"
+        },
+        {
+          "facet": "skills",
+          "concept": "writing"
+        },
+        {
+          "facet": "language_focus",
+          "concept": "spelling_punctuation"
+        }
+      ]
+    },
+    {
+      "material_id": "a1-08",
+      "proposal": {
+        "skills": [
+          "listening",
+          "speaking",
+          "writing"
+        ],
+        "language_focus": [
+          "grammar",
+          "vocabulary"
+        ]
+      },
+      "evidence": {
+        "listening": {
+          "paths": [
+            "/speaking/steps/2",
+            "/speaking/steps/3",
+            "/speaking/success/2"
+          ],
+          "reason": "Understand the teacher's description of the drawn plan, detect a wrong quantity or object and correct it."
+        },
+        "speaking": {
+          "paths": [
+            "/goal",
+            "/speaking/situation",
+            "/speaking/steps/1"
+          ],
+          "reason": "Describe a fictional home so another person can draw its rooms and furniture."
+        },
+        "writing": {
+          "paths": [
+            "/writing/instruction",
+            "/writing/checklist"
+          ],
+          "reason": "Compose a four-sentence description of a chosen home with rooms, furniture and quantities."
+        },
+        "grammar": {
+          "paths": [
+            "/language/explanation",
+            "/practice/0",
+            "/writing/checklist"
+          ],
+          "reason": "There is / there are and quantity agreement receive explicit practice and feedback criteria."
+        },
+        "vocabulary": {
+          "paths": [
+            "/vocabulary",
+            "/practice/1/items/1",
+            "/speaking/success/0"
+          ],
+          "reason": "Room and furniture meanings are taught, checked and needed to communicate the plan."
+        }
+      },
+      "removed_legacy": {
+        "reading": {
+          "paths": [
+            "/input/instruction",
+            "/speaking/steps",
+            "/writing/instruction"
+          ],
+          "reason": "The flat description is an opening model with alternative delivery. The later outcomes are communicating and checking a plan, not independently using a written guide."
+        }
+      },
+      "notes": [],
+      "title": "My home",
+      "source": {
+        "teaching_revision": 3,
+        "sequence": 8,
+        "legacy_skills": [
+          "grammar",
+          "vocabulary",
+          "reading"
+        ],
+        "content_sha256": "0ba796b108851baa0465df4c88a1ec1c85cb6b4aba296d4caaebeb2601239790",
+        "catalogue_sha256": "c2931bea74d15b51caf429abd50572edc128a0bbf7ebb7314065d3f940b1357f",
+        "authoring_file": "scripts/a1/content-06-10.mjs"
+      },
+      "status": "reviewed_proposal_not_applied",
+      "legacy_mapping": [
+        {
+          "old_value": "grammar",
+          "decision": "reclassified",
+          "target": {
+            "facet": "language_focus",
+            "concept": "grammar"
+          },
+          "reason": "There is / there are and quantity agreement receive explicit practice and feedback criteria."
+        },
+        {
+          "old_value": "vocabulary",
+          "decision": "reclassified",
+          "target": {
+            "facet": "language_focus",
+            "concept": "vocabulary"
+          },
+          "reason": "Room and furniture meanings are taught, checked and needed to communicate the plan."
+        },
+        {
+          "old_value": "reading",
+          "decision": "removed",
+          "target": null,
+          "reason": "The flat description is an opening model with alternative delivery. The later outcomes are communicating and checking a plan, not independently using a written guide."
+        }
+      ],
+      "additions": [
+        {
+          "facet": "skills",
+          "concept": "listening"
+        },
+        {
+          "facet": "skills",
+          "concept": "speaking"
+        },
+        {
+          "facet": "skills",
+          "concept": "writing"
+        }
+      ]
+    },
+    {
+      "material_id": "a1-09",
+      "proposal": {
+        "skills": [
+          "listening",
+          "speaking",
+          "writing"
+        ],
+        "language_focus": [
+          "grammar",
+          "vocabulary"
+        ]
+      },
+      "evidence": {
+        "listening": {
+          "paths": [
+            "/goal",
+            "/speaking/steps/3",
+            "/teacherNotes/0",
+            "/teacherNotes/1"
+          ],
+          "reason": "Follow location information to find objects, with an explicit hidden-text teacher-read dialogue and role reversal."
+        },
+        "speaking": {
+          "paths": [
+            "/speaking/steps",
+            "/speaking/success/2"
+          ],
+          "reason": "Give unseen object locations clearly enough for another person to find or draw them."
+        },
+        "writing": {
+          "paths": [
+            "/writing/instruction",
+            "/writing/checklist"
+          ],
+          "reason": "Compose three location clues that help someone find objects in the chosen scene."
+        },
+        "grammar": {
+          "paths": [
+            "/language/explanation",
+            "/practice/0",
+            "/writing/checklist/1"
+          ],
+          "reason": "Where is / where are and be before a location phrase are explicitly practised and checked."
+        },
+        "vocabulary": {
+          "paths": [
+            "/vocabulary",
+            "/practice/1",
+            "/speaking/success/0"
+          ],
+          "reason": "Three or more place expressions must be understood and selected to locate the intended objects."
+        }
+      },
+      "removed_legacy": {},
+      "notes": [],
+      "title": "Where is my key?",
+      "source": {
+        "teaching_revision": 2,
+        "sequence": 9,
+        "legacy_skills": [
+          "grammar",
+          "listening",
+          "speaking"
+        ],
+        "content_sha256": "ec1f87a2c4496e7d42d09a45d01d32e4c87d17a01b9948c0dbcba3fef9dfa646",
+        "catalogue_sha256": "19e7811d3fd1d8b72f42d33a2b7eef2e33caa54b282b4a6421a264ea37f25daa",
+        "authoring_file": "scripts/a1/content-06-10.mjs"
+      },
+      "status": "reviewed_proposal_not_applied",
+      "legacy_mapping": [
+        {
+          "old_value": "grammar",
+          "decision": "reclassified",
+          "target": {
+            "facet": "language_focus",
+            "concept": "grammar"
+          },
+          "reason": "Where is / where are and be before a location phrase are explicitly practised and checked."
+        },
+        {
+          "old_value": "listening",
+          "decision": "retained",
+          "target": {
+            "facet": "skills",
+            "concept": "listening"
+          },
+          "reason": "Follow location information to find objects, with an explicit hidden-text teacher-read dialogue and role reversal."
+        },
+        {
+          "old_value": "speaking",
+          "decision": "retained",
+          "target": {
+            "facet": "skills",
+            "concept": "speaking"
+          },
+          "reason": "Give unseen object locations clearly enough for another person to find or draw them."
+        }
+      ],
+      "additions": [
+        {
+          "facet": "skills",
+          "concept": "writing"
+        },
+        {
+          "facet": "language_focus",
+          "concept": "vocabulary"
+        }
+      ]
+    },
+    {
+      "material_id": "a1-10",
+      "proposal": {
+        "skills": [
+          "listening",
+          "speaking",
+          "writing"
+        ],
+        "language_focus": [
+          "grammar",
+          "vocabulary"
+        ]
+      },
+      "evidence": {
+        "listening": {
+          "paths": [
+            "/speaking/steps/1",
+            "/speaking/steps/2",
+            "/speaking/steps/3"
+          ],
+          "reason": "Understand a proposed lesson time and compare it with the routine to choose and confirm a suitable time."
+        },
+        "speaking": {
+          "paths": [
+            "/goal",
+            "/speaking/steps/0",
+            "/speaking/success"
+          ],
+          "reason": "Describe morning actions with times and negotiate an appropriate lesson time."
+        },
+        "writing": {
+          "paths": [
+            "/writing/instruction",
+            "/writing/checklist/1"
+          ],
+          "reason": "Create a four-line routine timetable with chosen actions and times that a reader can follow."
+        },
+        "grammar": {
+          "paths": [
+            "/language/explanation",
+            "/practice/1/items/2",
+            "/writing/checklist/0",
+            "/writing/checklist/2"
+          ],
+          "reason": "Present simple without am and at + time are explained, contrasted and checked in the routine."
+        },
+        "vocabulary": {
+          "paths": [
+            "/vocabulary",
+            "/practice/0",
+            "/practice/1/items/0",
+            "/practice/1/items/1"
+          ],
+          "reason": "Routine chunks and clock-time expressions receive dedicated retrieval and meaning checks."
+        }
+      },
+      "removed_legacy": {},
+      "notes": [
+        "The initial schedule is a model; no separate Reading tag is added for its presence."
+      ],
+      "title": "My morning",
+      "source": {
+        "teaching_revision": 3,
+        "sequence": 10,
+        "legacy_skills": [
+          "vocabulary",
+          "grammar",
+          "speaking"
+        ],
+        "content_sha256": "048ed186aac5b28804070bba88187c8623687b6b78f1ecc53465acfcc45d86ee",
+        "catalogue_sha256": "27882c087d2e10256d463a929916519cb5a91b983327f79ce7c805e1cb194eb1",
+        "authoring_file": "scripts/a1/content-06-10.mjs"
+      },
+      "status": "reviewed_proposal_not_applied",
+      "legacy_mapping": [
+        {
+          "old_value": "vocabulary",
+          "decision": "reclassified",
+          "target": {
+            "facet": "language_focus",
+            "concept": "vocabulary"
+          },
+          "reason": "Routine chunks and clock-time expressions receive dedicated retrieval and meaning checks."
+        },
+        {
+          "old_value": "grammar",
+          "decision": "reclassified",
+          "target": {
+            "facet": "language_focus",
+            "concept": "grammar"
+          },
+          "reason": "Present simple without am and at + time are explained, contrasted and checked in the routine."
+        },
+        {
+          "old_value": "speaking",
+          "decision": "retained",
+          "target": {
+            "facet": "skills",
+            "concept": "speaking"
+          },
+          "reason": "Describe morning actions with times and negotiate an appropriate lesson time."
+        }
+      ],
+      "additions": [
+        {
+          "facet": "skills",
+          "concept": "listening"
+        },
+        {
+          "facet": "skills",
+          "concept": "writing"
+        }
+      ]
+    },
+    {
+      "material_id": "a1-11",
+      "proposal": {
+        "skills": [
+          "speaking",
+          "writing"
+        ],
+        "language_focus": [
+          "grammar"
+        ]
+      },
+      "evidence": {
+        "speaking": {
+          "paths": [
+            "/goal",
+            "/speaking/steps/2",
+            "/speaking/success"
+          ],
+          "reason": "Give an ordered oral description of a fictional person's day and improve it after feedback."
+        },
+        "writing": {
+          "paths": [
+            "/writing/instruction",
+            "/writing/checklist"
+          ],
+          "reason": "Compose four sentences about another person's routine and contrast them with your own."
+        },
+        "grammar": {
+          "paths": [
+            "/language/explanation",
+            "/practice/0",
+            "/practice/1",
+            "/writing/checklist"
+          ],
+          "reason": "Third-person forms, including has and goes, are the deliberate teaching and feedback focus across both output tasks."
+        }
+      },
+      "removed_legacy": {
+        "reading": {
+          "paths": [
+            "/input/instruction",
+            "/speaking/steps/1",
+            "/speaking/teacherNote"
+          ],
+          "reason": "The opening biography is a model. Profile details can be looked at or dictated; the main outcome is producing a routine description, not a separate reading task."
+        }
+      },
+      "notes": [
+        "The word list supports the routine description; the checked blocks target verb forms rather than a separate lexical objective. Vocabulary is not added automatically.",
+        "Verb -s/-es and studies are grammatical inflections here; they do not establish Spelling and punctuation as a separate focus."
+      ],
+      "title": "A day in her life",
+      "source": {
+        "teaching_revision": 3,
+        "sequence": 11,
+        "legacy_skills": [
+          "grammar",
+          "reading",
+          "writing"
+        ],
+        "content_sha256": "afa10e5c35e42f430cdb3ea98ff477c7a5a172af2d8dd87996a0dc64e203653c",
+        "catalogue_sha256": "6c71516c18a7479c8146cbdc966f5355c3a34f564abb423258f88413e93094b7",
+        "authoring_file": "scripts/a1/content-11-15.mjs"
+      },
+      "status": "reviewed_proposal_not_applied",
+      "legacy_mapping": [
+        {
+          "old_value": "grammar",
+          "decision": "reclassified",
+          "target": {
+            "facet": "language_focus",
+            "concept": "grammar"
+          },
+          "reason": "Third-person forms, including has and goes, are the deliberate teaching and feedback focus across both output tasks."
+        },
+        {
+          "old_value": "reading",
+          "decision": "removed",
+          "target": null,
+          "reason": "The opening biography is a model. Profile details can be looked at or dictated; the main outcome is producing a routine description, not a separate reading task."
+        },
+        {
+          "old_value": "writing",
+          "decision": "retained",
+          "target": {
+            "facet": "skills",
+            "concept": "writing"
+          },
+          "reason": "Compose four sentences about another person's routine and contrast them with your own."
+        }
+      ],
+      "additions": [
+        {
+          "facet": "skills",
+          "concept": "speaking"
+        }
+      ]
+    },
+    {
+      "material_id": "a1-12",
+      "proposal": {
+        "skills": [
+          "listening",
+          "speaking"
+        ],
+        "language_focus": [
+          "grammar"
+        ]
+      },
+      "evidence": {
+        "listening": {
+          "paths": [
+            "/speaking/steps/1",
+            "/speaking/steps/2",
+            "/speaking/teacherNote"
+          ],
+          "reason": "Use answers from a different, unseen schedule to identify the day when both people are free."
+        },
+        "speaking": {
+          "paths": [
+            "/goal",
+            "/speaking/steps",
+            "/speaking/success"
+          ],
+          "reason": "Ask and answer routine questions to agree on a shared free day."
+        },
+        "grammar": {
+          "paths": [
+            "/language/explanation",
+            "/practice/0",
+            "/practice/1",
+            "/writing/checklist"
+          ],
+          "reason": "Do/does, basic verbs after does and negative/short-answer forms are systematically practised and checked."
+        }
+      },
+      "removed_legacy": {},
+      "notes": [
+        "Writing three question-and-answer pairs is controlled form practice; it does not form a separate written-message outcome.",
+        "Frequency expressions support the interview. The teacher notes explicitly allow treating them as ready-to-use support while retaining the question-form focus."
+      ],
+      "title": "Do you study every day?",
+      "source": {
+        "teaching_revision": 2,
+        "sequence": 12,
+        "legacy_skills": [
+          "grammar",
+          "speaking",
+          "listening"
+        ],
+        "content_sha256": "c0c5759be815679833ef7307efb4df0a6e61507a2356a90b0d18d160cb4ed647",
+        "catalogue_sha256": "164498a3d2568223861617cb813c26085f7734684a837dbccd1e86675fb04a89",
+        "authoring_file": "scripts/a1/content-11-15.mjs"
+      },
+      "status": "reviewed_proposal_not_applied",
+      "legacy_mapping": [
+        {
+          "old_value": "grammar",
+          "decision": "reclassified",
+          "target": {
+            "facet": "language_focus",
+            "concept": "grammar"
+          },
+          "reason": "Do/does, basic verbs after does and negative/short-answer forms are systematically practised and checked."
+        },
+        {
+          "old_value": "speaking",
+          "decision": "retained",
+          "target": {
+            "facet": "skills",
+            "concept": "speaking"
+          },
+          "reason": "Ask and answer routine questions to agree on a shared free day."
+        },
+        {
+          "old_value": "listening",
+          "decision": "retained",
+          "target": {
+            "facet": "skills",
+            "concept": "listening"
+          },
+          "reason": "Use answers from a different, unseen schedule to identify the day when both people are free."
+        }
+      ],
+      "additions": []
+    },
+    {
+      "material_id": "a1-13",
+      "proposal": {
+        "skills": [
+          "listening",
+          "speaking",
+          "writing"
+        ],
+        "language_focus": [
+          "grammar",
+          "vocabulary"
+        ]
+      },
+      "evidence": {
+        "listening": {
+          "paths": [
+            "/speaking/steps/0",
+            "/speaking/steps/2",
+            "/speaking/success/2"
+          ],
+          "reason": "Understand the partner's food preferences and use them to choose two foods that both people like."
+        },
+        "speaking": {
+          "paths": [
+            "/goal",
+            "/speaking/steps",
+            "/speaking/success"
+          ],
+          "reason": "Ask about preferences, state likes and dislikes and agree on a shared breakfast."
+        },
+        "writing": {
+          "paths": [
+            "/writing/instruction",
+            "/writing/checklist/0"
+          ],
+          "reason": "Compose a food-preference message with personal choices and a question for the teacher."
+        },
+        "grammar": {
+          "paths": [
+            "/language/explanation",
+            "/practice/0",
+            "/writing/checklist"
+          ],
+          "reason": "Like / don't like, Do you like and general-preference plurals are taught and checked in meaningful output."
+        },
+        "vocabulary": {
+          "paths": [
+            "/vocabulary",
+            "/practice/1",
+            "/speaking/steps/0"
+          ],
+          "reason": "Food meanings receive a dedicated matching task and determine the shared breakfast choices."
+        }
+      },
+      "removed_legacy": {},
+      "notes": [],
+      "title": "Food I like",
+      "source": {
+        "teaching_revision": 3,
+        "sequence": 13,
+        "legacy_skills": [
+          "vocabulary",
+          "grammar",
+          "speaking"
+        ],
+        "content_sha256": "4c591e6a3a3400d8f7632cab7d0bb773b40356500c1d433170c8156d00bf6401",
+        "catalogue_sha256": "0d682e79740e5a0193c46f2e7ee2443f85746b5a227a2bcb96d15e1c7f397824",
+        "authoring_file": "scripts/a1/content-11-15.mjs"
+      },
+      "status": "reviewed_proposal_not_applied",
+      "legacy_mapping": [
+        {
+          "old_value": "vocabulary",
+          "decision": "reclassified",
+          "target": {
+            "facet": "language_focus",
+            "concept": "vocabulary"
+          },
+          "reason": "Food meanings receive a dedicated matching task and determine the shared breakfast choices."
+        },
+        {
+          "old_value": "grammar",
+          "decision": "reclassified",
+          "target": {
+            "facet": "language_focus",
+            "concept": "grammar"
+          },
+          "reason": "Like / don't like, Do you like and general-preference plurals are taught and checked in meaningful output."
+        },
+        {
+          "old_value": "speaking",
+          "decision": "retained",
+          "target": {
+            "facet": "skills",
+            "concept": "speaking"
+          },
+          "reason": "Ask about preferences, state likes and dislikes and agree on a shared breakfast."
+        }
+      ],
+      "additions": [
+        {
+          "facet": "skills",
+          "concept": "listening"
+        },
+        {
+          "facet": "skills",
+          "concept": "writing"
+        }
+      ]
+    },
+    {
+      "material_id": "a1-14",
+      "proposal": {
+        "skills": [
+          "reading",
+          "listening",
+          "speaking",
+          "writing"
+        ],
+        "language_focus": [
+          "vocabulary"
+        ]
+      },
+      "evidence": {
+        "reading": {
+          "paths": [
+            "/input/text",
+            "/speaking/situation",
+            "/speaking/steps/1"
+          ],
+          "reason": "Read menu items and prices to select food and a drink within the stated budget."
+        },
+        "listening": {
+          "paths": [
+            "/speaking/steps/2",
+            "/speaking/steps/3",
+            "/teacherNotes/1"
+          ],
+          "reason": "Respond to the server and adapt an order when an item is unavailable; the provided script also has explicit listening delivery."
+        },
+        "speaking": {
+          "paths": [
+            "/goal",
+            "/speaking/steps",
+            "/speaking/success"
+          ],
+          "reason": "Make a polite order, answer the server and choose an alternative when needed."
+        },
+        "writing": {
+          "paths": [
+            "/writing/instruction",
+            "/writing/checklist"
+          ],
+          "reason": "Compose an order intended for a cafe worker, naming the requested items politely."
+        },
+        "vocabulary": {
+          "paths": [
+            "/vocabulary",
+            "/practice/0",
+            "/teacherNotes/0"
+          ],
+          "reason": "Food words and ordering/refusal chunks are explicitly taught and selected for communicative functions."
+        }
+      },
+      "removed_legacy": {},
+      "notes": [
+        "Ordering frames are taught as complete chunks; the teacher notes explicitly defer detailed would analysis. Grammar is not added for word-order reconstruction alone.",
+        "The brief I like / I'd like sound model supports ordering; it is not an independent pronunciation task."
+      ],
+      "title": "At the café",
+      "source": {
+        "teaching_revision": 2,
+        "sequence": 14,
+        "legacy_skills": [
+          "speaking",
+          "listening",
+          "vocabulary"
+        ],
+        "content_sha256": "b50faea9d9b1aa97d887066d5b3cd71ec715bfc87329c159c48b7db00add0f65",
+        "catalogue_sha256": "b76cc787d024689ff5fca8b1d1d3918ff1fce86841b22b56628ec9f1dea3892a",
+        "authoring_file": "scripts/a1/content-11-15.mjs"
+      },
+      "status": "reviewed_proposal_not_applied",
+      "legacy_mapping": [
+        {
+          "old_value": "speaking",
+          "decision": "retained",
+          "target": {
+            "facet": "skills",
+            "concept": "speaking"
+          },
+          "reason": "Make a polite order, answer the server and choose an alternative when needed."
+        },
+        {
+          "old_value": "listening",
+          "decision": "retained",
+          "target": {
+            "facet": "skills",
+            "concept": "listening"
+          },
+          "reason": "Respond to the server and adapt an order when an item is unavailable; the provided script also has explicit listening delivery."
+        },
+        {
+          "old_value": "vocabulary",
+          "decision": "reclassified",
+          "target": {
+            "facet": "language_focus",
+            "concept": "vocabulary"
+          },
+          "reason": "Food words and ordering/refusal chunks are explicitly taught and selected for communicative functions."
+        }
+      ],
+      "additions": [
+        {
+          "facet": "skills",
+          "concept": "reading"
+        },
+        {
+          "facet": "skills",
+          "concept": "writing"
+        }
+      ]
+    },
+    {
+      "material_id": "a1-15",
+      "proposal": {
+        "skills": [
+          "listening",
+          "speaking"
+        ],
+        "language_focus": [
+          "grammar",
+          "vocabulary",
+          "pronunciation",
+          "spelling_punctuation"
+        ]
+      },
+      "evidence": {
+        "listening": {
+          "paths": [
+            "/goal",
+            "/speaking/steps",
+            "/speaking/success/1",
+            "/teacherNotes/1"
+          ],
+          "reason": "Hear prices in a changed order, check an uncertain price and choose items that fit the budget."
+        },
+        "speaking": {
+          "paths": [
+            "/speaking/steps/0",
+            "/speaking/steps/2",
+            "/speaking/success"
+          ],
+          "reason": "Ask prices, repeat a total and communicate a purchase choice within the available money."
+        },
+        "grammar": {
+          "paths": [
+            "/language/explanation",
+            "/practice/1/items/0",
+            "/practice/1/items/1",
+            "/writing/checklist/2"
+          ],
+          "reason": "How much is / are is explicitly contrasted, practised for singular/plural items and checked in a new question."
+        },
+        "vocabulary": {
+          "paths": [
+            "/vocabulary",
+            "/language/explanation",
+            "/practice/1/items/2",
+            "/speaking/steps/2"
+          ],
+          "reason": "Tens and compound number words are taught and used to communicate prices and a total."
+        },
+        "pronunciation": {
+          "paths": [
+            "/language/pronunciation",
+            "/speaking/success/1",
+            "/homework/steps/2"
+          ],
+          "reason": "The thirteen/thirty stress contrast has explicit comparison and repetition, a hearing/saying success outcome and teacher practice."
+        },
+        "spelling_punctuation": {
+          "paths": [
+            "/practice/0",
+            "/language/pitfall",
+            "/writing/checklist/1"
+          ],
+          "reason": "A complete required block practises price-word spelling, with explicit forty/fifty checks."
+        }
+      },
+      "removed_legacy": {},
+      "notes": [
+        "Making price labels and a price question chiefly practises number spelling and the question form; there is no separate composed written-message focus.",
+        "All four language focuses have distinct evidence; no arbitrary two-tag cap is applied."
+      ],
+      "title": "How much is it?",
+      "source": {
+        "teaching_revision": 3,
+        "sequence": 15,
+        "legacy_skills": [
+          "listening",
+          "spelling",
+          "speaking"
+        ],
+        "content_sha256": "af20bc71808a30e4e5846e6b9991b79ad35d617ba971d1a35ecb7e257618320e",
+        "catalogue_sha256": "2dd1f781ca07a4ca53fe3a972792438fa73513c693cf3cfba6f7eb9d56f5ea76",
+        "authoring_file": "scripts/a1/content-11-15.mjs"
+      },
+      "status": "reviewed_proposal_not_applied",
+      "legacy_mapping": [
+        {
+          "old_value": "listening",
+          "decision": "retained",
+          "target": {
+            "facet": "skills",
+            "concept": "listening"
+          },
+          "reason": "Hear prices in a changed order, check an uncertain price and choose items that fit the budget."
+        },
+        {
+          "old_value": "spelling",
+          "decision": "reclassified",
+          "target": {
+            "facet": "language_focus",
+            "concept": "spelling_punctuation"
+          },
+          "reason": "A complete required block practises price-word spelling, with explicit forty/fifty checks."
+        },
+        {
+          "old_value": "speaking",
+          "decision": "retained",
+          "target": {
+            "facet": "skills",
+            "concept": "speaking"
+          },
+          "reason": "Ask prices, repeat a total and communicate a purchase choice within the available money."
+        }
+      ],
+      "additions": [
+        {
+          "facet": "language_focus",
+          "concept": "grammar"
+        },
+        {
+          "facet": "language_focus",
+          "concept": "vocabulary"
+        },
+        {
+          "facet": "language_focus",
+          "concept": "pronunciation"
+        }
+      ]
+    },
+    {
+      "material_id": "a1-16",
+      "proposal": {
+        "skills": [
+          "speaking",
+          "writing"
+        ],
+        "language_focus": [
+          "grammar",
+          "vocabulary"
+        ]
+      },
+      "evidence": {
+        "speaking": {
+          "paths": [
+            "/goal",
+            "/speaking/steps",
+            "/speaking/success"
+          ],
+          "reason": "Describe a fictional neighbourhood and answer questions that help the teacher choose a place to visit."
+        },
+        "writing": {
+          "paths": [
+            "/writing/instruction",
+            "/writing/checklist"
+          ],
+          "reason": "Compose a street guide describing available places, an absent place and a location relationship."
+        },
+        "grammar": {
+          "paths": [
+            "/language/explanation",
+            "/practice/0",
+            "/writing/checklist"
+          ],
+          "reason": "There is / isn't, Is there and short answers receive explicit practice and guide-writing criteria."
+        },
+        "vocabulary": {
+          "paths": [
+            "/vocabulary",
+            "/practice/1",
+            "/speaking/success/0"
+          ],
+          "reason": "Place meanings are matched and then used to explain what the neighbourhood offers."
+        }
+      },
+      "removed_legacy": {
+        "reading": {
+          "paths": [
+            "/input/instruction",
+            "/speaking/steps",
+            "/writing/instruction"
+          ],
+          "reason": "The neighbourhood notice is the initial model. The independent tasks produce a new oral description and written guide; they do not require using the original written guide."
+        }
+      },
+      "notes": [
+        "Ordinary questions during the neighbourhood conversation do not independently establish a Listening focus."
+      ],
+      "title": "Places in my town",
+      "source": {
+        "teaching_revision": 3,
+        "sequence": 16,
+        "legacy_skills": [
+          "vocabulary",
+          "reading",
+          "grammar"
+        ],
+        "content_sha256": "35237b72203a5d648c5224f9af6ea29df22aa5b30ec6988a3c39e5f9332cad80",
+        "catalogue_sha256": "ac56070c810af9bb6dc9e5affc443122930914aa79e84ab68db4293646b505f8",
+        "authoring_file": "scripts/a1/content-16-20.mjs"
+      },
+      "status": "reviewed_proposal_not_applied",
+      "legacy_mapping": [
+        {
+          "old_value": "vocabulary",
+          "decision": "reclassified",
+          "target": {
+            "facet": "language_focus",
+            "concept": "vocabulary"
+          },
+          "reason": "Place meanings are matched and then used to explain what the neighbourhood offers."
+        },
+        {
+          "old_value": "reading",
+          "decision": "removed",
+          "target": null,
+          "reason": "The neighbourhood notice is the initial model. The independent tasks produce a new oral description and written guide; they do not require using the original written guide."
+        },
+        {
+          "old_value": "grammar",
+          "decision": "reclassified",
+          "target": {
+            "facet": "language_focus",
+            "concept": "grammar"
+          },
+          "reason": "There is / isn't, Is there and short answers receive explicit practice and guide-writing criteria."
+        }
+      ],
+      "additions": [
+        {
+          "facet": "skills",
+          "concept": "speaking"
+        },
+        {
+          "facet": "skills",
+          "concept": "writing"
+        }
+      ]
+    },
+    {
+      "material_id": "a1-17",
+      "proposal": {
+        "skills": [
+          "listening",
+          "speaking",
+          "writing"
+        ],
+        "language_focus": [
+          "grammar",
+          "vocabulary"
+        ]
+      },
+      "evidence": {
+        "listening": {
+          "paths": [
+            "/goal",
+            "/speaking/steps/1",
+            "/speaking/steps/2",
+            "/speaking/success/2"
+          ],
+          "reason": "Follow the partner's route information on a different map and check a turn that is unclear."
+        },
+        "speaking": {
+          "paths": [
+            "/speaking/steps/1",
+            "/speaking/steps/3",
+            "/speaking/success"
+          ],
+          "reason": "Ask for a route and give two-step directions that match the drawn plan."
+        },
+        "writing": {
+          "paths": [
+            "/writing/instruction",
+            "/writing/checklist"
+          ],
+          "reason": "Compose three route instructions whose turns and landmarks guide someone through the chosen plan."
+        },
+        "grammar": {
+          "paths": [
+            "/language/explanation",
+            "/practice/1/items/0",
+            "/practice/1/items/1",
+            "/writing/checklist/0"
+          ],
+          "reason": "Verb-first imperatives and at + landmark are explicitly taught and checked in route instructions."
+        },
+        "vocabulary": {
+          "paths": [
+            "/vocabulary",
+            "/practice/0",
+            "/practice/1/items/3",
+            "/speaking/support"
+          ],
+          "reason": "Direction and landmark expressions are matched by meaning and used to convey the route."
+        }
+      },
+      "removed_legacy": {},
+      "notes": [
+        "A drawn map is not automatically a Reading task. Left/right perception serves route comprehension rather than a separate phonological target."
+      ],
+      "title": "Turn left at the café",
+      "source": {
+        "teaching_revision": 3,
+        "sequence": 17,
+        "legacy_skills": [
+          "listening",
+          "speaking",
+          "vocabulary"
+        ],
+        "content_sha256": "912f683af3f72d12229ac51653508cfb46ab8bbf366e486ee40ca73f09879b9b",
+        "catalogue_sha256": "cb399d2d5a435cf7d8cb81681bdc7fa0feba9f5e2a9432f5ab30e81a76c864a0",
+        "authoring_file": "scripts/a1/content-16-20.mjs"
+      },
+      "status": "reviewed_proposal_not_applied",
+      "legacy_mapping": [
+        {
+          "old_value": "listening",
+          "decision": "retained",
+          "target": {
+            "facet": "skills",
+            "concept": "listening"
+          },
+          "reason": "Follow the partner's route information on a different map and check a turn that is unclear."
+        },
+        {
+          "old_value": "speaking",
+          "decision": "retained",
+          "target": {
+            "facet": "skills",
+            "concept": "speaking"
+          },
+          "reason": "Ask for a route and give two-step directions that match the drawn plan."
+        },
+        {
+          "old_value": "vocabulary",
+          "decision": "reclassified",
+          "target": {
+            "facet": "language_focus",
+            "concept": "vocabulary"
+          },
+          "reason": "Direction and landmark expressions are matched by meaning and used to convey the route."
+        }
+      ],
+      "additions": [
+        {
+          "facet": "skills",
+          "concept": "writing"
+        },
+        {
+          "facet": "language_focus",
+          "concept": "grammar"
+        }
+      ]
+    },
+    {
+      "material_id": "a1-18",
+      "proposal": {
+        "skills": [
+          "listening",
+          "speaking",
+          "writing"
+        ],
+        "language_focus": [
+          "grammar",
+          "vocabulary"
+        ]
+      },
+      "evidence": {
+        "listening": {
+          "paths": [
+            "/speaking/steps/0",
+            "/speaking/steps/2",
+            "/speaking/teacherNote"
+          ],
+          "reason": "Learn a character's abilities from answers and allocate jobs; changed character information requires a new decision."
+        },
+        "speaking": {
+          "paths": [
+            "/goal",
+            "/speaking/steps",
+            "/speaking/success"
+          ],
+          "reason": "Ask and state abilities, choose who will do jobs and request help."
+        },
+        "writing": {
+          "paths": [
+            "/writing/instruction",
+            "/writing/checklist"
+          ],
+          "reason": "Create an ability profile for a character and add a request for help."
+        },
+        "grammar": {
+          "paths": [
+            "/language/explanation",
+            "/practice/0",
+            "/practice/1",
+            "/writing/checklist"
+          ],
+          "reason": "Can/can't, basic verbs after can and question/short-answer forms are explicitly practised."
+        },
+        "vocabulary": {
+          "paths": [
+            "/vocabulary",
+            "/speaking/situation",
+            "/speaking/steps/2"
+          ],
+          "reason": "Ability verbs have taught meanings and must be selected to match people with cooking, driving and computer jobs."
+        }
+      },
+      "removed_legacy": {
+        "pronunciation": {
+          "paths": [
+            "/language/pronunciation",
+            "/speaking/success",
+            "/teacherNotes/1"
+          ],
+          "reason": "Weak can and a clear negative support the ability message. The required task checks abilities and help, without a separate sound-identification or pronunciation-feedback outcome."
+        }
+      },
+      "notes": [],
+      "title": "What can you do?",
+      "source": {
+        "teaching_revision": 2,
+        "sequence": 18,
+        "legacy_skills": [
+          "grammar",
+          "speaking",
+          "pronunciation"
+        ],
+        "content_sha256": "4a4329598a42e40177a3f90087515bae1236ae009f77438be3ca3eaf827ec06c",
+        "catalogue_sha256": "3a93f41e4a8e0e25416af2f4415f85a7e9f6d64a40ad7fd738a2422c9d27379b",
+        "authoring_file": "scripts/a1/content-16-20.mjs"
+      },
+      "status": "reviewed_proposal_not_applied",
+      "legacy_mapping": [
+        {
+          "old_value": "grammar",
+          "decision": "reclassified",
+          "target": {
+            "facet": "language_focus",
+            "concept": "grammar"
+          },
+          "reason": "Can/can't, basic verbs after can and question/short-answer forms are explicitly practised."
+        },
+        {
+          "old_value": "speaking",
+          "decision": "retained",
+          "target": {
+            "facet": "skills",
+            "concept": "speaking"
+          },
+          "reason": "Ask and state abilities, choose who will do jobs and request help."
+        },
+        {
+          "old_value": "pronunciation",
+          "decision": "removed",
+          "target": null,
+          "reason": "Weak can and a clear negative support the ability message. The required task checks abilities and help, without a separate sound-identification or pronunciation-feedback outcome."
+        }
+      ],
+      "additions": [
+        {
+          "facet": "skills",
+          "concept": "listening"
+        },
+        {
+          "facet": "skills",
+          "concept": "writing"
+        },
+        {
+          "facet": "language_focus",
+          "concept": "vocabulary"
+        }
+      ]
+    },
+    {
+      "material_id": "a1-19",
+      "proposal": {
+        "skills": [
+          "reading",
+          "listening",
+          "speaking",
+          "writing"
+        ],
+        "language_focus": [
+          "grammar",
+          "vocabulary"
+        ]
+      },
+      "evidence": {
+        "reading": {
+          "paths": [
+            "/input/text",
+            "/practice/1/instruction",
+            "/practice/1/items"
+          ],
+          "reason": "A required matching task explicitly asks the learner to reread the character descriptions and identify people from their details."
+        },
+        "listening": {
+          "paths": [
+            "/speaking/situation",
+            "/speaking/steps/2",
+            "/speaking/steps/3",
+            "/speaking/model"
+          ],
+          "reason": "In the reversed guessing role, identify the character from the partner's clues and check a detail."
+        },
+        "speaking": {
+          "paths": [
+            "/goal",
+            "/speaking/steps/1",
+            "/speaking/success"
+          ],
+          "reason": "Give identifying clues without naming the person so the listener can select the intended character."
+        },
+        "writing": {
+          "paths": [
+            "/writing/instruction",
+            "/writing/checklist"
+          ],
+          "reason": "Compose an identifying description of a fictional person with appearance, possessions and colour details."
+        },
+        "grammar": {
+          "paths": [
+            "/language/explanation",
+            "/practice/0",
+            "/writing/checklist"
+          ],
+          "reason": "Be for description and have/has got for possession are contrasted and checked in original descriptions."
+        },
+        "vocabulary": {
+          "paths": [
+            "/vocabulary",
+            "/practice/1/items",
+            "/speaking/steps/1"
+          ],
+          "reason": "Appearance and possession words must be interpreted and selected to distinguish three characters."
+        }
+      },
+      "removed_legacy": {},
+      "notes": [
+        "Reading is supported by a separate explicit rereading task, not only by the opening text."
+      ],
+      "title": "People and their things",
+      "source": {
+        "teaching_revision": 3,
+        "sequence": 19,
+        "legacy_skills": [
+          "grammar",
+          "vocabulary",
+          "reading"
+        ],
+        "content_sha256": "2e36be6cb5cac794bee1dae663e7dbd430213b04aaab221f30e6de070011ea9e",
+        "catalogue_sha256": "66455dd8e944c165021d7d4c226345d862fdbd265c44eca59d1e587d12bd9346",
+        "authoring_file": "scripts/a1/content-16-20.mjs"
+      },
+      "status": "reviewed_proposal_not_applied",
+      "legacy_mapping": [
+        {
+          "old_value": "grammar",
+          "decision": "reclassified",
+          "target": {
+            "facet": "language_focus",
+            "concept": "grammar"
+          },
+          "reason": "Be for description and have/has got for possession are contrasted and checked in original descriptions."
+        },
+        {
+          "old_value": "vocabulary",
+          "decision": "reclassified",
+          "target": {
+            "facet": "language_focus",
+            "concept": "vocabulary"
+          },
+          "reason": "Appearance and possession words must be interpreted and selected to distinguish three characters."
+        },
+        {
+          "old_value": "reading",
+          "decision": "retained",
+          "target": {
+            "facet": "skills",
+            "concept": "reading"
+          },
+          "reason": "A required matching task explicitly asks the learner to reread the character descriptions and identify people from their details."
+        }
+      ],
+      "additions": [
+        {
+          "facet": "skills",
+          "concept": "listening"
+        },
+        {
+          "facet": "skills",
+          "concept": "speaking"
+        },
+        {
+          "facet": "skills",
+          "concept": "writing"
+        }
+      ]
+    },
+    {
+      "material_id": "a1-20",
+      "proposal": {
+        "skills": [
+          "speaking",
+          "writing"
+        ],
+        "language_focus": [
+          "grammar",
+          "vocabulary"
+        ]
+      },
+      "evidence": {
+        "speaking": {
+          "paths": [
+            "/goal",
+            "/speaking/steps",
+            "/speaking/success"
+          ],
+          "reason": "Describe actions being mimed or represented on scene cards and ask about what is happening now."
+        },
+        "writing": {
+          "paths": [
+            "/writing/instruction",
+            "/writing/checklist"
+          ],
+          "reason": "Compose a current-action message about three people."
+        },
+        "grammar": {
+          "paths": [
+            "/language/explanation",
+            "/practice/0",
+            "/practice/1",
+            "/writing/checklist"
+          ],
+          "reason": "Be + -ing and the distinction between now and regular habits are explicitly explained and checked."
+        },
+        "vocabulary": {
+          "paths": [
+            "/vocabulary",
+            "/speaking/steps/0",
+            "/speaking/teacherNote"
+          ],
+          "reason": "Recognise pictured or mimed activities and select the appropriate action words to communicate them."
+        }
+      },
+      "removed_legacy": {
+        "listening": {
+          "paths": [
+            "/input/instruction",
+            "/speaking/steps/0",
+            "/speaking/teacherNote"
+          ],
+          "reason": "The opening message has alternative delivery, while the core task uses visible mime or scene cards. No separate heard-information outcome is specified."
+        }
+      },
+      "notes": [
+        "Reading and writing appear as vocabulary meanings in this lesson; those words do not themselves establish the corresponding Skills."
+      ],
+      "title": "What are you doing now?",
+      "source": {
+        "teaching_revision": 3,
+        "sequence": 20,
+        "legacy_skills": [
+          "grammar",
+          "speaking",
+          "listening"
+        ],
+        "content_sha256": "7a53230b3c1ebad8bc3ca52705e600013d7319edf62e46b2861697490d51d737",
+        "catalogue_sha256": "384b826923bc527032860c9b0c9aef4c9db1c70bb6ddb5783ad0579771a485dd",
+        "authoring_file": "scripts/a1/content-16-20.mjs"
+      },
+      "status": "reviewed_proposal_not_applied",
+      "legacy_mapping": [
+        {
+          "old_value": "grammar",
+          "decision": "reclassified",
+          "target": {
+            "facet": "language_focus",
+            "concept": "grammar"
+          },
+          "reason": "Be + -ing and the distinction between now and regular habits are explicitly explained and checked."
+        },
+        {
+          "old_value": "speaking",
+          "decision": "retained",
+          "target": {
+            "facet": "skills",
+            "concept": "speaking"
+          },
+          "reason": "Describe actions being mimed or represented on scene cards and ask about what is happening now."
+        },
+        {
+          "old_value": "listening",
+          "decision": "removed",
+          "target": null,
+          "reason": "The opening message has alternative delivery, while the core task uses visible mime or scene cards. No separate heard-information outcome is specified."
+        }
+      ],
+      "additions": [
+        {
+          "facet": "skills",
+          "concept": "writing"
+        },
+        {
+          "facet": "language_focus",
+          "concept": "vocabulary"
+        }
+      ]
+    },
+    {
+      "material_id": "a1-21",
+      "proposal": {
+        "skills": [
+          "listening",
+          "speaking",
+          "writing"
+        ],
+        "language_focus": [
+          "grammar",
+          "vocabulary"
+        ]
+      },
+      "evidence": {
+        "listening": {
+          "paths": [
+            "/speaking/steps/0",
+            "/speaking/steps/2",
+            "/speaking/steps/3",
+            "/speaking/success/1"
+          ],
+          "reason": "Understand two spoken weather descriptions, choose a suitable place and revise the plan after a changed detail."
+        },
+        "speaking": {
+          "paths": [
+            "/goal",
+            "/speaking/steps",
+            "/speaking/success"
+          ],
+          "reason": "Describe weather, check a detail and choose a place and activity for a meeting."
+        },
+        "writing": {
+          "paths": [
+            "/writing/instruction",
+            "/writing/checklist"
+          ],
+          "reason": "Compose a three-sentence weather message giving a place and an action."
+        },
+        "grammar": {
+          "paths": [
+            "/language/explanation",
+            "/practice/1",
+            "/writing/checklist"
+          ],
+          "reason": "It is + adjective, is raining/snowing and in + season have explicit form practice and message criteria."
+        },
+        "vocabulary": {
+          "paths": [
+            "/vocabulary",
+            "/practice/0",
+            "/speaking/steps/2"
+          ],
+          "reason": "Weather meanings are matched and used to decide whether an indoor or outdoor activity fits."
+        }
+      },
+      "removed_legacy": {},
+      "notes": [],
+      "title": "Weather and seasons",
+      "source": {
+        "teaching_revision": 2,
+        "sequence": 21,
+        "legacy_skills": [
+          "vocabulary",
+          "speaking",
+          "listening"
+        ],
+        "content_sha256": "2343fff7cec0d5b635915a7a2920e5dc639108ce943bd8039a96b0d372c5b438",
+        "catalogue_sha256": "5ec6ab96b157ceeb2e8b4c7129a030567cdff56716f224bc34b778202b187286",
+        "authoring_file": "scripts/a1/content-21-25.mjs"
+      },
+      "status": "reviewed_proposal_not_applied",
+      "legacy_mapping": [
+        {
+          "old_value": "vocabulary",
+          "decision": "reclassified",
+          "target": {
+            "facet": "language_focus",
+            "concept": "vocabulary"
+          },
+          "reason": "Weather meanings are matched and used to decide whether an indoor or outdoor activity fits."
+        },
+        {
+          "old_value": "speaking",
+          "decision": "retained",
+          "target": {
+            "facet": "skills",
+            "concept": "speaking"
+          },
+          "reason": "Describe weather, check a detail and choose a place and activity for a meeting."
+        },
+        {
+          "old_value": "listening",
+          "decision": "retained",
+          "target": {
+            "facet": "skills",
+            "concept": "listening"
+          },
+          "reason": "Understand two spoken weather descriptions, choose a suitable place and revise the plan after a changed detail."
+        }
+      ],
+      "additions": [
+        {
+          "facet": "skills",
+          "concept": "writing"
+        },
+        {
+          "facet": "language_focus",
+          "concept": "grammar"
+        }
+      ]
+    },
+    {
+      "material_id": "a1-22",
+      "proposal": {
+        "skills": [
+          "speaking",
+          "writing"
+        ],
+        "language_focus": [
+          "grammar",
+          "vocabulary"
+        ]
+      },
+      "evidence": {
+        "speaking": {
+          "paths": [
+            "/goal",
+            "/speaking/steps",
+            "/speaking/success"
+          ],
+          "reason": "Communicate a chosen feeling and make a clear request for a simple need."
+        },
+        "writing": {
+          "paths": [
+            "/writing/instruction",
+            "/writing/checklist"
+          ],
+          "reason": "Compose two short messages that each connect a feeling to an appropriate request."
+        },
+        "grammar": {
+          "paths": [
+            "/language/explanation",
+            "/practice/0",
+            "/writing/checklist/0",
+            "/writing/checklist/1"
+          ],
+          "reason": "Be with feeling adjectives and have with a headache are explicitly contrasted, practised and checked."
+        },
+        "vocabulary": {
+          "paths": [
+            "/vocabulary",
+            "/practice/1",
+            "/speaking/success/0"
+          ],
+          "reason": "Feeling words and suitable request chunks are matched by meaning and used to express a need."
+        }
+      },
+      "removed_legacy": {
+        "listening": {
+          "paths": [
+            "/input/instruction",
+            "/speaking/steps/3",
+            "/speaking/success"
+          ],
+          "reason": "The generic script and a checking question support the learner's own request. They do not form a separate task to obtain and use new heard information at lesson level."
+        }
+      },
+      "notes": [
+        "The thirsty sound model is pronunciation support; the required task and criteria focus on feelings, requests and be/have."
+      ],
+      "title": "How do you feel?",
+      "source": {
+        "teaching_revision": 3,
+        "sequence": 22,
+        "legacy_skills": [
+          "vocabulary",
+          "speaking",
+          "listening"
+        ],
+        "content_sha256": "ec8900546b5901d89bf4fea9cf714e971fe39cd627787dec1fe96134990b16a7",
+        "catalogue_sha256": "8724ec811fdf571b5cde69428fa054a90d015a6abbe4a71cb03f935d08d3f4c6",
+        "authoring_file": "scripts/a1/content-21-25.mjs"
+      },
+      "status": "reviewed_proposal_not_applied",
+      "legacy_mapping": [
+        {
+          "old_value": "vocabulary",
+          "decision": "reclassified",
+          "target": {
+            "facet": "language_focus",
+            "concept": "vocabulary"
+          },
+          "reason": "Feeling words and suitable request chunks are matched by meaning and used to express a need."
+        },
+        {
+          "old_value": "speaking",
+          "decision": "retained",
+          "target": {
+            "facet": "skills",
+            "concept": "speaking"
+          },
+          "reason": "Communicate a chosen feeling and make a clear request for a simple need."
+        },
+        {
+          "old_value": "listening",
+          "decision": "removed",
+          "target": null,
+          "reason": "The generic script and a checking question support the learner's own request. They do not form a separate task to obtain and use new heard information at lesson level."
+        }
+      ],
+      "additions": [
+        {
+          "facet": "skills",
+          "concept": "writing"
+        },
+        {
+          "facet": "language_focus",
+          "concept": "grammar"
+        }
+      ]
+    },
+    {
+      "material_id": "a1-23",
+      "proposal": {
+        "skills": [
+          "listening",
+          "speaking",
+          "writing"
+        ],
+        "language_focus": [
+          "grammar",
+          "vocabulary"
+        ]
+      },
+      "evidence": {
+        "listening": {
+          "paths": [
+            "/speaking/steps/1",
+            "/speaking/steps/2",
+            "/speaking/steps/3",
+            "/speaking/success/2"
+          ],
+          "reason": "Understand the price and detect a wrong colour or size in the assistant's offer, then correct the order."
+        },
+        "speaking": {
+          "paths": [
+            "/goal",
+            "/speaking/steps",
+            "/speaking/success"
+          ],
+          "reason": "Ask for clothes in a chosen size and colour, check the price and request to try the item on."
+        },
+        "writing": {
+          "paths": [
+            "/writing/instruction",
+            "/writing/checklist/2"
+          ],
+          "reason": "Compose a shop message asking for two selected items to be kept, without relying on a picture."
+        },
+        "grammar": {
+          "paths": [
+            "/language/explanation",
+            "/practice/0",
+            "/writing/checklist/0",
+            "/writing/checklist/1"
+          ],
+          "reason": "This/these agreement and size-colour-noun order are taught and checked in original requests."
+        },
+        "vocabulary": {
+          "paths": [
+            "/vocabulary",
+            "/practice/0/items/2",
+            "/speaking/success/0"
+          ],
+          "reason": "Clothes, size labels and try it on are taught and needed to communicate the intended purchase."
+        }
+      },
+      "removed_legacy": {},
+      "notes": [
+        "The block called clothes-spelling mostly retrieves whole clothing/size words; its T-shirt hyphen reminder alone does not establish a lesson-level orthographic focus."
+      ],
+      "title": "Clothes that fit",
+      "source": {
+        "teaching_revision": 2,
+        "sequence": 23,
+        "legacy_skills": [
+          "vocabulary",
+          "speaking",
+          "grammar"
+        ],
+        "content_sha256": "ed840e81cd1a323608e031ad48425942543e2e5d0c463a64768c3cd2c3b3a56b",
+        "catalogue_sha256": "177ac649f41b41a434da805db48260aa1201b8a2f9ed33a55d65c3f226682db3",
+        "authoring_file": "scripts/a1/content-21-25.mjs"
+      },
+      "status": "reviewed_proposal_not_applied",
+      "legacy_mapping": [
+        {
+          "old_value": "vocabulary",
+          "decision": "reclassified",
+          "target": {
+            "facet": "language_focus",
+            "concept": "vocabulary"
+          },
+          "reason": "Clothes, size labels and try it on are taught and needed to communicate the intended purchase."
+        },
+        {
+          "old_value": "speaking",
+          "decision": "retained",
+          "target": {
+            "facet": "skills",
+            "concept": "speaking"
+          },
+          "reason": "Ask for clothes in a chosen size and colour, check the price and request to try the item on."
+        },
+        {
+          "old_value": "grammar",
+          "decision": "reclassified",
+          "target": {
+            "facet": "language_focus",
+            "concept": "grammar"
+          },
+          "reason": "This/these agreement and size-colour-noun order are taught and checked in original requests."
+        }
+      ],
+      "additions": [
+        {
+          "facet": "skills",
+          "concept": "listening"
+        },
+        {
+          "facet": "skills",
+          "concept": "writing"
+        }
+      ]
+    },
+    {
+      "material_id": "a1-24",
+      "proposal": {
+        "skills": [
+          "reading",
+          "listening",
+          "speaking",
+          "writing"
+        ],
+        "language_focus": [
+          "vocabulary"
+        ]
+      },
+      "evidence": {
+        "reading": {
+          "paths": [
+            "/input/text",
+            "/practice/1/items/0",
+            "/writing/checklist/1"
+          ],
+          "reason": "Use the written departure table to retrieve the 10:00 fare and verify the numbers in a travel note."
+        },
+        "listening": {
+          "paths": [
+            "/speaking/situation",
+            "/speaking/steps/1",
+            "/speaking/steps/2"
+          ],
+          "reason": "Obtain time, fare and platform from a ticket seller's initially unseen timetable and repeat the details to check them."
+        },
+        "speaking": {
+          "paths": [
+            "/goal",
+            "/speaking/steps",
+            "/speaking/success"
+          ],
+          "reason": "Request a ticket and ask questions to choose a suitable departure and check travel details."
+        },
+        "writing": {
+          "paths": [
+            "/writing/instruction",
+            "/writing/checklist"
+          ],
+          "reason": "Create a usable four-detail travel note for the chosen journey, selecting and organising destination, time, fare and platform."
+        },
+        "vocabulary": {
+          "paths": [
+            "/vocabulary",
+            "/practice/0",
+            "/practice/1/items/1",
+            "/teacherNotes/0"
+          ],
+          "reason": "Travel words, single/return meanings and useful ticket questions are taught as functional chunks."
+        }
+      },
+      "removed_legacy": {},
+      "notes": [
+        "The travel note records a chosen journey for later use, rather than spelling prescribed number words as in lesson 15.",
+        "The notes prioritise ready-to-use questions; incidental to/from guidance does not make Grammar a separate lesson focus."
+      ],
+      "title": "A ticket, please",
+      "source": {
+        "teaching_revision": 3,
+        "sequence": 24,
+        "legacy_skills": [
+          "listening",
+          "reading",
+          "speaking"
+        ],
+        "content_sha256": "9e0abe5876f09be14001355eea7c6ed85d55961a1ab057c0e7fb8b4a70410f54",
+        "catalogue_sha256": "d5588d7c185e5b99385f59c46f355125defa1c1f7a3d6d4737639e0716be7972",
+        "authoring_file": "scripts/a1/content-21-25.mjs"
+      },
+      "status": "reviewed_proposal_not_applied",
+      "legacy_mapping": [
+        {
+          "old_value": "listening",
+          "decision": "retained",
+          "target": {
+            "facet": "skills",
+            "concept": "listening"
+          },
+          "reason": "Obtain time, fare and platform from a ticket seller's initially unseen timetable and repeat the details to check them."
+        },
+        {
+          "old_value": "reading",
+          "decision": "retained",
+          "target": {
+            "facet": "skills",
+            "concept": "reading"
+          },
+          "reason": "Use the written departure table to retrieve the 10:00 fare and verify the numbers in a travel note."
+        },
+        {
+          "old_value": "speaking",
+          "decision": "retained",
+          "target": {
+            "facet": "skills",
+            "concept": "speaking"
+          },
+          "reason": "Request a ticket and ask questions to choose a suitable departure and check travel details."
+        }
+      ],
+      "additions": [
+        {
+          "facet": "skills",
+          "concept": "writing"
+        },
+        {
+          "facet": "language_focus",
+          "concept": "vocabulary"
+        }
+      ]
+    },
+    {
+      "material_id": "a1-25",
+      "proposal": {
+        "skills": [
+          "listening",
+          "speaking",
+          "writing"
+        ],
+        "language_focus": [
+          "grammar",
+          "vocabulary"
+        ]
+      },
+      "evidence": {
+        "listening": {
+          "paths": [
+            "/speaking/steps/0",
+            "/speaking/steps/2",
+            "/speaking/teacherNote"
+          ],
+          "reason": "Use the partner's answers to find a genuinely shared interest, or choose an alternative when the characters have none."
+        },
+        "speaking": {
+          "paths": [
+            "/goal",
+            "/speaking/steps",
+            "/speaking/success"
+          ],
+          "reason": "Ask about hobbies, state preferences and agree on a shared activity, day and place."
+        },
+        "writing": {
+          "paths": [
+            "/writing/instruction",
+            "/writing/checklist"
+          ],
+          "reason": "Compose a hobby profile with positive and negative preferences and a question for another person."
+        },
+        "grammar": {
+          "paths": [
+            "/language/explanation",
+            "/practice/0",
+            "/practice/1",
+            "/writing/checklist/0"
+          ],
+          "reason": "Like + -ing is explicitly contrasted with be + -ing and checked in questions and profiles."
+        },
+        "vocabulary": {
+          "paths": [
+            "/vocabulary",
+            "/practice/0/items/2",
+            "/speaking/success/0"
+          ],
+          "reason": "Hobby expressions, including listening to music, must be retrieved and selected to find a shared activity."
+        }
+      },
+      "removed_legacy": {},
+      "notes": [
+        "The phrase reading or listening to music names a hobby; its presence does not establish Reading or Listening. Listening is justified separately by the shared-interest task."
+      ],
+      "title": "Free time and hobbies",
+      "source": {
+        "teaching_revision": 3,
+        "sequence": 25,
+        "legacy_skills": [
+          "speaking",
+          "vocabulary",
+          "grammar"
+        ],
+        "content_sha256": "7eebbe099a16717eb1cf229b01113e81e63252df67897d91e5cca7d0c45e091f",
+        "catalogue_sha256": "35504fe4fb7b21251f3eb5aa0a4b1ea8a34b12e663b31404f1dd850b5b51dd59",
+        "authoring_file": "scripts/a1/content-21-25.mjs"
+      },
+      "status": "reviewed_proposal_not_applied",
+      "legacy_mapping": [
+        {
+          "old_value": "speaking",
+          "decision": "retained",
+          "target": {
+            "facet": "skills",
+            "concept": "speaking"
+          },
+          "reason": "Ask about hobbies, state preferences and agree on a shared activity, day and place."
+        },
+        {
+          "old_value": "vocabulary",
+          "decision": "reclassified",
+          "target": {
+            "facet": "language_focus",
+            "concept": "vocabulary"
+          },
+          "reason": "Hobby expressions, including listening to music, must be retrieved and selected to find a shared activity."
+        },
+        {
+          "old_value": "grammar",
+          "decision": "reclassified",
+          "target": {
+            "facet": "language_focus",
+            "concept": "grammar"
+          },
+          "reason": "Like + -ing is explicitly contrasted with be + -ing and checked in questions and profiles."
+        }
+      ],
+      "additions": [
+        {
+          "facet": "skills",
+          "concept": "listening"
+        },
+        {
+          "facet": "skills",
+          "concept": "writing"
+        }
+      ]
+    },
+    {
+      "material_id": "a1-26",
+      "proposal": {
+        "skills": [
+          "reading",
+          "listening",
+          "speaking",
+          "writing"
+        ],
+        "language_focus": [
+          "grammar",
+          "vocabulary"
+        ]
+      },
+      "evidence": {
+        "reading": {
+          "paths": [
+            "/input/text",
+            "/practice/1/items/0",
+            "/writing/checklist/0"
+          ],
+          "reason": "Retrieve a date from the supplied calendar and check that the written confirmation matches its day/date information."
+        },
+        "listening": {
+          "paths": [
+            "/speaking/steps/0",
+            "/speaking/steps/1",
+            "/speaking/success/1"
+          ],
+          "reason": "Understand two spoken appointment options and check each day, date and time before choosing."
+        },
+        "speaking": {
+          "paths": [
+            "/goal",
+            "/speaking/steps",
+            "/speaking/success"
+          ],
+          "reason": "Choose an appointment and repeat all three details so both people agree on the same time."
+        },
+        "writing": {
+          "paths": [
+            "/writing/instruction",
+            "/writing/checklist"
+          ],
+          "reason": "Compose a confirmation message for the chosen lesson date and time."
+        },
+        "grammar": {
+          "paths": [
+            "/language/explanation",
+            "/practice/0/items/0",
+            "/practice/0/items/1",
+            "/writing/checklist"
+          ],
+          "reason": "On + day/date and at + time receive explicit explanation, gap practice and confirmation-message checks."
+        },
+        "vocabulary": {
+          "paths": [
+            "/vocabulary",
+            "/practice/0/items/2",
+            "/practice/0/items/3",
+            "/speaking/steps/1"
+          ],
+          "reason": "Day names and ordinal date expressions are taught, retrieved and used to identify the appointment."
+        }
+      },
+      "removed_legacy": {
+        "spelling": {
+          "paths": [
+            "/language/pitfall",
+            "/practice/1/items/2",
+            "/writing/checklist"
+          ],
+          "reason": "One Wednesday-spelling question and a reminder support calendar use. The main practice and message criteria concern correct appointment information and on/at."
+        }
+      },
+      "notes": [
+        "This fictional timetable does not establish a current date, calendar year or real lesson time zone."
+      ],
+      "title": "Days, dates and appointments",
+      "source": {
+        "teaching_revision": 2,
+        "sequence": 26,
+        "legacy_skills": [
+          "listening",
+          "spelling",
+          "speaking"
+        ],
+        "content_sha256": "68b17458e760492d7d92773cda2630d7c72f9c3eea716bbd711b5bb1b344ed0c",
+        "catalogue_sha256": "81f4020e19d7d773c798af18d2411850cdc0e19dc75680715f5c0a9c42cf2fc4",
+        "authoring_file": "scripts/a1/content-26-30.mjs"
+      },
+      "status": "reviewed_proposal_not_applied",
+      "legacy_mapping": [
+        {
+          "old_value": "listening",
+          "decision": "retained",
+          "target": {
+            "facet": "skills",
+            "concept": "listening"
+          },
+          "reason": "Understand two spoken appointment options and check each day, date and time before choosing."
+        },
+        {
+          "old_value": "spelling",
+          "decision": "removed",
+          "target": null,
+          "reason": "One Wednesday-spelling question and a reminder support calendar use. The main practice and message criteria concern correct appointment information and on/at."
+        },
+        {
+          "old_value": "speaking",
+          "decision": "retained",
+          "target": {
+            "facet": "skills",
+            "concept": "speaking"
+          },
+          "reason": "Choose an appointment and repeat all three details so both people agree on the same time."
+        }
+      ],
+      "additions": [
+        {
+          "facet": "skills",
+          "concept": "reading"
+        },
+        {
+          "facet": "skills",
+          "concept": "writing"
+        },
+        {
+          "facet": "language_focus",
+          "concept": "grammar"
+        },
+        {
+          "facet": "language_focus",
+          "concept": "vocabulary"
+        }
+      ]
+    },
+    {
+      "material_id": "a1-27",
+      "proposal": {
+        "skills": [
+          "listening",
+          "speaking",
+          "writing"
+        ],
+        "language_focus": [
+          "vocabulary",
+          "spelling_punctuation"
+        ]
+      },
+      "evidence": {
+        "listening": {
+          "paths": [
+            "/speaking/situation",
+            "/speaking/steps/0",
+            "/speaking/steps/3"
+          ],
+          "reason": "Check the place/time in a spoken invitation and correct a wrong detail when the teacher reads the reply back."
+        },
+        "speaking": {
+          "paths": [
+            "/speaking/steps/1",
+            "/speaking/steps/2",
+            "/speaking/success"
+          ],
+          "reason": "Give an oral acceptance or alternative and dictate a complete reply with a clear place and time."
+        },
+        "writing": {
+          "paths": [
+            "/goal",
+            "/writing/instruction",
+            "/writing/checklist",
+            "/homework/instruction"
+          ],
+          "reason": "Compose a meeting message with greeting, place, time, question and ending, then an invitation and a changed-detail reply."
+        },
+        "vocabulary": {
+          "paths": [
+            "/vocabulary",
+            "/practice/0/items/2",
+            "/practice/0/items/3",
+            "/speaking/support"
+          ],
+          "reason": "Invitation, agreement, refusal and message-ending chunks are explicitly taught and selected for their functions."
+        },
+        "spelling_punctuation": {
+          "paths": [
+            "/language/explanation",
+            "/practice/0/items/0",
+            "/practice/0/items/1",
+            "/writing/checklist/1",
+            "/writing/checklist/2"
+          ],
+          "reason": "Capital letters and question marks are explicit lesson targets with required correction choices and output criteria."
+        }
+      },
+      "removed_legacy": {
+        "reading": {
+          "paths": [
+            "/input/instruction",
+            "/speaking/situation",
+            "/writing/instruction"
+          ],
+          "reason": "The written exchange is the opening model. The later incoming invitation is explicitly spoken; independent work focuses on producing and checking replies, not reading an incoming message."
+        }
+      },
+      "notes": [
+        "Message organisation and ready-to-use Let’s/Are you free chunks do not alone establish a separate grammatical teaching focus."
+      ],
+      "title": "A short message",
+      "source": {
+        "teaching_revision": 2,
+        "sequence": 27,
+        "legacy_skills": [
+          "writing",
+          "spelling",
+          "reading"
+        ],
+        "content_sha256": "693ebe12635f338d37f7e63bf694c0f6fa5a0b9eeeb1e30933d6a987ff18c173",
+        "catalogue_sha256": "3684af0e7dbec9f58c1ed7a29a982c9994ee4e56ba01d9dfb637565de991cdad",
+        "authoring_file": "scripts/a1/content-26-30.mjs"
+      },
+      "status": "reviewed_proposal_not_applied",
+      "legacy_mapping": [
+        {
+          "old_value": "writing",
+          "decision": "retained",
+          "target": {
+            "facet": "skills",
+            "concept": "writing"
+          },
+          "reason": "Compose a meeting message with greeting, place, time, question and ending, then an invitation and a changed-detail reply."
+        },
+        {
+          "old_value": "spelling",
+          "decision": "reclassified",
+          "target": {
+            "facet": "language_focus",
+            "concept": "spelling_punctuation"
+          },
+          "reason": "Capital letters and question marks are explicit lesson targets with required correction choices and output criteria."
+        },
+        {
+          "old_value": "reading",
+          "decision": "removed",
+          "target": null,
+          "reason": "The written exchange is the opening model. The later incoming invitation is explicitly spoken; independent work focuses on producing and checking replies, not reading an incoming message."
+        }
+      ],
+      "additions": [
+        {
+          "facet": "skills",
+          "concept": "listening"
+        },
+        {
+          "facet": "skills",
+          "concept": "speaking"
+        },
+        {
+          "facet": "language_focus",
+          "concept": "vocabulary"
+        }
+      ]
+    },
+    {
+      "material_id": "a1-28",
+      "proposal": {
+        "skills": [
+          "listening",
+          "speaking"
+        ],
+        "language_focus": [
+          "vocabulary"
+        ]
+      },
+      "evidence": {
+        "listening": {
+          "paths": [
+            "/speaking/situation",
+            "/speaking/steps",
+            "/speaking/success",
+            "/teacherNotes/1"
+          ],
+          "reason": "Recover four dictated booking details, request clarification and verify that the important information is understood."
+        },
+        "speaking": {
+          "paths": [
+            "/goal",
+            "/speaking/steps",
+            "/speaking/success/0"
+          ],
+          "reason": "Use at least two repair strategies, request spelling and repeat a number to check it during a real exchange."
+        },
+        "vocabulary": {
+          "paths": [
+            "/vocabulary",
+            "/practice/0",
+            "/practice/1",
+            "/speaking/support"
+          ],
+          "reason": "Repair chunks are explicitly matched to communication problems, retrieved and used to resolve them."
+        }
+      },
+      "removed_legacy": {
+        "pronunciation": {
+          "paths": [
+            "/language/pronunciation",
+            "/speaking/success",
+            "/speaking/teacherNote"
+          ],
+          "reason": "Stress and checking intonation are delivery guidance. The required success outcomes are repair strategies and accurate booking details, without a separate phonological task."
+        }
+      },
+      "notes": [
+        "The help card retrieves existing phrases and the dictated notes record heard details; neither establishes an independent composed Writing message.",
+        "Asking for spelling is a communication strategy here, not an orthographic teaching sequence."
+      ],
+      "title": "Sorry, again, please!",
+      "source": {
+        "teaching_revision": 2,
+        "sequence": 28,
+        "legacy_skills": [
+          "listening",
+          "speaking",
+          "pronunciation"
+        ],
+        "content_sha256": "aec7f9b439818c6ae37d3d4e99349d4bb49d56ef77d2fb5dd8576f669bb0db2a",
+        "catalogue_sha256": "caf6ec8d18661a6a5d150a1cb6e47ef715b2ab4a6f51ce9310419436e21b14aa",
+        "authoring_file": "scripts/a1/content-26-30.mjs"
+      },
+      "status": "reviewed_proposal_not_applied",
+      "legacy_mapping": [
+        {
+          "old_value": "listening",
+          "decision": "retained",
+          "target": {
+            "facet": "skills",
+            "concept": "listening"
+          },
+          "reason": "Recover four dictated booking details, request clarification and verify that the important information is understood."
+        },
+        {
+          "old_value": "speaking",
+          "decision": "retained",
+          "target": {
+            "facet": "skills",
+            "concept": "speaking"
+          },
+          "reason": "Use at least two repair strategies, request spelling and repeat a number to check it during a real exchange."
+        },
+        {
+          "old_value": "pronunciation",
+          "decision": "removed",
+          "target": null,
+          "reason": "Stress and checking intonation are delivery guidance. The required success outcomes are repair strategies and accurate booking details, without a separate phonological task."
+        }
+      ],
+      "additions": [
+        {
+          "facet": "language_focus",
+          "concept": "vocabulary"
+        }
+      ]
+    },
+    {
+      "material_id": "a1-29",
+      "proposal": {
+        "skills": [
+          "listening",
+          "speaking",
+          "writing"
+        ],
+        "language_focus": [
+          "vocabulary"
+        ]
+      },
+      "evidence": {
+        "listening": {
+          "paths": [
+            "/speaking/steps/2",
+            "/speaking/success/1",
+            "/teacherNotes/1"
+          ],
+          "reason": "Obtain and check room and breakfast information; changing the room number requires understanding a new detail."
+        },
+        "speaking": {
+          "paths": [
+            "/goal",
+            "/speaking/steps",
+            "/speaking/success"
+          ],
+          "reason": "Check in, give registration information and ask chosen questions about the room and breakfast."
+        },
+        "writing": {
+          "paths": [
+            "/writing/instruction",
+            "/writing/checklist"
+          ],
+          "reason": "Complete a guest card with chosen details and write questions for the receptionist about needed information."
+        },
+        "vocabulary": {
+          "paths": [
+            "/vocabulary",
+            "/practice/0",
+            "/practice/1",
+            "/speaking/support"
+          ],
+          "reason": "Guesthouse words and familiar question/request chunks are selected by meaning and used for check-in functions."
+        }
+      },
+      "removed_legacy": {},
+      "notes": [
+        "The lesson consolidates familiar questions in a new setting; it does not add an independent question-formation or grammatical contrast task. Grammar is not inferred from familiar forms appearing in a role-play.",
+        "Name capitals and spelling at check-in are supporting conventions and communication strategies, not separate spelling/punctuation targets."
+      ],
+      "title": "At a guesthouse",
+      "source": {
+        "teaching_revision": 3,
+        "sequence": 29,
+        "legacy_skills": [
+          "speaking",
+          "writing",
+          "listening"
+        ],
+        "content_sha256": "d655473eb558e6e081b2f34467bf14861d2a4d663044e617c4650dbdf378deab",
+        "catalogue_sha256": "b10a8ba28f56583f22c882e73cdfb24bb702f7896185f580826c1a821a626633",
+        "authoring_file": "scripts/a1/content-26-30.mjs"
+      },
+      "status": "reviewed_proposal_not_applied",
+      "legacy_mapping": [
+        {
+          "old_value": "speaking",
+          "decision": "retained",
+          "target": {
+            "facet": "skills",
+            "concept": "speaking"
+          },
+          "reason": "Check in, give registration information and ask chosen questions about the room and breakfast."
+        },
+        {
+          "old_value": "writing",
+          "decision": "retained",
+          "target": {
+            "facet": "skills",
+            "concept": "writing"
+          },
+          "reason": "Complete a guest card with chosen details and write questions for the receptionist about needed information."
+        },
+        {
+          "old_value": "listening",
+          "decision": "retained",
+          "target": {
+            "facet": "skills",
+            "concept": "listening"
+          },
+          "reason": "Obtain and check room and breakfast information; changing the room number requires understanding a new detail."
+        }
+      ],
+      "additions": [
+        {
+          "facet": "language_focus",
+          "concept": "vocabulary"
+        }
+      ]
+    },
+    {
+      "material_id": "a1-30",
+      "proposal": {
+        "skills": [
+          "listening",
+          "speaking",
+          "writing"
+        ],
+        "language_focus": [
+          "grammar",
+          "vocabulary"
+        ]
+      },
+      "evidence": {
+        "listening": {
+          "paths": [
+            "/speaking/situation",
+            "/speaking/steps/1",
+            "/speaking/steps/2",
+            "/speaking/steps/3",
+            "/speaking/success/1"
+          ],
+          "reason": "Obtain prices, directions and a lesson time across short exchanges, asking for repetition where needed."
+        },
+        "speaking": {
+          "paths": [
+            "/goal",
+            "/speaking/steps",
+            "/speaking/success"
+          ],
+          "reason": "Handle four short practical scenes and improve a difficult exchange after feedback."
+        },
+        "writing": {
+          "paths": [
+            "/writing/instruction",
+            "/writing/checklist"
+          ],
+          "reason": "Create three written pieces with distinct communicative purposes: a profile, a cafe order and a lesson-time message."
+        },
+        "grammar": {
+          "paths": [
+            "/language/explanation",
+            "/practice/0",
+            "/language/pitfall"
+          ],
+          "reason": "A dedicated review block deliberately selects be, third-person forms, can + basic verb and there is for their meanings."
+        },
+        "vocabulary": {
+          "paths": [
+            "/vocabulary",
+            "/practice/1",
+            "/speaking/support"
+          ],
+          "reason": "A dedicated function-choice block retrieves requests, place questions and repair chunks for the practical scenes."
+        }
+      },
+      "removed_legacy": {
+        "reading": {
+          "paths": [
+            "/input/instruction",
+            "/speaking/situation",
+            "/writing/instruction"
+          ],
+          "reason": "The new-student text is the opening model; the independent scenes are oral and the portfolio is learner-authored. No separate written-information task supports a Reading focus."
+        }
+      },
+      "notes": [
+        "An end-of-course review is not automatically tagged with every Skill and Language focus, and it is not A1 certification."
+      ],
+      "title": "My first day in a new town",
+      "source": {
+        "teaching_revision": 4,
+        "sequence": 30,
+        "legacy_skills": [
+          "speaking",
+          "writing",
+          "reading",
+          "listening"
+        ],
+        "content_sha256": "84255fd95446ed6802cd3a42a8263594ce9b60e29e79e71fb9a710373a61631c",
+        "catalogue_sha256": "9a5200ded3189e5950aebb83b779e5847b71ce70e868136f3fd5639fb06a528f",
+        "authoring_file": "scripts/a1/content-26-30.mjs"
+      },
+      "status": "reviewed_proposal_not_applied",
+      "legacy_mapping": [
+        {
+          "old_value": "speaking",
+          "decision": "retained",
+          "target": {
+            "facet": "skills",
+            "concept": "speaking"
+          },
+          "reason": "Handle four short practical scenes and improve a difficult exchange after feedback."
+        },
+        {
+          "old_value": "writing",
+          "decision": "retained",
+          "target": {
+            "facet": "skills",
+            "concept": "writing"
+          },
+          "reason": "Create three written pieces with distinct communicative purposes: a profile, a cafe order and a lesson-time message."
+        },
+        {
+          "old_value": "reading",
+          "decision": "removed",
+          "target": null,
+          "reason": "The new-student text is the opening model; the independent scenes are oral and the portfolio is learner-authored. No separate written-information task supports a Reading focus."
+        },
+        {
+          "old_value": "listening",
+          "decision": "retained",
+          "target": {
+            "facet": "skills",
+            "concept": "listening"
+          },
+          "reason": "Obtain prices, directions and a lesson time across short exchanges, asking for repetition where needed."
+        }
+      ],
+      "additions": [
+        {
+          "facet": "language_focus",
+          "concept": "grammar"
+        },
+        {
+          "facet": "language_focus",
+          "concept": "vocabulary"
+        }
+      ]
+    }
+  ],
+  "source_files": {
+    "src/data/a1-lessons.json": "a5a179c58100becd364d9646764b9f3ab56dd2f460a23fbd7df9a704c6ce8180",
+    "src/data/a1-versions.json": "57dfb3fc7d766846b1d5c115a1204ac3c2c1d642f8354cb6f381ecb38b2d76b0",
+    "docs/MATERIAL-CLASSIFICATION.md": "f2726ab6ce489819107cbc5a3d918eeed2a4982e4d7303b8997bdd1807d15774",
+    "src/MaterialStudy.tsx": "d4914fb53e05f59b20729f00a25eb2502ec54771e15769937368f7b57963488e",
+    "src/material-model.ts": "f7c0f8f2186b02b94efd564b1df32456da9729ff45f0b6d865674ac920ea163c",
+    "scripts/a1/helpers.mjs": "564af2e77257b8b82b7a6bda1810f8a9b8a4aeed1362df3cc4e665543c5814fa",
+    "scripts/a1/content-01-05.mjs": "f5ca56619179b9f8448a06a67416b299c816bf725488de72842d2b07dc442b46",
+    "scripts/a1/content-06-10.mjs": "6bbe3f3b7578de0a7aadd083ad6d6e5d5567484b8089882750055d3b33ba4f22",
+    "scripts/a1/content-11-15.mjs": "e5dfc9e2a27502d680cfbbb9b58b2a4313c9f604f4b9a1787436e673d1588f6e",
+    "scripts/a1/content-16-20.mjs": "2dd551e78bd0f33f4fffd298e27dc3a0439473925b2ce52dbaef33cb920e1208",
+    "scripts/a1/content-21-25.mjs": "f8635d22e11f60a25093c3c6c9e06518f105c538e7b28318c87fcfb6ff914237",
+    "scripts/a1/content-26-30.mjs": "1d39774ac995c7e99c0da5e87c1cb1aa36916750e3f58b2f5453f095a6b8059c"
+  },
+  "hash_method": "Source files: SHA-256 of raw bytes. Per-material content/catalogue: SHA-256 of UTF-8 JSON with object keys sorted recursively, array order and values preserved, no whitespace.",
+  "revision_note": "Teaching revisions are from the local A1 version manifest; no claim is made that the working database has been read or changed for this review.",
+  "delivery_note": "Listening proposals describe the specified teacher-led tasks. They do not claim recorded audio, automatic oral assessment or listening in every learner-only delivery.",
+  "statistics": {
+    "lessons": 30,
+    "legacy_values": 91,
+    "legacy_values_removed": 12,
+    "new_assignments": 64,
+    "evidence_references": 473,
+    "counts": {
+      "skills": {
+        "reading": 5,
+        "listening": 23,
+        "speaking": 30,
+        "writing": 26
+      },
+      "language_focus": {
+        "grammar": 24,
+        "vocabulary": 28,
+        "pronunciation": 2,
+        "spelling_punctuation": 5
+      }
+    }
+  }
+}

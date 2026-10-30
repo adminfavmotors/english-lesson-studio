@@ -1,0 +1,267 @@
+{
+  "schemaVersion": 1,
+  "title": "Hello! Nice to meet you",
+  "subtitle": "Start a conversation and introduce yourself",
+  "level": "A1",
+  "topic": "Introductions",
+  "skills": [
+    "speaking",
+    "vocabulary",
+    "pronunciation"
+  ],
+  "duration": 45,
+  "sequence": 1,
+  "goal": "I can say hello, give my name and ask someone’s name.",
+  "vocabulary": [
+    {
+      "term": "Hello",
+      "meaning": "a word to greet someone",
+      "example": "Hello, I’m Mia."
+    },
+    {
+      "term": "Hi",
+      "meaning": "a short, friendly greeting",
+      "example": "Hi, Ben!"
+    },
+    {
+      "term": "Good morning",
+      "meaning": "a greeting at the start of the day",
+      "example": "Good morning, Alex."
+    },
+    {
+      "term": "I’m…",
+      "meaning": "use this to give your name",
+      "example": "I’m Leo."
+    },
+    {
+      "term": "What’s your name?",
+      "meaning": "ask someone to tell you their name",
+      "example": "Hello. What’s your name?"
+    },
+    {
+      "term": "Nice to meet you",
+      "meaning": "say this when you meet someone for the first time",
+      "example": "Nice to meet you, Sara."
+    }
+  ],
+  "language": {
+    "focus": "I am / I’m; What’s your name?",
+    "explanation": "Say I am or I’m before your name: I’m Mia. Ask What’s your name? Listen to the model. Then use your own name.",
+    "examples": [
+      "I am Mia.",
+      "I’m Ben.",
+      "What’s your name?"
+    ],
+    "pitfall": "Remember am: I Mia → I am Mia. I am and I’m are both correct.",
+    "pronunciation": "Listen and repeat: hel-LO. The second part is stronger. Say I’m as one short sound. Practise slowly, then say the whole phrase."
+  },
+  "input": {
+    "title": "Two new classmates",
+    "format": "dialogue",
+    "text": "Mia: Hello. I’m Mia. What’s your name?\nBen: Hi, Mia. I’m Ben.\nMia: Nice to meet you, Ben.\nBen: Nice to meet you too.",
+    "instruction": "Read the text, or listen to your teacher first. Then answer the questions.",
+    "questions": {
+      "id": "understand",
+      "type": "choice",
+      "title": "Understand the message",
+      "instruction": "Choose the best answer.",
+      "items": [
+        {
+          "id": "1",
+          "prompt": "Who speaks first?",
+          "options": [
+            "Mia",
+            "Ben",
+            "Alex"
+          ],
+          "answers": [
+            "Mia"
+          ],
+          "explanation": "Mia says the first line."
+        },
+        {
+          "id": "2",
+          "prompt": "What is the second person’s name?",
+          "options": [
+            "Leo",
+            "Ben",
+            "Sara"
+          ],
+          "answers": [
+            "Ben"
+          ],
+          "explanation": "The second person says I’m Ben."
+        },
+        {
+          "id": "3",
+          "prompt": "What do they say after giving their names?",
+          "options": [
+            "Good night",
+            "Nice to meet you",
+            "Thank you for the coffee"
+          ],
+          "answers": [
+            "Nice to meet you"
+          ],
+          "explanation": "They say Nice to meet you."
+        }
+      ]
+    }
+  },
+  "retrieval": [
+    {
+      "prompt": "Say a greeting you know.",
+      "answer": "Hello.",
+      "fromLesson": null
+    },
+    {
+      "prompt": "Try to say your name in English.",
+      "answer": "I’m Alex.",
+      "fromLesson": null
+    },
+    {
+      "prompt": "What can you say after you tell someone your name?",
+      "answer": "Nice to meet you.",
+      "fromLesson": null
+    }
+  ],
+  "practice": [
+    {
+      "id": "be",
+      "type": "gap",
+      "title": "Complete the introductions",
+      "instruction": "Complete each gap. Write only the missing word or words.",
+      "items": [
+        {
+          "id": "1",
+          "prompt": "I ___ Mia.",
+          "answers": [
+            "am"
+          ],
+          "explanation": "Use am after I."
+        },
+        {
+          "id": "2",
+          "prompt": "Hello. I ___ Ben.",
+          "answers": [
+            "am"
+          ],
+          "explanation": "Use I am before a name."
+        },
+        {
+          "id": "3",
+          "prompt": "What’s your ___?",
+          "answers": [
+            "name"
+          ],
+          "explanation": "Use name to ask what someone is called."
+        },
+        {
+          "id": "4",
+          "prompt": "Nice to ___ you.",
+          "answers": [
+            "meet"
+          ],
+          "explanation": "The complete phrase is Nice to meet you."
+        }
+      ]
+    },
+    {
+      "id": "replies",
+      "type": "match",
+      "title": "Choose a natural reply",
+      "instruction": "Match each phrase with its meaning or reply.",
+      "items": [
+        {
+          "id": "1",
+          "prompt": "Hello. I’m Sara.",
+          "answers": [
+            "Hi, I’m Leo."
+          ],
+          "options": [
+            "Hi, I’m Leo.",
+            "I’m Alex.",
+            "Nice to meet you too."
+          ],
+          "explanation": "Say hello and give your name."
+        },
+        {
+          "id": "2",
+          "prompt": "What’s your name?",
+          "answers": [
+            "I’m Alex."
+          ],
+          "options": [
+            "Hi, I’m Leo.",
+            "I’m Alex.",
+            "Nice to meet you too."
+          ],
+          "explanation": "The person asks for your name."
+        },
+        {
+          "id": "3",
+          "prompt": "Nice to meet you.",
+          "answers": [
+            "Nice to meet you too."
+          ],
+          "options": [
+            "Hi, I’m Leo.",
+            "I’m Alex.",
+            "Nice to meet you too."
+          ],
+          "explanation": "Too means also: it is nice for both people."
+        }
+      ]
+    }
+  ],
+  "speaking": {
+    "situation": "You meet someone in an online lesson. Your teacher is the other person.",
+    "steps": [
+      "Say hello and give your name.",
+      "Ask the other person’s name.",
+      "Say the name again. Use a friendly phrase to finish.",
+      "Change roles. Try again without reading the model."
+    ],
+    "support": [
+      "Hello. I’m…",
+      "What’s your name?",
+      "Nice to meet you."
+    ],
+    "success": [
+      "I can say my name.",
+      "I can ask the other person’s name.",
+      "I can reply to a greeting."
+    ],
+    "model": "A: Hi. I’m Anna. What’s your name?\nB: I’m Sam.\nA: Nice to meet you, Sam.\nB: Nice to meet you too.",
+    "teacherNote": "Give one phrase as support first. In the second round, hide the text and use a different character name. Correct errors that make the introduction unclear."
+  },
+  "writing": {
+    "instruction": "Write a short message to a new person. Say hello, give your name and ask for their name.",
+    "model": "Hello! I’m Anna. What’s your name?",
+    "checklist": [
+      "I start with a greeting.",
+      "I use am or ’m after I.",
+      "I put a question mark at the end of my question."
+    ]
+  },
+  "exit": [
+    "I can say hello without help.",
+    "I can give my name and ask for a name.",
+    "I can reply Nice to meet you too."
+  ],
+  "homework": {
+    "instruction": "Make two short introductions: one with Hi and one with Good morning.",
+    "steps": [
+      "Write three lines for each introduction.",
+      "Close your notes. Say both introductions.",
+      "The next day, try to remember three phrases without looking."
+    ],
+    "model": "Good morning. I’m Kate. What’s your name?\nHi! I’m Kate. Nice to meet you.",
+    "review": "Review these phrases tomorrow, then about 3 and 7 days later. Try without help first, then check. Review sooner if it is difficult."
+  },
+  "teacherNotes": [
+    "For a complete beginner, use the opening recall as a gentle starting check. Give prompts when needed.",
+    "A made-up name is welcome; do not require real personal details.",
+    "At the end, repeat the introduction with a new name to check that the learner can use the phrases in a new situation."
+  ]
+}

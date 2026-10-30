@@ -14,7 +14,8 @@ export default [
     title: "Hello! Nice to meet you",
     subtitle: "Start a conversation and introduce yourself",
     topic: "Introductions",
-    skills: ["speaking", "vocabulary", "pronunciation"],
+    skills: ["speaking", "writing"],
+    languageFocus: ["grammar", "vocabulary"],
     goal: "I can say hello, give my name and ask someone’s name.",
     vocabulary: vocab(
       ["Hello", "a word to greet someone", "Hello, I’m Mia."],
@@ -156,7 +157,8 @@ export default [
     title: "Names, letters and numbers",
     subtitle: "Spell names and say numbers",
     topic: "Personal information",
-    skills: ["spelling", "listening", "pronunciation"],
+    skills: ["listening", "speaking"],
+    languageFocus: ["vocabulary", "pronunciation", "spelling_punctuation"],
     goal: "I can spell a short name and understand numbers from zero to twenty.",
     vocabulary: vocab(
       ["spell", "say the letters of a word", "Can you spell Sam?"],
@@ -301,7 +303,8 @@ export default [
     title: "Where are you from?",
     subtitle: "Talk about countries and languages",
     topic: "Countries and languages",
-    skills: ["grammar", "speaking", "vocabulary"],
+    skills: ["listening", "speaking", "writing"],
+    languageFocus: ["grammar", "vocabulary"],
     goal: "I can say where I am from and ask someone about their country.",
     vocabulary: vocab(
       ["from", "use this before your home country or town", "I’m from Poland."],
@@ -435,7 +438,8 @@ export default [
     title: "My contact card",
     subtitle: "Complete a simple personal information form",
     topic: "Personal information",
-    skills: ["writing", "spelling", "listening"],
+    skills: ["listening", "speaking", "writing"],
+    languageFocus: ["grammar", "vocabulary", "spelling_punctuation"],
     goal: "I can fill in a simple form with a name, age, town and email address.",
     vocabulary: vocab(
       ["first name", "Anna in Anna Green", "My first name is Eva."],
@@ -599,7 +603,8 @@ export default [
     title: "People in my family",
     subtitle: "Introduce family and friends",
     topic: "Family",
-    skills: ["vocabulary", "speaking", "grammar"],
+    skills: ["speaking", "writing"],
+    languageFocus: ["grammar", "vocabulary"],
     goal: "I can introduce a few people in my family and say their names.",
     vocabulary: vocab(
       ["mother", "a woman who has a child", "This is my mother."],
