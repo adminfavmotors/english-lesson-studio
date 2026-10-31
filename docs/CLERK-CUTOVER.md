@@ -1,8 +1,8 @@
 # Clerk account cutover
 
-Status: official components and identity migration prepared. The main origin's
-proxy and Supabase Custom OIDC are configured. The database/frontend switch
-must be completed together. See ACCOUNT-ACCESS.md for the access model.
+Status (31 October 2026): deployed on the main origin. The identity migration,
+private issuer/origin settings, proxy and Supabase Custom OIDC are active.
+Supabase email account entry is disabled. See ACCOUNT-ACCESS.md for the model.
 
 ## Provider contract
 
@@ -133,6 +133,17 @@ The owner completed real registration/email verification on the separate probe
 `/account` page intentionally ends the check. Main-site acceptance is separate.
 Provider-domain provisioning uses Clerk Platform API, currently labelled
 private beta. Earlier Account Portal/DNS research remains in local internal notes.
+
+Production acceptance passed with a disposable verified Clerk identity: student
+and controlled teacher routing, role/RLS denial, 30-material library access,
+shared lesson creation and capability checks, sign-out, reload, 375px layouts
+and invitation-secret isolation. No page errors occurred. A changed JWT
+signature was rejected. The QA Clerk identity, internal account and shared
+session were removed. Existing memberships, owner reservation, materials,
+favourites, roster and invitations match the pre-cutover snapshot exactly.
+The existing teacher must complete their own first Clerk login with the same
+verified email; no real user was impersonated. Password recovery and restoration
+after fully closing the browser have not been independently exercised.
 
 Sources: [official proxy implementation](https://github.com/clerk/javascript/blob/b5803ea35adc20272b664e9ef9e4250eef5bb555/packages/backend/src/proxy.ts),
 [provider-domain API](https://clerk.com/docs/guides/development/errors/platform-api#proxyurlrequiredforproviderdomain),

@@ -37,9 +37,9 @@ does not load a public copy of the A1 collection.
 ## Ученики
 
 
-1. Открыть **Ученики** и выбрать **Создать кабинет**. Указать собственную почту и пароль (не менее 10 символов).
-2. Подтвердить адрес по письму Supabase. После подтверждения можно вернуться на страницу и войти с почтой и паролем.
-3. Нажать **Добавить ученика**. Обязательно только имя; почта, уровень A1–C2, статус, цели и заметки заполняются при необходимости.
+1. Открыть `/login` и пройти вход или регистрацию в официальной форме Clerk. Подтверждение почты и восстановление доступа выполняет Clerk.
+2. Существующий учитель проходит первый вход Clerk с той же подтверждённой почтой: сохраняются UUID и преподавательские права. Новые аккаунты получают роль ученика; самостоятельное подключение учителей будет отдельным этапом.
+3. Учителю открыть **Students → Add student**. Обязательно только имя; почта, уровень A1–C2, статус, цели и заметки заполняются при необходимости.
 4. Открыть карточку по имени или стрелке. Редактирование сохраняется кнопкой; архивирование обратимо, физического удаления нет.
 5. Поиск по имени, фильтры статуса/уровня и страницы по 20 записей обрабатываются сервером. Кнопка обновления и возвращение в окно загружают актуальные данные.
 
@@ -47,11 +47,13 @@ does not load a public copy of the A1 collection.
 
 Данные учеников не записываются в общий документ текущего упражнения. Автоматическая связь с занятиями, домашними работами и их прогрессом будет отдельной доработкой. Тестовые ученики с изображений `docs/students-*-qa.png` созданы только в изолированной имитации API, в рабочей базе их нет.
 
-Account access in this branch uses the external **Clerk Account Portal**. Copy
+Account access uses **official Clerk components** on `/login`. Copy
 `.env.example` to `.env.local` and configure the dedicated application's public
 `VITE_CLERK_PUBLISHABLE_KEY`. Keep Clerk secret keys server-side and out of Git.
-The production migration is not active yet: see [the cutover procedure](docs/CLERK-CUTOVER.md)
-and [account access rules](docs/ACCOUNT-ACCESS.md) before publishing this branch.
+The production identity migration and Supabase Custom OIDC are active; the old
+Supabase email provider is disabled. See [the cutover contract](docs/CLERK-CUTOVER.md)
+and [account access rules](docs/ACCOUNT-ACCESS.md). Local development keys are
+separate from production and do not grant access to the working database.
 
 ## Запуск в Windows / PowerShell
 
@@ -87,7 +89,7 @@ Teacher and student pages have separate entry components and navigation. There i
 
 Local classroom drafts and browser broadcast channels are independent for the two workspaces. Existing local work is retained as independent snapshots. Different tabs of the same workspace still synchronise locally; teacher/student collaboration uses a shared lesson invitation.
 
-The public homepage links to `/login`, which opens Clerk’s hosted account pages. Trusted roles come from the server; teacher routes and the library require a teacher membership. Students join lessons through invitations after signing in. Individual material assignments remain future work. See [docs/ACCOUNT-ACCESS.md](docs/ACCOUNT-ACCESS.md).
+The public homepage links to `/login`, which renders official Clerk account forms. Trusted roles come from the server; teacher routes and the library require a teacher membership. Students join lessons through invitations after signing in. Individual material assignments remain future work. See [docs/ACCOUNT-ACCESS.md](docs/ACCOUNT-ACCESS.md).
 
 ## Общая сессия на разных устройствах
 

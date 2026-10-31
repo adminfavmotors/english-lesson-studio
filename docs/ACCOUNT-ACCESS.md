@@ -4,10 +4,11 @@ Official Clerk components at `/login` own registration, sign-in, email
 verification, recovery and sessions. The public homepage links to that account
 page. Lesson Studio does not implement password handling.
 
-**Release status:** this implementation is prepared on the Clerk migration
-branch. The production Supabase database and deployed frontend have not been
-switched. Follow [CLERK-CUTOVER](CLERK-CUTOVER.md) before publishing; installing
-the SDK or applying SQL alone does not complete the change.
+**Release status (31 October 2026):** the main Vercel site and Supabase database
+use Clerk. The production proxy and Custom OIDC are enabled; Supabase email
+account entry is disabled. Controlled production student/teacher checks passed.
+The existing teacher's UUID and membership and all 30 materials were preserved.
+See [CLERK-CUTOVER](CLERK-CUTOVER.md) for the exact deployment contract and limits.
 
 ## Authentication and teaching access
 
