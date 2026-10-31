@@ -1,15 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { validateAccountForm } from "../src/account-form.ts";
 import { sharedLessonErrorMessage } from "../src/session-messages.ts";
-
-test("account forms validate required fields and email before submitting", () => {
-  assert.deepEqual(Object.keys(validateAccountForm("", "", false)), ["email", "password"]);
-  assert.ok(validateAccountForm("not-an-email", "password", false).email);
-  assert.deepEqual(validateAccountForm(" teacher@example.com ", "a", false), {});
-  assert.ok(validateAccountForm("teacher@example.com", "short", true).password);
-  assert.deepEqual(validateAccountForm("teacher@example.com", "ten letters", true), {});
-});
 
 test("shared lesson errors explain recovery without exposing raw server messages", () => {
   assert.match(sharedLessonErrorMessage(403), /full link/);

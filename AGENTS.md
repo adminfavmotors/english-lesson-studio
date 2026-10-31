@@ -47,12 +47,12 @@ response, not cached state or a URL role, determines its invitation access.
 
 Routing does not replace account authorisation or RLS. Browser-only classroom
 drafts and broadcast channels are isolated by workspace; shared sessions
-synchronise through their existing invitation credentials. Existing email
-confirmation return URLs remain a compatibility bridge until provider URL
-configuration is updated in the authentication work.
+synchronise through their existing invitation credentials. Clerk Account Portal owns registration, sign-in, email verification and
+account recovery. Preserve invitation secrets locally across its redirects.
 
-All workspace routes now require a confirmed Supabase account. Trust only the
-server-managed `workspace_members` role. Never derive privileges from an email
+The Clerk cutover requires a verified Clerk session from the configured issuer
+and app origin. Supabase verifies its signature; private account mapping retains
+existing internal UUIDs. Trust only the server-managed `workspace_members` role. Never derive privileges from an email
 typed in a form, user metadata, a query parameter or browser storage. Students
 receive invitations to individual shared lessons; the library is teacher-only.
 Keep the A1 authoring snapshot out of browser imports and public build chunks.

@@ -1,7 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { emptyStudent, studentInitials, studentValues, validateStudent } from '../src/students-model.ts';
-import { isTeacherAuthCallback, teacherAccountReturnUrl } from '../src/teacher-auth-url.ts';
 
 test('a new student only requires a name and defaults to active',()=>{
   const draft=emptyStudent();assert.equal(draft.status,'active');assert.ok(validateStudent(draft).full_name);
@@ -28,14 +27,4 @@ test('saving a student only includes editable fields and preserves multiline not
 });
 test('student initials work with Ukrainian, Polish and single names',()=>{
   assert.equal(studentInitials('  Ірина  Коваль '),'ІК');assert.equal(studentInitials('Łukasz Żak'),'ŁŻ');assert.equal(studentInitials('Anna'),'A');assert.equal(studentInitials(''),'');
-});
-test('account callbacks cannot consume or forward lesson invitation secrets',()=>{
-  const invitation='https://example.com/?mode=teacher&view=students&session=test#access=private-lesson-token&section=reading';
-  assert.equal(isTeacherAuthCallback(new URL(invitation),{access:'private-lesson-token'}),false);
-  assert.equal(isTeacherAuthCallback(new URL(invitation),{access_token:'account-token'}),false);
-  assert.equal(teacherAccountReturnUrl(invitation),'https://example.com/?mode=teacher&view=students');
-  assert.equal(isTeacherAuthCallback(new URL('https://example.com/?mode=teacher&view=students'),{access_token:'account-token'}),true);
-  assert.equal(isTeacherAuthCallback(new URL('https://example.com/?mode=student'),{access_token:'account-token'}),false);
-  assert.equal(isTeacherAuthCallback(new URL('https://example.com/teacher/students'),{access_token:'account-token'}),true);
-  assert.equal(isTeacherAuthCallback(new URL('https://example.com/student/classroom?mode=teacher&view=students'),{access_token:'account-token'}),false);
 });

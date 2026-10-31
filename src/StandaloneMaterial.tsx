@@ -3,11 +3,12 @@ import { BookOpen, LoaderCircle } from "lucide-react";
 import type { Material } from "./material-model";
 import { loadMaterial } from "./material-api";
 import MaterialStudy from "./MaterialStudy";
-import { useTeacherAccount } from "./use-teacher-account";
+import { useWorkspaceAuth } from "./workspace-auth";
 import { studentClassroomPath } from "./app-routes";
 import AccountControls from "./AccountControls";
 export default function StandaloneMaterial({ id }: { id: string }) {
-  const { user, ready } = useTeacherAccount();
+  const { user, status } = useWorkspaceAuth();
+  const ready = status === "ready";
   const [material, setMaterial] = useState<Material | null>(null);
   const [error, setError] = useState("");
   useEffect(() => {

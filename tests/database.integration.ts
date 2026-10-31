@@ -4,7 +4,9 @@ import fs from 'node:fs';
 import { testDatabase } from './helpers/test-database.ts';
 
 test('migrations and access checks run in an isolated Postgres database', async t => {
-  const db = await testDatabase();
+  // Historical access contract before the Clerk cutover. The current contract
+  // is exercised independently by clerk-accounts.integration.ts.
+  const db = await testDatabase({throughMigration:'20261030180952_separate_material_facets.sql'});
   try {
     for (const name of ['students.database.sql', 'materials.database.sql', 'material-classification.database.sql', 'workspace-access.database.sql', 'student-invitations.database.sql']) {
       await t.test(name, async () => {

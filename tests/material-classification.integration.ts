@@ -35,7 +35,7 @@ async function seedPrevious(db: PGlite, changed?: 'content' | 'catalogue' | 'ver
 test('classification migration applies only the reviewed studio mapping and preserves private data, revisions and drafts',async()=>{
   let before: Record<string,unknown>[]=[];
   const storage=new Map<string,string>();
-  const db=await testDatabase({seedLibrary:false,beforeMigration:async(db,name)=>{
+  const db=await testDatabase({seedLibrary:false,throughMigration:migration,beforeMigration:async(db,name)=>{
     if(name!==migration)return;
     await seedPrevious(db);
     before=(await db.query<Record<string,unknown>>('select * from public.lesson_materials order by id')).rows;

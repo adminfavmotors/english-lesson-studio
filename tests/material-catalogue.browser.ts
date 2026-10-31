@@ -9,7 +9,7 @@ import { readMaterialDocument } from '../src/material-model.ts';
 
 test('independent catalogue filters → lesson → saved writing; reviewed and both legacy JSON formats round-trip', {timeout: 120000}, async () => {
   const db = await testDatabase();
-  const server = await createServer({server: {host: '127.0.0.1', port: 0}, logLevel: 'error'});
+  const server = await createServer({ resolve:{alias:{'@clerk/react':fileURLToPath(new URL('./fixtures/clerk-react.tsx',import.meta.url))}},server: {host: '127.0.0.1', port: 0}, logLevel: 'error'});
   const browser = await chromium.launch({channel: 'msedge', headless: true});
   const errors: string[] = [];
   let queue = Promise.resolve();
@@ -19,12 +19,14 @@ test('independent catalogue filters → lesson → saved writing; reviewed and b
     assert.ok(address && typeof address !== 'string');
     const origin = `http://127.0.0.1:${address.port}`;
     const user = {id: 'f1000000-0000-4000-8000-000000000001', email: 'catalogue-browser@example.invalid'};
-    await db.query('insert into auth.users(id,email,email_confirmed_at) values($1,$2,now())', [user.id,user.email]);
+    await db.query('insert into lesson_private.accounts(id,email,email_confirmed_at,clerk_user_id) values($1,$2,now(),$3)', [user.id,user.email,'user_'+user.id.replaceAll('-','')]);
+    await db.query("insert into public.workspace_members(user_id,role) values($1,'teacher')",[user.id]);
+    await db.query('insert into lesson_private.clerk_settings(issuer,allowed_origins) values($1,$2)',['https://qa.clerk.accounts.dev',[origin]]);
     await db.query("update public.workspace_members set role='teacher' where user_id=$1", [user.id]);
     const exp = Math.floor(Date.now()/1000)+3600;
     const encode = (value: object) => Buffer.from(JSON.stringify(value)).toString('base64url');
     const session = {
-      access_token: `${encode({alg:'HS256',typ:'JWT'})}.${encode({sub:user.id,role:'authenticated',aud:'authenticated',exp})}.local-qa-signature`,
+      access_token: `${encode({alg:'HS256',typ:'JWT'})}.${encode({sub:'user_'+user.id.replaceAll('-',''),sid:'sess_qa',sts:'active',iss:'https://qa.clerk.accounts.dev',azp:origin,email:user.email,email_verified:true,role:'authenticated',aud:'authenticated',exp})}.local-qa-signature`,
       refresh_token: 'local-qa-refresh', token_type: 'bearer', expires_in: 3600, expires_at: exp,
       user: {...user, aud:'authenticated',role:'authenticated',email_confirmed_at:new Date().toISOString(),
         app_metadata:{provider:'email'},user_metadata:{},created_at:new Date().toISOString()},
@@ -33,7 +35,7 @@ test('independent catalogue filters → lesson → saved writing; reviewed and b
     const insertable = new Set(['id','title','subtitle','level','topic','skills','language_focus','classification_status','legacy_skills','duration','sequence','content']);
     const context = await browser.newContext({acceptDownloads: true, viewport:{width:1280,height:900}});
     await context.addInitScript(session => {
-      localStorage.setItem('lessonstudio.teacher.auth.v1', JSON.stringify(session));
+      localStorage.setItem('lessonstudio.clerk.qa', JSON.stringify(session));
     }, session);
     // Auth is synthetic. Every data request executes the real schema and RLS
     // locally; no request is forwarded to the working Supabase project.
@@ -46,9 +48,11 @@ test('independent catalogue filters → lesson → saved writing; reviewed and b
         await db.exec('begin; set local role authenticated;');
         try {
           assert.equal(request.headers().authorization, `Bearer ${session.access_token}`);
-          await db.query("select set_config('request.jwt.claims',$1,true)", [JSON.stringify({sub:user.id,role:'authenticated'})]);
+          await db.query("select set_config('request.jwt.claims',$1,true)", [Buffer.from(session.access_token.split('.')[1],'base64url').toString()]);
           let body: unknown;
-          if (url.pathname==='/rest/v1/rpc/workspace_role') {
+          if (url.pathname==='/rest/v1/rpc/workspace_account') {
+            body = (await db.query('select public.workspace_account() as account')).rows[0].account;
+          } else if (url.pathname==='/rest/v1/rpc/workspace_role') {
             body = (await db.query('select public.workspace_role() as role')).rows[0].role;
           } else if (url.pathname==='/rest/v1/material_favourites' && request.method()==='GET') {
             body = (await db.query('select material_id from public.material_favourites')).rows;

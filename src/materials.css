@@ -459,7 +459,7 @@
   max-width: 900px;
 }
 
-.library-account-dialog, .material-import-dialog {
+.material-import-dialog {
   width: min(780px, 94vw);
   max-height: 94dvh;
   overflow: auto;
@@ -468,14 +468,6 @@
   border-radius: 14px;
   background: var(--color-surface);
   color: var(--color-text);
-}
-
-.library-account-dialog {
-  width: min(1080px, 94vw);
-}
-
-.library-account-dialog .dialog-heading h2 {
-  font-size: 23px;
 }
 
 .material-import-dialog h2 {
@@ -1636,7 +1628,7 @@
     margin-left: 0;
     width: 100%;
   }
-  .library-account-dialog, .material-import-dialog {
+  .material-import-dialog {
     padding: 20px 16px;
   }
   .material-study-toolbar > span {

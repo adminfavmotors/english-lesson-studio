@@ -2,6 +2,7 @@ import { backend } from './backend.config.ts';
 import type { Document, Value } from './store-model.ts';
 import { sharedLessonErrorMessage } from './session-messages.ts';
 import { classroomPath } from './app-routes.ts';
+import { accountToken } from './account-token.ts';
 
 export type SessionRole = 'teacher' | 'student';
 export type SessionCredentials = { id: string; token: string };
@@ -18,11 +19,10 @@ export class SessionError extends Error {
   status: number;
   constructor(message: string, status: number) { super(message); this.status = status; }
 }
-let accountToken: string | null = null;
-export const setSessionAuthToken = (token: string | null) => { accountToken = token; };
 async function rpc<T>(name: string, params: object, token?: string): Promise<T> {
+  const jwt = await accountToken();
   const response = await fetch(`${backend.url}/rest/v1/rpc/${name}`, {
-    method: 'POST', headers: { apikey: backend.publishableKey, 'Content-Type': 'application/json', ...(accountToken ? { Authorization: `Bearer ${accountToken}` } : {}), ...(token ? { 'x-lesson-token': token } : {}) },
+    method: 'POST', headers: { apikey: backend.publishableKey, 'Content-Type': 'application/json', ...(jwt ? { Authorization: `Bearer ${jwt}` } : {}), ...(token ? { 'x-lesson-token': token } : {}) },
     body: JSON.stringify(params), signal: AbortSignal.timeout(12000), cache: 'no-store', referrerPolicy: 'no-referrer',
   });
   if (!response.ok) {

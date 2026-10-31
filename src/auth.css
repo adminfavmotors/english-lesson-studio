@@ -61,97 +61,34 @@
   box-shadow: 0 15px 45px var(--color-shadow);
 }
 
-.login-form h1 {
+.login-access h1 {
   font-size: 32px;
   font-weight: 600;
   line-height: 1.15;
   letter-spacing: -.8px;
   margin: 15px 0 12px;
 }
-
-.login-form>p {
+.login-access>p {
   color: var(--color-text-muted);
   font-size: 16px;
   line-height: 1.6;
   margin: 0 0 24px;
 }
-
-.login-form fieldset {
-  border: 0;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-}
-
-.login-form label {
-  font-weight: 600;
-  font-size: 14px;
-  margin: 0 0 8px;
-}
-
-.login-form input {
-  min-height: 48px;
+.login-access>button {
   width: 100%;
-  border: 1px solid var(--color-border);
-  border-radius: 7px;
-  background: var(--color-surface);
-  font: inherit;
-  font-size: 17px;
-  padding: 10px 12px;
-  margin: 0 0 20px;
-  color: var(--color-text);
-}
-
-.login-form input[aria-invalid=true] {
-  border-color: var(--color-danger-border);
-  margin-bottom: 6px;
-}
-
-.login-form .field-error {
-  font-size: 14px;
-  color: var(--color-danger);
-  margin-bottom: 16px;
-}
-
-.login-form small {
-  margin: -10px 0 18px;
-  color: var(--color-text-muted);
-}
-
-.login-form .primary {
+  min-height: 48px;
   justify-content: center;
-  width: 100%;
-  margin-top: 5px;
-  cursor: pointer;
-  min-height: 48px;
+  margin-top: 12px;
 }
-
-.login-mode {
-  background: transparent;
-  border: 0;
-  cursor: pointer;
-  color: var(--color-text);
-  font: inherit;
-  font-size: 14px;
-  min-height: 44px;
-  margin-top: 9px;
-  padding: 10px 0;
-}
-
-.login-form>p.login-role-note {
+.login-access>p.login-role-note {
   font-size: 12px;
   line-height: 1.7;
   margin: 21px 0 0;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 7px;
 }
-
-.login-role-note svg {
-  flex-shrink: 0;
-}
+.login-role-note svg { flex-shrink: 0; }
 
 .login-error {
   background: var(--color-danger-tint);
@@ -160,23 +97,6 @@
   color: var(--color-danger);
   font-size: 15px;
   border-radius: 6px;
-}
-
-.login-notice {
-  background: var(--color-surface-muted);
-  border: 1px solid var(--color-border);
-  color: var(--color-success);
-  padding: 12px;
-  border-radius: 6px;
-  display: flex;
-  gap: 9px;
-  font-size: 15px;
-  line-height: 1.6;
-}
-
-.login-notice svg {
-  flex-shrink: 0;
-  margin-top: 3px;
 }
 
 .login-invitation {
@@ -330,7 +250,7 @@
   .login-card {
     padding: 28px 23px;
   }
-  .login-form h1 {
+  .login-access h1 {
     font-size: 29px;
   }
   .login-role-note {

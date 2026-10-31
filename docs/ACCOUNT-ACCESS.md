@@ -1,32 +1,57 @@
 # Public entry and account access
 
-The public homepage describes Lesson Studio and links to `/login`. It never
-loads the lesson library. One email/password form serves every account. Google
-sign-in is not enabled yet; it needs provider configuration in Supabase.
+The source now uses Clerk Account Portal for registration, sign-in, email
+verification, password recovery and session management. The public homepage
+links to `/login`, which contains only the controls that open Clerk's hosted
+pages. Lesson Studio never collects an account password.
 
-`AuthenticatedApp` loads the Auth client only for sign-in and workspace routes.
-It waits for the `workspace_role` RPC before importing a workspace. Changing a
-URL, cached role or user-editable metadata cannot grant teacher access. All
-permissions are enforced independently by database grants and RLS.
+**Release status:** this implementation is prepared on the Clerk migration
+branch. The production Supabase database and deployed frontend have not been
+switched. Follow [CLERK-CUTOVER](CLERK-CUTOVER.md) before publishing; installing
+the SDK or applying SQL alone does not complete the change.
 
-## First owner account
+## Authentication and teaching access
 
-An administrator reserves the owner's email in the non-exposed
-`lesson_private.workspace_owner` table. The address is not included in the
-frontend or repository. The owner registers through the ordinary form and
-confirms their email. An Auth trigger binds the reserved address to that Auth
-user's immutable ID and provisions a teacher membership. The reservation is
-claimed once: later email changes cannot transfer the role to a new account.
-Deleting the owner requires an explicit administrative reassignment first.
+Supabase's native Third-party Auth integration verifies Clerk's signed session
+tokens. The database additionally pins the exact Clerk issuer and allowed app
+origins, requires an active session ID and Clerk's verified-email claim, and rejects old
+Supabase Auth tokens. Roles always come from `public.workspace_members`.
+Client metadata, a typed email address, a query parameter and browser storage
+cannot grant teaching access.
 
-Other confirmed accounts receive a student membership. Unconfirmed accounts
-receive none. Clients can only read their own membership; they cannot insert,
-update or delete roles. Future teachers must be provisioned administratively.
+`WorkspaceAuth` requests `workspace_account` before importing a workspace. Its
+private, transactional provisioning function maps the immutable Clerk user ID
+to the application's stable UUID. The SDK supplies a current session token on
+every API request, including shared-lesson requests. A changed account remounts
+its workspace; sign-out is handled by Clerk.
 
-Registration uses the existing Supabase email provider and confirmation flow.
-SMTP delivery limits still apply. Provider return URLs use the existing legacy
-allow-list bridge, which the router canonicalises before consuming Auth tokens.
-No messages are sent by migrations or QA fixtures.
+## Existing accounts and the first owner
+
+The migration copies the existing account UUIDs and verified email state into
+`lesson_private.accounts`, changes foreign keys to that internal identity table,
+and retains memberships, material ownership, favourites and roster connections.
+It removes the superseded Supabase signup trigger. It does not rewrite lesson
+content, revisions, answers or local learner drafts.
+
+An existing email identity can be claimed once through a verified email from
+the pinned Clerk instance. After binding, the Clerk user ID determines identity:
+changing an email or registering another account with the old address cannot
+transfer the UUID or role. The server-managed first-owner reservation retains
+its one-time semantics. New confirmed accounts receive a student membership;
+open teacher onboarding is a separately agreed change.
+
+Supabase passwords are not copied into Clerk. Existing users complete Clerk's
+hosted account setup or use the configured email-code method; ownership and
+teaching permissions are preserved independently of the old password.
+
+## Invitation return links
+
+Lesson and student-invitation secrets remain in this tab's `sessionStorage`.
+Clerk receives only the clean, same-origin `/login` return URL, for sign-in,
+sign-up and sign-out. Once authenticated, Lesson Studio restores the validated
+internal destination and removes the saved return. The server still checks the
+account and invitation independently. If another browser is used or the tab's
+storage is lost, reopen the original invitation after signing in.
 
 ## Personal student invitations
 
@@ -43,10 +68,11 @@ after seven days. Replacing or revoking it invalidates the previous link.
 Editing the contact email or archiving the card also invalidates pending links;
 restoring the card does not reactivate them.
 
-The server checks the current membership and the confirmed email directly in
-Auth before revealing the student name or accepting an invitation. A different
-account, a teacher account or an unconfirmed account cannot accept. The linked
-Auth ID is written by the RPC, never by a roster form. A student can have one
+The server checks the current membership and the confirmed email from the
+verified Clerk session before revealing the student name or accepting an
+invitation. A different
+account, a teacher account or an unconfirmed account cannot accept. The stable internal
+account ID is written by the RPC, never by a roster form. A student can have one
 linked card per teacher. Repeated acceptance by the same account is idempotent;
 changing contact details never transfers an existing account connection.
 Unlinking an accepted connection is not part of this step.
@@ -58,8 +84,8 @@ access or alter account roles or existing shared-lesson credentials.
 
 Existing accounts can sign in on the invitation page. Signing out there keeps
 the personal link so the student can switch accounts. New users confirm their
-email through the existing provider callback, then reopen the original personal
-invitation and sign in to accept; no invitation secret enters the Auth callback.
+email through Clerk’s hosted account setup. The original invitation is restored
+from the same tab or reopened manually; its secret never enters Clerk’s URLs.
 
 ## Materials and shared lessons
 
@@ -93,16 +119,27 @@ will require authenticated storage delivery as a separate change.
 
 ## Verification
 
+- `npm run test:database` includes the historical pre-cutover access contract and
+  the current Clerk migration contract. The latter checks stable UUIDs and
+  ownership, pinned issuer/origin, verified-email claims, email reuse, membership
+  escalation denial, existing/new student connections and anonymous denial.
+- `npm run test:accounts:browser` uses the real configured Clerk development
+  portal to check external sign-in/sign-up pages and invitation-secret isolation.
+  It creates no accounts and sends no confirmation emails.
+- Catalogue and invitation browser tests use an explicitly test-only Clerk
+  session fixture with the real migrated SQL and RLS. They do not replace the
+  real-provider production acceptance test.
+
+
 - `npm test` checks routing, role decisions and existing lesson behaviour.
-- `tests/workspace-access.database.sql` tests owner confirmation and one-time
-  binding, spoofed metadata, self-upgrade denial, membership isolation, private
-  notes, student library denial, account plus invitation checks and anonymous
-  denial. All fixtures are rolled back.
+- `tests/workspace-access.database.sql` retains the historical Supabase Auth
+  contract. `tests/clerk-accounts.integration.ts` verifies the new cutover and
+  current Clerk access contract in an isolated database.
 - Existing roster and materials SQL checks use explicit synthetic teacher roles.
 - `npm run test:database` applies every local migration to an isolated PGlite
   Postgres database and runs the roster, materials, account-access and personal
-  invitation SQL suites. Its minimal Auth schema is a fixture, not the Supabase
-  email provider. It never connects to the working project.
+  invitation SQL suites. Its minimal Auth schema is a fixture for the historical migrations, not a
+  replacement authentication provider. It never connects to the working project.
 - `npm run test:invitations:browser` runs the real UI and SQL in separate browser
   contexts with local Auth fixtures and intercepted API requests. It checks link
   creation/replacement/revocation, rejection of the wrong email, account switching,

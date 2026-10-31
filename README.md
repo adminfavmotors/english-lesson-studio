@@ -23,7 +23,10 @@
 - Для аудирования предоставлен текст: его читает учитель либо английский голос устройства при наличии. Студийных аудиофайлов, записи микрофона и оценки произношения нет.
 - Экспорт урока и «Пример JSON» дают образец для подготовки нового материала с ИИ или вручную. После входа «Добавить урок» принимает один JSON-объект, проверяет структуру и создаёт личный материал. Прямой генератор на платном API не подключён.
 
-Коллекция доступна без аккаунта; импорт и избранное требуют того же кабинета учителя, что и список учеников. `lesson_materials` и `material_favourites` защищены RLS: общие уроки доступны для чтения, личные материалы и избранное — владельцу. Импорт не меняет общую коллекцию. Для практики другого аккаунта личный материал пока не назначается и не расшаривается. При недоступности облака используется встроенная копия 30 уроков A1.
+The lesson library requires a trusted teacher account. RLS limits private
+materials, favourites and student profiles to their owner; students access shared
+lessons through invitations. A failed library request shows a retry message and
+does not load a public copy of the A1 collection.
 
 Исходники курса находятся в `scripts/a1/`. После правок выполнить `npm run content:build`: команда проверяет содержание, обновляет `src/data/a1-lessons.json` и программу. `npm run content:seed:sql` печатает SQL для осознанного обновления общей коллекции администратором; команда сама ничего не отправляет в базу. Повторная загрузка одинакового содержимого не меняет серверную версию. После изменения данных нужно обновить снимок версий `src/data/a1-versions.json` из базы: встроенная и облачная копии должны использовать одинаковые версии. `npm run test:library` проверяет анонимный отказ доступа; с временным `LESSON_TEST_ACCESS_TOKEN` дополнительно проверяет совпадение всех данных и версий для учителя. Сначала применяются миграции `assignment_library` и `material_validation`. Новые версии контента получают новую серверную версию, чтобы старые ответы не оценивались по изменённому ключу; прежние черновики не удаляются.
 
@@ -44,7 +47,11 @@
 
 Данные учеников не записываются в общий документ текущего упражнения. Автоматическая связь с занятиями, домашними работами и их прогрессом будет отдельной доработкой. Тестовые ученики с изображений `docs/students-*-qa.png` созданы только в изолированной имитации API, в рабочей базе их нет.
 
-Регистрация использует существующий email-провайдер Supabase с подтверждением адреса. Его ограничения доставки и частоты отправки сохраняются; отдельный SMTP не подключался. Для автоматического возврата после письма в Supabase Auth → URL Configuration должны быть разрешены публичный домен и нужные локальные адреса. Даже без автоматического возврата после подтверждения можно открыть страницу кабинета вручную и войти.
+Account access in this branch uses the external **Clerk Account Portal**. Copy
+`.env.example` to `.env.local` and configure the dedicated application's public
+`VITE_CLERK_PUBLISHABLE_KEY`. Keep Clerk secret keys server-side and out of Git.
+The production migration is not active yet: see [the cutover procedure](docs/CLERK-CUTOVER.md)
+and [account access rules](docs/ACCOUNT-ACCESS.md) before publishing this branch.
 
 ## Запуск в Windows / PowerShell
 
@@ -80,7 +87,7 @@ Teacher and student pages have separate entry components and navigation. There i
 
 Local classroom drafts and browser broadcast channels are independent for the two workspaces. Existing local work is retained as independent snapshots. Different tabs of the same workspace still synchronise locally; teacher/student collaboration uses a shared lesson invitation.
 
-The public homepage links to one `/login` form. Trusted roles come from the server; teacher routes and the library require a teacher membership. Students join lessons through invitations after signing in. Google sign-in and individual material assignments remain future work. See [docs/ACCOUNT-ACCESS.md](docs/ACCOUNT-ACCESS.md).
+The public homepage links to `/login`, which opens Clerk’s hosted account pages. Trusted roles come from the server; teacher routes and the library require a teacher membership. Students join lessons through invitations after signing in. Individual material assignments remain future work. See [docs/ACCOUNT-ACCESS.md](docs/ACCOUNT-ACCESS.md).
 
 ## Общая сессия на разных устройствах
 

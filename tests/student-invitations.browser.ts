@@ -8,7 +8,7 @@ import { testDatabase } from './helpers/test-database.ts';
 
 test('personal invitation: teacher card → sign-in → confirmed identity → connection', { timeout: 120000 }, async () => {
   const db = await testDatabase();
-  const server = await createServer({ server: { host: '127.0.0.1', port: 0 }, logLevel: 'error' });
+  const server = await createServer({ resolve:{alias:{'@clerk/react':fileURLToPath(new URL('./fixtures/clerk-react.tsx',import.meta.url))}}, server: { host: '127.0.0.1', port: 0 }, logLevel: 'error' });
   const browser = await chromium.launch({ channel: 'msedge', headless: true });
   const pageErrors: string[] = [];
   const apiErrors: string[] = [];
@@ -22,17 +22,21 @@ test('personal invitation: teacher card → sign-in → confirmed identity → c
       { id: 'c0000000-0000-4000-8000-000000000002', email: 'learner-browser@example.invalid' },
       { id: 'c0000000-0000-4000-8000-000000000003', email: 'other-browser@example.invalid' },
     ];
-    for (const user of users) await db.query('insert into auth.users(id,email,email_confirmed_at) values($1,$2,now())', [user.id,user.email]);
+    for (const user of users) {
+      await db.query('insert into lesson_private.accounts(id,email,email_confirmed_at,clerk_user_id) values($1,$2,now(),$3)', [user.id,user.email,'user_'+user.id.replaceAll('-','')]);
+      await db.query("insert into public.workspace_members(user_id,role) values($1,'student')",[user.id]);
+    }
+    await db.query('insert into lesson_private.clerk_settings(issuer,allowed_origins) values($1,$2)',['https://qa.clerk.accounts.dev',[origin]]);
     await db.query("update public.workspace_members set role='teacher' where user_id=$1", [users[0].id]);
     await db.query(`insert into public.teacher_students(id,owner_id,full_name,email,notes) values
       ('c1000000-0000-4000-8000-000000000001',$1,'Invited learner',$2,'PRIVATE QA NOTE')`, [users[0].id,users[1].email]);
     const sessions = users.map(user => {
       const exp = Math.floor(Date.now()/1000)+3600;
       const encode = (value: object) => Buffer.from(JSON.stringify(value)).toString('base64url');
-      return { access_token: `${encode({alg:'HS256',typ:'JWT'})}.${encode({sub:user.id,role:'authenticated',aud:'authenticated',exp})}.qa-signature`, refresh_token: 'qa-refresh-only', token_type: 'bearer', expires_in: 3600, expires_at: exp, user: { ...user, aud:'authenticated',role:'authenticated',email_confirmed_at:new Date().toISOString(),app_metadata:{provider:'email'},user_metadata:{},created_at:new Date().toISOString() } };
+      return { access_token: `${encode({alg:'HS256',typ:'JWT'})}.${encode({sub:'user_'+user.id.replaceAll('-',''),sid:'sess_qa',sts:'active',iss:'https://qa.clerk.accounts.dev',azp:origin,email:user.email,email_verified:true,role:'authenticated',aud:'authenticated',exp})}.qa-signature`, refresh_token: 'qa-refresh-only', token_type: 'bearer', expires_in: 3600, expires_at: exp, user: { ...user, aud:'authenticated',role:'authenticated',email_confirmed_at:new Date().toISOString(),app_metadata:{provider:'email'},user_metadata:{},created_at:new Date().toISOString() } };
     });
     const functions: Record<string,string[]> = {
-      workspace_role: [], student_connections: [], student_invitation_status: ['p_student_id'],
+      workspace_account: [], workspace_role: [], student_connections: [], student_invitation_status: ['p_student_id'],
       student_invitation_create: ['p_student_id','p_version'], student_invitation_revoke: ['p_student_id'],
       student_invitation_read: ['p_token'], student_invitation_accept: ['p_token'],
     };
@@ -46,17 +50,11 @@ test('personal invitation: teacher card → sign-in → confirmed identity → c
         const url = new URL(request.url());
         const headers: Record<string,string> = { 'access-control-allow-origin':origin, 'access-control-allow-headers':'*', 'access-control-expose-headers':'content-range', 'content-type':'application/json' };
         if (request.method() === 'OPTIONS') { await route.fulfill({status:204,headers}); return; }
-        if (url.pathname === '/auth/v1/token') {
-          const body = request.postDataJSON();
-          const session = sessions.find(session => session.user.email === body.email);
-          await route.fulfill({status:session?200:400,headers,body:JSON.stringify(session ?? {message:'Invalid login credentials'})}); return;
-        }
-        if (url.pathname === '/auth/v1/logout') { await route.fulfill({status:200,headers,body:'{}'}); return; }
         const session = sessions.find(session => request.headers().authorization === `Bearer ${session.access_token}`);
         const work = queue.then(async () => {
           await db.exec('begin; set local role authenticated;');
           try {
-            await db.query("select set_config('request.jwt.claims',$1,true)", [JSON.stringify(session ? {sub:session.user.id,role:'authenticated'} : {})]);
+            await db.query("select set_config('request.jwt.claims',$1,true)", [session ? Buffer.from(session.access_token.split('.')[1],'base64url').toString() : '{}']);
             let body: unknown;
             if (url.pathname.startsWith('/rest/v1/rpc/')) {
               const name = url.pathname.split('/').at(-1)!;
@@ -86,7 +84,7 @@ test('personal invitation: teacher card → sign-in → confirmed identity → c
       const page = await context.newPage();
       page.on('pageerror', error => pageErrors.push(error.message));
       await page.goto(origin);
-      if (sessionIndex !== undefined) await page.evaluate(session => localStorage.setItem('lessonstudio.teacher.auth.v1',JSON.stringify(session)),sessions[sessionIndex]);
+      if (sessionIndex !== undefined) await page.evaluate(session => localStorage.setItem('lessonstudio.clerk.qa',JSON.stringify(session)),sessions[sessionIndex]);
       return { context,page };
     };
 
@@ -120,11 +118,11 @@ test('personal invitation: teacher card → sign-in → confirmed identity → c
     await expect(student.page.getByRole('alert')).toContainText('Sign in with the email address your teacher invited');
     await student.page.getByRole('button',{name:'Sign out',exact:true}).click();
     await expect(student.page.getByRole('heading',{name:'Welcome back.'})).toBeVisible();
-    assert.equal(student.page.url(),link,'Switching account must preserve the invitation');
+    assert.equal(student.page.url(),origin+'/login','Signing out returns to local account access');
+    assert.equal(await student.page.evaluate(()=>sessionStorage.getItem('lessonstudio.account-return.v1')),new URL(link).pathname+new URL(link).hash,'Switching account must preserve the invitation locally');
     await expect(student.page.getByText('Sign in with the email address your teacher invited.',{exact:false})).toBeVisible();
-    await student.page.getByLabel('Email address',{exact:true}).fill(users[1].email);
-    await student.page.getByLabel('Password',{exact:true}).fill('local-qa-password');
-    await student.page.getByRole('button',{name:'Sign in',exact:true}).click();
+    await student.page.evaluate(session=>localStorage.setItem('lessonstudio.clerk.qa',JSON.stringify(session)),sessions[1]);
+    await student.page.reload();
     await expect(student.page.getByRole('button',{name:'Accept invitation',exact:true})).toBeVisible();
     await student.page.setViewportSize({width:375,height:812});
     await student.page.emulateMedia({reducedMotion:'reduce'});
@@ -144,8 +142,8 @@ test('personal invitation: teacher card → sign-in → confirmed identity → c
     const fresh = await context();
     await fresh.page.goto(link);
     await expect(fresh.page.getByRole('heading',{name:'Welcome back.'})).toBeVisible();
-    await fresh.page.getByRole('button',{name:'New here? Create an account',exact:true}).click();
-    await expect(fresh.page.getByText('After creating an account and confirming your email, reopen this personal invitation to accept it.',{exact:false})).toBeVisible();
+    await expect(fresh.page.getByRole('button',{name:'Create account',exact:true})).toBeVisible();
+    await expect(fresh.page.locator('input[type=password]')).toHaveCount(0);
     assert.deepEqual(pageErrors,[]);
     assert.deepEqual(apiErrors,[]);
     const result = await db.query("select student_user_id,notes from public.teacher_students where id='c1000000-0000-4000-8000-000000000001'");

@@ -30,39 +30,9 @@ import {
   loadMaterials,
   saveFavourite,
 } from "./material-api";
-import { useTeacherAccount } from "./use-teacher-account";
-import { TeacherAccount } from "./TeacherAccount";
+import { useWorkspaceAuth } from "./workspace-auth";
 import MaterialStudy, { downloadMaterial } from "./MaterialStudy";
 
-function AccountDialog({ onClose }: { onClose: () => void }) {
-  const dialog = useRef<HTMLDialogElement>(null);
-  useEffect(() => {
-    dialog.current?.showModal();
-  }, []);
-  return (
-    <dialog
-      ref={dialog}
-      className="library-account-dialog"
-      aria-labelledby="library-account-title"
-      onCancel={(event) => {
-        event.preventDefault();
-        onClose();
-      }}
-    >
-      <div className="dialog-heading">
-        <h2 id="library-account-title">Sign in to your workspace</h2>
-        <button
-          className="icon-button"
-          aria-label="Close sign-in dialog"
-          onClick={onClose}
-        >
-          <X size={20} />
-        </button>
-      </div>
-      <TeacherAccount />
-    </dialog>
-  );
-}
 function ImportDialog({
   onClose,
   onSaved,
@@ -201,7 +171,8 @@ export default function AssignmentsLibrary({
   onOpenLegacy: () => void;
   materialId: string;
 }) {
-  const { user, ready } = useTeacherAccount();
+  const { user, status } = useWorkspaceAuth();
+  const ready = status === "ready";
   const [rows, setRows] = useState<MaterialSummary[]>([]);
   const [favourites, setFavourites] = useState(new Set<string>());
   const [loading, setLoading] = useState(true);
@@ -219,7 +190,6 @@ export default function AssignmentsLibrary({
   const [material, setMaterial] = useState<Material | null>(null);
   const [detailLoading, setDetailLoading] = useState(false);
   const [detailError, setDetailError] = useState("");
-  const [accountOpen, setAccountOpen] = useState(false);
   const [importOpen, setImportOpen] = useState(false);
   const [templateBusy, setTemplateBusy] = useState(false);
   useEffect(() => {
@@ -255,9 +225,6 @@ export default function AssignmentsLibrary({
     return () => controller.abort();
   }, [user?.id, ready, reload]);
   useEffect(() => {
-    if (user) setAccountOpen(false);
-  }, [user?.id]);
-  useEffect(() => {
     if (!materialId) {
       setMaterial(null);
       setDetailError("");
@@ -284,10 +251,6 @@ export default function AssignmentsLibrary({
     navigateToMaterial(id);
   };
   const toggleFavourite = async (id: string) => {
-    if (!user) {
-      setAccountOpen(true);
-      return;
-    }
     setPendingFavourite(id);
     setError("");
     try {
@@ -329,15 +292,10 @@ export default function AssignmentsLibrary({
   const currentPage = Math.min(page, pages - 1);
   const visible = filtered.slice(currentPage * 9, currentPage * 9 + 9);
   const hasFilters = !!(search || level || skill || languageFocus || topic);
-  const needsSignIn = !user && (source === "mine" || source === "favourites");
-  const emptyTitle = needsSignIn
-    ? "Sign in to your library"
-    : hasFilters ? "No matching lessons"
+  const emptyTitle = hasFilters ? "No matching lessons"
       : source === "favourites" ? "No favourites yet"
         : source === "mine" ? "Your own lessons will appear here" : "No lessons found";
-  const emptyDescription = needsSignIn
-    ? "Sign in to access your own lessons and favourites on any device."
-    : hasFilters ? "Try a different search or clear the filters to see all lessons."
+  const emptyDescription = hasFilters ? "Try a different search or clear the filters to see all lessons."
       : source === "favourites" ? "Select the star on a lesson to save it here."
         : source === "mine" ? "Import a lesson to add it to your private collection."
           : "Browse the Studio collection or import a lesson of your own.";
@@ -383,14 +341,6 @@ export default function AssignmentsLibrary({
               <button className="secondary" onClick={() => open("")}>
                 Back to lesson library
               </button>
-              {!user && (
-                <button
-                  className="text-button"
-                  onClick={() => setAccountOpen(true)}
-                >
-                  Sign in
-                </button>
-              )}
             </div>
           )}
         </>
@@ -412,9 +362,7 @@ export default function AssignmentsLibrary({
               </button>
               <button
                 className="primary"
-                onClick={() =>
-                  user ? setImportOpen(true) : setAccountOpen(true)
-                }
+                onClick={() => setImportOpen(true)}
               >
                 <Upload size={17} />
                 Import lesson
@@ -448,10 +396,6 @@ export default function AssignmentsLibrary({
                 aria-pressed={source === tab.id}
                 className={source === tab.id ? "active" : ""}
                 onClick={() => {
-                  if (!user && ["mine", "favourites"].includes(tab.id)) {
-                    setAccountOpen(true);
-                    return;
-                  }
                   setFilter(setSource, tab.id);
                 }}
               >
@@ -608,7 +552,6 @@ export default function AssignmentsLibrary({
               <button
                 className="secondary"
                 onClick={() => {
-                  if (needsSignIn) { setAccountOpen(true); return; }
                   setSearch("");
                   setLevel("");
                   setSkill("");
@@ -618,7 +561,7 @@ export default function AssignmentsLibrary({
                   setPage(0);
                 }}
               >
-                {needsSignIn ? "Sign in" : hasFilters ? "Clear filters" : "Browse all lessons"}
+                {hasFilters ? "Clear filters" : "Browse all lessons"}
               </button>
             </div>
           )}
@@ -703,7 +646,6 @@ export default function AssignmentsLibrary({
           </details>
         </>
       )}
-      {accountOpen && <AccountDialog onClose={() => setAccountOpen(false)} />}
       {importOpen && (
         <ImportDialog
           onClose={() => setImportOpen(false)}
