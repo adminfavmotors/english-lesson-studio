@@ -1,9 +1,8 @@
 # Public entry and account access
 
-The source now uses Clerk Account Portal for registration, sign-in, email
-verification, password recovery and session management. The public homepage
-links to `/login`, which contains only the controls that open Clerk's hosted
-pages. Lesson Studio never collects an account password.
+Official Clerk components at `/login` own registration, sign-in, email
+verification, recovery and sessions. The public homepage links to that account
+page. Lesson Studio does not implement password handling.
 
 **Release status:** this implementation is prepared on the Clerk migration
 branch. The production Supabase database and deployed frontend have not been
@@ -12,8 +11,9 @@ the SDK or applying SQL alone does not complete the change.
 
 ## Authentication and teaching access
 
-Supabase's native Third-party Auth integration verifies Clerk's signed session
-tokens. The database additionally pins the exact Clerk issuer and allowed app
+Supabase's official Custom OIDC Third-Party Auth integration verifies Clerk's
+signed session tokens through the main origin's `/__clerk` discovery endpoint.
+The database additionally pins the exact Clerk issuer and allowed app
 origins, requires an active session ID and Clerk's verified-email claim, and rejects old
 Supabase Auth tokens. Roles always come from `public.workspace_members`.
 Client metadata, a typed email address, a query parameter and browser storage
@@ -41,13 +41,13 @@ its one-time semantics. New confirmed accounts receive a student membership;
 open teacher onboarding is a separately agreed change.
 
 Supabase passwords are not copied into Clerk. Existing users complete Clerk's
-hosted account setup or use the configured email-code method; ownership and
+account setup or use the configured email-code method; ownership and
 teaching permissions are preserved independently of the old password.
 
 ## Invitation return links
 
 Lesson and student-invitation secrets remain in this tab's `sessionStorage`.
-Clerk receives only the clean, same-origin `/login` return URL, for sign-in,
+Clerk hash routing runs only at the clean, same-origin `/login` URL, for sign-in,
 sign-up and sign-out. Once authenticated, Lesson Studio restores the validated
 internal destination and removes the saved return. The server still checks the
 account and invitation independently. If another browser is used or the tab's
@@ -84,7 +84,7 @@ access or alter account roles or existing shared-lesson credentials.
 
 Existing accounts can sign in on the invitation page. Signing out there keeps
 the personal link so the student can switch accounts. New users confirm their
-email through Clerk’s hosted account setup. The original invitation is restored
+email through Clerk’s account setup. The original invitation is restored
 from the same tab or reopened manually; its secret never enters Clerk’s URLs.
 
 ## Materials and shared lessons
@@ -124,7 +124,7 @@ will require authenticated storage delivery as a separate change.
   ownership, pinned issuer/origin, verified-email claims, email reuse, membership
   escalation denial, existing/new student connections and anonymous denial.
 - `npm run test:accounts:browser` uses the real configured Clerk development
-  portal to check external sign-in/sign-up pages and invitation-secret isolation.
+  component to check the embedded entry and invitation-secret isolation.
   It creates no accounts and sends no confirmation emails.
 - Catalogue and invitation browser tests use an explicitly test-only Clerk
   session fixture with the real migrated SQL and RLS. They do not replace the

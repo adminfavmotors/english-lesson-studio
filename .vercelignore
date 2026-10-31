@@ -1,0 +1,11 @@
+.git/
+.env*
+**/*.local
+**/*.local/**
+clerk-setup.local/
+internal-docs/
+.release-backups/
+node_modules/
+dist/
+*.tsbuildinfo
+supabase/.temp/

@@ -6,7 +6,7 @@ import { testDatabase } from './helpers/test-database.ts';
 const migration = '20261031104633_clerk_workspace_accounts.sql';
 const owner = 'd1000000-0000-4000-8000-000000000001';
 const learner = 'd1000000-0000-4000-8000-000000000002';
-const issuer = 'https://lesson-qa.clerk.accounts.dev';
+const issuer = 'https://lesson.example/__clerk';
 const origin = 'https://lesson.example';
 const teacherClaims = {iss:issuer,azp:origin,sub:'user_ownerQA',sid:'sess_ownerQA',sts:'active',role:'authenticated',email:'owner@example.invalid',email_verified:true};
 

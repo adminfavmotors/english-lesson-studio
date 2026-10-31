@@ -19,9 +19,11 @@
     "test:invitations:browser": "node --experimental-strip-types --test tests/student-invitations.browser.ts",
     "test:library": "node --experimental-strip-types --test tests/materials.integration.ts",
     "test:cloud": "node --experimental-strip-types --test tests/cloud.integration.ts",
-    "test:accounts:browser": "node --experimental-strip-types --test tests/clerk-portal.browser.ts"
+    "test:accounts:browser": "node --experimental-strip-types --test tests/clerk-entry.browser.ts"
   },
   "dependencies": {
+    "@clerk/backend": "3.26.4",
+    "@clerk/localizations": "4.24.4",
     "@clerk/react": "6.18.4",
     "@fontsource/source-sans-3": "^5.3.1",
     "@supabase/supabase-js": "2.118.0",

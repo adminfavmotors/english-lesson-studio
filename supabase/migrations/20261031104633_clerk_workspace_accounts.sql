@@ -18,7 +18,7 @@ create unique index accounts_unclaimed_email on lesson_private.accounts(email) w
 
 create table lesson_private.clerk_settings (
   singleton boolean primary key default true check(singleton),
-  issuer text not null check(issuer ~ '^https://[a-zA-Z0-9.-]+$'),
+  issuer text not null check(issuer ~ '^https://[a-zA-Z0-9.-]+(/[-a-zA-Z0-9._~]+)*$'),
   allowed_origins text[] not null check(cardinality(allowed_origins)>0)
 );
 alter table lesson_private.clerk_settings enable row level security;

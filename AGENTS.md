@@ -47,8 +47,10 @@ response, not cached state or a URL role, determines its invitation access.
 
 Routing does not replace account authorisation or RLS. Browser-only classroom
 drafts and broadcast channels are isolated by workspace; shared sessions
-synchronise through their existing invitation credentials. Clerk Account Portal owns registration, sign-in, email verification and
-account recovery. Preserve invitation secrets locally across its redirects.
+synchronise through their existing invitation credentials. Official Clerk components
+own registration, sign-in, email verification and account recovery on `/login`.
+Keep invitation credentials in tab storage before opening the account page;
+Clerk's hash routing must never consume a lesson invitation fragment.
 
 The Clerk cutover requires a verified Clerk session from the configured issuer
 and app origin. Supabase verifies its signature; private account mapping retains

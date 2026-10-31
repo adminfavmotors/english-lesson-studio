@@ -54,49 +54,15 @@
 }
 
 .login-card {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: 15px;
-  padding: 35px 37px;
-  box-shadow: 0 15px 45px var(--color-shadow);
+  min-width: 0;
 }
-
-.login-access h1 {
-  font-size: 32px;
-  font-weight: 600;
-  line-height: 1.15;
-  letter-spacing: -.8px;
-  margin: 15px 0 12px;
-}
-.login-access>p {
-  color: var(--color-text-muted);
-  font-size: 16px;
-  line-height: 1.6;
-  margin: 0 0 24px;
-}
-.login-access>button {
+.login-widget,
+.login-widget-box,
+.login-widget-card {
   width: 100%;
-  min-height: 48px;
-  justify-content: center;
-  margin-top: 12px;
 }
-.login-access>p.login-role-note {
-  font-size: 12px;
-  line-height: 1.7;
-  margin: 21px 0 0;
-  display: flex;
-  align-items: flex-start;
-  gap: 7px;
-}
-.login-role-note svg { flex-shrink: 0; }
-
-.login-error {
-  background: var(--color-danger-tint);
-  border: 1px solid var(--color-danger-border);
-  padding: 12px;
-  color: var(--color-danger);
-  font-size: 15px;
-  border-radius: 6px;
+.login-widget-card {
+  box-shadow: 0 15px 45px var(--color-shadow);
 }
 
 .login-invitation {
@@ -211,9 +177,6 @@
   .login-intro h2 {
     font-size: 39px;
   }
-  .login-card {
-    padding: 30px 25px;
-  }
   .login-intro>p {
     font-size: 17px;
   }
@@ -246,15 +209,6 @@
   }
   .login-intro-note {
     display: none;
-  }
-  .login-card {
-    padding: 28px 23px;
-  }
-  .login-access h1 {
-    font-size: 29px;
-  }
-  .login-role-note {
-    align-items: flex-start;
   }
   .student-home main {
     margin-top: 45px;

@@ -117,7 +117,7 @@ test('personal invitation: teacher card → sign-in → confirmed identity → c
     await student.page.goto(link);
     await expect(student.page.getByRole('alert')).toContainText('Sign in with the email address your teacher invited');
     await student.page.getByRole('button',{name:'Sign out',exact:true}).click();
-    await expect(student.page.getByRole('heading',{name:'Welcome back.'})).toBeVisible();
+    await expect(student.page.getByRole('heading',{name:'Sign in or create an account'})).toBeVisible();
     assert.equal(student.page.url(),origin+'/login','Signing out returns to local account access');
     assert.equal(await student.page.evaluate(()=>sessionStorage.getItem('lessonstudio.account-return.v1')),new URL(link).pathname+new URL(link).hash,'Switching account must preserve the invitation locally');
     await expect(student.page.getByText('Sign in with the email address your teacher invited.',{exact:false})).toBeVisible();
@@ -141,9 +141,10 @@ test('personal invitation: teacher card → sign-in → confirmed identity → c
 
     const fresh = await context();
     await fresh.page.goto(link);
-    await expect(fresh.page.getByRole('heading',{name:'Welcome back.'})).toBeVisible();
-    await expect(fresh.page.getByRole('button',{name:'Create account',exact:true})).toBeVisible();
-    await expect(fresh.page.locator('input[type=password]')).toHaveCount(0);
+    await expect(fresh.page.getByRole('heading',{name:'Sign in or create an account'})).toBeVisible();
+    await expect(fresh.page.getByLabel('Email address',{exact:true})).toBeVisible();
+    assert.equal(fresh.page.url(),origin+'/login');
+    assert.equal(await fresh.page.evaluate(()=>sessionStorage.getItem('lessonstudio.account-return.v1')),new URL(link).pathname+new URL(link).hash);
     assert.deepEqual(pageErrors,[]);
     assert.deepEqual(apiErrors,[]);
     const result = await db.query("select student_user_id,notes from public.teacher_students where id='c1000000-0000-4000-8000-000000000001'");

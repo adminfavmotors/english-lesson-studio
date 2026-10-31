@@ -1,13 +1,33 @@
-# Clerk hosted-account cutover
+# Clerk account cutover
 
-Status: implementation prepared and locally verified; **not deployed**. Production
-still uses the previous Supabase email account flow. Do not publish this branch
-until the provider, database and frontend are configured together.
+Status: official components and identity migration prepared. The main origin's
+proxy and Supabase Custom OIDC are configured. The database/frontend switch
+must be completed together. See ACCOUNT-ACCESS.md for the access model.
 
 ## Provider contract
 
-Use a dedicated Lesson Studio Clerk application and its Account Portal. Keep
-email verification required. Configure these **session-token** custom claims:
+The dedicated Lesson Studio production instance owns registration, sign-in,
+email verification, recovery and sessions. `/login` mounts the official Clerk
+`SignIn` component with combined sign-up and hash routing. Lesson Studio has no
+password handling or fallback authentication. British English is explicit;
+the display locale comes from `src/app-language.ts`.
+
+The production origin is `https://english-lesson-studio.vercel.app`. Vercel's
+Node.js routing middleware forwards `/__clerk` with the official
+`@clerk/backend/proxy` handler. It uses the canonical origin and Vercel's client
+IP and removes client-supplied Cloudflare IP headers. Responses are not cached.
+Keep these production variables on the main Vercel project:
+
+- `VITE_CLERK_PUBLISHABLE_KEY`: browser publishable key, `pk_live_`.
+- `CLERK_PUBLISHABLE_KEY`: the same publishable key for the server proxy.
+- `CLERK_SECRET_KEY`: server-only Vercel Secret, never a `VITE_` variable.
+- `CLERK_PROXY_ORIGIN`: the exact production origin above.
+
+`.vercelignore` excludes local credentials, backups and internal notes from
+CLI uploads. Inspect `vercel deploy --dry --json` before uploading a working
+copy. Never include local key files in deployment archives.
+
+Require verified email and configure these session-token custom claims:
 
 ```json
 {
@@ -17,116 +37,104 @@ email verification required. Configure these **session-token** custom claims:
 }
 ```
 
-Keep the standard active-session claims (`sid`, `sts`) and 60-second token lifetime. Use Clerk's built-in
-verified email fields, never unsafe metadata. The PostgreSQL `authenticated`
-claim grants no teaching role; `workspace_members` remains authoritative.
+Keep standard active-session claims (`sid`, `sts`) and the 60-second lifetime.
+The actual `email_verified` claim is a boolean. The database `authenticated`
+role grants no teaching privileges; `workspace_members` owns those. Google
+OAuth stays disabled until its production credentials are configured. Clerk
+manages password/email-code access. Provider paths are `/`, `/login`, `/login`,
+`/login` for home, sign-in, sign-up and sign-out respectively.
 
-Enable Supabase's native Clerk Third-party Auth integration with the **production
-instance's** domain. Do not use the deprecated Supabase JWT template or share a
-Supabase signing secret with Clerk.
+## Supabase verification
 
-Development instances use different identities and keys. Test against isolated
-SQL, as the browser suites do. Do not bind production accounts to a development
-Clerk user ID. Clerk production requires an owned domain and its DNS records;
-the Vercel-generated `vercel.app` address alone does not satisfy this requirement.
+The actual issuer is **`https://english-lesson-studio.vercel.app/__clerk`**.
+Discovery and signing keys are available at:
 
-## Data migration
+- `/__clerk/.well-known/openid-configuration`
+- `/__clerk/.well-known/jwks.json`
 
-`20261031104633_clerk_workspace_accounts.sql` copies account UUIDs into a private
-internal table, retains teaching roles, and redirects all ownership/connection
-foreign keys. It replaces each current policy/default/function that depended on
-`auth.uid()` with the private Clerk-to-UUID lookup. Supabase Auth users remain
-for historical recovery; the active application no longer trusts their tokens
-or uses their signup trigger.
+Configure Supabase **Third-Party Auth → Custom OIDC** with that exact issuer.
+The native Clerk CLI validator accepts host-only issuers and cannot represent
+this path. Custom OIDC is the official discovery integration. Never bypass a
+validator, label the provider as another service, use the old Supabase JWT
+template or share Supabase signing secrets with Clerk.
 
-An email from the migration snapshot can claim its old UUID once, after Clerk
-verifies it. Subsequent email changes never rebind an existing identity. New
-accounts receive the student role. Administrator-assigned teacher memberships
-and the original one-time owner reservation remain server-managed.
+Supabase verifies signature and expiry. Private SQL settings additionally pin
+the exact issuer/origin, require an authenticated Clerk user, an active session
+ID/status and verified email. Probe-origin tokens cannot satisfy this contract.
+Development keys and identities stay separate from production.
 
-Passwords are not migrated. Existing users complete Clerk's hosted account setup
-or use its email-code sign-in. Do not tell them that their old Supabase password
-has been imported. Deleting a Clerk account does not grant its stored UUID to a
-new account with the same email; reassignment requires explicit administration.
+## Identity and invitation migration
+
+`20261031104633_clerk_workspace_accounts.sql` copies existing UUIDs and verified
+email state into private accounts, preserving memberships, ownership,
+favourites, roster and connections. It replaces Auth-dependent policies,
+defaults and functions and removes the signup trigger. Historical Supabase Auth
+users remain; their tokens no longer authorise application operations.
+
+A verified Clerk email can claim an existing snapshot identity once. Thereafter
+the immutable Clerk user ID determines identity. Changing/reusing an email
+cannot transfer a UUID or privileges. New confirmed accounts receive a student
+role. Open teacher onboarding remains a separate change. Supabase passwords are
+not imported: existing users complete Clerk access with the same verified email.
+
+Before `/login`, the app saves a validated internal return and invitation
+fragment in this tab's session storage. Only a clean `/login` reaches Clerk.
+After server authorisation, the app restores a destination permitted for the
+role or opens its canonical workspace home. Clerk hash routing never consumes
+a shared lesson or personal invitation secret.
 
 ## Coordinated publication
 
-1. Complete the production Clerk instance, DNS, required verified email, session
-   claims, application home/return URLs and Supabase Third-party Auth integration.
-   Use exact HTTPS return paths and app origins. Lesson Studio returns through
-   `/login`; the provider's Account Portal owns its sign-in and sign-up pages.
-   If the frontend moves from `vercel.app` to a new origin, first arrange an
-   explicit transfer of existing browser-only practice/drafts. Browser storage
-   cannot move across origins through a redirect. Keep the old origin available
-   for that reviewed transfer and preserve old lesson/invitation links. Transfer
-   only learner data, never old Auth tokens or cached permissions. The SQL
-   migration preserves server data; it is not a cross-origin browser migration.
-2. Take a fresh private backup of account IDs/email verification, memberships,
-   owner reservation, material ownership/revisions, favourites, roster and
-   connections. Record the deployed commit and all current provider settings.
-3. Prepare a frontend build with the production public key in
-   `VITE_CLERK_PUBLISHABLE_KEY`. Never expose `CLERK_SECRET_KEY` through a `VITE_`
-   variable. Vercel production builds reject development or missing public keys.
-4. In a controlled cutover, apply the migration and provision the private
-   `lesson_private.clerk_settings` singleton with the exact production issuer
-   and app origins. Until that row exists, every Clerk account operation fails
-   closed. Applying the migration also rejects old Supabase sessions, so do not
-   apply it separately from the prepared frontend switch.
-5. Publish the prepared frontend and verify an existing teacher and a new
-   student through the real Account Portal, then verify data ownership, roster,
-   favourites, shared lessons and invitation acceptance. Test sign-out and
-   sign-in on both desktop and a phone. This is required before declaring the
-   production cutover complete.
-6. Disable further Supabase email/password account entry in provider settings
-   after acceptance. The application already rejects those old sessions; no
-   old password form or runtime fallback remains in this source.
+1. Publish the proxy while the old frontend/database continue working. Check
+   discovery, JWKS and public Frontend API at the main origin.
+2. Configure Custom OIDC. Prove a real signed Clerk token reaches an existing
+   RPC and a tampered signature receives 401. Before the migration, the legacy
+   UUID lookup can reject a Clerk subject after signature verification.
+3. Take a fresh private snapshot of accounts, memberships, owner reservation,
+   materials/revisions, favourites, roster and invitations. Record the deployed
+   commit and provider settings. Keep the origin to preserve browser drafts.
+4. Stage the production frontend with `vercel deploy --prod --skip-domain`.
+   Production builds reject development or missing publishable keys.
+5. Apply the migration and configure the private singleton below, then promote
+   the staged build. SQL and frontend form one cutover: the migration rejects
+   old Supabase sessions immediately.
+6. Check signed-in student and controlled teacher access, anonymous denial,
+   role separation, preserved data, sign-out, reload and invitation return.
+   Do not impersonate existing users. Local SQL tests separately verify legacy
+   binding and ownership preservation.
+7. Disable Supabase email entry after acceptance. Remove disposable QA identities
+   and their own rows, preserving real accounts and data.
 
-Issuer/origin configuration is an administrative operation, never a browser RPC:
+Settings are administrative, never a browser RPC:
 
 ```sql
--- Replace both literals with reviewed production values before running.
 insert into lesson_private.clerk_settings(singleton,issuer,allowed_origins)
-values(true,'https://clerk.your-owned-domain.example',
-  array['https://your-owned-domain.example']);
+values(true,'https://english-lesson-studio.vercel.app/__clerk',
+  array['https://english-lesson-studio.vercel.app']);
 ```
 
-Do not enable a broad wildcard or an unreviewed origin. New accounts and existing
-users must be tested against the actual configured issuer, not just a locally
-constructed JWT. Supabase verifies signatures and expiration; our private lookup
-additionally requires the pinned issuer, authorized party, session ID and a
-boolean verified-email claim.
+Never allow wildcard origins. Before this row exists, account operations fail
+closed. A frontend-only rollback cannot restore old Supabase access. After new
+account activity, preserve current UUIDs/data and use an explicit reverse
+migration; never restore an old snapshot over new writes. Catalogue recovery
+scripts are not authentication rollback tools.
 
-## Recovery
+## Verification and limits
 
-Keep the previous frontend and provider settings and the fresh backup available.
-Before any Clerk activity, a coordinated database/provider/frontend restoration
-can use that reviewed baseline. After Clerk sign-ins or writes, do not restore an
-old data snapshot blindly: it could lose new accounts or learner data. Preserve
-current internal UUIDs and ownership and prepare an explicit reverse identity
-migration. A frontend-only rollback cannot restore Supabase authentication after
-this database cutover.
+Run `npm test`, `npm run test:database`, `npm run test:invitations:browser`,
+`npm run test:catalogue:browser`, `npm run test:accounts:browser` and
+`npm run build`. These cover routing, migrated SQL/RLS, stable UUIDs, email
+reuse, escalation denial, invitations, catalogue and the real development
+Clerk component. The entry browser test creates no accounts or emails and
+checks invitation isolation. Offline fixtures never enter the product build.
 
-The catalogue recovery script intentionally rejects later migration history;
-it is not an authentication rollback.
+The owner completed real registration/email verification on the separate probe
+`lesson-studio-clerk-check.vercel.app`. It has no lesson-data connection and its
+`/account` page intentionally ends the check. Main-site acceptance is separate.
+Provider-domain provisioning uses Clerk Platform API, currently labelled
+private beta. Earlier Account Portal/DNS research remains in local internal notes.
 
-## Verification
-
-```powershell
-npm test
-npm run test:database
-npm run test:invitations:browser
-npm run test:catalogue:browser
-npm run test:accounts:browser
-npm run build
-```
-
-The database suite tests the new account contract and preserved data, alongside
-explicitly historical migration tests. The invitation and catalogue suites use
-offline Clerk session fixtures with real migrated SQL/RLS. The account-portal
-suite uses actual Clerk development pages, creates no users and sends no mail.
-Production acceptance and real email delivery are separate checks.
-
-Sources: [Clerk Account Portal](https://clerk.com/docs/guides/account-portal/getting-started),
-[native Supabase integration](https://supabase.com/docs/guides/auth/third-party/clerk),
-[session claims](https://clerk.com/docs/guides/sessions/customize-session-tokens),
-[production requirements](https://clerk.com/docs/guides/development/deployment/production).
+Sources: [official proxy implementation](https://github.com/clerk/javascript/blob/b5803ea35adc20272b664e9ef9e4250eef5bb555/packages/backend/src/proxy.ts),
+[provider-domain API](https://clerk.com/docs/guides/development/errors/platform-api#proxyurlrequiredforproviderdomain),
+[Supabase Custom OIDC](https://supabase.com/docs/guides/auth/third-party/custom-oidc),
+[Clerk session claims](https://clerk.com/docs/guides/sessions/customize-session-tokens).
