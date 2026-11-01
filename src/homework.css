@@ -1,0 +1,72 @@
+.dictation-preview, .homework-page > article { max-width: 960px; margin-inline: auto; }
+.homework-page { min-width: 0; }
+.student-homework { padding: 28px 20px 70px; }
+.homework-account { display: flex; justify-content: space-between; align-items: center; max-width: 960px; margin: 0 auto 34px; gap: 16px; }
+.homework-page-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 22px; margin-bottom: 24px; }
+.homework-page-heading h1 { font-size: clamp(1.7rem, 4vw, 2.5rem); letter-spacing: -.025em; margin: 8px 0; line-height: 1.12; }
+.homework-page-heading p { color: var(--color-text-muted); margin: 12px 0; }
+.homework-page-heading > button { flex-shrink: 0; margin-top: 36px; }
+.dictation-notice, .homework-link, .homework-summary, .homework-review, .homework-list { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-card); padding: 20px 22px; margin: 20px 0; }
+.dictation-notice { border-inline-start: 3px solid var(--color-info); background: var(--color-info-tint); }
+.dictation-audio { margin: 26px 0 18px; border: 1px solid var(--color-border); border-radius: var(--radius-card); background: var(--color-surface); padding: 22px; }
+.dictation-audio h2 { display: flex; align-items: center; gap: 10px; font-size: 1.12rem; margin: 0; }
+.dictation-audio p { margin: 9px 0 16px; }
+.dictation-audio audio { display: block; width: 100%; margin-block: 14px; }
+.dictation-audio details { margin-top: 16px; }
+.dictation-audio summary, .dictation-teacher-notes summary { cursor: pointer; font-weight: 600; }
+.dictation-audio label { display: grid; gap: 8px; margin-top: 14px; }
+.dictation-audio input[type=file] { max-width: 100%; }
+.dictation-helper { color: var(--color-text-muted); font-size: .92rem; }
+.dictation-status { display: flex; gap: 12px 22px; align-items: center; flex-wrap: wrap; position: sticky; top: 0; z-index: 5; padding: 14px 0; background: var(--color-bg); border-bottom: 1px solid var(--color-border-strong); }
+.dictation-status > button { margin-inline-start: auto; }
+.dictation-sentence { margin: 16px 0; padding: 18px 20px; border: 1px solid var(--color-border); border-radius: var(--radius-card); background: var(--color-surface); }
+.dictation-sentence-heading { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 18px; }
+.dictation-sentence-heading h2 { margin: 0; font-size: .95rem; }
+.dictation-sentence-heading h2 > span:first-child { display: grid; place-items: center; width: 32px; height: 32px; background: var(--color-primary); color: var(--color-on-primary); border-radius: 50%; }
+.dictation-sentence-heading > .text-button { margin-inline-start: auto; }
+.dictation-words { display: flex; align-items: flex-start; gap: 16px 8px; flex-wrap: wrap; }
+.dictation-word { max-width: 100%; text-align: center; }
+.dictation-word-line { display: flex; align-items: center; }
+.dictation-word input { display: inline-block; max-width: 100%; min-width: 3.5ch; min-height: 44px; text-align: center; padding: 6px; background: var(--color-bg); border: 2px solid var(--color-border-strong); border-radius: var(--radius-control); font-size: 1rem; scroll-margin-block-start: 110px; }
+.dictation-word input:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.dictation-punctuation { min-width: 5px; }
+.dictation-word.correct input { color: var(--color-success); background: var(--color-success-tint); border-color: var(--color-success); font-weight: 600; }
+.dictation-word.shown input { color: var(--color-warning); background: var(--color-warning-tint); border-color: var(--color-warning); font-weight: 600; }
+.dictation-word.incorrect input { background: var(--color-danger-tint); border-color: var(--color-danger); }
+.dictation-word-state { display: block; color: var(--color-text-muted); font-size: .75rem; margin-top: 3px; }
+.dictation-caption { max-width: 185px; margin-top: 8px; font-size: .8rem; line-height: 1.4; }
+.dictation-caption > span { display: block; margin-bottom: 7px; }
+.dictation-caption > div { display: flex; justify-content: center; gap: 6px; flex-wrap: wrap; }
+.dictation-caption button { padding: 5px 9px; min-height: 32px; font-size: .8rem; }
+.dictation-error, .homework-error { color: var(--color-danger); }
+.dictation-hint { color: var(--color-info); font-weight: 600; overflow-wrap: anywhere; }
+.dictation-teacher-notes { padding: 20px; margin-top: 22px; border: 1px solid var(--color-border); border-radius: var(--radius-card); }
+.dictation-teacher-notes li { margin: 8px 0; }
+.homework-badge { display: inline-flex; align-items: center; white-space: nowrap; gap: 7px; border: 1px solid; border-radius: 999px; padding: 5px 11px; font-size: .85rem; font-weight: 600; }
+.homework-badge > span { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.homework-badge.not_completed { color: var(--color-danger); background: var(--color-danger-tint); border-color: var(--color-danger-border); }
+.homework-badge.completed { color: var(--color-success); background: var(--color-success-tint); border-color: var(--color-success-border); }
+.homework-badge.reviewed { color: var(--color-info); background: var(--color-info-tint); border-color: var(--color-info-border); }
+.homework-section-heading, .homework-save-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.homework-section-heading h2, .homework-review h2, .homework-summary h2 { font-size: 1.2rem; margin: 0 0 12px; }
+.homework-list ul { padding: 0; list-style: none; margin-bottom: 0; }
+.homework-list li { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 15px; border-top: 1px solid var(--color-border); }
+.homework-list a { font-weight: 600; }
+.homework-list li p { font-size: .9rem; color: var(--color-text-muted); margin: 5px 0 0; }
+.homework-review label, .homework-link label, .homework-assign-dialog label { display: grid; gap: 8px; font-weight: 600; }
+.homework-review textarea, .homework-link input, .homework-assign-dialog select { width: 100%; min-width: 0; }
+.homework-review button, .homework-link button { margin-top: 12px; }
+.homework-error { padding: 14px; border: 1px solid var(--color-danger-border); background: var(--color-danger-tint); border-radius: var(--radius-control); margin-block: 16px; }
+.homework-assign-dialog { width: min(540px, calc(100vw - 30px)); padding: 26px; border: 1px solid var(--color-border); border-radius: var(--radius-card); color: var(--color-text); background: var(--color-surface); }
+.homework-assign-dialog::backdrop { background: var(--color-overlay); }
+.homework-actions { display: flex; justify-content: flex-end; gap: 12px; margin-top: 22px; }
+@media(max-width: 600px) {
+  .homework-page-heading { flex-direction: column; gap: 12px; }
+  .homework-page-heading > button { margin-top: 0; }
+  .dictation-sentence, .dictation-audio { padding: 16px 12px; }
+  .dictation-status { gap: 10px 14px; font-size: .9rem; }
+  .dictation-status > button { margin-inline-start: 0; }
+  .dictation-sentence-heading > .text-button { margin-inline-start: 0; }
+  .homework-list li { align-items: flex-start; flex-direction: column; }
+  .student-homework { padding: 18px 14px 50px; }
+}

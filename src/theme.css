@@ -24,6 +24,11 @@
   --color-rail-border: #ffffff26;
   --color-on-primary: #ffffff;
   --color-success: #26754e;
+  --color-success-tint: #eaf5ed;
+  --color-success-border: #bad6c4;
+  --color-info: #245b9a;
+  --color-info-tint: #edf4fd;
+  --color-info-border: #bcd0e8;
   --color-danger: #a43737;
   --color-danger-tint: #fff2f1;
   --color-danger-border: #e9c2be;

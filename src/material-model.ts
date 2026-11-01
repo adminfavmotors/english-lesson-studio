@@ -1,3 +1,5 @@
+import { validateDictationContent } from './dictation-model.ts';
+import type { DictationContent } from './dictation-model.ts';
 export const MATERIAL_SKILLS = {
   reading: "Reading",
   listening: "Listening",
@@ -49,7 +51,7 @@ export const MATERIAL_CATALOGUE_FIELDS = [
   "title", "subtitle", "level", "topic", "skills", "duration", "sequence",
   "language_focus", "classification_status", "legacy_skills",
 ] as const;
-export type MaterialContent = {
+export type StructuredLessonContent = {
   schemaVersion: 2;
   goal: string;
   vocabulary: { term: string; meaning: string; example: string }[];
@@ -87,6 +89,7 @@ export type MaterialContent = {
   };
   teacherNotes: string[];
 };
+export type MaterialContent = StructuredLessonContent | DictationContent;
 export type MaterialDocument = {
   catalogue: MaterialCatalogue;
   content: MaterialContent;
@@ -281,6 +284,11 @@ export function validateMaterialContent(value: unknown): string[] {
   if (!value || typeof value !== "object" || Array.isArray(value))
     return ["Provide a lesson as a JSON object."];
   const m = value as Record<string, unknown>;
+  if (m.schemaVersion === 3) {
+    const dictationErrors = validateDictationContent(m);
+    if (MATERIAL_CATALOGUE_FIELDS.some(key => Object.hasOwn(m, key))) dictationErrors.push('Keep catalogue fields outside lesson content.');
+    return dictationErrors;
+  }
   const text = (v: unknown, max = 6000) =>
     typeof v === "string" && !!v.trim() && v.length <= max;
   const list = (v: unknown, min = 1, max = 30) =>
@@ -306,7 +314,7 @@ export function validateMaterialContent(value: unknown): string[] {
     )
   )
     errors.push("Include 3–20 words or phrases with a meaning and example.");
-  const language = m.language as MaterialContent["language"];
+  const language = m.language as StructuredLessonContent["language"];
   if (
     !language ||
     !text(language.focus, 200) ||
@@ -363,7 +371,7 @@ export function validateMaterialContent(value: unknown): string[] {
         errors.push(`tokens must form a correct answer in ${t.id}.`);
     }
   };
-  const input = m.input as MaterialContent["input"];
+  const input = m.input as StructuredLessonContent["input"];
   if (
     !input ||
     !text(input.title, 200) ||
@@ -396,7 +404,7 @@ export function validateMaterialContent(value: unknown): string[] {
     )
   )
     errors.push("Complete the retrieval section.");
-  const speaking = m.speaking as MaterialContent["speaking"];
+  const speaking = m.speaking as StructuredLessonContent["speaking"];
   if (
     !speaking ||
     !text(speaking.situation) ||
@@ -407,7 +415,7 @@ export function validateMaterialContent(value: unknown): string[] {
     !text(speaking.teacherNote)
   )
     errors.push("Complete the speaking task.");
-  const writing = m.writing as MaterialContent["writing"];
+  const writing = m.writing as StructuredLessonContent["writing"];
   if (
     !writing ||
     !text(writing.instruction) ||
@@ -415,7 +423,7 @@ export function validateMaterialContent(value: unknown): string[] {
     !list(writing.checklist)
   )
     errors.push("Complete the writing task.");
-  const homework = m.homework as MaterialContent["homework"];
+  const homework = m.homework as StructuredLessonContent["homework"];
   if (
     !homework ||
     !text(homework.instruction) ||

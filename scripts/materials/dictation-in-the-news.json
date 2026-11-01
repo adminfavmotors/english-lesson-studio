@@ -1,0 +1,38 @@
+{
+  "catalogue": {
+    "title": "Dictation: In the News",
+    "subtitle": "Listen closely. Spell the words. Follow fifteen short news stories.",
+    "level": "A2", "topic": "News and current events", "duration": 25, "sequence": null,
+    "classification_status": "reviewed", "skills": ["listening"],
+    "language_focus": ["spelling_punctuation", "vocabulary"], "legacy_skills": null
+  },
+  "content": {
+    "schemaVersion": 3, "kind": "dictation",
+    "goal": "Listen to short news sentences and spell the words you hear.",
+    "instruction": "Listen and type every word. Green means correct. Red means try again. Use Hint or Show if you are stuck. Finish all fifteen sentences, then send your work to your teacher.",
+    "audioUrl": null,
+    "sentences": [
+      "The mayor announced the result in front of the town hall.",
+      "People celebrated in the streets all night.",
+      "The opposition says the new plan is too expensive.",
+      "It is unlikely that the factory will stay open.",
+      "Hundreds of employees are protesting outside the office.",
+      "The company will close down and cut three hundred jobs.",
+      "The captain said the injury was a terrible blow for the team.",
+      "The doctor is optimistic about the player’s chances.",
+      "The two leaders met for talks about peace.",
+      "The president accused the minister of telling lies.",
+      "They could not resolve their differences, so they will talk again next week.",
+      "Their wedding ceremony took place in a small church.",
+      "My friends are divorced, but they still talk every week.",
+      "Sixty percent of people voted in the election.",
+      "However, the government says the plan will not change."
+    ],
+    "teacherNotes": [
+      "This is supported A2 listening and spelling practice. Several news words may need preparation. It is not a CEFR placement test.",
+      "The sentences and their order follow the supplied dictation. Capitalisation and apostrophes are not assessed; punctuation is provided.",
+      "Shown words count towards finishing but are reported separately. Review the learner’s use of hints and shown words before giving feedback.",
+      "Until the recording is added, Browser voice can read each sentence on devices with an English speech voice. Local audio files stay on the learner’s device and are not uploaded."
+    ]
+  }
+}

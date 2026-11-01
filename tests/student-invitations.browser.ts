@@ -36,7 +36,7 @@ test('personal invitation: teacher card → sign-in → confirmed identity → c
       return { access_token: `${encode({alg:'HS256',typ:'JWT'})}.${encode({sub:'user_'+user.id.replaceAll('-',''),sid:'sess_qa',sts:'active',iss:'https://qa.clerk.accounts.dev',azp:origin,email:user.email,email_verified:true,role:'authenticated',aud:'authenticated',exp})}.qa-signature`, refresh_token: 'qa-refresh-only', token_type: 'bearer', expires_in: 3600, expires_at: exp, user: { ...user, aud:'authenticated',role:'authenticated',email_confirmed_at:new Date().toISOString(),app_metadata:{provider:'email'},user_metadata:{},created_at:new Date().toISOString() } };
     });
     const functions: Record<string,string[]> = {
-      workspace_account: [], workspace_role: [], student_connections: [], student_invitation_status: ['p_student_id'],
+      workspace_account: [], workspace_role: [], homework_list: ['p_student_id'], student_connections: [], student_invitation_status: ['p_student_id'],
       student_invitation_create: ['p_student_id','p_version'], student_invitation_revoke: ['p_student_id'],
       student_invitation_read: ['p_token'], student_invitation_accept: ['p_token'],
     };

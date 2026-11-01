@@ -20,7 +20,10 @@ import {
   isCorrectAnswer,
   materialDocument,
 } from "./material-model";
-import type { Material, PracticeTask, PracticeItem } from "./material-model";
+import type { Material, StructuredLessonContent, PracticeTask, PracticeItem } from "./material-model";
+import DictationPreview from './DictationPreview';
+import WorkspaceNotice from './WorkspaceNotice';
+type StructuredMaterial = Material & { content: StructuredLessonContent };
 import MaterialClassification from "./MaterialClassification";
 import {
   blankMaterialDraft as blankDraft,
@@ -256,7 +259,7 @@ function InputBlock({
   draft,
   update,
 }: {
-  material: Material;
+  material: StructuredMaterial;
   draft: Draft;
   update: (update: (previous: Draft) => Draft) => void;
 }) {
@@ -336,7 +339,7 @@ function InputBlock({
     </>
   );
 }
-function TeacherKeys({ material }: { material: Material }) {
+function TeacherKeys({ material }: { material: StructuredMaterial }) {
   const l = material.content;
   return (
     <details className="material-teacher-keys">
@@ -373,12 +376,12 @@ function TeacherKeys({ material }: { material: Material }) {
   );
 }
 
-export default function MaterialStudy({
+function StructuredMaterialStudy({
   material,
   teacher,
   onBack,
 }: {
-  material: Material;
+  material: StructuredMaterial;
   teacher: boolean;
   onBack: () => void;
 }) {
@@ -799,4 +802,12 @@ function TargetMark() {
       <CheckCircle2 size={23} />
     </span>
   );
+}
+
+export default function MaterialStudy(props: { material: Material; teacher: boolean; onBack: () => void }) {
+  const content = props.material.content;
+  if (content.schemaVersion === 3) return props.teacher
+    ? <DictationPreview material={props.material} content={content} onBack={props.onBack}/>
+    : <WorkspaceNotice title="Open your assigned homework" description="Open the homework link from your teacher or choose it in your learning space." href="/student/classroom"/>;
+  return <StructuredMaterialStudy {...props} material={{ ...props.material, content }}/>;
 }

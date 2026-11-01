@@ -103,8 +103,11 @@ separated contract, JSON compatibility and coordinated migration/frontend releas
 
 Students see an invitation-based learning home. They cannot browse the library
 or open arbitrary material IDs. Teachers can still preview a student material.
-Named material assignments, homework delivery and binding a shared textbook
-lesson invitation to an individual student account are future work.
+Assigned dictation homework is available to connected student accounts through
+their learning space and account-protected links. It has server-saved answers,
+explicit submission and teacher review; it does not grant library access. See
+[DICTATION-HOMEWORK](DICTATION-HOMEWORK.md). Assigning other material formats and
+binding a shared textbook invitation to an individual account remain future work.
 
 Shared textbook lessons require both a confirmed account and a valid lesson
 capability. A teacher capability also requires a trusted teacher membership.

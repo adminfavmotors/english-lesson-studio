@@ -60,6 +60,14 @@ receive invitations to individual shared lessons; the library is teacher-only.
 Keep the A1 authoring snapshot out of browser imports and public build chunks.
 See `docs/ACCOUNT-ACCESS.md` for the current rules and remaining work.
 
+Assigned homework is separate from browser-only practice and shared live lessons.
+Freeze the material revision and content at assignment time. Only the assigning
+teacher and connected student can read it; only that student saves/submits and
+only that teacher reviews. Completion and review require explicit actions and
+server checks. Never derive status from opening a page or a client score. Keep
+canonical homework links inside the appropriate workspace. See
+`docs/DICTATION-HOMEWORK.md` for the current contract.
+
 # Shared interface styles
 
 `src/main.tsx` imports only `src/app.css` for product styles. Keep every page's

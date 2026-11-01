@@ -1,10 +1,10 @@
 export type Workspace = "teacher" | "student";
-export type TeacherPage = "students" | "materials" | "classroom";
+export type TeacherPage = "students" | "materials" | "classroom" | "homework";
 export type AppRoute =
   | { area: "entry" }
   | { area: "login" }
-  | { area: "teacher"; page: TeacherPage; materialId?: string }
-  | { area: "student"; page: "classroom" | "lesson" | "connect"; materialId?: string }
+  | { area: "teacher"; page: TeacherPage; materialId?: string; homeworkId?: string }
+  | { area: "student"; page: "classroom" | "lesson" | "connect" | "homework"; materialId?: string; homeworkId?: string }
   | { area: "not-found"; workspace?: Workspace };
 
 const materialIdPattern = /^[a-z0-9-]{3,100}$/;
@@ -14,6 +14,7 @@ export const teacherMaterialPath = (id = "") =>
 export const studentClassroomPath = "/student/classroom";
 export const studentLessonPath = (id: string) => `/student/lessons/${encodeURIComponent(id)}`;
 export const classroomPath = (workspace: Workspace) => `/${workspace}/classroom`;
+export const homeworkPath = (workspace: Workspace, id: string) => `/${workspace}/homework/${encodeURIComponent(id)}`;
 
 export function canonicalAppUrl(address: string): URL {
   const url = new URL(address);
@@ -48,6 +49,8 @@ export function resolveAppRoute(address: string): AppRoute {
   const path = url.pathname;
   if (path === "/") return { area: "entry" };
   if (path === "/login") return { area: "login" };
+  const homework = path.match(/^\/(teacher|student)\/homework\/([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$/i);
+  if (homework) return { area: homework[1] as Workspace, page: 'homework', homeworkId: homework[2] };
   if (path === teacherPath("students")) return { area: "teacher", page: "students" };
   if (path === teacherPath("classroom")) return { area: "teacher", page: "classroom" };
   if (path === teacherPath("materials")) return { area: "teacher", page: "materials" };
