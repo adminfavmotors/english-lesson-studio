@@ -70,6 +70,8 @@ test('library → assigned homework → saved dictation → submission → teach
   await expect(student.page.getByRole('button',{name:'Send to teacher',exact:true})).toBeDisabled();
   const word=student.page.getByRole('textbox',{name:'Sentence 1, word 1',exact:true});await word.fill('thz');await word.blur();
   await expect(student.page.getByText('Almost! One letter is wrong.',{exact:true})).toBeVisible();
+  await word.fill('t');await expect(word).not.toHaveAttribute('aria-invalid','true');
+  await word.fill('thz');await word.blur();
   await student.page.getByRole('button',{name:'Hint: sentence 1, word 1',exact:true}).click();await expect(student.page.locator('.dictation-hint').first()).toContainText('T _ _');
   await word.fill('The');await expect(student.page.getByRole('textbox',{name:'Sentence 1, word 2',exact:true})).toBeFocused();
   await expect(student.page.getByText('All answers saved.',{exact:true})).toBeVisible();await student.page.reload();await expect(word).toHaveValue('The');

@@ -74,7 +74,7 @@ export default function DictationLesson({ content, progress, onChange, readOnly 
       <div className="dictation-words">{sentence.map(word => {
         const attempt = progress[word.id] ?? { value: '', hints: 0, revealed: false };
         const correct = wordCorrect(word, attempt), shown = attempt.revealed;
-        const bad = !correct && !shown && !!attempt.value.trim() && (readOnly || final[word.id] || attempt.value.length >= word.answer.length);
+        const bad = !correct && !shown && !!attempt.value.trim() && (readOnly || final[word.id] || attempt.value.trim().length >= word.answer.length);
         const locked = readOnly || correct || shown;
         const caption = !locked && (active === word.id || bad);
         return <div className={`dictation-word${shown ? ' shown' : correct ? ' correct' : bad ? ' incorrect' : ''}`} key={word.id}>
@@ -83,7 +83,7 @@ export default function DictationLesson({ content, progress, onChange, readOnly 
             aria-describedby={caption ? `${word.id}-help` : undefined} autoComplete="off" autoCapitalize="off" autoCorrect="off" spellCheck={false}
             style={{ width: `${Math.max(word.answer.length, 3) + 2}ch` }} maxLength={100} value={attempt.value} readOnly={locked}
             onFocus={() => setActive(word.id)} onBlur={() => setFinal(previous => ({ ...previous, [word.id]: true }))}
-            onChange={event => update(word.id, { value: event.target.value })}
+            onChange={event => { setFinal(previous => ({ ...previous, [word.id]: false })); update(word.id, { value: event.target.value }); }}
             onKeyDown={event => { if (event.key === 'Enter') { event.preventDefault(); setFinal(previous => ({ ...previous, [word.id]: true })); } }}/><span className="dictation-punctuation" aria-hidden="true">{word.punctuation}</span></div>
           {(correct || shown) && <span className="dictation-word-state">{shown ? 'Shown' : 'Correct'}{attempt.hints ? ` · ${attempt.hints} ${attempt.hints === 1 ? 'hint' : 'hints'}` : ''}</span>}
           {caption && <div id={`${word.id}-help`} className="dictation-caption">
