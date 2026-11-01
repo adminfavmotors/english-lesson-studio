@@ -89,7 +89,7 @@ test('library → assigned homework → saved dictation → submission → teach
   await expect(teacher.page.locator('.homework-badge')).toHaveText('Reviewed');
   await teacher.page.screenshot({path:fileURLToPath(new URL('teacher-reviewed.png',screenshotRoot)),fullPage:true});
   await student.page.reload();await expect(student.page.locator('.homework-badge')).toHaveText('Reviewed');await expect(student.page.getByText('Good work. Listen to mayor once more.',{exact:true})).toBeVisible();
-  await student.page.getByRole('link',{name:'Your learning space',exact:true}).click();await expect(student.page.locator('.homework-badge')).toHaveText('Reviewed');
+  await student.page.getByRole('link',{name:'Your learning space',exact:true}).click();await expect(student.page.locator('.student-home')).toBeVisible();await expect(student.page.locator('.homework-list .homework-badge')).toHaveText('Reviewed');
   await teacher.page.goto(origin+'/teacher/students');await teacher.page.getByRole('button',{name:'Dictation learner',exact:false}).first().click();await expect(teacher.page.getByRole('dialog').locator('.homework-badge')).toHaveText('Reviewed');
   await queue;assert.deepEqual(errors,[]);complete=true;
  }finally{

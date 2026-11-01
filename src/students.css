@@ -616,36 +616,6 @@
   margin: 16px 0 8px;
 }
 
-.student-history-empty {
-  display: flex;
-  gap: 14px;
-  align-items: flex-start;
-  background: var(--color-surface-muted);
-  border: 1px solid var(--color-border);
-  border-radius: 9px;
-  padding: 20px;
-  margin: 28px 0 0;
-}
-
-.student-history-empty>svg {
-  margin-top: 3px;
-  color: var(--color-text-muted);
-}
-
-.student-history-empty h3 {
-  font-size: 18px;
-  font-weight: 600;
-  margin: 0 0 7px;
-  color: var(--color-text-muted);
-}
-
-.student-history-empty p {
-  font-size: 15px;
-  color: var(--color-text-muted);
-  margin: 0;
-  line-height: 1.7;
-}
-
 @media (max-width:1130px) {
   .students-stat {
     padding: 18px 17px;
@@ -814,16 +784,6 @@
   .student-profile-facts {
     grid-template-columns: 1fr;
     gap: 18px;
-  }
-  .student-history-empty {
-    padding: 17px;
-  }
-  .student-history-empty>svg {
-    width: 20px;
-    height: 20px;
-  }
-  .student-history-empty p {
-    font-size: 14px;
   }
 }
 

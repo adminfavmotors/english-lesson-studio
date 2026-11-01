@@ -1,5 +1,10 @@
 # Assigned dictation homework
 
+Published on the main Lesson Studio site on 1 November 2026. The Studio material
+ID is `dictation-in-the-news`, teaching revision 1 and catalogue revision 1.
+The original 30 A1 materials, their revisions and existing memberships are
+unchanged. The recording is intentionally pending the next agreed audio step.
+
 `Dictation: In the News` is a separate A2 material format, not a schema-2 lesson
 filled with unrelated sections. Its editable source is
 `scripts/materials/dictation-in-the-news.json`. The fifteen sentences and their
