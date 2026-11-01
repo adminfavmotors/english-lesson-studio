@@ -56,6 +56,7 @@ test('library → assigned homework → saved dictation → submission → teach
   };
   const teacher=await makeContext(0),student=await makeContext(1);
   await teacher.page.goto(origin+'/teacher/materials');await teacher.page.getByRole('searchbox',{name:'Search lessons'}).fill('Dictation');
+  await expect(teacher.page.locator('.material-card').getByText('Studio lesson',{exact:true})).toBeVisible();
   await teacher.page.getByRole('button',{name:'Dictation: In the News',exact:true}).click();
   await expect(teacher.page.getByRole('heading',{name:'Dictation: In the News',exact:true})).toBeVisible();
   await teacher.page.getByRole('button',{name:'Assign homework',exact:true}).click();await teacher.page.getByLabel('Student',{exact:true}).selectOption(card);

@@ -507,7 +507,7 @@ export default function AssignmentsLibrary({
                     <span>
                       {row.owner_id
                         ? "My lesson"
-                        : `Lesson ${String(row.sequence).padStart(2, "0")}`}
+                        : row.sequence === null ? 'Studio lesson' : `Lesson ${String(row.sequence).padStart(2, "0")}`}
                     </span>
                     <button
                       className={`icon-button favourite-button ${favourites.has(row.id) ? "selected" : ""}`}
