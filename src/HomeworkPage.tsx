@@ -72,7 +72,7 @@ function HomeworkWork({ initial, teacher, reload }: { initial: Homework; teacher
       {error && <div className="homework-error" role="alert"><p>{error}</p><button className="secondary" onClick={reload}>Reload saved work</button></div>}
       {homework.status !== 'not_completed' && <p role="status" className="dictation-notice">{homework.status === 'reviewed' ? 'Your teacher has reviewed this homework.' : teacher ? 'The student has sent this work for your review.' : 'Homework completed and sent to your teacher.'} Answers are now read-only.</p>}
       <DictationLesson content={homework.content} progress={progress} onChange={change} readOnly={readOnly}/>
-      <section className="homework-summary"><h2>{teacher ? 'Student work' : 'Your work'}</h2><p>{result.correct} correct without Show · {result.shown} shown · {result.hinted} words with hints</p>
+      <section className="homework-summary"><h2>{teacher ? 'Student work' : 'Your work'}</h2><p>Correct without Show: {result.correct} · Shown: {result.shown} · Words with hints: {result.hinted}</p>
         {!teacher && homework.status === 'not_completed' && <><p>Finish every word, then send your work. Your teacher can see which words used hints or Show.</p><button className="primary" disabled={busy || result.done !== result.total} onClick={() => void complete()}>{busy ? 'Sending homework…' : 'Send to teacher'}</button></>}
       </section>
       {teacher && <section className="homework-review"><h2>Your review</h2><label>Feedback for the student<textarea rows={4} maxLength={3000} value={feedback} readOnly={homework.status !== 'completed'} onChange={e => setFeedback(e.target.value)}/></label>
